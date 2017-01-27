@@ -60,7 +60,7 @@ router.route('/:student_id')
                 student.DOB = request.body.student.DOB;
                 student.photo = request.body.student.photo;
                 student.resInfo = request.body.student.resInfo;
-
+                student.transInfo = request.body.student.transInfo;
                 student.save(function (error) {
                     if (error) {
                         response.send({error: error});
