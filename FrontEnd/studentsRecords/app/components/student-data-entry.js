@@ -78,12 +78,21 @@ export default Ember.Component.extend({
 
 
   actions: {
-    saveStudent () {
+    saveStudent() {
       var updatedStudent = this.get('currentStudent');
       var res = this.get('store').peekRecord('residency', this.get('selectedResidency'));
-      updatedStudent.set('gender', this.get('selectedGender'));
+      ///////////////////////////////
+      var gen = this.get('store').peekRecord('gender', this.get('selectedGender'));
+      ///////////////////////////////
+      //updatedStudent.set('gender', this.get('selectedGender'));
+      updatedStudent.set('genInfo', gen);
       updatedStudent.set('DOB', new Date(this.get('selectedDate')));
       updatedStudent.set('resInfo', res);
+
+      //updatedStudent.set('transInfo', trans);
+      ///add transcript saves here too
+
+
       updatedStudent.save().then(() => {
         //     this.set('isStudentFormEditing', false);
       });
@@ -94,22 +103,21 @@ export default Ember.Component.extend({
     },
 
     nextStudent() {
-      this.set('movingBackword' , false);
+      this.set('movingBackword', false);
       if (this.get('currentIndex') < this.get('lastIndex')) {
         this.set('currentIndex', this.get('currentIndex') + 1);
         //     console.log(JSON.stringify(this.get('currentStudent')));
-      }
-      else {
+      } else {
         this.set('offset', this.get('offset') + this.get('pageSize'));
       }
     },
 
     previousStudent() {
-      this.set('movingBackword' , true);
+      this.set('movingBackword', true);
       if (this.get('currentIndex') > 0) {
-        this.set('currentIndex', this.get('currentIndex') - 1);f
-      }
-      else if (this.get('offset') > 0) {
+        this.set('currentIndex', this.get('currentIndex') - 1);
+        f
+      } else if (this.get('offset') > 0) {
         this.set('offset', this.get('offset') - this.get('pageSize'));
       }
     },
@@ -122,15 +130,15 @@ export default Ember.Component.extend({
       this.set('showAllStudents', true);
     },
 
-    selectGender (gender){
+    selectGender(gender) {
       this.set('selectedGender', gender);
     },
 
-    selectResidency (residency){
+    selectResidency(residency) {
       this.set('selectedResidency', residency);
     },
 
-    assignDate (date){
+    assignDate(date) {
       this.set('selectedDate', date);
     },
   }
