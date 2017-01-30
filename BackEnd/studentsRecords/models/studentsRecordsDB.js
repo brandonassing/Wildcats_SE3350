@@ -20,6 +20,7 @@ var transcriptSchema = mongoose.Schema(
         description: String,
         units: Number,
         grade: Number,
+        year: Number,
         students: [{type: mongoose.Schema.ObjectId, ref: ('Students')}]
     }
 );

@@ -45,6 +45,7 @@ router.route('/:transcript_id')
                 transcript.description = request.body.transcript.description;
                 transcript.units = request.body.transcript.units;
                 transcript.grade = request.body.transcript.grade;
+                transcript.year = request.body.transcript.year;
                 transcript.students = request.body.transcript.students;
 
                 transcript.save(function (error) {
