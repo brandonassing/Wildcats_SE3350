@@ -7,52 +7,49 @@ var parseJSON = bodyParser.json();
 
 router.route('/')
     .post(parseUrlencoded, parseJSON, function (request, response) {
-        var transcript = new models.Transcripts(request.body.transcript);
-        transcript.save(function (error) {
+        var award = new models.Awards(request.body.award);
+        award.save(function (error) {
             if (error) response.send(error);
-            response.json({transcript: transcript});
+            response.json({award: award});
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
         var Student = request.query.filter;
         if (!Student) {
-            models.Transcripts.find(function (error, transcripts) {
+            models.Awards.find(function (error, awards) {
                 if (error) response.send(error);
-                response.json({transcript: transcripts});
+                response.json({award: awards});
             });
         } else {
-            models.Transcripts.find({"student": Student.student}, function (error, students) {
+            models.Awards.find({"student": Student.student}, function (error, students) {
                 if (error) response.send(error);
-                response.json({transcript: students});
+                response.json({award: students});
             });
         }
     });
 
-router.route('/:transcript_id')
+router.route('/:award_id')
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        models.Transcripts.findById(request.params.transcript_id, function (error, transcript) {
+        models.Awards.findById(request.params.award_id, function (error, award) {
             if (error) response.send(error);
-            response.json({transcript: transcript});
+            response.json({award: award});
         })
     })
     .put(parseUrlencoded, parseJSON, function (request, response) {
-        models.Transcripts.findById(request.params.transcript_id, function (error, transcript) {
+        models.Awards.findById(request.params.award_id, function (error, award) {
             if (error) {
                 response.send({error: error});
             }
             else {
-                transcript.course = request.body.transcript.course;
-                transcript.description = request.body.transcript.description;
-                transcript.units = request.body.transcript.units;
-                transcript.grade = request.body.transcript.grade;
-                transcript.students = request.body.transcript.students;
+                award.note = request.body.award.note;
+                award.students = request.body.award.students;
 
-                transcript.save(function (error) {
+                award.save(function (error) {
                     if (error) {
                         response.send({error: error});
                     }
                     else {
-                        response.json({transcript: transcript});
+                        response.json({award: award});
                     }
                 });
             }
