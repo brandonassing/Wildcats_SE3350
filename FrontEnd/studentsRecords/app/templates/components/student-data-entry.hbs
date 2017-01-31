@@ -130,37 +130,53 @@
   </div>
 
   <div class="ui bottom attached active tab segment" data-tab="comments">
+    <div class="ui inverted violet segment">
+      <h2>
+        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center> 
+      </h2>
+    </div>
 
     <body>
-      <br> Attach to database comments
-      <br><br> Attach whatever else will go in here
-      <br><br>
+     <!-- <br> Name: {{currentStudent.firstName}} {{currentStudent.lastName}} <br>!-->
+
+      <br> Admission Average: {{currentStudent.admissionAvg}} <br>
+
+      <br> Admission Comments: <br> {{currentStudent.admissionComments}}
+   
+      <br>
     </body>
   </div>
 
   <div class="ui bottom attached tab segment" data-tab="basis">
+    <div class="ui inverted violet segment">
+      <h2>
+        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center> 
+      </h2>
+    </div>
 
     <body>
-      <br> Attach overall average
       <br>
-      <br> Attach other basis for admission
-      <br><br>
+      <br> Basis for student admission: {{currentStudent.basis}}
+      <br>
     </body>
   </div>
 
   <div class="ui bottom attached tab segment" data-tab="registration">
+    <div class="ui inverted violet segment">
+      <h2>
+        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center> 
+      </h2>
+    </div>
 
     <body>
-      <br> Attach db registration comments
       <br>
-      <br> Anything else
+      <br> Registration Comments: {{currentStudent.regComments}}
       <br>
     </body>
   </div>
 </div>
 
 <div class="ui tab" data-tab="standing">
-
   <body>
     <br><br> resons for advanced standing and stuff
     <br><br>
