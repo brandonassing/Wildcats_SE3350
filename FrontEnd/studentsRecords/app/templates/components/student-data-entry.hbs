@@ -65,50 +65,36 @@
         <div class="inline field">
           <label>Gender</label>
           <select onchange={{action 'selectGender' value="target.value"}}>
-<!--
-<option value=1 selected={{eq 1 currentStudent.gender}}>Male</option>
-<option value=2 selected={{eq 2 currentStudent.gender}}>Female</option>
+              <!--
+                  <option value=1 selected={{eq 1 currentStudent.gender}}>Male</option>
+                  <option value=2 selected={{eq 2 currentStudent.gender}}>Female</option>
               -->
-{{#each genderModel as |genderChoice|}}
-<option value={{genderChoice.id}} selected={{eq currentStudent.genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
-{{/each}}
-</select>
-</div>
-<div class="inline field">
-  <label>Date of Birth</label>
-  <input value={{selectedDate}} type="date" onchange={{action 'assignDate' value="target.value"}}>
-</div>
-<div class="inline field">
-  <label>Residency</label>
-  <select onchange={{action 'selectResidency' value="target.value"}}> {{#each residencyModel as |residencyChoice|}}
-<option value={{residencyChoice.id}} selected={{eq currentStudent.resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
-{{/each}}
-</select>
-</div>
-</div>
-</div>
-<!-- Show student photo -->
-<div class="ui center aligned  seven wide column segment">
-  <img src={{studentPhoto}}>
-</div>
-</div>
-
-</div>
-<div class="ui tab" data-tab="program">
-  <!-- Program records, courses and grades !-->
-  <br>
-  <h2>{{currentStudent.number}}</h2>
-  <h3> {{currentStudent.firstName}} {{currentStudent.lastName}}</h3>
-
-
-  <br><br><br>
-
-</div>
-<div class="ui tab" data-tab="others">
-  <!-- Others !-->
-  <h2>Other data</h2>
+          {{#each genderModel as |genderChoice|}}
+          <option value={{genderChoice.id}} selected={{eq currentStudent.genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
+          {{/each}}
+          </select>
+        </div>
+  <div class="inline field">
+    <label>Date of Birth</label>
+    <input value={{selectedDate}} type="date" onchange={{action 'assignDate' value="target.value"}}>
+  </div>
+  <div class="inline field">
+    <label>Residency</label>
+    <select onchange={{action 'selectResidency' value="target.value"}}> {{#each residencyModel as |residencyChoice|}}
+  <option value={{residencyChoice.id}} selected={{eq currentStudent.resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
+  {{/each}}
+  </select>
+  </div>
+  </div>
+  </div>
+  
+  <!-- Show student photo -->
+  <div class="ui center aligned  seven wide column segment">
+    <img src={{studentPhoto}}>
+  </div>
 </div>
 
+</div>
 
 <div class="ui tab" data-tab="program">
   <!-- Program records, courses and grades !-->
@@ -120,7 +106,6 @@
   <br><br><br>
 
 </div>
-
 
 <div class="ui tab" data-tab="admission">
   <div class="ui top attached tabular menu">
@@ -129,59 +114,132 @@
     <div class="item" data-tab="registration">Registration Comments</div>
   </div>
 
-  <div class="ui bottom attached active tab segment" data-tab="comments">
-    <div class="ui inverted violet segment">
-      <h2>
-        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center> 
-      </h2>
+    <div class="ui bottom attached active tab segment" data-tab="comments">
+      <div class="ui inverted violet segment">
+        <h2>
+          <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
+        </h2>
+      </div>
+      <div class = "ui segment">
+        <div class = "ui vertical divided grid">
+          
+          <div class = "four wide column">
+            <body>
+              <br> Admission Average: {{currentStudent.admissionAvg}}
+              <br>
+            </body>
+          </div>
+          <div class = "six wide column">
+            <body>
+              <br> Comments: {{currentStudent.admissionComments}}
+              <br>
+              <br>
+            </body>
+          </div>
+        
+        </div>
+      </div>
     </div>
-
-    <body>
-     <!-- <br> Name: {{currentStudent.firstName}} {{currentStudent.lastName}} <br>!-->
-
-      <br> Admission Average: {{currentStudent.admissionAvg}} <br>
-
-      <br> Admission Comments: <br> {{currentStudent.admissionComments}}
-   
-      <br>
-    </body>
-  </div>
+  
 
   <div class="ui bottom attached tab segment" data-tab="basis">
+    
     <div class="ui inverted violet segment">
       <h2>
-        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center> 
+        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
       </h2>
     </div>
 
-    <body>
-      <br>
-      <br> Basis for student admission: {{currentStudent.basis}}
-      <br>
-    </body>
+    <div class= "ui segment">
+      <body>
+        <br>
+        <br> Basis for student admission: {{currentStudent.basis}}
+        <br>
+        <br>
+      </body>
+    </div>
+
   </div>
 
   <div class="ui bottom attached tab segment" data-tab="registration">
     <div class="ui inverted violet segment">
       <h2>
-        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center> 
+        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
       </h2>
     </div>
 
-    <body>
-      <br>
-      <br> Registration Comments: {{currentStudent.regComments}}
-      <br>
-    </body>
-  </div>
-</div>
+    <div class = "ui segment">
+      <body>
+        <br>
+        <br> Registration Comments: {{currentStudent.regComments}}
+        <br>
+        <br>
+      </body>
+    </div>
 
-<div class="ui tab" data-tab="standing">
-  <body>
-    <br><br> resons for advanced standing and stuff
-    <br><br>
-  </body>
-</div>
+  </div>
+  </div>
+
+
+
+<div class="ui bottom attached tab segment" data-tab="standing">
+   <div class="ui inverted violet segment">
+      <h2>
+        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
+      </h2>
+    </div>
+    
+    <div class = "ui segment">
+      <div class = "ui vertical divided grid">
+          <div class = "four wide column">
+            <h3>Course</h3>
+            <div class = "ui divider"></div>
+            <br> {{currentStudent.standingSchema.course}}
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+          <div class = "four wide column">
+            <h3>Description</h3>
+            <div class = "ui divider"></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+          <div class = "two wide column">
+            <h3>Units</h3>
+            <div class = "ui divider"></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+          <div class = "two wide column">
+            <h3>Grade</h3>
+            <div class = "ui divider"></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+          <div class = "four wide column">
+            <h3>From</h3>
+            <div class = "ui divider"></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+      </div>
+    </div>
+  </div>
+
 
 <div class="ui tab" data-tab="others">
   <!-- Others !-->
