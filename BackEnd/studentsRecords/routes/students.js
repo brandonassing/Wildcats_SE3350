@@ -27,13 +27,42 @@ router.route('/')
                     if (error) response.send(error);
                     response.json({student: students.docs});
                 });
-        } else {
-            //        if (Student == "residency")
-            models.Students.find({"residency": request.query.residency}, function (error, students) {
+        } else if (Student == "number") {
+            models.Students.find({"number": {$regex : "^" + request.query.number}}, function (error, students) {
                 if (error) response.send(error);
                 response.json({student: students});
             });
-        }
+        } else if (Student == "firstName") {
+            if(request.query.lastName == null) {
+            models.Students.find({"firstName": {$regex : "^" + request.query.firstName}}, function (error, students) {
+                if (error) response.send(error);
+                response.json({student: students});
+            });
+            } else {
+                models.Students.find({"firstName": {$regex : "^" + request.query.firstName}, "lastName": {$regex : "^" + request.query.lastName}}, function (error, students) {
+                if (error) response.send(error);
+                response.json({student: students});
+            });
+            }
+            
+        } else if (Student == "lastName") {
+            if(request.query.firstName == null) {
+            models.Students.find({"lastName": {$regex : "^" + request.query.lastName}}, function (error, students) {
+                if (error) response.send(error);
+                response.json({student: students});
+            });
+            } else {
+                models.Students.find({"firstName": {$regex : "^" + request.query.firstName}, "lastName": {$regex : "^" + request.query.lastName}}, function (error, students) {
+                if (error) response.send(error);
+                response.json({student: students});
+            });
+            }
+        }  else {
+            models.Students.find({"residency": {$regex : "^" + request.query.residency}}, function (error, students) {
+                if (error) response.send(error);
+                response.json({student: students});
+            });
+        } 
     });
 
 router.route('/:student_id')

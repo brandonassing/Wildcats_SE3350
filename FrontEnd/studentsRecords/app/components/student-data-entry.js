@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   store: Ember.inject.service(),
   showAllStudents: false,
+  showFindStudents: false,
   residencyModel: null,
   selectedResidency: null,
   selectedGender: null,
@@ -116,7 +117,7 @@ export default Ember.Component.extend({
       this.set('movingBackword', true);
       if (this.get('currentIndex') > 0) {
         this.set('currentIndex', this.get('currentIndex') - 1);
-        f
+        
       } else if (this.get('offset') > 0) {
         this.set('offset', this.get('offset') - this.get('pageSize'));
       }
@@ -128,6 +129,10 @@ export default Ember.Component.extend({
 
     allStudents() {
       this.set('showAllStudents', true);
+    },
+
+    findStudents() {
+      this.set('showFindStudents', true);
     },
 
     selectGender(gender) {
