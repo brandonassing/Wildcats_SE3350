@@ -9,9 +9,10 @@
         <i class="large leanpub icon"></i>
         Students Records
       </a>
-      <div class="item">
-        <br><br>
-      </div>
+      <a class="item" {{action "addStudent"}}>
+        <i class="large add user icon"></i>
+        Add Student
+      </a>
       <a class="item " {{action "about"}}>
         <i class="large user icon"></i>
         About
@@ -28,6 +29,9 @@
       {{/if}}
       {{#if isAboutShowing}}
         {{about-us}}
+      {{/if}}
+      {{#if isAddShowing}}
+        {{add-student}}
       {{/if}}
     </div>
   </div>
