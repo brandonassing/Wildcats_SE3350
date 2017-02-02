@@ -71,7 +71,7 @@ var Residencies = mongoose.model('residency', residencySchema);
 var Standings = mongoose.model('standing', standingSchema);
 var Awards = mongoose.model('award', awardSchema);
 
-mongoose.connect('mongodb://localhost/studentsRecords');
+mongoose.connect('mongodb://main:main@ds139909.mlab.com:39909/se3350_wildcats');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
