@@ -69,6 +69,8 @@
                   <option value=1 selected={{eq 1 currentStudent.gender}}>Male</option>
                   <option value=2 selected={{eq 2 currentStudent.gender}}>Female</option>
               -->
+
+              <!-- TODO: gender not working -->
 {{#each genderModel as |genderChoice|}}
 <option value={{genderChoice.id}} selected={{eq currentStudent.genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
 {{/each}}
