@@ -144,39 +144,27 @@
     </div>
     <div class="ui segment">
       <div class="ui vertical divided grid">
-
         <div class="four wide column">
-
           <body>
             <br> Admission Average: {{currentStudent.admissionAvg}}
             <br>
           </body>
         </div>
         <div class="six wide column">
-
           <body>
             <div class="ui form">
-          <div class="inline field">
+            <div class="inline field">
             <label>Admission Comments</label> {{textarea size="10" type="text" value = currentStudent.admissionComments}}
-          </div>
-        </div>
+            </div>
+            </div>
           </body>
         </div>
-
       </div>
     </div>
   </div>
 
 
-<<<<<<< HEAD
-    <div class="ui bottom attached tab segment" data-tab="basis">
-    
-      <div class="ui inverted violet segment">
-        <h2>
-          <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
-        </h2>
-      </div>
-=======
+
   <div class="ui bottom attached tab segment" data-tab="basis">
 
     <div class="ui inverted violet segment">
@@ -184,18 +172,18 @@
         <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
       </h2>
     </div>
->>>>>>> df0a1e0c78a404a650795634cc8181abf8e1a84b
-
+    
     <div class="ui segment">
 
       <body>
-        <br>
-        <br> Basis for student admission: {{currentStudent.basis}}
-        <br>
-        <br>
+        <div class="ui form">
+          <div class="inline field">
+            <label>Basis of Admission</label> {{textarea size="10" type="text" value = currentStudent.basis}}
+          </div>
+        </div>
       </body>
     </div>
-
+    
   </div>
 
   <div class="ui bottom attached tab segment" data-tab="registration">
@@ -215,73 +203,11 @@
         </div>
       </body>
     </div>
-
   </div>
+
 </div>
 
 
-
-<<<<<<< HEAD
-  <div class="ui bottom attached tab segment" data-tab="standing">
-    <div class="ui inverted violet segment">
-        <h2>
-          <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
-        </h2>
-      </div>
-      
-      <div class = "ui segment">
-        <div class = "ui vertical divided grid">
-            <div class = "four wide column">
-              <h3>Course</h3>
-              <div class = "ui divider"></div>
-              <br> {{currentStudent.standingSchema.course}}
-              <br>
-              <br>
-              <br>
-              <br>
-            </div>
-            <div class = "four wide column">
-              <h3>Description</h3>
-              <div class = "ui divider"></div>
-              <br>
-              <br>
-              <br>
-                <br>
-                <br>
-              </div>
-            <div class = "two wide column">
-              <h3>Units</h3>
-              <div class = "ui divider"></div>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-            </div>
-            <div class = "two wide column">
-              <h3>Grade</h3>
-              <div class = "ui divider"></div>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-            </div>
-            <div class = "four wide column">
-              <h3>From</h3>
-              <div class = "ui divider"></div>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-            </div>
-        </div>
-      </div>
-    </div>
-
-
-=======
 <div class="ui bottom attached tab segment" data-tab="standing">
   <div class="ui inverted violet segment">
     <h2>
@@ -339,13 +265,14 @@
     </div>
   </div>
 </div>
->>>>>>> df0a1e0c78a404a650795634cc8181abf8e1a84b
 
 
+
+<!--
 <div class="ui tab" data-tab="others">
-  <!-- Others !-->
+  
   <h2>Other data</h2>
 </div>
-
+!-->
 
 {{/if}}
