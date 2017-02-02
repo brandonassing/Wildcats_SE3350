@@ -40,11 +40,26 @@
 
 
 <div class="ui top attached tabular menu">
+ 
+ 
   <div class="active item" data-tab="basics">Basic Info</div>
+
+<!--
+   ==============GETIING RID OF THE PROGRAM RECORDS TAB ================
   <div class="item" data-tab="program">Program Record</div>
+   !-->
+
   <div class="item" data-tab="admission">Admission Details</div>
   <div class="item" data-tab="standing">Advanced Standing</div>
+
+  
+  <!--
+    ====  WE DONT NEED OTHER TAB RIGHT NOW=====================
   <div class="item" data-tab="others">Other tabs</div>
+  !-->
+
+
+
 </div>
 
 <div class="ui bottom attached active tab segment" data-tab="basics">
@@ -98,16 +113,21 @@
 
 </div>
 
+
+<!--
+=========Old tab for program record============
+
 <div class="ui tab" data-tab="program">
-  <!-- Program records, courses and grades !-->
+   Program records, courses and grades !
   <br>
   <h2>{{currentStudent.number}}</h2>
   <h3> {{currentStudent.firstName}} {{currentStudent.lastName}}</h3>
 
 
   <br><br><br>
-
-</div>
+  
+===============================================
+</div>!-->
 
 <div class="ui tab" data-tab="admission">
   <div class="ui top attached tabular menu">
@@ -124,28 +144,25 @@
     </div>
     <div class="ui segment">
       <div class="ui vertical divided grid">
-
         <div class="four wide column">
-
           <body>
             <br> Admission Average: {{currentStudent.admissionAvg}}
             <br>
           </body>
         </div>
         <div class="six wide column">
-
           <body>
             <div class="ui form">
-          <div class="inline field">
+            <div class="inline field">
             <label>Admission Comments</label> {{textarea size="10" type="text" value = currentStudent.admissionComments}}
-          </div>
-        </div>
+            </div>
+            </div>
           </body>
         </div>
-
       </div>
     </div>
   </div>
+
 
 
   <div class="ui bottom attached tab segment" data-tab="basis">
@@ -155,17 +172,18 @@
         <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
       </h2>
     </div>
-
+    
     <div class="ui segment">
 
       <body>
-        <br>
-        <br> Basis for student admission: {{currentStudent.basis}}
-        <br>
-        <br>
+        <div class="ui form">
+          <div class="inline field">
+            <label>Basis of Admission</label> {{textarea size="10" type="text" value = currentStudent.basis}}
+          </div>
+        </div>
       </body>
     </div>
-
+    
   </div>
 
   <div class="ui bottom attached tab segment" data-tab="registration">
@@ -185,10 +203,9 @@
         </div>
       </body>
     </div>
-
   </div>
-</div>
 
+</div>
 
 
 <div class="ui bottom attached tab segment" data-tab="standing">
@@ -250,10 +267,12 @@
 </div>
 
 
+
+<!--
 <div class="ui tab" data-tab="others">
-  <!-- Others !-->
+  
   <h2>Other data</h2>
 </div>
-
+!-->
 
 {{/if}}
