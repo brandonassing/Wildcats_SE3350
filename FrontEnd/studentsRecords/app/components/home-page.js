@@ -18,24 +18,35 @@ export default Ember.Component.extend({
   isHomeShowing: true,
   isStudentsRecordsDataEntry: false,
   isAboutShowing: false,
+  isAddShowing: false,
 
   actions: {
     home () {
+      this.set('isAddShowing', false);
       this.set('isHomeShowing', true);
       this.set('isStudentsRecordsDataEntry', false);
       this.set('isAboutShowing', false);
     },
 
     studentsDataEntry (){
+      this.set('isAddShowing', false);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', true);
       this.set('isAboutShowing', false);
     },
 
     about (){
+      this.set('isAddShowing', false);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
       this.set('isAboutShowing', true);
+    },
+
+    addStudent(){
+      this.set('isAddShowing', true);
+      this.set('isHomeShowing', false);
+      this.set('isStudentsRecordsDataEntry', false);
+      this.set('isAboutShowing', false);
     }
   }
 });
