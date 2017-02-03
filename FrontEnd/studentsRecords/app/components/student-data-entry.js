@@ -34,6 +34,7 @@ export default Ember.Component.extend({
         self.set('currentIndex', records.indexOf(records.get("firstObject")));
       }
     });
+    
   }),
 
   fetchStudent: Ember.observer('currentIndex', function () {
@@ -65,10 +66,6 @@ export default Ember.Component.extend({
 
       // Show first student data
       self.set('currentIndex', self.get('firstIndex'));
-
-      //TODO Set gender and res to students gender and res
-      //this.set('selectedGender', gender);
-      //this.set('selectedResidency', residency);
     });
   },
 
@@ -87,10 +84,16 @@ export default Ember.Component.extend({
 
   actions: {
     saveStudent() {
-
-      //TODO: fix bug by setting selectedResidency and selectedGender to student residency and gender on load
-
       var updatedStudent = this.get('currentStudent');
+
+      //QUICK FIX for null selections
+      if (this.get("selectedGender") == null){
+        this.set("selectedGender", this.get("currentStudent.genInfo.id"));
+      }
+      if (this.get("selectedResidency") == null){
+        this.set("selectedResidency", this.get("currentStudent.resInfo.id"));
+      }
+
       var res = this.get('store').peekRecord('residency', this.get('selectedResidency'));
       var gen = this.get('store').peekRecord('gender', this.get('selectedGender'));
       updatedStudent.set('genInfo', gen);
@@ -103,6 +106,8 @@ export default Ember.Component.extend({
 
       updatedStudent.save().then(() => {
         //     this.set('isStudentFormEditing', false);
+        this.set("selectedGender", null);
+        this.set("selectedResidency", null);
       });
     },
 
@@ -111,6 +116,8 @@ export default Ember.Component.extend({
     },
 
     nextStudent() {
+      //ERROR: change gen/res -> next -> prev doesn't change gen/res back
+
       this.set('movingBackword', false);
       if (this.get('currentIndex') < this.get('lastIndex')) {
         this.set('currentIndex', this.get('currentIndex') + 1);

@@ -52,7 +52,8 @@ init() {
 
 //TODO set default gender and residency
 //TODO don't allow save on null values
-//ERROR index (last, first, etc) gets messed up with new students
+//ERROR bc of offset, all students: selecting first student in list doesn't work.
+//ERROR offset in general throws everything off
 
 this.set('resInfo',this.get('store').peekRecord('residency', this.get('selectedResidency')));
 this.set("genInfo", this.get('store').peekRecord('gender', this.get('selectedGender')));    
