@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   showAllStudents: false,
   residencyModel: null,
+  genderModel: null,
   selectedResidency: null,
   selectedGender: null,
   selectedDate: null,
@@ -45,6 +46,9 @@ export default Ember.Component.extend({
     this.get('store').findAll('residency').then(function (records) {
       self.set('residencyModel', records);
     });
+    this.get('store').findAll('gender').then(function (records) {
+      self.set('genderModel', records);
+    });
 
     // load first page of the students records
     this.set('limit', 10);
@@ -61,6 +65,10 @@ export default Ember.Component.extend({
 
       // Show first student data
       self.set('currentIndex', self.get('firstIndex'));
+
+      //TODO Set gender and res to students gender and res
+      //this.set('selectedGender', gender);
+      //this.set('selectedResidency', residency);
     });
   },
 
@@ -79,12 +87,12 @@ export default Ember.Component.extend({
 
   actions: {
     saveStudent() {
+
+      //TODO: fix bug by setting selectedResidency and selectedGender to student residency and gender on load
+
       var updatedStudent = this.get('currentStudent');
       var res = this.get('store').peekRecord('residency', this.get('selectedResidency'));
-      ///////////////////////////////
       var gen = this.get('store').peekRecord('gender', this.get('selectedGender'));
-      ///////////////////////////////
-      //updatedStudent.set('gender', this.get('selectedGender'));
       updatedStudent.set('genInfo', gen);
       updatedStudent.set('DOB', new Date(this.get('selectedDate')));
       updatedStudent.set('resInfo', res);
