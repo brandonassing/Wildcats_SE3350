@@ -2,6 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 store: Ember.inject.service(),
+number: null,
+firstname: null,
+lastname: null,
+geninfo: null,
+resinfo: null,
   newStudent: null,
   residencyModel: null,
   selectedResidency: null,
@@ -44,34 +49,39 @@ init() {
   },
   actions: {
     saveStudent() {
-        ///PROBLEM: newStudent isn't assigned anything
-        //MAYBE try to create empty student and then fill it with updatedStudent data
 
+//TODO set default gender and residency
+//TODO don't allow save on null values
+
+this.set('resInfo',this.get('store').peekRecord('residency', this.get('selectedResidency')));
+this.set("genInfo", this.get('store').peekRecord('gender', this.get('selectedGender')));    
+
+if (this.get("genInfo.name") == "Male"){
+    this.set('studentPhoto', "/assets/studentsPhotos/male.png");
+}
+else if (this.get("genInfo.name") == "Female"){
+    this.set('studentPhoto', "/assets/studentsPhotos/female.png");
+}
+
+this.get("store").createRecord('student', {
+  "number": this.get('number'),
+    "firstName": this.get("firstname"),
+    "lastName": this.get("lastname"),
+    "photo": this.get('studentPhoto'),
+    "DOB": new Date(this.get('selectedDate')),
+    "resInfo": this.get('resInfo'),
+    "genInfo": this.get('genInfo')
+}).save();
+/*
         window.alert(this.get("newStudent"));
       var updatedStudent = this.get('newStudent');
-      window.alert(updatedStudent);
-      window.alert("1");
       var res = this.get('store').peekRecord('residency', this.get('selectedResidency'));
-      window.alert("2");
       var gen = this.get('store').peekRecord('gender', this.get('selectedGender'));
-      window.alert("3");
       updatedStudent.set('genInfo', gen);
-      window.alert("4");
       updatedStudent.set('DOB', new Date(this.get('selectedDate')));
-      window.alert("5");
       updatedStudent.set('resInfo', res);
-      window.alert("6");
-/*
-window.alert(updatedStudent.get('geninfo.name'));
-        if(selectedGender == "Male"){
-            updateStudent.set("photo", "/assets/studentsPhotos/male.png");
-            window.alert("male");
-        }
-        else if(selectedGender == "Female"){
-updateStudent.set("photo", "/assets/studentsPhotos/female.png");
-window.alert("female");
-        }*/
-
+      */
+      
       //updatedStudent.set('transInfo', trans);
       ///add transcript saves here too
 

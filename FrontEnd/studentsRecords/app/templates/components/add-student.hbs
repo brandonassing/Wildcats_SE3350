@@ -15,19 +15,19 @@
     <div class="ui right aligned  seven wide column">
       <div class="ui form">
         <div class="inline field">
-          <label>Student Number</label> {{input size="10" type="text" value = newStudent.number}}
+          <label>Student Number</label> {{input size="10" type="text" value = number}}
         </div>
         <div class="inline field">
-          <label>First Name</label> {{input type="text" value = newStudent.firstName}}
+          <label>First Name</label> {{input type="text" value = firstname}}
         </div>
         <div class="inline field">
-          <label>Last Name</label> {{input type="text" value = newStudent.lastName }}
+          <label>Last Name</label> {{input type="text" value = lastname}}
         </div>
         <div class="inline field">
           <label>Gender</label>
           <select onchange={{action 'selectGender' value="target.value"}}>
 {{#each genderModel as |genderChoice|}}
-<option value={{genderChoice.id}} selected={{eq newStudent.genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
+<option value={{genderChoice.id}} selected={{eq genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
 {{/each}}
 </select>
 </div>
@@ -38,7 +38,7 @@
 <div class="inline field">
   <label>Residency</label>
   <select onchange={{action 'selectResidency' value="target.value"}}> {{#each residencyModel as |residencyChoice|}}
-<option value={{residencyChoice.id}} selected={{eq newStudent.resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
+<option value={{residencyChoice.id}} selected={{eq resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
 {{/each}}
 </select>
 </div>
