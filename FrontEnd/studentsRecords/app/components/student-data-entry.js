@@ -65,6 +65,10 @@ export default Ember.Component.extend({
 
       // Show first student data
       self.set('currentIndex', self.get('firstIndex'));
+
+      //TODO Set gender and res to students gender and res
+      //this.set('selectedGender', gender);
+      //this.set('selectedResidency', residency);
     });
   },
 
@@ -87,9 +91,7 @@ export default Ember.Component.extend({
       //TODO: fix bug by setting selectedResidency and selectedGender to student residency and gender on load
 
       var updatedStudent = this.get('currentStudent');
-      window.alert(this.get("selectedResidency"));
       var res = this.get('store').peekRecord('residency', this.get('selectedResidency'));
-      window.alert(this.get("selectedGender"));
       var gen = this.get('store').peekRecord('gender', this.get('selectedGender'));
       updatedStudent.set('genInfo', gen);
       updatedStudent.set('DOB', new Date(this.get('selectedDate')));

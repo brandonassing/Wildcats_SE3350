@@ -52,17 +52,19 @@ init() {
 
 //TODO set default gender and residency
 //TODO don't allow save on null values
+//ERROR index (last, first, etc) gets messed up with new students
 
 this.set('resInfo',this.get('store').peekRecord('residency', this.get('selectedResidency')));
 this.set("genInfo", this.get('store').peekRecord('gender', this.get('selectedGender')));    
 
-if (this.get("genInfo.name") == "Male"){
+if (this.get("genInfo.name") === "Male"){
     this.set('studentPhoto', "/assets/studentsPhotos/male.png");
 }
-else if (this.get("genInfo.name") == "Female"){
+else if (this.get("genInfo.name") === "Female"){
     this.set('studentPhoto', "/assets/studentsPhotos/female.png");
 }
 
+//ERROR only shows in student record with more than one addition??????
 this.get("store").createRecord('student', {
   "number": this.get('number'),
     "firstName": this.get("firstname"),

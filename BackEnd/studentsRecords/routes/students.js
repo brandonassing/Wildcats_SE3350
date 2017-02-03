@@ -56,14 +56,14 @@ router.route('/:student_id')
                 student.number = request.body.student.number;
                 student.firstName = request.body.student.firstName;
                 student.lastName = request.body.student.lastName;
-                student.DOB = request.body.student.DOB;
                 student.regComments = request.body.student.regComments;
                 student.basis = request.body.student.basis;
                 student.admissionAvg = request.body.student.admissionAvg;
                 student.admissionComments = request.body.student.admissionComments;
                 student.photo = request.body.student.photo;
-                student.genInfo = request.body.student.genInfo;
+                student.DOB = request.body.student.DOB;
                 student.resInfo = request.body.student.resInfo;
+                student.genInfo = request.body.student.genInfo;
                 student.transInfo = request.body.student.transInfo;
                 student.awardInfo = request.body.student.awardInfo;
                 student.save(function (error) {
