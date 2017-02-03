@@ -55,7 +55,7 @@ var Students = mongoose.model('student', studentsSchema);
 var Genders = mongoose.model('gender', genderSchema);
 var Residencies = mongoose.model('residency', residencySchema);
 var Standings = mongoose.model('standing', standingSchema);
-var Awards = mongoose.model('award', awards);
+var Awards = mongoose.model('award', awardSchema);
 
 mongoose.connect('mongodb://localhost/studentsRecords');
 var db = mongoose.connection;
