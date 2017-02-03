@@ -83,12 +83,14 @@ export default Ember.Component.extend({
 
   actions: {
     saveStudent() {
+
+      //TODO: fix bug by setting selectedResidency and selectedGender to student residency and gender on load
+
       var updatedStudent = this.get('currentStudent');
+      window.alert(this.get("selectedResidency"));
       var res = this.get('store').peekRecord('residency', this.get('selectedResidency'));
-      ///////////////////////////////
+      window.alert(this.get("selectedGender"));
       var gen = this.get('store').peekRecord('gender', this.get('selectedGender'));
-      ///////////////////////////////
-      //updatedStudent.set('gender', this.get('selectedGender'));
       updatedStudent.set('genInfo', gen);
       updatedStudent.set('DOB', new Date(this.get('selectedDate')));
       updatedStudent.set('resInfo', res);
