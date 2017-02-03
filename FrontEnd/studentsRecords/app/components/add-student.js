@@ -65,16 +65,26 @@ else if (this.get("genInfo.name") === "Female"){
     this.set('studentPhoto', "/assets/studentsPhotos/female.png");
 }
 
-//ERROR only shows in student record with more than one addition??????
+if (this.get("number") != null && this.get("firstname") != null && this.get("lastname") != null && this.get("selectedDate") != null && this.get("genInfo.name") != null && this.get("resInfo.name") != null) {
 this.get("store").createRecord('student', {
-  "number": this.get('number'),
+  "number": this.get("number"),
     "firstName": this.get("firstname"),
     "lastName": this.get("lastname"),
     "photo": this.get('studentPhoto'),
     "DOB": new Date(this.get('selectedDate')),
     "resInfo": this.get('resInfo'),
     "genInfo": this.get('genInfo')
-}).save();
+}).save().then(() => {
+  this.set("number", null);
+  this.set("firstname", null);
+  this.set("lastname", null);
+  this.set("studentPhoto", null);
+  this.set("selectedDate", null);
+  this.set("selectedGender", null);
+  this.set("selectedResidency", null);
+});
+  
+}
 /*
         window.alert(this.get("newStudent"));
       var updatedStudent = this.get('newStudent');
