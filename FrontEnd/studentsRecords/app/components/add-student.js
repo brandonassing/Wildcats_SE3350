@@ -5,6 +5,7 @@ store: Ember.inject.service(),
 newStudent: null,
   residencyModel: null,
   selectedResidency: null,
+  genderModel: null,
   selectedGender: null,
   selectedDate: null,
   //studentsRecords: null,
@@ -36,6 +37,9 @@ init() {
       self.set('residencyModel', records);
     });
 
+    this.get('store').findAll('gender').then(function (records) {
+      self.set('genderModel', records);
+    });
     var self = this;
   },
   actions: {
