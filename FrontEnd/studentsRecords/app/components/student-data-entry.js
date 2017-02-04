@@ -34,7 +34,7 @@ export default Ember.Component.extend({
         self.set('currentIndex', records.indexOf(records.get("firstObject")));
       }
     });
-    
+
   }),
 
   fetchStudent: Ember.observer('currentIndex', function () {
@@ -87,10 +87,10 @@ export default Ember.Component.extend({
       var updatedStudent = this.get('currentStudent');
 
       //QUICK FIX for null selections
-      if (this.get("selectedGender") == null){
+      if (this.get("selectedGender") == null) {
         this.set("selectedGender", this.get("currentStudent.genInfo.id"));
       }
-      if (this.get("selectedResidency") == null){
+      if (this.get("selectedResidency") == null) {
         this.set("selectedResidency", this.get("currentStudent.resInfo.id"));
       }
 
