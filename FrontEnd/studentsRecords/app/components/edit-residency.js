@@ -30,14 +30,14 @@ init() {
       ///TODO STILL GETS ERRORS
 
 
-      //if (deletable){
+    if (this.get("deletable")){
     this.get("store").findRecord('residency',  this.get("resInfo.id")
     ).then(function (res) {
     res.deleteRecord();
     res.save();
     this.set('deletable', false);
 });
-      //}
+      }
     },
     selectResidency(residency) {
       this.set('selectedResidency', residency);

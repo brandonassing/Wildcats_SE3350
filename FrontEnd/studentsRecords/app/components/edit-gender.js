@@ -33,14 +33,14 @@ export default Ember.Component.extend({
       ///TODO STILL GETS ERRORS
 
 
-      //if (deletable){
+     if (this.get("deletable")){
     this.get("store").findRecord('gender',  this.get("genInfo.id")
     ).then(function (gen) {
     gen.deleteRecord();
     gen.save();
     this.set('deletable', false);
 });
-      //}
+      }
     },
 
     selectGender(gender) {
