@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   showAllStudents: false,
   showFindStudents: false,
   residencyModel: null,
+  genderModel: null,
   selectedResidency: null,
   selectedGender: null,
   selectedDate: null,
@@ -34,6 +35,7 @@ export default Ember.Component.extend({
         self.set('currentIndex', records.indexOf(records.get("firstObject")));
       }
     });
+    
   }),
 
   fetchStudent: Ember.observer('currentIndex', function () {
@@ -45,6 +47,9 @@ export default Ember.Component.extend({
     // load Residency data model
     this.get('store').findAll('residency').then(function (records) {
       self.set('residencyModel', records);
+    });
+    this.get('store').findAll('gender').then(function (records) {
+      self.set('genderModel', records);
     });
 
     // load first page of the students records
@@ -81,11 +86,17 @@ export default Ember.Component.extend({
   actions: {
     saveStudent() {
       var updatedStudent = this.get('currentStudent');
+
+      //QUICK FIX for null selections
+      if (this.get("selectedGender") == null){
+        this.set("selectedGender", this.get("currentStudent.genInfo.id"));
+      }
+      if (this.get("selectedResidency") == null){
+        this.set("selectedResidency", this.get("currentStudent.resInfo.id"));
+      }
+
       var res = this.get('store').peekRecord('residency', this.get('selectedResidency'));
-      ///////////////////////////////
       var gen = this.get('store').peekRecord('gender', this.get('selectedGender'));
-      ///////////////////////////////
-      //updatedStudent.set('gender', this.get('selectedGender'));
       updatedStudent.set('genInfo', gen);
       updatedStudent.set('DOB', new Date(this.get('selectedDate')));
       updatedStudent.set('resInfo', res);
@@ -96,6 +107,8 @@ export default Ember.Component.extend({
 
       updatedStudent.save().then(() => {
         //     this.set('isStudentFormEditing', false);
+        this.set("selectedGender", null);
+        this.set("selectedResidency", null);
       });
     },
 
@@ -104,6 +117,8 @@ export default Ember.Component.extend({
     },
 
     nextStudent() {
+      //ERROR: change gen/res -> next -> prev doesn't change gen/res back
+
       this.set('movingBackword', false);
       if (this.get('currentIndex') < this.get('lastIndex')) {
         this.set('currentIndex', this.get('currentIndex') + 1);
@@ -117,7 +132,11 @@ export default Ember.Component.extend({
       this.set('movingBackword', true);
       if (this.get('currentIndex') > 0) {
         this.set('currentIndex', this.get('currentIndex') - 1);
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> master
       } else if (this.get('offset') > 0) {
         this.set('offset', this.get('offset') - this.get('pageSize'));
       }
