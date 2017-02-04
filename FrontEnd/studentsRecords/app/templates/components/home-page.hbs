@@ -13,6 +13,14 @@
         <i class="large add user icon"></i>
         Add Student
       </a>
+      <a class="item " {{action "editResidency"}}>
+        <i class="large user icon"></i>
+        Edit Residency
+      </a>
+      <a class="item " {{action "editGender"}}>
+        <i class="large user icon"></i>
+        Edit Gender
+      </a>
       <a class="item " {{action "about"}}>
         <i class="large user icon"></i>
         About
@@ -30,8 +38,14 @@
       {{#if isAboutShowing}}
         {{about-us}}
       {{/if}}
-      {{#if isAddShowing}}
+      {{#if isAddStudShowing}}
         {{add-student}}
+      {{/if}}
+      {{#if isEditResShowing}}
+        {{edit-residency}}
+      {{/if}}
+      {{#if isEditGenShowing}}
+        {{edit-gender}}
       {{/if}}
     </div>
   </div>
