@@ -18,35 +18,61 @@ export default Ember.Component.extend({
   isHomeShowing: true,
   isStudentsRecordsDataEntry: false,
   isAboutShowing: false,
-  isAddShowing: false,
+  isAddStudShowing: false,
+  isEditRes: false,
+  isEditGen: false,
 
   actions: {
     home () {
-      this.set('isAddShowing', false);
+      this.set('isAddStudShowing', false);
       this.set('isHomeShowing', true);
       this.set('isStudentsRecordsDataEntry', false);
       this.set('isAboutShowing', false);
+      this.set('isEditResShowing', false);
+      this.set('isEditGenShowing', false);
     },
 
     studentsDataEntry (){
-      this.set('isAddShowing', false);
+      this.set('isAddStudShowing', false);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', true);
       this.set('isAboutShowing', false);
+      this.set('isEditResShowing', false);
+      this.set('isEditGenShowing', false);
     },
 
     about (){
-      this.set('isAddShowing', false);
+      this.set('isAddStudShowing', false);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
       this.set('isAboutShowing', true);
+      this.set('isEditResShowing', false);
+      this.set('isEditGenShowing', false);
     },
 
     addStudent(){
-      this.set('isAddShowing', true);
+      this.set('isAddStudShowing', true);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
       this.set('isAboutShowing', false);
+      this.set('isEditResShowing', false);
+      this.set('isEditGenShowing', false);
+    },
+    editResidency(){
+      this.set('isAddStudShowing', false);
+      this.set('isHomeShowing', false);
+      this.set('isStudentsRecordsDataEntry', false);
+      this.set('isAboutShowing', false);
+      this.set('isEditResShowing', true);
+      this.set('isEditGenShowing', false);
+    },
+    editGender(){
+      this.set('isAddStudShowing', false);
+      this.set('isHomeShowing', false);
+      this.set('isStudentsRecordsDataEntry', false);
+      this.set('isAboutShowing', false);
+      this.set('isEditResShowing', false);
+      this.set('isEditGenShowing', true);
     }
   }
 });
