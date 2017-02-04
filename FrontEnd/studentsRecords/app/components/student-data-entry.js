@@ -131,7 +131,7 @@ export default Ember.Component.extend({
       this.set('showAllStudents', true);
     },
 
-    findStudents() {
+    findStudent() {
       this.set('showFindStudents', true);
     },
 

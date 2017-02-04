@@ -16,19 +16,40 @@
     </div>
 
     <div class="inline field">
-      <div class="header">Search Students Using the Input Fields and by Pressing 'Search'</div>
-      {{#each studentsModel as |oneStudent|}}
-
-      {{/each}}
+      <hr>
+      <div class="header">Search Results:</div>
+      
     </div>
 
+    {{#each searchedRecords as | oneStudent|}}
+      <div class="ui grid">
+        <div class="ten wide column">
+          <div class="actions">
+            <div class="ui form">
+              <div class="grouped fields">
+                <div class="field">
+                  <div class="ui radio checkbox">
+                    <input type="radio" name="fixed"
+                           onchange={{action 'getStudent' oneStudent}}>
+                    <label>{{oneStudent.number}} {{oneStudent.firstName}}
+                      {{oneStudent.lastName}}  </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="six wide column">
+        </div>
+      </div>
+    {{/each}}
 
     <div class="actions">
       <hr>
       <div class="ui button" {{action "search"}}>
         <i>Search</i>
       </div>
-
+      <div class="ui button" {{action "exit"}}>OK</div>
     </div>
 
   </div>
