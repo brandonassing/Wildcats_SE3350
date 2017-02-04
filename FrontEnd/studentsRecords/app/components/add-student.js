@@ -116,7 +116,7 @@ this.get("store").createRecord('student', {
 
     assignDate(date) {
       this.set('selectedDate', date);
-    },
+    }
   }
     
 });
