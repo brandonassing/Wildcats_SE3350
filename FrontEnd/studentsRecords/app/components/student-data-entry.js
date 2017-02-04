@@ -158,11 +158,6 @@ export default Ember.Component.extend({
       this.set('movingBackword', true);
       if (this.get('currentIndex') > 0) {
         this.set('currentIndex', this.get('currentIndex') - 1);
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> master
       } else if (this.get('offset') > 0) {
         this.set('offset', this.get('offset') - this.get('pageSize'));
       }
