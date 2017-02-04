@@ -23,6 +23,7 @@ app.use('/residencies', residencies);
 app.use('/genders', genders);
 app.use('/standings',standings);
 
+
 app.listen(3700, function () {
     console.log('Listening on port 3700');
 });
