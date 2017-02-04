@@ -15,6 +15,6 @@ this.get("store").createRecord('residency', {
 });
   
 }
-},
+}
   }
 });
