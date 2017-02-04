@@ -1,7 +1,27 @@
 <div class="ui modal">
-  <div class="header">List of 10 Students, click the arrow keys to get more students</div>
+  <div class="header">Search Students Using the Input Fields and by Pressing 'Search'</div>
   <div class="content">
-    {{#each studentsModel as |oneStudent|}}
+
+    <div class="inline field">
+      <label>Student Number</label>
+      {{input size="10" type="text"  value = idSearch}}
+    </div>
+    <div class="inline field">
+      <label>First Name</label>
+      {{input type="text"  value = firstNameSearch}}
+    </div>
+    <div class="inline field">
+      <label>Last Name</label>
+      {{input type="text" value = lastNameSearch}}
+    </div>
+
+    <div class="inline field">
+      <hr>
+      <div class="header">Search Results:</div>
+      
+    </div>
+
+    {{#each searchedRecords as | oneStudent|}}
       <div class="ui grid">
         <div class="ten wide column">
           <div class="actions">
@@ -26,15 +46,11 @@
 
     <div class="actions">
       <hr>
-      <div class="ui button" {{action "loadPrevious"}}>
-        <i class="arrow left icon"></i>
-      </div>
-      <div class="ui button" {{action "loadNext"}}>
-        <i class="arrow right icon"></i>
+      <div class="ui button" {{action "search"}}>
+        <i>Search</i>
       </div>
       <div class="ui button" {{action "exit"}}>OK</div>
     </div>
 
   </div>
 </div>
-
