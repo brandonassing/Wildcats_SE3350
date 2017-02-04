@@ -32,4 +32,20 @@
 <button class="ui button" {{action 'saveResidency'}}>
     <i class="save icon"></i> Save
 </button>
+<br/>
+<h3>Delete Residency</h3>
+<div class="inline field">
+          <label>Residency</label>
+          <select required onchange={{action 'selectResidency' value="target.value"}}>
+          <option selected="selected">Select Residency</option>
+{{#each residencyModel as |residencyChoice|}}
+<option value={{residencyChoice.id}} selected={{eq resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
+{{/each}}
+</select>
+{{#if deletable}}
+<button class="ui button" {{action 'deleteResidency'}}>
+    <i class="save icon"></i> Delete
+</button>
+{{/if}}
+</div>
 </div>

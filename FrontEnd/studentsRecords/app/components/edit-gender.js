@@ -54,7 +54,7 @@ export default Ember.Component.extend({
       else{
         this.set("deletable", false);
       }
-    },
+    }
 
   }
 });
