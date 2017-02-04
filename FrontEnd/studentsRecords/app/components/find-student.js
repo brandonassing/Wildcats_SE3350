@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
+  
   store: Ember.inject.service(),
   limit: 10,
   offset: 0,
@@ -10,21 +10,23 @@ export default Ember.Component.extend({
   studentsModel: null,
   INDEX: null,
   notDONE: null,
+  firstNameSearch: null,
+  idSearch: null,
+  lastNameSearch: null,
+  searchedRecords: null,
 
-  actions: {
-    loadNext: function () {
-      Ember.$('.ui.modal').modal('hide');
-      this.set('offset', this.get('offset') + this.get('pageSize'));
-      Ember.$('.ui.modal').modal('show');
-    },
-
-    loadPrevious: function () {
-      if (this.get('offset') >= this.get('pageSize')) {
-        Ember.$('.ui.modal').modal('hide');
-        this.set('offset', this.get('offset') - this.get('pageSize'));
-        Ember.$('.ui.modal').modal('show');
-      }
-    },
+  actions:{
+    search: function () {
+    var self = this;
+    this.get('store').query('student', {
+      firstName: self.get('firstNameSearch'),
+      lastName: self.get('lastNameSearch'),
+      number: self.get('idSearch')
+    }).then(function (records) {
+      console.log(records);
+      self.set('searchedRecords', records);
+    });
+  },
 
     getStudent: function (student) {
       var index = this.get('studentsModel').indexOf(student);
@@ -39,11 +41,10 @@ export default Ember.Component.extend({
     }
   },
 
-
   didRender() {
     Ember.$('.ui.modal')
       .modal({
-        closable: false,
+        closable: true,
       })
       .modal('show');
   }
