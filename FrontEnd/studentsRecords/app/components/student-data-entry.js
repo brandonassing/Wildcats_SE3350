@@ -3,7 +3,9 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   store: Ember.inject.service(),
   showAllStudents: false,
+  showFindStudents: false,
   residencyModel: null,
+  genderModel: null,
   selectedResidency: null,
   selectedGender: null,
   selectedDate: null,
@@ -17,6 +19,19 @@ export default Ember.Component.extend({
   offset: null,
   pageSize: null,
   movingBackword: false,
+  tempnumber: null,
+  tempfirstName: null,
+  templastName: null,
+  tempDOB: null,
+  tempregComments: null,
+  tempbasis: null,
+  tempAvg: null,
+  tempComments: null,
+  tempPhoto: null,
+  tempGen: null,
+  tempRes: null,
+  tempTrans: null,
+  tempAward: null,
 
   studentModel: Ember.observer('offset', function () {
     var self = this;
@@ -33,6 +48,7 @@ export default Ember.Component.extend({
         self.set('currentIndex', records.indexOf(records.get("firstObject")));
       }
     });
+
   }),
 
   fetchStudent: Ember.observer('currentIndex', function () {
@@ -44,6 +60,9 @@ export default Ember.Component.extend({
     // load Residency data model
     this.get('store').findAll('residency').then(function (records) {
       self.set('residencyModel', records);
+    });
+    this.get('store').findAll('gender').then(function (records) {
+      self.set('genderModel', records);
     });
 
     // load first page of the students records
@@ -66,6 +85,19 @@ export default Ember.Component.extend({
 
   showStudentData: function (index) {
     this.set('currentStudent', this.get('studentsRecords').objectAt(index));
+      this.set('tempnumber', this.get('currentStudent.number'));
+      this.set('tempfirstName', this.get('currentStudent.firstName'));
+      this.set('templastName', this.get('currentStudent.lastName'));
+      this.set('tempDOB', this.get('currentStudent.DOB'));
+      this.set('tempregComments', this.get('currentStudent.regComments'));
+      this.set('tempbasis', this.get('currentStudent.basis'));
+      this.set('tempAvg', this.get('current.admissionAvg'));
+      this.set('tempComments', this.get('current.admissionComments'));
+      this.set('tempPhoto', this.get('currentStudent.photo'));
+      this.set('tempGen', this.get('currentStudent.genInfo'));
+      this.set('tempRes', this.get('currentStudent.resInfo'));
+      this.set('tempTrans', this.get('currentStudent.transInfo'));
+      this.set('tempAward', this.get('currentStudent.awardInfo'));
     this.set('studentPhoto', this.get('currentStudent').get('photo'));
     var date = this.get('currentStudent').get('DOB');
     var datestring = date.toISOString().substring(0, 10);
@@ -80,11 +112,17 @@ export default Ember.Component.extend({
   actions: {
     saveStudent() {
       var updatedStudent = this.get('currentStudent');
+
+      //QUICK FIX for null selections
+      if (this.get("selectedGender") == null) {
+        this.set("selectedGender", this.get("currentStudent.genInfo.id"));
+      }
+      if (this.get("selectedResidency") == null) {
+        this.set("selectedResidency", this.get("currentStudent.resInfo.id"));
+      }
+
       var res = this.get('store').peekRecord('residency', this.get('selectedResidency'));
-      ///////////////////////////////
       var gen = this.get('store').peekRecord('gender', this.get('selectedGender'));
-      ///////////////////////////////
-      //updatedStudent.set('gender', this.get('selectedGender'));
       updatedStudent.set('genInfo', gen);
       updatedStudent.set('DOB', new Date(this.get('selectedDate')));
       updatedStudent.set('resInfo', res);
@@ -95,6 +133,8 @@ export default Ember.Component.extend({
 
       updatedStudent.save().then(() => {
         //     this.set('isStudentFormEditing', false);
+        this.set("selectedGender", null);
+        this.set("selectedResidency", null);
       });
     },
 
@@ -103,6 +143,8 @@ export default Ember.Component.extend({
     },
 
     nextStudent() {
+      //ERROR: change gen/res -> next -> prev doesn't change gen/res back
+
       this.set('movingBackword', false);
       if (this.get('currentIndex') < this.get('lastIndex')) {
         this.set('currentIndex', this.get('currentIndex') + 1);
@@ -116,7 +158,6 @@ export default Ember.Component.extend({
       this.set('movingBackword', true);
       if (this.get('currentIndex') > 0) {
         this.set('currentIndex', this.get('currentIndex') - 1);
-
       } else if (this.get('offset') > 0) {
         this.set('offset', this.get('offset') - this.get('pageSize'));
       }
@@ -130,6 +171,10 @@ export default Ember.Component.extend({
       this.set('showAllStudents', true);
     },
 
+    findStudent() {
+      this.set('showFindStudents', true);
+    },
+
     selectGender(gender) {
       this.set('selectedGender', gender);
     },
@@ -141,5 +186,21 @@ export default Ember.Component.extend({
     assignDate(date) {
       this.set('selectedDate', date);
     },
+
+    undoSave() {
+      this.set('currentStudent.number', this.get('tempnumber'));
+      this.set('currentStudent.firstName', this.get('tempfirstName'));
+      this.set('currentStudent.lastName', this.get('templastName'));
+      this.set('currentStudent.DOB', this.get('tempDOB'));
+      this.set('currentStudent.regComments', this.get('tempregComments'));
+      this.set('currentStudent.basis', this.get('tempbasis'));
+      this.set('currentStudent.admissionAvg', this.get('tempAvg'));
+      this.set('currentStudent.admissionComments', this.get('tempComments'));
+      this.set('currentStudent.photo', this.get('tempPhoto'));
+      this.set('currentStudent.genInfo', this.get('tempGen'));
+      this.set('currentStudent.resInfo', this.get('tempRes'));
+      this.set('currentStudent.transInfo', this.get('tempTrans'));
+      this.set('currentStudent.awardInfo', this.get('tempAward'));
+    }
   }
 });

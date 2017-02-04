@@ -35,7 +35,13 @@
 
 {{#if showAllStudents}}
 <!-- Note that offset is an "in" and "out" parameter !-->
-{{all-students INDEX = currentIndex notDONE = showAllStudents offset = offset studentsModel = studentsRecords}} {{else}}
+{{all-students INDEX = currentIndex notDONE = showAllStudents offset = offset studentsModel = studentsRecords}}
+
+{{else if showFindStudents}}
+
+{{find-student INDEX = currentIndex notDONE = showAllStudents offset = offset studentsModel = studentsRecords}}
+
+ {{else}}
 <!-- Show data entry form -->
 
 
@@ -79,13 +85,7 @@
         </div>
         <div class="inline field">
           <label>Gender</label>
-          <select onchange={{action 'selectGender' value="target.value"}}>
-<!--
-                  <option value=1 selected={{eq 1 currentStudent.gender}}>Male</option>
-                  <option value=2 selected={{eq 2 currentStudent.gender}}>Female</option>
-              -->
-
-              <!-- TODO: gender not working -->
+          <select onchange={{action 'selectGender' value="target.value"}}>>
 {{#each genderModel as |genderChoice|}}
 <option value={{genderChoice.id}} selected={{eq currentStudent.genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
 {{/each}}
@@ -276,5 +276,9 @@
 </div>
 !-->
 
+
 {{/if}}
+
+
+
 

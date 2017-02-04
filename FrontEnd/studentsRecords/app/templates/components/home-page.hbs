@@ -7,14 +7,22 @@
       </a>
       <a class="item" {{action "studentsDataEntry"}}>
         <i class="large leanpub icon"></i>
-        Students Records
+        Student Records
       </a>
       <a class="item" {{action "addStudent"}}>
         <i class="large add user icon"></i>
         Add Student
       </a>
+      <a class="item " {{action "editResidency"}}>
+        <i class="large building outline icon"></i>
+        Edit Residency
+      </a>
+      <a class="item " {{action "editGender"}}>
+        <i class="large heterosexual icon"></i>
+        Edit Gender
+      </a>
       <a class="item " {{action "about"}}>
-        <i class="large user icon"></i>
+        <i class="large book icon"></i>
         About
       </a>
     </div>
@@ -30,8 +38,14 @@
       {{#if isAboutShowing}}
         {{about-us}}
       {{/if}}
-      {{#if isAddShowing}}
+      {{#if isAddStudShowing}}
         {{add-student}}
+      {{/if}}
+      {{#if isEditResShowing}}
+        {{edit-residency}}
+      {{/if}}
+      {{#if isEditGenShowing}}
+        {{edit-gender}}
       {{/if}}
     </div>
   </div>

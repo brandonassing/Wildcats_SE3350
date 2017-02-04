@@ -1,0 +1,31 @@
+<div class="ui center aligned header">
+  <h2>Edit Gender</h2>
+</div>
+
+
+<div class="ui form">
+  <h3>Add Gender</h3>
+        <div class="inline field">
+          <label>Enter gender</label> {{input size="20" type="text" value = genderName}}
+        </div>
+<button class="ui button" {{action 'saveGender'}}>
+    <i class="save icon"></i> Save
+</button>
+<br/>
+<h3>Delete Gender</h3>
+<div class="inline field">
+          <label>Gender</label>
+          <select required onchange={{action 'selectGender' value="target.value"}}>
+          <option selected="selected">Select Gender</option>
+{{#each genderModel as |genderChoice|}}
+<option value={{genderChoice.id}} selected={{eq genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
+{{/each}}
+</select>
+{{#if deletable}}
+<button class="ui button" {{action 'deleteGender'}}>
+    <i class="save icon"></i> Delete
+</button>
+{{/if}}
+</div>
+
+</div>
