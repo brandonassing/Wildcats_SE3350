@@ -137,6 +137,25 @@ export default Ember.Component.extend({
         this.set("selectedResidency", null);
       });
     },
+    deleteStudent(){
+           ///TODO STILL GETS ERRORS
+    this.get("store").findRecord('student',  this.get("currentStudent.id"))
+    .then(function (stud) {
+      stud.destroyRecord();
+      //stud.save();
+    });
+    
+    /*
+       if (this.get("currentIndex") >= this.get("lastIndex")){
+         this.currentIndex = this.firstIndex;
+         //ERROR this will cause problems on the last offset
+         this.offset +=10;
+      }
+      else{
+        this.currentIndex += 1;
+      }
+      */
+    },
 
     firstStudent() {
       this.set('currentIndex', this.get('firstIndex'));

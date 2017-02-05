@@ -36,10 +36,10 @@ export default Ember.Component.extend({
      if (this.get("deletable")){
     this.get("store").findRecord('gender',  this.get("genInfo.id")
     ).then(function (gen) {
-    gen.deleteRecord();
-    gen.save();
+    gen.destroyRecord();
+    //gen.save();
+    });
     this.set('deletable', false);
-});
       }
     },
 
