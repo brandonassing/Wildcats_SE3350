@@ -7,6 +7,7 @@ var students = require('./routes/students');
 var residencies = require('./routes/residencies');
 var genders = require('./routes/genders');
 var standings = require('./routes/standings');
+var awards = require('./routes/awards');
 
 
 app.use(function (request, response, next) {
@@ -22,7 +23,7 @@ app.use('/students', students);
 app.use('/residencies', residencies);
 app.use('/genders', genders);
 app.use('/standings',standings);
-
+app.use('/awards', awards);
 
 app.listen(3700, function () {
     console.log('Listening on port 3700');

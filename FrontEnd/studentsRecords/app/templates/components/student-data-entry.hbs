@@ -57,6 +57,7 @@
 
   <div class="item" data-tab="admission">Admission Details</div>
   <div class="item" data-tab="standing">Advanced Standing</div>
+  <div class="item" data-tab="awards">Awards and Scholarships</div>
 
   
   <!--
@@ -224,7 +225,7 @@
   </div>
 
   <div class="ui segment">
-    <div class="ui vertical divided grid">
+    <div class="ui grid">
       <div class="four wide column">
         <h3>Course</h3>
         <div class="ui divider"></div>
@@ -299,8 +300,6 @@
       <div class="four wide column">
         <h3>From</h3>
         <div class="ui divider"></div>
-
-
         <ul> 
         {{#each currentStudent.transInfo as |standings|}}
           <li>{{standings.location}}</li>
@@ -308,7 +307,6 @@
         the location list is empty
         {{/each}}
         </ul>
-
         <br>
         <br>
         <br>
@@ -317,9 +315,33 @@
       </div>
     </div>
   </div>
-{{add-course currentStudent = currentStudent}}
+  {{add-course currentStudent = currentStudent}}
 </div>
 
+<div class="ui bottom attached tab segment" data-tab="awards">
+  <div class="ui inverted violet segment">
+    <h2>
+      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
+    </h2>
+  </div>
+  <div class="ui segment">
+    <div class="ui grid">
+      <div class="tenwide column">
+      <center><h3>Scholarships and Awards</h3></center>
+      <div class="ui divider"></div>
+      <ul>
+        {{#each currentStudent.awardInfo as awards}}
+          <li>{{awards.note}}</li>
+          {{else}}
+          This student has no awards on record
+        {{/each}}
+       
+      </ul>
+      </div>
+    </div>
+  </div>
+  {{add-awards currentStudent = currentStudent}}
+</div>
 
 
 <!--
