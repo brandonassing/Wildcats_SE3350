@@ -1,0 +1,40 @@
+#header-img{
+    padding: 10px;
+    padding-bottom: 0px;
+}
+#header-img img{
+    height: 50%;
+}
+#header-text{
+    text-align: center;
+    padding: 10px;
+}
+#header-text h1{
+    color: white;
+}
+#header-text h2{
+    color: #EDEDED;
+}
+#menu-items{
+    margin-top: 50px;
+}
+#main-content{
+    padding-top: 100px;
+    background: #eee;
+    background-image: url(https://www.uwo.ca/web_standards/img/bkg/bigshield.gif);
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    color: #333;
+    font-size: 14px;
+    height: 100vh;
+    padding-bottom: 20px;
+}
+.titlebar{
+    background-color: #4F2683;
+    height: 50px;
+    text-align: center;
+}
+.titlebar h3{
+    color : white;
+    font-size: 40px;
+}

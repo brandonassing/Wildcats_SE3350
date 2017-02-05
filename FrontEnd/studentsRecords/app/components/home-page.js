@@ -13,7 +13,6 @@ export default Ember.Component.extend({
 
   isHomeShowing: true,
   isStudentsRecordsDataEntry: false,
-  isAboutShowing: false,
   isAddStudShowing: false,
   isEditRes: false,
   isEditGen: false,
@@ -22,8 +21,7 @@ export default Ember.Component.extend({
     home() {
       this.set('isAddStudShowing', false);
       this.set('isHomeShowing', true);
-      this.set('isStudentsRecordsDataEntry', false);
-      this.set('isAboutShowing', false);
+      this.set('isStudentsRecordsDataEntry', false);      
       this.set('isEditResShowing', false);
       this.set('isEditGenShowing', false);
     },
@@ -31,17 +29,7 @@ export default Ember.Component.extend({
     studentsDataEntry() {
       this.set('isAddStudShowing', false);
       this.set('isHomeShowing', false);
-      this.set('isStudentsRecordsDataEntry', true);
-      this.set('isAboutShowing', false);
-      this.set('isEditResShowing', false);
-      this.set('isEditGenShowing', false);
-    },
-
-    about() {
-      this.set('isAddStudShowing', false);
-      this.set('isHomeShowing', false);
-      this.set('isStudentsRecordsDataEntry', false);
-      this.set('isAboutShowing', true);
+      this.set('isStudentsRecordsDataEntry', true);      
       this.set('isEditResShowing', false);
       this.set('isEditGenShowing', false);
     },
@@ -50,7 +38,6 @@ export default Ember.Component.extend({
       this.set('isAddStudShowing', true);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
-      this.set('isAboutShowing', false);
       this.set('isEditResShowing', false);
       this.set('isEditGenShowing', false);
     },
@@ -58,7 +45,6 @@ export default Ember.Component.extend({
       this.set('isAddStudShowing', false);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
-      this.set('isAboutShowing', false);
       this.set('isEditResShowing', true);
       this.set('isEditGenShowing', false);
     },
@@ -66,7 +52,6 @@ export default Ember.Component.extend({
       this.set('isAddStudShowing', false);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
-      this.set('isAboutShowing', false);
       this.set('isEditResShowing', false);
       this.set('isEditGenShowing', true);
     }
