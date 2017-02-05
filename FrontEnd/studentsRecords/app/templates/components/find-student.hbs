@@ -1,7 +1,9 @@
 <div class="ui modal">
   <div class="header">Search Students Using the Input Fields and by Pressing 'Search'</div>
   <div class="content">
-
+    
+    
+<div class="ui form">
     <div class="inline field">
       <label>Student Number</label>
       {{input size="10" type="text"  value = idSearch}}
@@ -19,6 +21,7 @@
       <hr>
       <div class="header">Search Results:</div>
       
+    </div>
     </div>
 
     {{#each searchedRecords as | oneStudent|}}
