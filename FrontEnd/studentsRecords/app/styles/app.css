@@ -1,13 +1,14 @@
+#header{
+    padding:10px;
+}
 #header-img{
-    padding: 10px;
-    padding-bottom: 0px;
+    padding: 20px;
 }
 #header-img img{
     height: 50%;
 }
 #header-text{
     text-align: center;
-    padding: 10px;
 }
 #header-text h1{
     color: white;
@@ -40,6 +41,7 @@
 .content-card{
     background-color: white;
     margin: 20px;
+    width: 65vw;
 }
 .content-card .content{
     padding: 20px;
