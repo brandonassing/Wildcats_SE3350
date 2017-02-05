@@ -188,10 +188,12 @@ export default Ember.Component.extend({
 
     allStudents() {
       this.set('showAllStudents', true);
+      this.set('showFindStudents', false);
     },
 
     findStudent() {
       this.set('showFindStudents', true);
+      this.set('showAllStudents', false);
     },
 
     selectGender(gender) {
