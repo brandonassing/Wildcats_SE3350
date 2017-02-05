@@ -35,59 +35,61 @@
    <div id = "main-content" class="ui">
     
       {{#if isHomeShowing}}
-      <div class="ui segment container">
+      <div class="ui content-card container">
         <div class = "titlebar">
           <h3 class = "titlebar-header">Welcome</h3>
         </div>
+        <div class = "content">
         {{welcome-page}}
+        </div>
     </div>
-    <div class="ui segment container">
+    <div class="ui content-card container">
         <div class = "titlebar">
           <h3 class = "titlebar-header">About Us</h3>
         </div>
-      <div class="ui segment container">
-        {{about-us}}
-    </div>
+        <div class = "content">
+       {{about-us}}
+       </div>
     </div>
       {{/if}}
       {{#if isStudentsRecordsDataEntry}}
-      <div class="ui segment container">
+      <div class="ui content-card container">
         <div class = "titlebar">
           <h3 class = "titlebar-header">Student Records</h3>
         </div>
-      <div class="ui segment container">
-        {{student-data-entry}}
-    </div>
+        <div class = "content">
+       {{student-data-entry}}
+       </div>
     </div>
       {{/if}}
       {{#if isAddStudShowing}}
-      <div class="ui segment container">
+      <div class="ui content-card container">
         <div class = "titlebar">
           <h3 class = "titlebar-header">Add Student</h3>
         </div>
-      <div class="ui segment container">
-        {{add-student}}
-    </div>
+        <div class = "content">
+       {{add-student}}
+       </div>
     </div>
       {{/if}}
       {{#if isEditResShowing}}
-      <div class="ui segment container">
+      <div class="ui content-card container">
         <div class = "titlebar">
           <h3 class = "titlebar-header">Residencies</h3>
         </div>
-      <div class="ui segment container">
-        {{edit-residency}}
-    </div>
+        <div class = "content">
+       {{edit-residency}}
+       </div>
     </div>
       {{/if}}
       {{#if isEditGenShowing}}
-      <div class="ui segment container">
+      <div class="ui content-card container">
         <div class = "titlebar">
           <h3 class = "titlebar-header">Genders</h3>
         </div>
-      <div class="ui segment container">
+        <div class = "content">
         {{edit-gender}}
-    </div>
+        </div>
     </div>
       {{/if}}
 

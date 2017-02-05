@@ -31,10 +31,16 @@
 }
 .titlebar{
     background-color: #4F2683;
-    height: 50px;
-    text-align: center;
+    padding: 10px;
 }
 .titlebar h3{
     color : white;
     font-size: 40px;
+}
+.content-card{
+    background-color: white;
+    margin: 20px;
+}
+.content-card .content{
+    padding: 20px;
 }
