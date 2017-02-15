@@ -17,7 +17,7 @@ export default Ember.Component.extend({
 
   actions:{
     search: function () {
-    
+    //TODO try printing out studentsModel or records or store.get('student') or SOMETHING
     var self = this;
     this.get('store').query('student', {
       firstName: self.get('firstNameSearch'),
