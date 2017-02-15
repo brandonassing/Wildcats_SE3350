@@ -18,6 +18,8 @@ export default Ember.Component.extend({
   actions:{
     search: function () {
     //TODO try printing out studentsModel or records or store.get('student') or SOMETHING
+
+    //doesn't work bc Ouda's student num is an int and every save/addition is a string
     var self = this;
     this.get('store').query('student', {
       firstName: self.get('firstNameSearch'),
