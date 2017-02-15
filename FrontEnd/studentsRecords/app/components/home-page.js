@@ -13,62 +13,35 @@ export default Ember.Component.extend({
 
   isHomeShowing: true,
   isStudentsRecordsDataEntry: false,
-  isAboutShowing: false,
   isAddStudShowing: false,
-  isEditRes: false,
-  isEditGen: false,
+  isEditSysShowing: false,
 
   actions: {
     home() {
       this.set('isAddStudShowing', false);
       this.set('isHomeShowing', true);
-      this.set('isStudentsRecordsDataEntry', false);
-      this.set('isAboutShowing', false);
-      this.set('isEditResShowing', false);
-      this.set('isEditGenShowing', false);
+      this.set('isStudentsRecordsDataEntry', false);      
+      this.set('isEditSysShowing', false);
     },
 
     studentsDataEntry() {
       this.set('isAddStudShowing', false);
       this.set('isHomeShowing', false);
-      this.set('isStudentsRecordsDataEntry', true);
-      this.set('isAboutShowing', false);
-      this.set('isEditResShowing', false);
-      this.set('isEditGenShowing', false);
-    },
-
-    about() {
-      this.set('isAddStudShowing', false);
-      this.set('isHomeShowing', false);
-      this.set('isStudentsRecordsDataEntry', false);
-      this.set('isAboutShowing', true);
-      this.set('isEditResShowing', false);
-      this.set('isEditGenShowing', false);
+      this.set('isStudentsRecordsDataEntry', true);      
+      this.set('isEditSysShowing', false);
     },
 
     addStudent() {
       this.set('isAddStudShowing', true);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
-      this.set('isAboutShowing', false);
-      this.set('isEditResShowing', false);
-      this.set('isEditGenShowing', false);
+      this.set('isEditSysShowing', false);
     },
-    editResidency() {
+    editSystemCode() {
       this.set('isAddStudShowing', false);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
-      this.set('isAboutShowing', false);
-      this.set('isEditResShowing', true);
-      this.set('isEditGenShowing', false);
-    },
-    editGender() {
-      this.set('isAddStudShowing', false);
-      this.set('isHomeShowing', false);
-      this.set('isStudentsRecordsDataEntry', false);
-      this.set('isAboutShowing', false);
-      this.set('isEditResShowing', false);
-      this.set('isEditGenShowing', true);
+      this.set('isEditSysShowing', true);
     }
   }
 });

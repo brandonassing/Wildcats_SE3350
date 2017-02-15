@@ -1,16 +1,7 @@
-<div class="ui center aligned header">
-  <h2>Add Student</h2>
-</div>
-
-<div class="ui inverted menu">
-<a class="item" {{action 'saveStudent'}}>
-    <i class="save icon"></i> Save
-  </a>
-  </div>
-<div class="ui bottom attached active tab segment" data-tab="basics">
+<div class="ui bottom attached active tab" data-tab="basics">
 
   <div class="ui grid">
-    <div class="ui right aligned  seven wide column">
+    <div class="ui left aligned seven wide column">
       <div class="ui form">
         <div class="inline field">
           <label>Student Number</label> {{input size="10" type="text" value = number}}
@@ -43,9 +34,11 @@
 {{/each}}
 </select>
 </div>
+<button class="ui button" {{action 'saveStudent'}}>
+    <i class="save icon"></i> Save
+  </button>
 </div>
 </div>
-
 <div class="ui center aligned  seven wide column segment">
   <img src={{studentPhoto}}>
 </div>
