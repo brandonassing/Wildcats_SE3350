@@ -31,6 +31,7 @@ export default Ember.Component.extend({
       } else {
         self.set('currentIndex', records.indexOf(records.get("firstObject")));
       }
+      //
 });*/
   }),
 
