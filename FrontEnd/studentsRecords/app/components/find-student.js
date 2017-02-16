@@ -42,16 +42,6 @@ export default Ember.Component.extend({
 
     exit: function () {
       this.set('notDONE', false);
-      Ember.$('.ui.modal').modal('hide');
-      $(this).data('modal', null);
     }
-  },
-
-  didRender() {
-    Ember.$('.ui.modal')
-      .modal({
-        closable: true,
-      })
-      .modal('show');
   }
 });

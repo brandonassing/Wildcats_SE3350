@@ -13,38 +13,20 @@ export default Ember.Component.extend({
 
   actions: {
     loadNext: function () {
-      Ember.$('.ui.modal').modal('hide');
       this.set('offset', this.get('offset') + this.get('pageSize'));
-      Ember.$('.ui.modal').modal('show');
     },
 
     loadPrevious: function () {
       if (this.get('offset') >= this.get('pageSize')) {
-        Ember.$('.ui.modal').modal('hide');
         this.set('offset', this.get('offset') - this.get('pageSize'));
-        Ember.$('.ui.modal').modal('show');
       }
     },
 
     getStudent: function (student) {
       var index = this.get('studentsModel').indexOf(student);
       this.set('INDEX', index);
-
-    },
-
-    exit: function () {
       this.set('notDONE', false);
-      Ember.$('.ui.modal').modal('hide');
-      $(this).data('modal', null);
+
     }
-  },
-
-
-  didRender() {
-    Ember.$('.ui.modal')
-      .modal({
-        closable: false,
-      })
-      .modal('show');
   }
 });

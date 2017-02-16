@@ -1,4 +1,4 @@
-<div class="ui modal">
+<div class="ui">
   <div class="header">Search Students Using the Input Fields and by Pressing 'Search'</div>
   <div class="content">
     
@@ -17,7 +17,16 @@
       {{input type="text" value = lastNameSearch}}
     </div>
 
-    <div class="inline field">
+    
+
+    <div class="actions">
+      <hr>
+      <div class="ui button" {{action "search"}}>
+        <i>Search</i>
+      </div>
+      <div class="ui button" {{action "exit"}}>OK</div>
+    </div>
+<div class="inline field">
       <hr>
       <div class="header">Search Results:</div>
       
@@ -46,14 +55,5 @@
         </div>
       </div>
     {{/each}}
-
-    <div class="actions">
-      <hr>
-      <div class="ui button" {{action "search"}}>
-        <i>Search</i>
-      </div>
-      <div class="ui button" {{action "exit"}}>OK</div>
-    </div>
-
   </div>
 </div>
