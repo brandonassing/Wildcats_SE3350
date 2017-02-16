@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   limit: 10,
   offset: 0,
   pageSize: 10,
+  prevOffset: 0,
 
   studentsModel: null,
   INDEX: null,
@@ -15,6 +16,11 @@ export default Ember.Component.extend({
   lastNameSearch: null,
   searchedRecords: null,
 
+  init(){
+    this._super(...arguments);
+
+    this.set("prevOffset", this.get("offset"));
+  },
   actions:{
     search: function () {
     //TODO try printing out studentsModel or records or store.get('student') or SOMETHING
@@ -42,6 +48,7 @@ export default Ember.Component.extend({
 
     exit: function () {
       this.set('notDONE', false);
+      this.set('offset', this.get("prevOffset"));
     }
   }
 });
