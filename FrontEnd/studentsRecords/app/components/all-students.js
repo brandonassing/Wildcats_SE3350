@@ -6,45 +6,37 @@ export default Ember.Component.extend({
   limit: 10,
   offset: 0,
   pageSize: 10,
+  prevOffset: 0,
 
   studentsModel: null,
   INDEX: null,
   notDONE: null,
 
+  init(){
+    this._super(...arguments);
+
+    this.set("prevOffset", this.get("offset"));
+  },
   actions: {
     loadNext: function () {
-      Ember.$('.ui.modal').modal('hide');
       this.set('offset', this.get('offset') + this.get('pageSize'));
-      Ember.$('.ui.modal').modal('show');
     },
 
     loadPrevious: function () {
       if (this.get('offset') >= this.get('pageSize')) {
-        Ember.$('.ui.modal').modal('hide');
         this.set('offset', this.get('offset') - this.get('pageSize'));
-        Ember.$('.ui.modal').modal('show');
       }
     },
 
     getStudent: function (student) {
       var index = this.get('studentsModel').indexOf(student);
       this.set('INDEX', index);
+      this.set('notDONE', false);
 
     },
-
     exit: function () {
       this.set('notDONE', false);
-      Ember.$('.ui.modal').modal('hide');
-      $(this).data('modal', null);
+      this.set('offset', this.get("prevOffset"));
     }
-  },
-
-
-  didRender() {
-    Ember.$('.ui.modal')
-      .modal({
-        closable: false,
-      })
-      .modal('show');
   }
 });

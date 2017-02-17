@@ -25,7 +25,7 @@ router.route('/')
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
         if (typeof request.query.limit != "undefined" && typeof request.query.offset != "undefined") {
-        var l = parseInt(request.query.limit) ;
+        var l = parseInt(request.query.limit);
         var o = parseInt(request.query.offset);
         var Student = request.query.student;
         if (!Student) {

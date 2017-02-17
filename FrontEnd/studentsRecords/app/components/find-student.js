@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   limit: 10,
   offset: 0,
   pageSize: 10,
+  prevOffset: 0,
 
   studentsModel: null,
   INDEX: null,
@@ -15,8 +16,16 @@ export default Ember.Component.extend({
   lastNameSearch: null,
   searchedRecords: null,
 
+  init(){
+    this._super(...arguments);
+
+    this.set("prevOffset", this.get("offset"));
+  },
   actions:{
     search: function () {
+    //TODO try printing out studentsModel or records or store.get('student') or SOMETHING
+
+    //doesn't work bc Ouda's student num is an int and every save/addition is a string
     var self = this;
     this.get('store').query('student', {
       firstName: self.get('firstNameSearch'),
@@ -29,23 +38,17 @@ export default Ember.Component.extend({
   },
 
     getStudent: function (student) {
+      var offset = 20;
+      this.set('offset', offset);
       var index = this.get('studentsModel').indexOf(student);
+      //ERROR TODO can only get student if on the same offset!!!
+      //set index and offset here
       this.set('INDEX', index);
-
     },
 
     exit: function () {
       this.set('notDONE', false);
-      Ember.$('.ui.modal').modal('hide');
-      $(this).data('modal', null);
+      this.set('offset', this.get("prevOffset"));
     }
-  },
-
-  didRender() {
-    Ember.$('.ui.modal')
-      .modal({
-        closable: true,
-      })
-      .modal('show');
   }
 });
