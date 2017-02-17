@@ -38,12 +38,15 @@ export default Ember.Component.extend({
   },
 
     getStudent: function (student) {
+      window.alert("");
       var offset = 20;
       this.set('offset', offset);
       var index = this.get('studentsModel').indexOf(student);
       //ERROR TODO can only get student if on the same offset!!!
       //set index and offset here
       this.set('INDEX', index);
+      //this.set('notDONE', false);
+      //window.alert(this.notDONE);
     },
 
     exit: function () {
