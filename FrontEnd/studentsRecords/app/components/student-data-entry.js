@@ -72,6 +72,23 @@ export default Ember.Component.extend({
 
   showStudentData: function (index) {
     this.set('currentStudent', this.get('studentsRecords').objectAt(index));
+    
+      this.set('tempnumber', this.get('currentStudent.number'));
+      this.set('tempfirstName', this.get('currentStudent.firstName'));
+      this.set('templastName', this.get('currentStudent.lastName'));
+      this.set('tempDOB', this.get('currentStudent.DOB'));
+      this.set('tempregComments', this.get('currentStudent.regComments'));
+      this.set('tempbasis', this.get('currentStudent.basis'));
+      this.set('tempAvg', this.get('current.admissionAvg'));
+      this.set('tempComments', this.get('current.admissionComments'));
+      this.set('tempPhoto', this.get('currentStudent.photo'));
+      this.set('tempGen', this.get('currentStudent.genInfo'));
+      this.set('tempRes', this.get('currentStudent.resInfo'));
+      this.set('tempTrans', this.get('currentStudent.transInfo'));
+      //window.alert(index);
+      //window.alert(this.get("currentStudent"));
+      this.set('tempAward', this.get('currentStudent.awardInfo'));
+      
     this.set('studentPhoto', this.get('currentStudent').get('photo'));
     var date = this.get('currentStudent').get('DOB');
     var datestring = date.toISOString().substring(0, 10);
@@ -143,10 +160,12 @@ export default Ember.Component.extend({
 
     allStudents() {
       this.set('showAllStudents', true);
+      this.set('showFindStudents', false);
     },
 
     findStudent() {
       this.set('showFindStudents', true);
+      this.set('showAllStudents', false);
     },
 
     selectGender(gender) {
