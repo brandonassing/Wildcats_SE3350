@@ -19,19 +19,6 @@ export default Ember.Component.extend({
   offset: null,
   pageSize: null,
   movingBackword: false,
-  tempnumber: null,
-  tempfirstName: null,
-  templastName: null,
-  tempDOB: null,
-  tempregComments: null,
-  tempbasis: null,
-  tempAvg: null,
-  tempComments: null,
-  tempPhoto: null,
-  tempGen: null,
-  tempRes: null,
-  tempTrans: null,
-  tempAward: null,
 
   studentModel: Ember.observer('offset', function () {
     var self = this;
@@ -48,7 +35,7 @@ export default Ember.Component.extend({
         self.set('currentIndex', records.indexOf(records.get("firstObject")));
       }
     });
-
+    
   }),
 
   fetchStudent: Ember.observer('currentIndex', function () {
@@ -85,19 +72,6 @@ export default Ember.Component.extend({
 
   showStudentData: function (index) {
     this.set('currentStudent', this.get('studentsRecords').objectAt(index));
-      this.set('tempnumber', this.get('currentStudent.number'));
-      this.set('tempfirstName', this.get('currentStudent.firstName'));
-      this.set('templastName', this.get('currentStudent.lastName'));
-      this.set('tempDOB', this.get('currentStudent.DOB'));
-      this.set('tempregComments', this.get('currentStudent.regComments'));
-      this.set('tempbasis', this.get('currentStudent.basis'));
-      this.set('tempAvg', this.get('current.admissionAvg'));
-      this.set('tempComments', this.get('current.admissionComments'));
-      this.set('tempPhoto', this.get('currentStudent.photo'));
-      this.set('tempGen', this.get('currentStudent.genInfo'));
-      this.set('tempRes', this.get('currentStudent.resInfo'));
-      this.set('tempTrans', this.get('currentStudent.transInfo'));
-      this.set('tempAward', this.get('currentStudent.awardInfo'));
     this.set('studentPhoto', this.get('currentStudent').get('photo'));
     var date = this.get('currentStudent').get('DOB');
     var datestring = date.toISOString().substring(0, 10);
@@ -114,10 +88,10 @@ export default Ember.Component.extend({
       var updatedStudent = this.get('currentStudent');
 
       //QUICK FIX for null selections
-      if (this.get("selectedGender") == null) {
+      if (this.get("selectedGender") == null){
         this.set("selectedGender", this.get("currentStudent.genInfo.id"));
       }
-      if (this.get("selectedResidency") == null) {
+      if (this.get("selectedResidency") == null){
         this.set("selectedResidency", this.get("currentStudent.resInfo.id"));
       }
 
@@ -136,25 +110,6 @@ export default Ember.Component.extend({
         this.set("selectedGender", null);
         this.set("selectedResidency", null);
       });
-    },
-    deleteStudent(){
-           ///TODO STILL GETS ERRORS
-    this.get("store").findRecord('student',  this.get("currentStudent.id"))
-    .then(function (stud) {
-      stud.destroyRecord();
-      //stud.save();
-    });
-    
-    /*
-       if (this.get("currentIndex") >= this.get("lastIndex")){
-         this.currentIndex = this.firstIndex;
-         //ERROR this will cause problems on the last offset
-         this.offset +=10;
-      }
-      else{
-        this.currentIndex += 1;
-      }
-      */
     },
 
     firstStudent() {
@@ -205,21 +160,5 @@ export default Ember.Component.extend({
     assignDate(date) {
       this.set('selectedDate', date);
     },
-
-    undoSave() {
-      this.set('currentStudent.number', this.get('tempnumber'));
-      this.set('currentStudent.firstName', this.get('tempfirstName'));
-      this.set('currentStudent.lastName', this.get('templastName'));
-      this.set('currentStudent.DOB', this.get('tempDOB'));
-      this.set('currentStudent.regComments', this.get('tempregComments'));
-      this.set('currentStudent.basis', this.get('tempbasis'));
-      this.set('currentStudent.admissionAvg', this.get('tempAvg'));
-      this.set('currentStudent.admissionComments', this.get('tempComments'));
-      this.set('currentStudent.photo', this.get('tempPhoto'));
-      this.set('currentStudent.genInfo', this.get('tempGen'));
-      this.set('currentStudent.resInfo', this.get('tempRes'));
-      this.set('currentStudent.transInfo', this.get('tempTrans'));
-      this.set('currentStudent.awardInfo', this.get('tempAward'));
-    }
   }
 });

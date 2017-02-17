@@ -15,6 +15,7 @@ export default Ember.Component.extend({
   isStudentsRecordsDataEntry: false,
   isAddStudShowing: false,
   isEditSysShowing: false,
+  isImportRecordsShowing: false,
 
   actions: {
     home() {
@@ -22,6 +23,7 @@ export default Ember.Component.extend({
       this.set('isHomeShowing', true);
       this.set('isStudentsRecordsDataEntry', false);      
       this.set('isEditSysShowing', false);
+      this.set('isImportRecordsShowing', false);
     },
 
     studentsDataEntry() {
@@ -29,6 +31,7 @@ export default Ember.Component.extend({
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', true);      
       this.set('isEditSysShowing', false);
+      this.set('isImportRecordsShowing', false);
     },
 
     addStudent() {
@@ -36,12 +39,21 @@ export default Ember.Component.extend({
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
       this.set('isEditSysShowing', false);
+      this.set('isImportRecordsShowing', false);
     },
     editSystemCode() {
       this.set('isAddStudShowing', false);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
       this.set('isEditSysShowing', true);
+      this.set('isImportRecordsShowing', false);
+    },
+    importStudentRecords() {
+      this.set('isImportRecordsShowing', true);
+      this.set('isAddStudShowing', false);
+      this.set('isStudentsRecordsDataEntry',false);
+      this.set('isHomeShowing',false);
+      this.set('isEditSysShowing', false);
     }
   }
 });
