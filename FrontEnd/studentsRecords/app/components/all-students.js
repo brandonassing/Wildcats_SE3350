@@ -4,7 +4,7 @@ export default Ember.Component.extend({
 
   store: Ember.inject.service(),
   limit: 10,
-  offset: 0,
+  OFFSET: 0,
   pageSize: 10,
   prevOffset: 0,
 
@@ -15,16 +15,16 @@ export default Ember.Component.extend({
   init(){
     this._super(...arguments);
 
-    this.set("prevOffset", this.get("offset"));
+    this.set("prevOffset", this.get("OFFSET"));
   },
   actions: {
     loadNext: function () {
-      this.set('offset', this.get('offset') + this.get('pageSize'));
+      this.set('OFFSET', this.get('OFFSET') + this.get('pageSize'));
     },
 
     loadPrevious: function () {
-      if (this.get('offset') >= this.get('pageSize')) {
-        this.set('offset', this.get('offset') - this.get('pageSize'));
+      if (this.get('OFFSET') >= this.get('pageSize')) {
+        this.set('OFFSET', this.get('OFFSET') - this.get('pageSize'));
       }
     },
 
@@ -35,8 +35,8 @@ export default Ember.Component.extend({
 
     },
     exit: function () {
+      this.set('OFFSET', this.get("prevOffset"));
       this.set('notDONE', false);
-      this.set('offset', this.get("prevOffset"));
     }
   }
 });

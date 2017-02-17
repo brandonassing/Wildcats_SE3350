@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   
   store: Ember.inject.service(),
   limit: 10,
-  offset: 0,
+  OFFSET: 0,
   pageSize: 10,
   prevOffset: 0,
 
@@ -19,7 +19,7 @@ export default Ember.Component.extend({
   init(){
     this._super(...arguments);
 
-    this.set("prevOffset", this.get("offset"));
+    this.set("prevOffset", this.get("OFFSET"));
   },
   actions:{
     search: function () {
@@ -38,17 +38,18 @@ export default Ember.Component.extend({
   },
 
     getStudent: function (student) {
-      var offset = 20;
-      this.set('offset', offset);
+     // var offset = 60;
+      //this.set('OFFSET', offset);
       var index = this.get('studentsModel').indexOf(student);
       //ERROR TODO can only get student if on the same offset!!!
-      //set index and offset here
+      //ERROR first search sets index to 0 and the second one works??????? only when hard-setting index???
       this.set('INDEX', index);
+      this.set('notDONE', false);
     },
 
     exit: function () {
-      this.set('notDONE', false);
       this.set('offset', this.get("prevOffset"));
+      this.set('notDONE', false);
     }
   }
 });
