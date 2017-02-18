@@ -14,12 +14,18 @@
 
 {{else}}
 <!-- Show the menu bar-->
-<div class="ui inverted menu">
-  <a class="item" {{action 'saveStudent'}}>
+<div class="ui eleven item fluid borderless inverted menu">
+<a class="item" {{action 'saveStudent'}}>
     <i class="save icon"></i>Save
   </a>
   <a class="item" {{action 'undoSave'}}>
     <i class="undo icon"></i>Undo
+  </a>
+    <a class="item" {{action 'addStudent'}}>
+    <i class="add user icon"></i>Add
+  </a>
+  <a class="item" {{action 'deleteStudent'}}>
+    <i class="remove user icon"></i>Delete
   </a>
   <a class="item" {{action 'firstStudent'}}>
     <i class="step backward icon"></i>First
@@ -34,16 +40,10 @@
     <i class="step forward icon"></i>Last
   </a>
   <a class="item" {{action 'allStudents'}}>
-    <i class="list icon"></i>All Records
+    <i class="list icon"></i>Show All
   </a>
   <a class="item" {{action 'findStudent'}}>
-    <i class="search icon"></i>Find Record
-  </a>
-  <a class="item" {{action 'addStudent'}}>
-    <i class="add user icon"></i>Add Student
-  </a>
-  <a class="item" {{action 'deleteStudent'}}>
-    <i class="remove user icon"></i>Delete
+    <i class="search icon"></i>Find
   </a>
   <a class="item">
     <i class="help circle icon"></i>Help
