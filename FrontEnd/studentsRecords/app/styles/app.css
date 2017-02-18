@@ -1,3 +1,6 @@
+body{
+    background: #eee;
+}
 #header{
     padding:10px;
 }
@@ -21,7 +24,6 @@
 }
 #main-content{
     padding-top: 100px;
-    background: #eee;
     background-image: url(https://www.uwo.ca/web_standards/img/bkg/bigshield.gif);
     background-repeat: no-repeat;
     background-position: 50% 0;
