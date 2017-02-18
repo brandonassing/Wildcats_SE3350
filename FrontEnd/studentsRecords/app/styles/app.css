@@ -46,3 +46,9 @@
 .content-card .content{
     padding: 20px;
 }
+#welcome-card.content-card{
+    /*width: 30vw;*/
+}
+#edit-res-card.content-card, #edit-gen-card.content-card{
+    width: 30vw;
+}
