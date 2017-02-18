@@ -4,6 +4,8 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   showAllStudents: false,
   showFindStudents: false,
+  showAddStudent: false,
+
   residencyModel: null,
   genderModel: null,
   selectedResidency: null,
@@ -19,6 +21,7 @@ export default Ember.Component.extend({
   offset: null,
   pageSize: null,
   movingBackword: false,
+
   tempnumber: null,
   tempfirstName: null,
   templastName: null,
@@ -193,13 +196,20 @@ export default Ember.Component.extend({
     allStudents() {
       this.set('showAllStudents', true);
       this.set('showFindStudents', false);
+      this.set('showAddStudent', false);
     },
 
     findStudent() {
       this.set('showFindStudents', true);
       this.set('showAllStudents', false);
+      this.set('showAddStudent', false);
     },
 
+    addStudent(){
+      this.set('showFindStudents', false);
+      this.set('showAllStudents', false);
+      this.set('showAddStudent', true);
+    },
     selectGender(gender) {
       this.set('selectedGender', gender);
     },
