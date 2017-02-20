@@ -1,4 +1,14 @@
 
+
+{{#if showAllStudents}}
+<!-- Note that offset is an "in" and "out" parameter !-->
+{{all-students INDEX = currentIndex notDONE = showAllStudents OFFSET = offset studentsModel = studentsRecords}}
+
+{{else if showFindStudents}}
+
+{{find-student INDEX = currentIndex notDONE = showFindStudents OFFSET = offset studentsModel = studentsRecords}}
+
+{{else}}
 <!-- Show the menu bar-->
 <div class="ui inverted menu">
   <a class="item" {{action 'saveStudent'}}>
@@ -33,15 +43,6 @@
   </a>
 </div>
 
-{{#if showAllStudents}}
-<!-- Note that offset is an "in" and "out" parameter !-->
-{{all-students INDEX = currentIndex notDONE = showAllStudents offset = offset studentsModel = studentsRecords}}
-
-{{else if showFindStudents}}
-
-{{find-student INDEX = currentIndex notDONE = showAllStudents offset = offset studentsModel = studentsRecords}}
-
- {{else}}
 <!-- Show data entry form -->
 
 
