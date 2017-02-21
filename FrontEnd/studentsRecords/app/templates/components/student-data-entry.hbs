@@ -15,7 +15,7 @@
 {{else}}
 <!-- Show the menu bar-->
 <div class="ui eleven item fluid borderless inverted menu">
-<a class="ui item" {{action 'saveStudent'}}>
+<a class="item" {{action 'saveStudent'}}>
     <i class="save icon"></i>Save
   </a>
   <a class="item" {{action 'undoSave'}}>
@@ -115,7 +115,7 @@
 </div>
 
 <!-- Show student photo -->
-<div class="ui center aligned  seven wide column segment">
+<div class="ui center aligned four wide column segment">
   <img src={{studentPhoto}}>
 </div>
 </div>
@@ -138,88 +138,71 @@
 ===============================================
 </div>!-->
 
-<div class="ui tab" data-tab="admission">
-  <div class="ui top attached tabular menu">
+<div class="ui bottom attached tab segment" data-tab="admission">
+  <div class="ui inverted violet segment">
+      <h2>
+        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
+      </h2>
+    </div>
+  <div class="ui pointing secondary menu">
     <div class="active item" data-tab="comments">Admission Comments</div>
     <div class="item" data-tab="basis">Basis of Admission</div>
     <div class="item" data-tab="registration">Registration Comments</div>
   </div>
 
-  <div class="ui bottom attached active tab segment" data-tab="comments">
-    <div class="ui inverted violet segment">
-      <h2>
-        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
-      </h2>
-    </div>
-    <div class="ui segment">
-      <div class="ui vertical divided grid">
-        <div class="four wide column">
-          <body>
+  <div class="ui active tab" data-tab="comments">
+      <div class="ui">
+        <div>
+          <div>
            
            <div class ="ui form">
              <div class = "inline field">
-                <div class = "ui pointing below label">Admission Average:</div>
+                <div class = "ui label">Admission Average:</div>
                  {{input type="text" value = currentStudent.admissionAvg}}
               </div>
            </div>
             
 
             <br>
-          </body>
+          </div>
         </div>
-        <div class="six wide column">
-          <body>
+        <div>
+          <div>
             <div class="ui form">
             <div class="inline field">
-            <label>Admission Comments</label> {{textarea size="10" type="text" value = currentStudent.admissionComments}}
+            {{textarea size="10" type="text" value = currentStudent.admissionComments placeholder = "Enter admission comments"}}
             </div>
             </div>
-          </body>
+          </div>
         </div>
       </div>
-    </div>
   </div>
 
 
 
-  <div class="ui bottom attached tab segment" data-tab="basis">
-
-    <div class="ui inverted violet segment">
-      <h2>
-        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
-      </h2>
-    </div>
+  <div class="ui bottom attached tab" data-tab="basis">
     
-    <div class="ui segment">
 
-      <body>
+      <div>
         <div class="ui form">
           <div class="inline field">
-            <label>Basis of Admission</label> {{textarea size="10" type="text" value = currentStudent.basis}}
+            {{textarea size="10" type="text" value = currentStudent.basis placeholder="Enter basis of admission"}}
           </div>
         </div>
-      </body>
-    </div>
+      </div>
     
   </div>
 
-  <div class="ui bottom attached tab segment" data-tab="registration">
-    <div class="ui inverted violet segment">
-      <h2>
-        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
-      </h2>
-    </div>
+  <div class="ui bottom attached tab" data-tab="registration">
 
-    <div class="ui segment">
 
-      <body>
+      <div>
         <div class="ui form">
           <div class="inline field">
-            <label>Registration Comments</label> {{textarea size="10" type="text" value = currentStudent.regComments}}
+            {{textarea size="10" type="text" value = currentStudent.regComments placeholder = "Enter registration comments"}}
           </div>
         </div>
-      </body>
-    </div>
+      </div>
   </div>
 
 </div>
@@ -335,7 +318,7 @@
   <div class="ui segment">
     <div class="ui grid">
       <div class="tenwide column">
-      <center><h3>Scholarships and Awards</h3></center>
+      <center><h3>Awards and Scholarships</h3></center>
       <div class="ui divider"></div>
       <ul>
         {{#each currentStudent.awardInfo as awards}}
