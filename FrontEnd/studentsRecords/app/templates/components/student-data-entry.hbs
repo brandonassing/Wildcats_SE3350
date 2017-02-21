@@ -8,38 +8,45 @@
 
 {{find-student INDEX = currentIndex notDONE = showFindStudents OFFSET = offset studentsModel = studentsRecords}}
 
+{{else if showAddStudent}}
+
+{{add-student notDONE = showAddStudent}}
+
 {{else}}
 <!-- Show the menu bar-->
-<div class="ui inverted menu">
-  <a class="item" {{action 'saveStudent'}}>
-    <i class="save icon"></i> Save
+<div class="ui eleven item fluid borderless inverted menu">
+<a class="ui item" {{action 'saveStudent'}}>
+    <i class="save icon"></i>Save
   </a>
   <a class="item" {{action 'undoSave'}}>
-    <i class="undo icon"></i> Undo
+    <i class="undo icon"></i>Undo
   </a>
-  <a class="item" {{action 'firstStudent'}}>
-    <i class="step backward icon"></i> First
-  </a>
-  <a class="item" {{action 'previousStudent'}}>
-    <i class="arrow left icon"></i> Previous
-  </a>
-  <a class="item" {{action 'nextStudent'}}>
-    <i class="arrow right icon"></i> Next
-  </a>
-  <a class="item" {{action 'lastStudent'}}>
-    <i class="step forward icon"></i> Last
-  </a>
-  <a class="item" {{action 'allStudents'}}>
-    <i class="content icon"></i> All Records
-  </a>
-  <a class="item" {{action 'findStudent'}}>
-    <i class="search icon"></i> Find Record
+    <a class="item" {{action 'addStudent'}}>
+    <i class="add user icon"></i>Add
   </a>
   <a class="item" {{action 'deleteStudent'}}>
-    Delete
+    <i class="remove user icon"></i>Delete
+  </a>
+  <a class="item" {{action 'firstStudent'}}>
+    <i class="step backward icon"></i>First
+  </a>
+  <a class="item" {{action 'previousStudent'}}>
+    <i class="arrow left icon"></i>Previous
+  </a>
+  <a class="item" {{action 'nextStudent'}}>
+    <i class="arrow right icon"></i>Next
+  </a>
+  <a class="item" {{action 'lastStudent'}}>
+    <i class="step forward icon"></i>Last
+  </a>
+  <a class="item" {{action 'allStudents'}}>
+    <i class="list icon"></i>Show All
+  </a>
+  <a class="item" {{action 'findStudent'}}>
+    <i class="search icon"></i>Find
   </a>
   <a class="item">
-    Help
+    <i class="help circle icon"></i>Help
   </a>
 </div>
 
@@ -74,7 +81,7 @@
   <!-- student basic information !-->
 
   <div class="ui grid">
-    <div class="ui right aligned  seven wide column">
+    <div class="ui right aligned seven wide column">
       <div class="ui form">
         <div class="inline field">
           <label>Student Number</label> {{input size="10" type="text" value = currentStudent.number}}

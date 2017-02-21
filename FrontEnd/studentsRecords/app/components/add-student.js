@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   store: Ember.inject.service(),
+  notDONE: true,
   number: null,
   firstname: null,
   lastname: null,
@@ -82,6 +83,7 @@ export default Ember.Component.extend({
           this.set("selectedDate", null);
           this.set("selectedGender", null);
           this.set("selectedResidency", null);
+          this.set('notDONE', false);
         });
 
       }
@@ -116,7 +118,11 @@ export default Ember.Component.extend({
 
     assignDate(date) {
       this.set('selectedDate', date);
+    },
+    
+    exit() {
+      this.set('notDONE', false);
     }
-  }
-
+       
+}
 });

@@ -1,3 +1,8 @@
+body{
+    background: #eee;
+}
+
+/*==========HOME PAGE===========*/
 #header{
     padding:10px;
 }
@@ -21,7 +26,6 @@
 }
 #main-content{
     padding-top: 100px;
-    background: #eee;
     background-image: url(https://www.uwo.ca/web_standards/img/bkg/bigshield.gif);
     background-repeat: no-repeat;
     background-position: 50% 0;
@@ -46,3 +50,25 @@
 .content-card .content{
     padding: 20px;
 }
+
+/*==========HOME PAGE===========*/
+
+/*==========IMPORT COMPONENT===========*/
+.import-field{
+    padding: 20px;
+    background-color: #eee;
+    margin: 10px;
+}
+/*==========IMPORT COMPONENT===========*/
+
+/*==========SYSTEM CODE COMPONENT===========*/
+#edit-res-card.content-card, #edit-gen-card.content-card{
+    width: 30vw;
+}
+/*==========SYSTEM CODE COMPONENT===========*/
+
+/*==========WELCOME COMPONENT===========*/
+#welcome-card.content-card{
+    /*width: 30vw;*/
+}
+/*==========WELCOME COMPONENT===========*/

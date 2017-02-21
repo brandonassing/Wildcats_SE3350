@@ -1,7 +1,10 @@
-<div class="ui bottom attached active tab" data-tab="basics">
+<h2 style="text-align:center">Add new student</h2>
 
+<!-- TODO add tabs for awards etc
+<div class="ui bottom attached active tab" data-tab="basics">
+-->
   <div class="ui grid">
-    <div class="ui left aligned seven wide column">
+    <div class="ui right aligned seven wide column">
       <div class="ui form">
         <div class="inline field">
           <label>Student Number</label> {{input size="10" type="text" value = number}}
@@ -37,11 +40,10 @@
 <button class="ui button" {{action 'saveStudent'}}>
     <i class="save icon"></i> Save
   </button>
+  <div class="ui button" {{action "exit"}}>Back</div>
 </div>
 </div>
 <div class="ui center aligned  seven wide column segment">
   <img src={{studentPhoto}}>
 </div>
-</div>
-
 </div>
