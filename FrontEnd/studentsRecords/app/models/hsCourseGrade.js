@@ -1,7 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  note: DS.attr(),
+  mark: DS.attr(),
+  source: DS.belongsTo('highSchoolCourse'),
   student: DS.belongsTo('student')
 
 });

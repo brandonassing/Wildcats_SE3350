@@ -46,7 +46,7 @@ router.route('/:standing_id')
                 standing.units = request.body.standing.units;
                 standing.grade = request.body.standing.grade;
                 standing.location = request.body.standing.location;
-                standing.students = request.body.standing.students;
+                standing.student = request.body.standing.student;
 
                 standing.save(function (error) {
                     if (error) {
