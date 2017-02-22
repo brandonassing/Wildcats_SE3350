@@ -26,21 +26,16 @@ var studentsSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Awards'
     }],
-    highSchoolCourse: 
+    highSchoolCourses: 
     [{
         type: mongoose.Schema.ObjectId,
         ref: 'HSCourseGrades'
     }],
-    semester: 
-    {
-        type: mongoose.Schema.ObjectId,
-        ref: 'TermCodes'
-    },
     marks:
-    {
+    [{
         type: mongoose.Schema.ObjectId,
         ref: 'Grades'
-    }
+    }]
 });
 studentsSchema.plugin(mongoosePaginate);
 
@@ -138,7 +133,7 @@ var gradeSchema = mongoose.Schema({
         ref: ('ProgramRecords')
     },
     student:{
-        type: mongoose.Scheme.ObjectId,
+        type: mongoose.Schema.ObjectId,
         ref: ('Students')
     }
 });
@@ -152,8 +147,8 @@ var programRecordSchema = mongoose.Schema({
     {
         type: mongoose.Schema.ObjectId,
         ref: ('CourseCodes')
-    }
-    plan:
+    },
+    plans:
     [{
         type: mongoose.Schema.ObjectId,
         ref: ('PlanCodes')
@@ -162,7 +157,7 @@ var programRecordSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: ('TermCodes')
     }, 
-    mark:[{
+    marks:[{
         type: mongoose.Schema.ObjectId,
         ref: ('Grades')
     }]
@@ -191,10 +186,10 @@ var planCodeSchema = mongoose.Schema({
 var termCodeSchema = mongoose.Schema({
     name: String,
     programRecords:
-    {
+    [{
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
-    }
+    }]
 });
 
 var Students = mongoose.model('student', studentsSchema);
