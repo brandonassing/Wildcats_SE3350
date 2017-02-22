@@ -251,22 +251,22 @@
     </h2>
   </div>
 
-  <div class="ui segment">
-    <div class="ui grid">
-      <div class="tenwide column">
-      <center><h3>Awards and Scholarships</h3></center>
-      <div class="ui divider"></div>
-      <ul>
-        {{#each currentStudent.awardInfo as awards}}
-          <li>{{awards.note}}</li>
-          {{else}}
-          This student has no awards on record
-        {{/each}}
-       
-      </ul>
-      </div>
-    </div>
-  </div>
+  <table class = "ui celled table">
+    <tbody>
+      <br>
+      <center><tr><h3>Awards And Scholarships</h3></tr></center>
+      <br>
+      {{#each currentStudent.awardInfo as |awards|}}
+      <tr>
+        <td>{{awards.note}}</td>
+      </tr>
+      {{else}}
+      <tr>
+        <td>No Awards or Scholarships Currently On Record</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
   {{add-awards currentStudent = currentStudent}}
 </div>
 
