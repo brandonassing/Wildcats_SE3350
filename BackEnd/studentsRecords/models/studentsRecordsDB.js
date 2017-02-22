@@ -143,7 +143,7 @@ var programRecordSchema = mongoose.Schema({
     level: String,
     load: String,
     status: String,
-    courseIno:
+    courseInfo:
     {
         type: mongoose.Schema.ObjectId,
         ref: ('CourseCodes')
@@ -171,7 +171,7 @@ var courseCodeSchema = mongoose.Schema({
     programRecords:[{
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
-    }],
+    }]
 
 });
 
