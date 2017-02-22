@@ -223,15 +223,9 @@
         {{#each currentStudent.transInfo as |standings|}}
           <li>{{standings.course}}</li>
         {{else}}
-        the course list is empty
+        <p>No courses on record</p>
         {{/each}}
         </ul>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
       </div>
       <div class="four wide column">
         <h3>Description</h3>
@@ -240,16 +234,8 @@
         <ul> 
         {{#each currentStudent.transInfo as |standings|}}
           <li>{{standings.description}}</li>
-        {{else}}
-        the description list is empty
         {{/each}}
         </ul>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
       </div>
       <div class="two wide column">
         <h3>Units</h3>
@@ -258,16 +244,8 @@
         <ul> 
         {{#each currentStudent.transInfo as |standings|}}
           <li>{{standings.units}}</li>
-        {{else}}
-        the units list is empty
         {{/each}}
         </ul>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
       </div>
       <div class="two wide column">
         <h3>Grade</h3>
@@ -276,16 +254,8 @@
         <ul> 
         {{#each currentStudent.transInfo as |standings|}}
           <li>{{standings.grade}}</li>
-        {{else}}
-        the grade list is empty
         {{/each}}
         </ul>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
       </div>
       <div class="four wide column">
         <h3>From</h3>
@@ -293,15 +263,8 @@
         <ul> 
         {{#each currentStudent.transInfo as |standings|}}
           <li>{{standings.location}}</li>
-        {{else}}
-        the location list is empty
         {{/each}}
         </ul>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
       </div>
     </div>
   </div>
@@ -317,13 +280,13 @@
   <div class="ui segment">
     <div class="ui grid">
       <div class="tenwide column">
-      <center><h3>Awards and Scholarships</h3></center>
+      <h3>Awards and Scholarships</h3>
       <div class="ui divider"></div>
       <ul>
         {{#each currentStudent.awardInfo as awards}}
           <li>{{awards.note}}</li>
           {{else}}
-          This student has no awards on record
+          <p>No awards/scholarships on record</p>
         {{/each}}
        
       </ul>
