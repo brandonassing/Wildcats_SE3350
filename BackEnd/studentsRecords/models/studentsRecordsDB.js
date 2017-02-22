@@ -208,6 +208,7 @@ var CourseCodes = mongoose.model('courseCode', courseCodeSchema);
 var PlanCodes = mongoose.model('planCode', planCodeSchema);
 var TermCodes = mongoose.model('termCode', termCodeSchema);
 
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://main:main@ds139909.mlab.com:39909/se3350_wildcats');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
