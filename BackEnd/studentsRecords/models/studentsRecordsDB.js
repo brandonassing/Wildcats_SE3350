@@ -26,7 +26,7 @@ var studentsSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Awards'
     }],
-    highSchoolCourses: 
+    hsCourseGrades: 
     [{
         type: mongoose.Schema.ObjectId,
         ref: 'HSCourseGrades'
@@ -197,7 +197,7 @@ var Genders = mongoose.model('gender', genderSchema);
 var Residencies = mongoose.model('residency', residencySchema);
 var Standings = mongoose.model('standing', standingSchema);
 var Awards = mongoose.model('award', awardSchema);
-var HSCourseGrades = mongoose.model('hsCourseGrades', hsCourseGradeSchema);
+var HSCourseGrades = mongoose.model('hsCourseGrade', hsCourseGradeSchema);
 var HighSchoolCourses = mongoose.model('highSchoolCourse', highSchoolCourseSchema);
 var SecondarySchools = mongoose.model('secondarySchool',secondarySchoolSchema)
 var HighSchoolSubjects = mongoose.model('highSchoolSubject', highSchoolSubjectSchema);
@@ -221,7 +221,7 @@ db.once('open', function () {
     exports.HSCourseGrades = HSCourseGrades;
     exports.HighSchoolCourses = HighSchoolCourses;
     exports.SecondarySchools = SecondarySchools;
-    exports.HighSchoolCourses = HighSchoolCourses;
+    exports.HighSchoolSubjects = HighSchoolSubjects;
     exports.Grades = Grades;
     exports.ProgramRecords = ProgramRecords;
     exports.CourseCodes = CourseCodes;
