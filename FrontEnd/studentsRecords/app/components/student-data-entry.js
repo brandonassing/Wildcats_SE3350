@@ -37,13 +37,11 @@ export default Ember.Component.extend({
   tempAward: null,
 
   studentModel: Ember.observer('offset', function () {
-    window.alert("1");
     var self = this;
     this.get('store').query('student', {
       limit: self.get('limit'),
       offset: self.get('offset')
     }).then(function (records) {
-    window.alert("2");
       self.set('studentsRecords', records);
       self.set('firstIndex', records.indexOf(records.get("firstObject")));
       self.set('lastIndex', records.indexOf(records.get("lastObject")));
@@ -52,8 +50,6 @@ export default Ember.Component.extend({
       } else {
         self.set('currentIndex', records.indexOf(records.get("firstObject")));
       }
-      
-    window.alert("3");
     });
 
   }),
@@ -80,8 +76,6 @@ export default Ember.Component.extend({
       limit: self.get('limit'),
       offset: self.get('offset')
     }).then(function (records) {
-      
-    window.alert("7");
       self.set('studentsRecords', records);
       self.set('firstIndex', records.indexOf(records.get("firstObject")));
       self.set('lastIndex', records.indexOf(records.get("lastObject")));
