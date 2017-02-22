@@ -88,7 +88,7 @@ var hsCourseGradeSchema = mongoose.Schema({
     }]
 });
 
-var highsSchoolCourseSchema = mongoose.Schema({
+var highSchoolCourseSchema = mongoose.Schema({
     level: String,
     source: String,
     unit: String,
@@ -199,7 +199,7 @@ var Residencies = mongoose.model('residency', residencySchema);
 var Standings = mongoose.model('standing', standingSchema);
 var Awards = mongoose.model('award', awardSchema);
 var HSCourseGrades = mongoose.model('hsCourseGrade', hsCourseGradeSchema);
-var HighSchoolCourses = mongoose.model('highSchoolCourse', highsSchoolCourseSchema);
+var HighSchoolCourses = mongoose.model('highSchoolCourse', highSchoolCourseSchema);
 var SecondarySchools = mongoose.model('secondarySchool',secondarySchoolSchema)
 var HighSchoolSubjects = mongoose.model('highSchoolSubject', highSchoolSubjectSchema);
 var Grades = mongoose.model('grade', gradeSchema);
