@@ -60,14 +60,14 @@ export default Ember.Component.extend({
     },
 
     saveCourse(){
-        console.log(this.get("currentStudent"));
+     //   console.log(studentInfo);
         this.get("store").createRecord('standing', {
         "course": this.get("course"),
         "description": this.get("description"),
         "units": this.get("units"),
         "grade": this.get("grade"),
         "location":this.get("location"),
-        "student": this.get("currentStudent"),
+        "student" : this.get("currentStudent"),
         
         }).save().then(() => {
             this.set("course",null);

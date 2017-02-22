@@ -56,10 +56,6 @@ export default Ember.Component.extend({
     },
 
     saveAward(){
-        console.log(this.get("awardsModel"));
-        console.log(this.get("currentStudent.firstName"));
-
-
         this.get("store").createRecord('award', {
         "note": this.get("note"),
         "student": this.get("currentStudent"),

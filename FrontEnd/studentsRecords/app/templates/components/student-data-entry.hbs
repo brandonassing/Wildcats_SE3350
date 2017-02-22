@@ -66,6 +66,8 @@
   <div class="item" data-tab="admission">Admission Details</div>
   <div class="item" data-tab="standing">Advanced Standing</div>
   <div class="item" data-tab="awards">Awards and Scholarships</div>
+  <div class="item" data-tab="highschool">HighSchool Records</div>
+
 
   
   <!--
@@ -214,62 +216,34 @@
     </h2>
   </div>
 
-  <div class="ui segment">
-    <div class="ui grid">
-      <div class="four wide column">
-        <h3>Course</h3>
-        <div class="ui divider"></div>
-        <ul>
-        {{#each currentStudent.transInfo as |standings|}}
-          <li>{{standings.course}}</li>
-        {{else}}
-        <p>No courses on record</p>
-        {{/each}}
-        </ul>
-      </div>
-      <div class="four wide column">
-        <h3>Description</h3>
-        <div class="ui divider"></div>
-        
-        <ul> 
-        {{#each currentStudent.transInfo as |standings|}}
-          <li>{{standings.description}}</li>
-        {{/each}}
-        </ul>
-      </div>
-      <div class="two wide column">
-        <h3>Units</h3>
-        <div class="ui divider"></div>
-
-        <ul> 
-        {{#each currentStudent.transInfo as |standings|}}
-          <li>{{standings.units}}</li>
-        {{/each}}
-        </ul>
-      </div>
-      <div class="two wide column">
-        <h3>Grade</h3>
-        <div class="ui divider"></div>
-
-        <ul> 
-        {{#each currentStudent.transInfo as |standings|}}
-          <li>{{standings.grade}}</li>
-        {{/each}}
-        </ul>
-      </div>
-      <div class="four wide column">
-        <h3>From</h3>
-        <div class="ui divider"></div>
-        <ul> 
-        {{#each currentStudent.transInfo as |standings|}}
-          <li>{{standings.location}}</li>
-        {{/each}}
-        </ul>
-      </div>
-    </div>
-  </div>
-  {{add-course currentStudent = currentStudent}}
+ <table class="ui celled table">
+   <tbody>
+     <tr>
+      <td>Course name</td>
+      <td>Description</td>
+      <td>Units</td>
+      <td>Grade</td>
+      <td>Location</td>
+     </tr>
+   {{#each currentStudent.transInfo as |standings|}}
+   <tr>
+     <td>{{standings.course}}</td>
+     <td>{{standings.description}}</td>
+     <td>{{standings.units}}</td>
+     <td>{{standings.grade}}</td>
+     <td>{{standings.location}}</td>
+   </tr>
+   {{else}}
+   <tr>
+    <td>No courses on record</td>
+    <td></td><td></td><td></td><td></td>
+   </tr>
+   {{/each}}
+   </tbody>
+ </table>
+ {{add-course currentStudent = currentStudent}}
 </div>
+  
 
 <div class="ui bottom attached tab segment" data-tab="awards">
   <div class="ui inverted violet segment">
@@ -277,25 +251,34 @@
       <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
     </h2>
   </div>
-  <div class="ui segment">
-    <div class="ui grid">
-      <div class="tenwide column">
-      <h3>Awards and Scholarships</h3>
-      <div class="ui divider"></div>
-      <ul>
-        {{#each currentStudent.awardInfo as awards}}
-          <li>{{awards.note}}</li>
-          {{else}}
-          <p>No awards/scholarships on record</p>
-        {{/each}}
-       
-      </ul>
-      </div>
-    </div>
-  </div>
+
+  <table class = "ui celled table">
+    <tbody>
+      <br>
+      <center><tr><h3>Awards And Scholarships</h3></tr></center>
+      <br>
+      {{#each currentStudent.awardInfo as |awards|}}
+      <tr>
+        <td>{{awards.note}}</td>
+      </tr>
+      {{else}}
+      <tr>
+        <td>No awards/scholarships on record</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
   {{add-awards currentStudent = currentStudent}}
 </div>
 
+
+<div class="ui bottom attached tab segment" data-tab="highschool">
+  <div class="ui inverted violet segment">
+    <h2>
+      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
+    </h2>
+  </div>
+</div>
 
 <!--
 <div class="ui tab" data-tab="others">
