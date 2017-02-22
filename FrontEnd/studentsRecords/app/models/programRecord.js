@@ -5,6 +5,8 @@ export default DS.Model.extend({
   level: DS.attr(),
   load: DS.attr(),
   status: DS.attr(),
-  program: DS.hasMany('courseCode'),
+  courseIno: DS.belongsTo('courseCode'),
   plan: DS.hasMany('planCode'),
+  semester: DS.belongsTo('termCode'),
+  mark: DS.hasMany('grade')
 });

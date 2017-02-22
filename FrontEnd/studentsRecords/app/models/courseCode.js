@@ -5,7 +5,6 @@ export default DS.Model.extend({
   courseNumber: DS.attr(),
   name: DS.attr(),
   unit: DS.attr(),
-  mark: DS.belongsTo('grade'),
-  courseNo: DS.belongsTo('termCode')
+  programRecords: DS.hasMany('programRecord')
 
 });

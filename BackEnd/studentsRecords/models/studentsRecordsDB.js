@@ -18,23 +18,28 @@ var studentsSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Residencies'
     },
-    transInfo: {
+    transInfo: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Transcripts'
-    },
-    awardInfo: {
+    }],
+    awardInfo: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Awards'
-    },
+    }],
     highSchoolCourse: 
-    {
+    [{
         type: mongoose.Schema.ObjectId,
         ref: 'HSCourseGrades'
-    },
+    }],
     semester: 
     {
         type: mongoose.Schema.ObjectId,
         ref: 'TermCodes'
+    },
+    marks:
+    {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Grades'
     }
 });
 studentsSchema.plugin(mongoosePaginate);
@@ -45,18 +50,18 @@ var standingSchema = mongoose.Schema({
     units: Number,
     grade: Number,
     location: String,
-    students: [{
+    student: {
         type: mongoose.Schema.ObjectId,
         ref: ('Students')
-    }]
+    }
 });
 
 var awardSchema = mongoose.Schema({
     note: String,
-    students: [{
+    student: {
         type: mongoose.Schema.ObjectId,
         ref: ('Students')
-    }]
+    }
 });
 
 var genderSchema = mongoose.Schema({
@@ -82,10 +87,10 @@ var hsCourseGradeSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: ('HighSchoolCourses')
     },
-    students: [{
+    student: {
         type: mongoose.Schema.ObjectId,
         ref: ('Students')
-    }]
+    }
 });
 
 var highSchoolCourseSchema = mongoose.Schema({
@@ -128,10 +133,14 @@ var highSchoolSubjectSchema = mongoose.Schema({
 var gradeSchema = mongoose.Schema({
     mark: String,
     note: String,
-    courseCode: [{
+    level: {
         type: mongoose.Schema.ObjectId,
-        ref: ('CourseCodes')
-    }]
+        ref: ('ProgramRecords')
+    },
+    student:{
+        type: mongoose.Scheme.ObjectId,
+        ref: ('Students')
+    }
 });
 
 var programRecordSchema = mongoose.Schema({
@@ -139,15 +148,24 @@ var programRecordSchema = mongoose.Schema({
     level: String,
     load: String,
     status: String,
-    plan:
+    courseIno:
     {
         type: mongoose.Schema.ObjectId,
+        ref: ('CourseCodes')
+    }
+    plan:
+    [{
+        type: mongoose.Schema.ObjectId,
         ref: ('PlanCodes')
-    },
-    program:[{
+    }],
+    semester:{
         type: mongoose.Schema.ObjectId,
         ref: ('TermCodes')
-    }],
+    }, 
+    mark:[{
+        type: mongoose.Schema.ObjectId,
+        ref: ('Grades')
+    }]
 });
 
 var courseCodeSchema = mongoose.Schema({
@@ -155,13 +173,9 @@ var courseCodeSchema = mongoose.Schema({
     courseNumber: String,
     name: String,
     unit: String,
-    mark: {
+    programRecords:[{
         type: mongoose.Schema.ObjectId,
-        ref: ('Grades')
-    },
-    courseNo:[{
-        type: mongoose.Schema.ObjectId,
-        ref: ('TermCode')
+        ref: ('ProgramRecords')
     }],
 
 });
@@ -176,21 +190,11 @@ var planCodeSchema = mongoose.Schema({
 
 var termCodeSchema = mongoose.Schema({
     name: String,
-    program:
+    programRecords:
     {
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
-    },
-    courseNo:
-    {
-        type: mongoose.Schema.ObjectId,
-        ref: ('CourseCodes')
-    },
-    student:
-    [{
-        type: mongoose.Schema.ObjectId,
-        ref: ('Students')
-    }]
+    }
 });
 
 var Students = mongoose.model('student', studentsSchema);
