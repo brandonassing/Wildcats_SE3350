@@ -62,6 +62,8 @@
   <div class="item" data-tab="admission">Admission Details</div>
   <div class="item" data-tab="standing">Advanced Standing</div>
   <div class="item" data-tab="awards">Awards and Scholarships</div>
+  <div class="item" data-tab="highschool">HighSchool Records</div>
+
 
   
   <!--
@@ -227,100 +229,34 @@
       <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
     </h2>
   </div>
-
-  <div class="ui segment">
-    <div class="ui grid">
-      <div class="four wide column">
-        <h3>Course</h3>
-        <div class="ui divider"></div>
-        <ul>
-        {{#each currentStudent.transInfo as |standings|}}
-          <li>{{standings.course}}</li>
-        {{else}}
-        the course list is empty
-        {{/each}}
-        </ul>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-      </div>
-      <div class="four wide column">
-        <h3>Description</h3>
-        <div class="ui divider"></div>
-        
-        <ul> 
-        {{#each currentStudent.transInfo as |standings|}}
-          <li>{{standings.description}}</li>
-        {{else}}
-        the description list is empty
-        {{/each}}
-        </ul>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-      </div>
-      <div class="two wide column">
-        <h3>Units</h3>
-        <div class="ui divider"></div>
-
-        <ul> 
-        {{#each currentStudent.transInfo as |standings|}}
-          <li>{{standings.units}}</li>
-        {{else}}
-        the units list is empty
-        {{/each}}
-        </ul>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-      </div>
-      <div class="two wide column">
-        <h3>Grade</h3>
-        <div class="ui divider"></div>
-
-        <ul> 
-        {{#each currentStudent.transInfo as |standings|}}
-          <li>{{standings.grade}}</li>
-        {{else}}
-        the grade list is empty
-        {{/each}}
-        </ul>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-      </div>
-      <div class="four wide column">
-        <h3>From</h3>
-        <div class="ui divider"></div>
-        <ul> 
-        {{#each currentStudent.transInfo as |standings|}}
-          <li>{{standings.location}}</li>
-        {{else}}
-        the location list is empty
-        {{/each}}
-        </ul>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-      </div>
-    </div>
-  </div>
-  {{add-course currentStudent = currentStudent}}
+ <table class="ui celled table">
+   <tbody>
+     <tr>
+      <td>Course name</td>
+      <td>Description</td>
+      <td>Units</td>
+      <td>Grade</td>
+      <td>Location</td>
+     </tr>
+   {{#each currentStudent.transInfo as |standings|}}
+   <tr>
+     <td>{{standings.course}}</td>
+     <td>{{standings.description}}</td>
+     <td>{{standings.units}}</td>
+     <td>{{standings.grade}}</td>
+     <td>{{standings.location}}</td>
+   </tr>
+   {{else}}
+   <tr>
+    <td>No courses listed</td>
+    <td></td><td></td><td></td><td></td>
+   </tr>
+   {{/each}}
+   </tbody>
+ </table>
+ {{add-course currentStudent = currentStudent}}
 </div>
+  
 
 <div class="ui bottom attached tab segment" data-tab="awards">
   <div class="ui inverted violet segment">
@@ -328,6 +264,7 @@
       <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
     </h2>
   </div>
+
   <div class="ui segment">
     <div class="ui grid">
       <div class="tenwide column">
@@ -347,6 +284,14 @@
   {{add-awards currentStudent = currentStudent}}
 </div>
 
+
+<div class="ui bottom attached tab segment" data-tab="highschool">
+  <div class="ui inverted violet segment">
+    <h2>
+      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
+    </h2>
+  </div>
+</div>
 
 <!--
 <div class="ui tab" data-tab="others">
