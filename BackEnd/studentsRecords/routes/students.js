@@ -88,6 +88,8 @@ router.route('/:student_id')
                 student.genInfo = request.body.student.genInfo;
                 student.transInfo = request.body.student.transInfo;
                 student.awardInfo = request.body.student.awardInfo;
+                student.hsCourseGrades = request.body.student.hsCourseGrades;
+                student.marks = request.body.student.marks;
                 student.save(function (error) {
                     if (error) {
                         response.send({error: error});
