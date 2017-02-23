@@ -3,8 +3,12 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     actions: {
         //TODO streamline this to one class
-        importGenders() {
-        
+        importGenders(file) {
+            mongoxlsx = require('mongo-xlsx');
+            var model = null;
+            mongoxlsx.xlsx2MongoData(file,model,function(err, data){
+                console.log(data);
+            });
         },
 
         importAdvancedStanding() {
