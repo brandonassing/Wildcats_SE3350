@@ -130,6 +130,11 @@ export default Ember.Component.extend({
       if (this.get("selectedResidency") == null) {
         this.set("selectedResidency", this.get("currentStudent.resInfo.id"));
       }
+/*SUPPOSED TO BE A NULL CHECK
+      if( this.get('currentStudent.number')===null || this.get('currentStudent.firstName')===null || this.get('currentStudent.lastName')===null || this.get('currentStudent.DOB')===null || this.get('currentStudent.genInfo')===null || this.get('currentStudent.resInfo')===null){
+          window.alert("Sorry, you cannot save a student with empty values. \n Please ensure all fields have a value.");
+      }*/
+      
 
       var res = this.get('store').peekRecord('residency', this.get('selectedResidency'));
       var gen = this.get('store').peekRecord('gender', this.get('selectedGender'));
@@ -145,9 +150,21 @@ export default Ember.Component.extend({
         this.set("selectedGender", null);
         this.set("selectedResidency", null);
       });
+      if(confirm("Are you sure that you want to save this student with the current values?")){
+        
+      }else{
+        this.undoSave();
+      }
     },
     deleteStudent(){
            ///TODO STILL GETS ERRORS
+           if(confirm("Are you sure you want to delete this student?")){
+
+           }else{
+             return;
+           }
+
+
     this.get("store").findRecord('student',  this.get("currentStudent.id"))
     .then(function (stud) {
       stud.destroyRecord();
