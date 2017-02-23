@@ -46,8 +46,7 @@ router.route('/:programRecord_id')
                 programRecord.load = request.body.programRecord.load;
                 programRecord.status = request.body.programRecord.status;
                 programRecord.plan = request.body.programRecord.plan;
-                programRecord.term = request.body.programRecord.term;
-                
+                programRecord.program = request.body.programRecord.record;
                 programRecord.save(function (error) {
                     if (error) {
                         response.send({error: error});

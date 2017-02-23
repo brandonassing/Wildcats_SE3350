@@ -88,8 +88,6 @@ router.route('/:student_id')
                 student.genInfo = request.body.student.genInfo;
                 student.transInfo = request.body.student.transInfo;
                 student.awardInfo = request.body.student.awardInfo;
-                student.hsInfo = request.body.student.hsInfo;
-                student.term = request.body.student.term;
                 student.save(function (error) {
                     if (error) {
                         response.send({error: error});
@@ -104,10 +102,7 @@ router.route('/:student_id')
     .delete(parseUrlencoded, parseJSON, function (request, response) {
         models.Students.findByIdAndRemove(request.params.student_id,
             function (error, deleted) {
-                if (error) {
-                    response.send({error: error});
-                }
-                else{
+                if (!error) {
                     response.json({student: deleted});
                 }
             }

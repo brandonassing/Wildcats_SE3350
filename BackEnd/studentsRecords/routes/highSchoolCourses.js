@@ -46,7 +46,7 @@ router.route('/:highSchoolCourse_id')
                 highSchoolCourse.unit = request.body.highSchoolCourse.unit;
                 highSchoolCourse.school = request.body.highSchoolCourse.school;
                 highSchoolCourse.course = request.body.highSchoolCourse.course;
-                highSchoolCourse.hsInfo = request.body.highSchoolCourse.hsInfo;
+                highSchoolCourse.hsCourseGrades = request.body.highSchoolCourse.hsCourseGrades;
                 secondarySchool.save(function (error) {
                     if (error) {
                         response.send({error: error});
