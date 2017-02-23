@@ -127,14 +127,10 @@ var highSchoolSubjectSchema = mongoose.Schema({
 var gradeSchema = mongoose.Schema({
     mark: String,
     note: String,
-    level: {
+    mark: {
         type: mongoose.Schema.ObjectId,
-        ref: ('ProgramRecords')
+        ref: ('CourseCodes')
     },
-    student:{
-        type: mongoose.Schema.ObjectId,
-        ref: ('Students')
-    }
 });
 
 var programRecordSchema = mongoose.Schema({
@@ -142,23 +138,13 @@ var programRecordSchema = mongoose.Schema({
     level: String,
     load: String,
     status: String,
-    courseInfo:
-    {
-        type: mongoose.Schema.ObjectId,
-        ref: ('CourseCodes')
-    },
-    plans:
-    [{
-        type: mongoose.Schema.ObjectId,
-        ref: ('PlanCodes')
-    }],
-    semester:{
+    program:{
         type: mongoose.Schema.ObjectId,
         ref: ('TermCodes')
     }, 
-    marks:[{
+    plan:[{
         type: mongoose.Schema.ObjectId,
-        ref: ('Grades')
+        ref: ('PlanCodes')
     }]
 });
 
@@ -167,26 +153,40 @@ var courseCodeSchema = mongoose.Schema({
     courseNumber: String,
     name: String,
     unit: String,
-    programRecords:[{
+    semester:{
         type: mongoose.Schema.ObjectId,
         ref: ('TermCodes')
-    }],
+    },
+    mark: [{
+        type: mongoose.Schema.ObjectId,
+        ref: ('Grades')
+    }]
 });
 
 var planCodeSchema = mongoose.Schema({
     name: String,
-    programRecords:[{
+    plan:{
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
-    }]
+    }
 });
 
 var termCodeSchema = mongoose.Schema({
     name: String,
-    programRecords:
-    [{
+    semester:
+    {
+        type: mongoose.Schema.ObjectId,
+        ref: ('Students')
+    },
+    program:
+    {
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
+    },
+    courseInfo:
+    [{
+        type: mongoose.Schema.ObjectId,
+        ref: ('CourseCodes')
     }]
 });
 

@@ -14,9 +14,7 @@ export default DS.Model.extend({
   genInfo: DS.belongsTo('gender'),
   transInfo: DS.hasMany('standing'),
   awardInfo: DS.hasMany('award'),
-  ///////////////ERROR for some reason when this is "hsCourseGrades" with an S and it matches the studentsRecordsDB.js model it doesn't work idk why
   hsInfo: DS.hasMany('hsCourseGrade'),
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  marks: DS.hasMany('grade')
+  semester: DS.hasMany('termCode')
   
 });

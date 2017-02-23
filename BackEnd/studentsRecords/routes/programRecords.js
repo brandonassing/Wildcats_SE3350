@@ -45,10 +45,8 @@ router.route('/:programRecord_id')
                 programRecord.level = request.body.programRecord.level;
                 programRecord.load = request.body.programRecord.load;
                 programRecord.status = request.body.programRecord.status;
-                programRecord.courseInfo = request.body.programRecord.courseInfo;
-                programRecord.plans = request.body.programRecord.plans;
-                programRecord.semester = request.body.programRecord.semester;
-                programRecord.marks = request.body.programRecord.marks;
+                programRecord.plan = request.body.programRecord.plan;
+                programRecord.program = request.body.programRecord.program;
                 
                 programRecord.save(function (error) {
                     if (error) {
