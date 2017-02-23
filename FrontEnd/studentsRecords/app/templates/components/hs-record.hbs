@@ -7,13 +7,13 @@
       <td>Grade</td>
       <td>Location</td>
      </tr>
-   {{#each currentStudent.transInfo as |standings|}}
+   {{#each currentStudent.highSchoolCourse as |hsCourse|}}
    <tr>
-     <td>{{standings.course}}</td>
-     <td>{{standings.description}}</td>
-     <td>{{standings.units}}</td>
-     <td>{{standings.grade}}</td>
-     <td>{{standings.location}}</td>
+     <td>{{hsCourse.course}}</td>
+     <td>{{hsCourse.description}}</td>
+     <td>{{hsCourse.units}}</td>
+     <td>{{hsCourse.grade}}</td>
+     <td>{{hsCourse.location}}</td>
    </tr>
    {{else}}
    <tr>
