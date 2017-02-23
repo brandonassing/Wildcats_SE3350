@@ -18,23 +18,24 @@ var studentsSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Residencies'
     },
-    transInfo: [{
+    transInfo: {
         type: mongoose.Schema.ObjectId,
-        ref: 'Standings'
-    }],
-    awardInfo: [{
+        ref: 'Transcripts'
+    },
+    awardInfo: {
         type: mongoose.Schema.ObjectId,
         ref: 'Awards'
-    }],
-    hsInfo: [{
+    },
+    highSchoolCourse: 
+    {
         type: mongoose.Schema.ObjectId,
         ref: 'HSCourseGrades'
-    }],
-    term:
-    [{
+    },
+    semester: 
+    {
         type: mongoose.Schema.ObjectId,
         ref: 'TermCodes'
-    }]
+    }
 });
 studentsSchema.plugin(mongoosePaginate);
 
@@ -44,18 +45,18 @@ var standingSchema = mongoose.Schema({
     units: Number,
     grade: Number,
     location: String,
-    student: {
+    students: [{
         type: mongoose.Schema.ObjectId,
         ref: ('Students')
-    }
+    }]
 });
 
 var awardSchema = mongoose.Schema({
     note: String,
-    student: {
+    students: [{
         type: mongoose.Schema.ObjectId,
         ref: ('Students')
-    }
+    }]
 });
 
 var genderSchema = mongoose.Schema({
@@ -81,10 +82,10 @@ var hsCourseGradeSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: ('HighSchoolCourses')
     },
-    student: {
+    students: [{
         type: mongoose.Schema.ObjectId,
         ref: ('Students')
-    }
+    }]
 });
 
 var highSchoolCourseSchema = mongoose.Schema({
@@ -101,7 +102,7 @@ var highSchoolCourseSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: ('HighSchoolSubjects')
     },
-    hsInfo: [{
+    hsCourseGrades: [{
         type: mongoose.Schema.ObjectId,
         ref: ('HSCourseGrades')
     }]
@@ -127,7 +128,7 @@ var highSchoolSubjectSchema = mongoose.Schema({
 var gradeSchema = mongoose.Schema({
     mark: String,
     note: String,
-    courseInfo: [{
+    courseCode: [{
         type: mongoose.Schema.ObjectId,
         ref: ('CourseCodes')
     }]
@@ -138,14 +139,15 @@ var programRecordSchema = mongoose.Schema({
     level: String,
     load: String,
     status: String,
-    term:[{
-        type: mongoose.Schema.ObjectId,
-        ref: ('TermCodes')
-    }], 
-    plan:[{
+    plan:
+    {
         type: mongoose.Schema.ObjectId,
         ref: ('PlanCodes')
-    }]
+    },
+    program:[{
+        type: mongoose.Schema.ObjectId,
+        ref: ('TermCodes')
+    }],
 });
 
 var courseCodeSchema = mongoose.Schema({
@@ -153,19 +155,20 @@ var courseCodeSchema = mongoose.Schema({
     courseNumber: String,
     name: String,
     unit: String,
-    term:{
-        type: mongoose.Schema.ObjectId,
-        ref: ('TermCodes')
-    },
     mark: {
         type: mongoose.Schema.ObjectId,
         ref: ('Grades')
-    }
+    },
+    courseNo:[{
+        type: mongoose.Schema.ObjectId,
+        ref: ('TermCode')
+    }],
+
 });
 
 var planCodeSchema = mongoose.Schema({
     name: String,
-    program:[{
+    programRecords:[{
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
     }]
@@ -173,20 +176,20 @@ var planCodeSchema = mongoose.Schema({
 
 var termCodeSchema = mongoose.Schema({
     name: String,
-    student:
+    program:
     {
         type: mongoose.Schema.ObjectId,
-        ref: ('Students')
-    },
-    program:
-    [{
-        type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
-    }],
-    courseInfo:
-    [{
+    },
+    courseNo:
+    {
         type: mongoose.Schema.ObjectId,
         ref: ('CourseCodes')
+    },
+    student:
+    [{
+        type: mongoose.Schema.ObjectId,
+        ref: ('Students')
     }]
 });
 
@@ -205,7 +208,6 @@ var CourseCodes = mongoose.model('courseCode', courseCodeSchema);
 var PlanCodes = mongoose.model('planCode', planCodeSchema);
 var TermCodes = mongoose.model('termCode', termCodeSchema);
 
-mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://main:main@ds139909.mlab.com:39909/se3350_wildcats');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -219,7 +221,7 @@ db.once('open', function () {
     exports.HSCourseGrades = HSCourseGrades;
     exports.HighSchoolCourses = HighSchoolCourses;
     exports.SecondarySchools = SecondarySchools;
-    exports.HighSchoolSubjects = HighSchoolSubjects;
+    exports.HighSchoolCourses = HighSchoolCourses;
     exports.Grades = Grades;
     exports.ProgramRecords = ProgramRecords;
     exports.CourseCodes = CourseCodes;
