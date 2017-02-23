@@ -106,7 +106,10 @@ router.route('/:student_id')
     .delete(parseUrlencoded, parseJSON, function (request, response) {
         models.Students.findByIdAndRemove(request.params.student_id,
             function (error, deleted) {
-                if (!error) {
+                if (error) {
+                    response.send({error: error});
+                }
+                else{
                     response.json({student: deleted});
                 }
             }
