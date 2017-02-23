@@ -37,6 +37,10 @@ export default Ember.Component.extend({
             this.set("location",null);
         });
     },
+
+
+
+    /*
     deleteCourse(){
         /*
                ///TODO STILL GETS ERRORS
@@ -45,7 +49,11 @@ export default Ember.Component.extend({
       stand.destroyRecord();
       //stand.save();
     });
-    */
-    }    
+    
+
+    //console.log(this.get("store").findRecord('standing', this.get('currentStudent.id')));
+    console.log(this.get('store').findRecord('standing',this.get(id)));
+
+    }  */  
     }
 });
