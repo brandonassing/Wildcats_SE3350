@@ -25,14 +25,10 @@ export default Ember.Component.extend({
             this.set("note",null);
         });
     },
-        deleteAward(){
-      /*
-               ///TODO STILL GETS ERRORS
-    this.get("store").findRecord('award',  this.get("currentStudent.id"))
-    .then(function (aw) {
-      aw.destroyRecord();
-    });
-    */
-    }
+        deleteAward(thisAward){
+            thisAward.set('student',null);
+            thisAward.save();
+            thisAward.destroyRecord();
+        }
     }
 });

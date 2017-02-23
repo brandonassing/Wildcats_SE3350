@@ -37,23 +37,10 @@ export default Ember.Component.extend({
             this.set("location",null);
         });
     },
-
-
-
-    /*
-    deleteCourse(){
-        /*
-               ///TODO STILL GETS ERRORS
-    this.get("store").findRecord('standing',  this.get("currentStudent.id"))
-    .then(function (stand) {
-      stand.destroyRecord();
-      //stand.save();
-    });
-    
-
-    //console.log(this.get("store").findRecord('standing', this.get('currentStudent.id')));
-    console.log(this.get('store').findRecord('standing',this.get(id)));
-
-    }  */  
+    deleteCourse(thisCourse){
+        thisCourse.set('student', null);
+            thisCourse.save();
+            thisCourse.destroyRecord();
+    }
     }
 });
