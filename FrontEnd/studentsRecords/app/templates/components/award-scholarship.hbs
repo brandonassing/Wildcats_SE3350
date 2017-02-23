@@ -4,11 +4,7 @@
       {{#each currentStudent.awardInfo as |awards|}}
       <tr>
         <td>{{awards.note}}</td>
-        <td>
-        <button class="ui icon button" {{action 'deleteAward'}}>
-            <i class="remove icon"></i>
-        </button>
-    </td>
+        <td>{{delete-awards thisAward=awards}}</td>
       </tr>
       {{else}}
       <tr>
