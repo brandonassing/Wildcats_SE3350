@@ -42,7 +42,7 @@ router.route('/:award_id')
             }
             else {
                 award.note = request.body.award.note;
-                award.students = request.body.award.students;
+                award.student = request.body.award.student;
 
                 award.save(function (error) {
                     if (error) {

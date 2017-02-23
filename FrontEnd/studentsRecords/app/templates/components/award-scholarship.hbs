@@ -1,0 +1,32 @@
+<h3>Awards And Scholarships</h3>
+<table class = "ui celled table">
+    <tbody>
+      {{#each currentStudent.awardInfo as |awards|}}
+      <tr>
+        <td>{{awards.note}}</td>
+        <td>
+        <button class="ui icon button" {{action 'deleteAward'}}>
+            <i class="remove icon"></i>
+        </button>
+    </td>
+      </tr>
+      {{else}}
+      <tr>
+        <td>No awards/scholarships on record</td>
+        <td></td>
+      </tr>
+      {{/each}}
+      <tr>
+        <td>
+            <div class="ui form">
+                {{input type="text" value = note}}
+            </div>
+      </td>
+      <td>
+        <button class="ui icon button" {{action 'addAward'}}>
+            <i class="plus icon"></i>
+        </button>
+    </td>
+    </tr>
+    </tbody>
+  </table>

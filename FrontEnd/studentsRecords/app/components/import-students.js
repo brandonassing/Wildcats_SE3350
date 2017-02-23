@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     actions: {
+        //TODO streamline this to one class
         importGenders() {
         
         },
@@ -44,6 +45,6 @@ export default Ember.Component.extend({
 
         importTermCodes() {
         
-        },
+        }
     }
 });

@@ -35,6 +35,8 @@ export default Ember.Component.extend({
   tempRes: null,
   tempTrans: null,
   tempAward: null,
+  tempHS: null,
+  tempMarks: null,
 
   studentModel: Ember.observer('offset', function () {
     var self = this;
@@ -67,7 +69,6 @@ export default Ember.Component.extend({
     this.get('store').findAll('gender').then(function (records) {
       self.set('genderModel', records);
     });
-
     // load first page of the students records
     this.set('limit', 10);
     this.set('offset', 0);
@@ -101,6 +102,8 @@ export default Ember.Component.extend({
       this.set('tempGen', this.get('currentStudent.genInfo'));
       this.set('tempRes', this.get('currentStudent.resInfo'));
       this.set('tempTrans', this.get('currentStudent.transInfo'));
+      this.set('tempHS', this.get('currentStudent.hsInfo'));
+      this.set('tempMarks', this.get('currentStudent.marks'));
       //window.alert(index);
       //window.alert(this.get("currentStudent"));
       this.set('tempAward', this.get('currentStudent.awardInfo'));
@@ -236,6 +239,8 @@ export default Ember.Component.extend({
       this.set('currentStudent.resInfo', this.get('tempRes'));
       this.set('currentStudent.transInfo', this.get('tempTrans'));
       this.set('currentStudent.awardInfo', this.get('tempAward'));
+      this.set('currentStudent.hsInfo', this.get('tempHS'));
+      this.set('currentStudent.marks', this.get('tempMarks'));
     }
   }
 });

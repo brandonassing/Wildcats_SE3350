@@ -31,8 +31,7 @@ body{
     background-position: 50% 0;
     color: #333;
     font-size: 14px;
-    height: 100vh;
-    padding-bottom: 20px;
+    padding-bottom: 100px;
 }
 .titlebar{
     background-color: #4F2683;
@@ -48,6 +47,7 @@ body{
     width: 65vw;
 }
 .content-card .content{
+    /*TODO padding not working on bottom for some reason*/
     padding: 20px;
 }
 
@@ -67,8 +67,11 @@ body{
 }
 /*==========SYSTEM CODE COMPONENT===========*/
 
-/*==========WELCOME COMPONENT===========*/
+/*==========WELCOME/ABOUT COMPONENT===========*/
 #welcome-card.content-card{
     /*width: 30vw;*/
 }
-/*==========WELCOME COMPONENT===========*/
+#wildcats-logo{
+    width: 20vw;
+}
+/*==========WELCOME/ABOUT COMPONENT===========*/
