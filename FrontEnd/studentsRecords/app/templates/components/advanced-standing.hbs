@@ -16,9 +16,7 @@
      <td>{{standings.grade}}</td>
      <td>{{standings.location}}</td>
      <td>   
-        <button class="ui icon button" {{action 'deleteCourse'}}>
-            <i class="remove icon"></i>
-        </button>
+        {{delete-standing thisCourse=standings currentStudent=currentStudent}}
     </td>
    </tr>
    {{else}}
