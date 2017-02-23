@@ -43,8 +43,7 @@ router.route('/:grade_id')
             else {
                 grade.mark = request.body.grade.mark;
                 grade.note = request.body.grade.note;
-                grade.level = request.body.grade.level;
-                grade.student = request.body.grade.student;
+                grade.courseInfo = request.body.grade.courseInfo;
                 grade.save(function (error) {
                     if (error) {
                         response.send({error: error});

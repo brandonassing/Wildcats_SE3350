@@ -30,10 +30,10 @@ var studentsSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'HSCourseGrades'
     }],
-    marks:
+    term:
     [{
         type: mongoose.Schema.ObjectId,
-        ref: 'Grades'
+        ref: 'TermCodes'
     }]
 });
 studentsSchema.plugin(mongoosePaginate);
@@ -127,14 +127,10 @@ var highSchoolSubjectSchema = mongoose.Schema({
 var gradeSchema = mongoose.Schema({
     mark: String,
     note: String,
-    level: {
+    courseInfo: [{
         type: mongoose.Schema.ObjectId,
-        ref: ('ProgramRecords')
-    },
-    student:{
-        type: mongoose.Schema.ObjectId,
-        ref: ('Students')
-    }
+        ref: ('CourseCodes')
+    }]
 });
 
 var programRecordSchema = mongoose.Schema({
@@ -142,23 +138,13 @@ var programRecordSchema = mongoose.Schema({
     level: String,
     load: String,
     status: String,
-    courseInfo:
-    {
-        type: mongoose.Schema.ObjectId,
-        ref: ('CourseCodes')
-    },
-    plans:
-    [{
-        type: mongoose.Schema.ObjectId,
-        ref: ('PlanCodes')
-    }],
-    semester:{
+    term:[{
         type: mongoose.Schema.ObjectId,
         ref: ('TermCodes')
-    }, 
-    marks:[{
+    }], 
+    plan:[{
         type: mongoose.Schema.ObjectId,
-        ref: ('Grades')
+        ref: ('PlanCodes')
     }]
 });
 
@@ -167,16 +153,19 @@ var courseCodeSchema = mongoose.Schema({
     courseNumber: String,
     name: String,
     unit: String,
-    programRecords:[{
+    term:{
         type: mongoose.Schema.ObjectId,
-        ref: ('ProgramRecords')
-    }]
-
+        ref: ('TermCodes')
+    },
+    mark: {
+        type: mongoose.Schema.ObjectId,
+        ref: ('Grades')
+    }
 });
 
 var planCodeSchema = mongoose.Schema({
     name: String,
-    programRecords:[{
+    program:[{
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
     }]
@@ -184,10 +173,20 @@ var planCodeSchema = mongoose.Schema({
 
 var termCodeSchema = mongoose.Schema({
     name: String,
-    programRecords:
+    student:
+    {
+        type: mongoose.Schema.ObjectId,
+        ref: ('Students')
+    },
+    program:
     [{
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
+    }],
+    courseInfo:
+    [{
+        type: mongoose.Schema.ObjectId,
+        ref: ('CourseCodes')
     }]
 });
 
