@@ -143,7 +143,7 @@
 <div class="ui bottom attached tab segment" data-tab="admission">
   <div class="ui inverted violet segment">
       <h2>
-        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
+        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
       </h2>
     </div>
   <div class="ui pointing secondary menu">
@@ -212,43 +212,17 @@
 <div class="ui bottom attached tab segment" data-tab="standing">
   <div class="ui inverted violet segment">
     <h2>
-      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
+      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
     </h2>
   </div>
-
- <table class="ui celled table">
-   <tbody>
-     <tr>
-      <td>Course name</td>
-      <td>Description</td>
-      <td>Units</td>
-      <td>Grade</td>
-      <td>Location</td>
-     </tr>
-   {{#each currentStudent.transInfo as |standings|}}
-   <tr>
-     <td>{{standings.course}}</td>
-     <td>{{standings.description}}</td>
-     <td>{{standings.units}}</td>
-     <td>{{standings.grade}}</td>
-     <td>{{standings.location}}</td>
-   </tr>
-   {{else}}
-   <tr>
-    <td>No courses on record</td>
-    <td></td><td></td><td></td><td></td>
-   </tr>
-   {{/each}}
-   </tbody>
- </table>
- {{add-course currentStudent = currentStudent}}
+  {{advanced-standing currentStudent=currentStudent}}
 </div>
   
 
 <div class="ui bottom attached tab segment" data-tab="awards">
   <div class="ui inverted violet segment">
     <h2>
-      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
+      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
     </h2>
   </div>
 
@@ -275,9 +249,34 @@
 <div class="ui bottom attached tab segment" data-tab="highschool">
   <div class="ui inverted violet segment">
     <h2>
-      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} </center>
+      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
     </h2>
   </div>
+   <table class="ui celled table">
+   <tbody>
+     <tr>
+      <td>Course name</td>
+      <td>Description</td>
+      <td>Units</td>
+      <td>Grade</td>
+      <td>Location</td>
+     </tr>
+   {{#each currentStudent.transInfo as |standings|}}
+   <tr>
+     <td>{{standings.course}}</td>
+     <td>{{standings.description}}</td>
+     <td>{{standings.units}}</td>
+     <td>{{standings.grade}}</td>
+     <td>{{standings.location}}</td>
+   </tr>
+   {{else}}
+   <tr>
+    <td>No courses on record</td>
+    <td></td><td></td><td></td><td></td>
+   </tr>
+   {{/each}}
+   </tbody>
+ </table>
 </div>
 
 <!--
