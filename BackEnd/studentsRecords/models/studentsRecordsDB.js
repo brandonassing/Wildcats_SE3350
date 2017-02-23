@@ -20,7 +20,7 @@ var studentsSchema = mongoose.Schema({
     },
     transInfo: {
         type: mongoose.Schema.ObjectId,
-        ref: 'Transcripts'
+        ref: 'Standings'
     },
     awardInfo: {
         type: mongoose.Schema.ObjectId,
@@ -161,7 +161,7 @@ var courseCodeSchema = mongoose.Schema({
     },
     courseNo:[{
         type: mongoose.Schema.ObjectId,
-        ref: ('TermCode')
+        ref: ('TermCodes')
     }],
 
 });
