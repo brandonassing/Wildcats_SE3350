@@ -45,7 +45,7 @@ router.route('/:courseCode_id')
                 courseCode.courseNumber = request.body.courseCode.courseNumber;
                 courseCode.name = request.body.courseCode.name;
                 courseCode.unit = request.body.courseCode.unit;
-                courseCode.semester = request.body.courseCode.semester;
+                courseCode.term = request.body.courseCode.term;
                 courseCode.mark = request.body.courseCode.mark;
                 courseCode.save(function (error) {
                     if (error) {

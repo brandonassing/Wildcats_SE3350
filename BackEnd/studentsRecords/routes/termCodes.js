@@ -43,7 +43,7 @@ router.route('/:termCode_id')
             else {
                 termCode.name = request.body.termCode.name;
                 termCode.program = request.body.termCode.program;
-                termCode.semester = request.body.termCode.semester;
+                termCode.student = request.body.termCode.student;
                 termCode.courseInfo = request.body.termCode.courseInfo;
                 termCode.save(function (error) {
                     if (error) {

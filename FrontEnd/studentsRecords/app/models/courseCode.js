@@ -5,6 +5,6 @@ export default DS.Model.extend({
   courseNumber: DS.attr(),
   name: DS.attr(),
   unit: DS.attr(),
-  semester: DS.belongsTo('termCode'),
+  term: DS.belongsTo('termCode'),
   mark: DS.belongsTo('grade')
 });

@@ -5,6 +5,6 @@ export default DS.Model.extend({
   level: DS.attr(),
   load: DS.attr(),
   status: DS.attr(),
-  program: DS.hasMany('termCode'),
+  term: DS.hasMany('termCode'),
   plan: DS.hasMany('planCode'),
 });

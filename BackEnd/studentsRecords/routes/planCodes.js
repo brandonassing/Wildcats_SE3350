@@ -42,7 +42,7 @@ router.route('/:planCode_id')
             }
             else {
                 planCode.name = request.body.planCode.name;
-                planCode.plan = request.body.planCode.plan;
+                planCode.program = request.body.planCode.program;
                 planCode.save(function (error) {
                     if (error) {
                         response.send({error: error});
