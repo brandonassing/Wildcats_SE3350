@@ -26,9 +26,27 @@ export default Ember.Component.extend({
         });
     },
         deleteAward(thisAward){
+            if(confirm('Are you sure that you want to delete this file? \n This cannot be undone.')){
+                thisAward.set('student',null);
+                thisAward.save();
+                thisAward.destroyRecord();
+            }else{
+                return;
+            }
+
+
+
+
+
+
+
+
+
+/*
             thisAward.set('student',null);
-            thisAward.save();
-            thisAward.destroyRecord();
+                thisAward.save();
+                thisAward.destroyRecord();*/
+            
         }
     }
 });

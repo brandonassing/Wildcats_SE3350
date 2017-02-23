@@ -38,9 +38,14 @@ export default Ember.Component.extend({
         });
     },
     deleteCourse(thisCourse){
-        thisCourse.set('student', null);
+        if(confirm('Are you sure that you want to delete this course? \n This cannot be undone')){
+            thisCourse.set('student', null);
             thisCourse.save();
             thisCourse.destroyRecord();
+        }else{
+            return;
+        }
+            
     }
     }
 });
