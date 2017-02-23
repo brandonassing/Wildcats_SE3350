@@ -56,9 +56,8 @@ export default Ember.Component.extend({
         if(confirm('Are you sure you want to save? \n All previous information will be lost.')){
             thisCourse.save();
             this.set('isEditing', false);
-
-
-        
+        }else{
+            return;
         }
 
     },

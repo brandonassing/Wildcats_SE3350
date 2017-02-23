@@ -2,14 +2,33 @@
 <table class = "ui celled table">
     <tbody>
       {{#each currentStudent.awardInfo as |awards|}}
+      {{#if isEditing}}
+      <tr>
+        <td><div class="ui form warning"><div class = "inline field">{{input type="text" value=awards.note}}</div></div></td>
+
+        <td>
+       <button class="ui icon button" data-tooltip="Return" data-inverted=" " {{action 'cancelEdit' thisOne=awards.note}}>
+          <i class="level up icon"></i>
+        </button>
+       <button class="ui icon button" data-tooltip="Save Award" data-inverted=" " {{action 'saveAward' awards}}>
+          <i class="save icon"></i>
+        </button>
+     </td>
+      </tr>
+      
+      {{else}}
       <tr>
         <td>{{awards.note}}</td>
         <td>
-          <button class="ui icon button" {{action 'deleteAward' awards}}>
+          <button class="ui icon button" data-tooltip="Delete Award" data-inverted=" " {{action 'deleteAward' awards}}>
             <i class="delete icon"></i>
+          </button>
+          <button class="ui icon button" data-tooltip="Edit Award" data-inverted=" " {{action 'editAward' awards}}>
+            <i class="edit icon"></i>
           </button>
         </td>
       </tr>
+      {{/if}}
       {{else}}
       <tr>
         <td>No awards/scholarships on record</td>

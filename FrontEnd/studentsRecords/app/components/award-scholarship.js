@@ -6,6 +6,7 @@ export default Ember.Component.extend({
     student: null,
     AwardModel: null,
     currentStudent:null,
+    isEditing:false,
     
     init() {
     this._super(...arguments);
@@ -32,21 +33,22 @@ export default Ember.Component.extend({
                 thisAward.destroyRecord();
             }else{
                 return;
+            }            
+        },
+        editAward(thisAward){
+            this.set('isEditing',true);
+        },
+        saveAward(thisAward){
+            if(confirm("Are you sure you want to save? \n All previous information will be lost.")){
+                thisAward.save();
+                this.set('isEditing',false);
+            }else{
+                return;
             }
 
-
-
-
-
-
-
-
-
-/*
-            thisAward.set('student',null);
-                thisAward.save();
-                thisAward.destroyRecord();*/
-            
+        },
+        cancelEdit(){
+        this.set('isEditing',false);
         }
     }
 });
