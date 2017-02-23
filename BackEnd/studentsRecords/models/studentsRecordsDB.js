@@ -20,14 +20,13 @@ var studentsSchema = mongoose.Schema({
     },
     transInfo: [{
         type: mongoose.Schema.ObjectId,
-        ref: 'Transcripts'
+        ref: 'Standings'
     }],
     awardInfo: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Awards'
     }],
-    hsInfo: 
-    [{
+    hsInfo: [{
         type: mongoose.Schema.ObjectId,
         ref: 'HSCourseGrades'
     }],
