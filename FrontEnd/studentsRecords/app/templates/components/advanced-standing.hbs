@@ -9,6 +9,26 @@
       <td>Action</td>
      </tr>
    {{#each currentStudent.transInfo as |standings|}}
+   {{#if isEditing}}
+   <tr>
+     <td><div class="ui form warning"><div class = "inline field">{{input type="text" value=standings.course}}</div></div></td>
+     <td><div class="ui form warning"><div class = "inline field">{{input type="text" value=standings.description}}</div></div></td>
+     <td><div class="ui form warning"><div class = "inline field">{{input type="text" value=standings.units}}</div></div></td>
+     <td><div class="ui form warning"><div class = "inline field">{{input type="text" value=standings.grade}}</div></div></td>
+     <td><div class="ui form warning"><div class = "inline field">{{input type="text" value=standings.location}}</div></div></td>
+     <td>
+       <button class="ui icon button" data-tooltip="Return" data-inverted=" " {{action 'cancelEdit' thisOne=standings.course}}>
+          <i class="level up icon"></i>
+        </button>
+       <button class="ui icon button" data-tooltip="Save Course" data-inverted=" " {{action 'saveCourse' standings}}>
+          <i class="save icon"></i>
+        </button>
+        
+     </td>
+   </tr>
+
+
+   {{else}}
    <tr>
      <td>{{standings.course}}</td>
      <td>{{standings.description}}</td>
@@ -16,11 +36,16 @@
      <td>{{standings.grade}}</td>
      <td>{{standings.location}}</td>
      <td>   
-        <button class="ui icon button" {{action 'deleteCourse' standings}}>
+        <button class="ui icon button" data-tooltip="Delete Course" data-inverted=" " {{action 'deleteCourse' standings}}>
           <i class="delete icon"></i>
         </button>
+        <button class="ui icon button" data-tooltip="Edit Course" data-inverted=" " {{action 'editCourse' standings}}>
+          <i class="edit icon"></i>
+        </button>
+
     </td>
    </tr>
+   {{/if}}
    {{else}}
    <tr>
     <td>No courses on record</td>
@@ -34,7 +59,7 @@
      <td><div class = "ui form">{{input type="text" value = grade}}</div></td>
      <td> <div class = "ui form">{{input type="text" value = location}}</div></td>
      <td>   
-        <button class="ui icon button" {{action 'addCourse'}}>
+        <button class="ui icon button" data-tooltip="Add Course" data-inverted=" " {{action 'addCourse'}}>
             <i class="plus icon"></i>
         </button>
     </td>

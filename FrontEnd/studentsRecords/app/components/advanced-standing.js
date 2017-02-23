@@ -10,6 +10,8 @@ export default Ember.Component.extend({
     student: null,
     standingModel: null,
     currentStudent:null,
+    isEditing:false,
+    standings: null,
 
     init() {
     this._super(...arguments);
@@ -45,7 +47,27 @@ export default Ember.Component.extend({
         }else{
             return;
         }
-            
+    },
+    editCourse(){
+        this.set('isEditing',true);
+
+    },
+    saveCourse(thisCourse){
+        if(confirm('Are you sure you want to save? \n All previous information will be lost.')){
+            thisCourse.save();
+            this.set('isEditing', false);
+
+
+        
+        }
+
+    },
+    cancelEdit(){
+        this.set('isEditing',false);
     }
+
+
+
+
     }
 });
