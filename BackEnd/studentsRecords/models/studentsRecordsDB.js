@@ -20,22 +20,22 @@ var studentsSchema = mongoose.Schema({
     },
     transInfo: [{
         type: mongoose.Schema.ObjectId,
-        ref: 'Transcripts'
+        ref: 'Standings'
     }],
     awardInfo: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Awards'
-    }],/* ERROR
+    }],
     highSchoolCourse: 
-    {
+    [{
         type: mongoose.Schema.ObjectId,
         ref: 'HSCourseGrades'
-    },
+    }],
     term: 
-    {
+    [{
         type: mongoose.Schema.ObjectId,
         ref: 'TermCodes'
-    }*/
+    }]
 });
 studentsSchema.plugin(mongoosePaginate);
 

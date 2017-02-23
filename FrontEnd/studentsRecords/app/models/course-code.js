@@ -6,6 +6,6 @@ export default DS.Model.extend({
   name: DS.attr(),
   unit: DS.attr(),
   mark: DS.belongsTo('grade'),
-  term: DS.belongsTo('termCode')
+  term: DS.belongsTo('term-code')
 
 });

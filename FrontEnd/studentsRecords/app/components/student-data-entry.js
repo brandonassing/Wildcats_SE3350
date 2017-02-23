@@ -102,10 +102,8 @@ export default Ember.Component.extend({
       this.set('tempGen', this.get('currentStudent.genInfo'));
       this.set('tempRes', this.get('currentStudent.resInfo'));
       this.set('tempTrans', this.get('currentStudent.transInfo'));
-
-      //=======ERROR
-      //this.set('tempHS', this.get('currentStudent.hsInfo'));
-      //this.set('tempMarks', this.get('currentStudent.marks'));
+      this.set('tempHS', this.get('currentStudent.highSchoolCourse'));
+      this.set('tempMarks', this.get('currentStudent.term'));
       //window.alert(index);
       //window.alert(this.get("currentStudent"));
       this.set('tempAward', this.get('currentStudent.awardInfo'));
@@ -135,15 +133,14 @@ export default Ember.Component.extend({
 
       var res = this.get('store').peekRecord('residency', this.get('selectedResidency'));
       var gen = this.get('store').peekRecord('gender', this.get('selectedGender'));
+      
       updatedStudent.set('genInfo', gen);
       updatedStudent.set('DOB', new Date(this.get('selectedDate')));
       updatedStudent.set('resInfo', res);
 
-      //updatedStudent.set('transInfo', trans);
-      ///add transcript saves here too
-
 
       updatedStudent.save().then(() => {
+        
         //     this.set('isStudentFormEditing', false);
         this.set("selectedGender", null);
         this.set("selectedResidency", null);
@@ -241,10 +238,8 @@ export default Ember.Component.extend({
       this.set('currentStudent.resInfo', this.get('tempRes'));
       this.set('currentStudent.transInfo', this.get('tempTrans'));
       this.set('currentStudent.awardInfo', this.get('tempAward'));
-      
-      //==========ERROR
-      //this.set('currentStudent.hsInfo', this.get('tempHS'));
-      //this.set('currentStudent.marks', this.get('tempMarks'));
+      this.set('currentStudent.highSchoolCourse', this.get('tempHS'));
+      this.set('currentStudent.term', this.get('tempMarks'));
     }
   }
 });

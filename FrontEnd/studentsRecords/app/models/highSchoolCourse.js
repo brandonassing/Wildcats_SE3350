@@ -4,9 +4,9 @@ export default DS.Model.extend({
   level: DS.attr(),
   source: DS.attr(),
   unit: DS.attr(),
-  school: DS.belongsTo('secondarySchool'),
-  course: DS.belongsTo('highSchoolSubject'),
-  hsCourseGrades: DS.hasMany('hsCourseGrade')
+  school: DS.belongsTo('secondary-school'),
+  course: DS.belongsTo('high-school-subject'),
+  hsCourseGrades: DS.hasMany('hs-course-grade')
   
 
 });
