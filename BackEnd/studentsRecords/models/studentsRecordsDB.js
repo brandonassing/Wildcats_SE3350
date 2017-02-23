@@ -26,8 +26,7 @@ var studentsSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Awards'
     }],
-    hsInfo: 
-    [{
+    hsInfo: [{
         type: mongoose.Schema.ObjectId,
         ref: 'HSCourseGrades'
     }],
