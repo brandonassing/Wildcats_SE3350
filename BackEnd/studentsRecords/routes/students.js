@@ -89,7 +89,7 @@ router.route('/:student_id')
                 student.transInfo = request.body.student.transInfo;
                 student.awardInfo = request.body.student.awardInfo;
                 ///////////check student.js model
-                student.hsCourseGrade = request.body.student.hsCourseGrade;
+                student.hsInfo = request.body.student.hsInfo;
                 ////////////////////////////////////
                 student.marks = request.body.student.marks;
                 student.save(function (error) {
