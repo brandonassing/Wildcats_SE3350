@@ -225,24 +225,7 @@
       <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
     </h2>
   </div>
-
-  <table class = "ui celled table">
-    <tbody>
-      <br>
-      <center><tr><h3>Awards And Scholarships</h3></tr></center>
-      <br>
-      {{#each currentStudent.awardInfo as |awards|}}
-      <tr>
-        <td>{{awards.note}}</td>
-      </tr>
-      {{else}}
-      <tr>
-        <td>No awards/scholarships on record</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-  {{add-awards currentStudent = currentStudent}}
+  {{award-scholarship currentStudent=currentStudent}}
 </div>
 
 

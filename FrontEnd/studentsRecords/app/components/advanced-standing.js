@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
         store:Ember.inject.service(),
-    addCourse: false,
     course: null,
     description: null,
     units: null,
@@ -44,7 +43,7 @@ export default Ember.Component.extend({
     this.get("store").findRecord('standing',  this.get("currentStudent.id"))
     .then(function (stand) {
       stand.destroyRecord();
-      //stud.save();
+      //stand.save();
     });
     */
     }    
