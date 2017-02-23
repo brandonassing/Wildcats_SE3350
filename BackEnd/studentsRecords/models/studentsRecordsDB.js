@@ -25,7 +25,7 @@ var studentsSchema = mongoose.Schema({
     awardInfo: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Awards'
-    }],
+    }],/* ERROR
     highSchoolCourse: 
     {
         type: mongoose.Schema.ObjectId,
@@ -35,7 +35,7 @@ var studentsSchema = mongoose.Schema({
     {
         type: mongoose.Schema.ObjectId,
         ref: 'TermCodes'
-    }
+    }*/
 });
 studentsSchema.plugin(mongoosePaginate);
 

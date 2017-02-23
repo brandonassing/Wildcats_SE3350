@@ -102,8 +102,10 @@ export default Ember.Component.extend({
       this.set('tempGen', this.get('currentStudent.genInfo'));
       this.set('tempRes', this.get('currentStudent.resInfo'));
       this.set('tempTrans', this.get('currentStudent.transInfo'));
-      this.set('tempHS', this.get('currentStudent.hsInfo'));
-      this.set('tempMarks', this.get('currentStudent.marks'));
+
+      //=======ERROR
+      //this.set('tempHS', this.get('currentStudent.hsInfo'));
+      //this.set('tempMarks', this.get('currentStudent.marks'));
       //window.alert(index);
       //window.alert(this.get("currentStudent"));
       this.set('tempAward', this.get('currentStudent.awardInfo'));
@@ -239,8 +241,10 @@ export default Ember.Component.extend({
       this.set('currentStudent.resInfo', this.get('tempRes'));
       this.set('currentStudent.transInfo', this.get('tempTrans'));
       this.set('currentStudent.awardInfo', this.get('tempAward'));
-      this.set('currentStudent.hsInfo', this.get('tempHS'));
-      this.set('currentStudent.marks', this.get('tempMarks'));
+      
+      //==========ERROR
+      //this.set('currentStudent.hsInfo', this.get('tempHS'));
+      //this.set('currentStudent.marks', this.get('tempMarks'));
     }
   }
 });

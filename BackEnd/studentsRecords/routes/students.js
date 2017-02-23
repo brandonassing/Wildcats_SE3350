@@ -88,8 +88,9 @@ router.route('/:student_id')
                 student.genInfo = request.body.student.genInfo;
                 student.transInfo = request.body.student.transInfo;
                 student.awardInfo = request.body.student.awardInfo;
-                student.highSchoolCourse = request.body.student.highSchoolCourse;
-                student.term = request.body.student.term;
+                //==============ERROR
+                //student.highSchoolCourse = request.body.student.highSchoolCourse;
+                //student.term = request.body.student.term;
                 student.save(function (error) {
                     if (error) {
                         response.send({error: error});
