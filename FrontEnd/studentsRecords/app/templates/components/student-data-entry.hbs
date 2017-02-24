@@ -67,6 +67,7 @@
   <div class="item" data-tab="standing">Advanced Standing</div>
   <div class="item" data-tab="awards">Awards and Scholarships</div>
   <div class="item" data-tab="highschool">High School Records</div>
+  <div class="item" data-tab="term">Term Records</div>
 
 
   
@@ -244,6 +245,15 @@
     </h2>
   </div>
    {{hs-record currentStudent = currentStudent}}
+</div>
+
+<div class="ui bottom attached tab segment" data-tab="term">
+  <div class="ui inverted violet segment">
+    <h2>
+      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
+    </h2>
+  </div>
+   {{term-record currentStudent = currentStudent}}
 </div>
 
 <!--

@@ -1,0 +1,25 @@
+<table class="ui celled table">
+   <tbody>
+     <tr>
+      <td>Course name</td>
+      <td>Description</td>
+      <td>Units</td>
+      <td>Grade</td>
+      <td>Location</td>
+     </tr>
+   {{#each currentStudent.term as |termRec|}}
+   <tr>
+     <td>{{termRec.course}}</td>
+     <td>{{termRec.description}}</td>
+     <td>{{termRec.units}}</td>
+     <td>{{termRec.grade}}</td>
+     <td>{{termRec.location}}</td>
+   </tr>
+   {{else}}
+   <tr>
+    <td>No courses on record</td>
+    <td></td><td></td><td></td><td></td>
+   </tr>
+   {{/each}}
+   </tbody>
+ </table>
