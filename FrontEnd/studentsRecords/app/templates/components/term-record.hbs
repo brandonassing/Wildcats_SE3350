@@ -7,13 +7,13 @@
       <td>Grade</td>
       <td>Location</td>
      </tr>
-   {{#each currentStudent.highSchoolCourse as |hsCourse|}}
+   {{#each currentStudent.term as |termRec|}}
    <tr>
-     <td>{{hsCourse.course}}</td>
-     <td>{{hsCourse.description}}</td>
-     <td>{{hsCourse.units}}</td>
-     <td>{{hsCourse.grade}}</td>
-     <td>{{hsCourse.location}}</td>
+     <td>{{termRec.course}}</td>
+     <td>{{termRec.description}}</td>
+     <td>{{termRec.units}}</td>
+     <td>{{termRec.grade}}</td>
+     <td>{{termRec.location}}</td>
    </tr>
    {{else}}
    <tr>

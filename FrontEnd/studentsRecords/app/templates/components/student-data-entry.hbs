@@ -66,7 +66,8 @@
   <div class="item" data-tab="admission">Admission Details</div>
   <div class="item" data-tab="standing">Advanced Standing</div>
   <div class="item" data-tab="awards">Awards and Scholarships</div>
-  <div class="item" data-tab="highschool">HighSchool Records</div>
+  <div class="item" data-tab="highschool">High School Records</div>
+  <div class="item" data-tab="term">Term Records</div>
 
 
   
@@ -156,7 +157,9 @@
       <div class="ui">
         <div>
           <div>
-           
+           <button class="ui button" {{action 'saveStudent'}}>
+          <i class="save icon"></i> Save
+        </button>
            <div class ="ui form">
              <div class = "inline field">
                 <div class = "ui label">Admission Average:</div>
@@ -185,6 +188,9 @@
     
 
       <div>
+        <button class="ui button" {{action 'saveStudent'}}>
+          <i class="save icon"></i> Save
+        </button>
         <div class="ui form">
           <div class="inline field">
             {{textarea size="10" type="text" value = currentStudent.basis placeholder="Enter basis of admission"}}
@@ -198,6 +204,9 @@
 
 
       <div>
+        <button class="ui button" {{action 'saveStudent'}}>
+          <i class="save icon"></i> Save
+        </button>
         <div class="ui form">
           <div class="inline field">
             {{textarea size="10" type="text" value = currentStudent.regComments placeholder = "Enter registration comments"}}
@@ -236,6 +245,15 @@
     </h2>
   </div>
    {{hs-record currentStudent = currentStudent}}
+</div>
+
+<div class="ui bottom attached tab segment" data-tab="term">
+  <div class="ui inverted violet segment">
+    <h2>
+      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
+    </h2>
+  </div>
+   {{term-record currentStudent = currentStudent}}
 </div>
 
 <!--

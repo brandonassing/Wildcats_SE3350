@@ -10,6 +10,8 @@ export default Ember.Component.extend({
     student: null,
     standingModel: null,
     currentStudent:null,
+    isEditing:false,
+    standings: null,
 
     init() {
     this._super(...arguments);
@@ -38,9 +40,33 @@ export default Ember.Component.extend({
         });
     },
     deleteCourse(thisCourse){
-        thisCourse.set('student', null);
+        if(confirm('Are you sure that you want to delete this course? \n This cannot be undone')){
+            thisCourse.set('student', null);
             thisCourse.save();
             thisCourse.destroyRecord();
+        }else{
+            return;
+        }
+    },
+    editCourse(){
+        this.set('isEditing',true);
+
+    },
+    saveCourse(thisCourse){
+        if(confirm('Are you sure you want to save? \n All previous information will be lost.')){
+            thisCourse.save();
+            this.set('isEditing', false);
+        }else{
+            return;
+        }
+
+    },
+    cancelEdit(){
+        this.set('isEditing',false);
     }
+
+
+
+
     }
 });
