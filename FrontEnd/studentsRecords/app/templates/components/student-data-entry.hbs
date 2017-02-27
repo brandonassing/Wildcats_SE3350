@@ -1,27 +1,17 @@
-
-
-{{#if showAllStudents}}
+ {{#if showAllStudents}}
 <!-- Note that offset is an "in" and "out" parameter !-->
-{{all-students INDEX = currentIndex notDONE = showAllStudents OFFSET = offset studentsModel = studentsRecords}}
-
-{{else if showFindStudents}}
-
-{{find-student INDEX = currentIndex notDONE = showFindStudents OFFSET = offset studentsModel = studentsRecords}}
-
-{{else if showAddStudent}}
-
-{{add-student notDONE = showAddStudent}}
-
-{{else}}
+{{all-students INDEX = currentIndex notDONE = showAllStudents OFFSET = offset studentsModel = studentsRecords}} {{else if
+showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudents OFFSET = offset studentsModel = studentsRecords}}
+{{else if showAddStudent}} {{add-student notDONE = showAddStudent}} {{else}}
 <!-- Show the menu bar-->
 <div class="ui eleven item fluid borderless inverted menu">
-<a class="item" {{action 'saveStudent'}}>
+  <a class="item" {{action 'saveStudent'}}>
     <i class="save icon"></i>Save
   </a>
   <a class="item" {{action 'undoSave'}}>
     <i class="undo icon"></i>Undo
   </a>
-    <a class="item" {{action 'addStudent'}}>
+  <a class="item" {{action 'addStudent'}}>
     <i class="add user icon"></i>Add
   </a>
   <a class="item" {{action 'deleteStudent'}}>
@@ -54,11 +44,11 @@
 
 
 <div class="ui top attached tabular menu">
- 
- 
+
+
   <div class="active item" data-tab="basics">Basic Info</div>
 
-<!--
+  <!--
    ==============GETIING RID OF THE PROGRAM RECORDS TAB ================
   <div class="item" data-tab="program">Program Record</div>
    !-->
@@ -70,19 +60,16 @@
   <div class="item" data-tab="term">Term Records</div>
 
 
-  
+
   <!--
     ====  WE DONT NEED OTHER TAB RIGHT NOW=====================
   <div class="item" data-tab="others">Other tabs</div>
   !-->
 
-
-
 </div>
 
 <div class="ui bottom attached active tab segment" data-tab="basics">
   <!-- student basic information !-->
-
   <div class="ui grid">
     <div class="ui right aligned seven wide column">
       <div class="ui form">
@@ -97,31 +84,31 @@
         </div>
         <div class="inline field">
           <label>Gender</label>
-          <select onchange={{action 'selectGender' value="target.value"}}>>
+          <select onchange={{action 'selectGender' value="target.value" }}>>
 {{#each genderModel as |genderChoice|}}
 <option value={{genderChoice.id}} selected={{eq currentStudent.genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
 {{/each}}
 </select>
-</div>
-<div class="inline field">
-  <label>Date of Birth</label>
-  <input value={{selectedDate}} type="date" onchange={{action 'assignDate' value="target.value"}}>
-</div>
-<div class="inline field">
-  <label>Residency</label>
-  <select onchange={{action 'selectResidency' value="target.value"}}> {{#each residencyModel as |residencyChoice|}}
+        </div>
+        <div class="inline field">
+          <label>Date of Birth</label>
+          <input value={{selectedDate}} type="date" onchange={{action 'assignDate' value="target.value" }}>
+        </div>
+        <div class="inline field">
+          <label>Residency</label>
+          <select onchange={{action 'selectResidency' value="target.value" }}> {{#each residencyModel as |residencyChoice|}}
 <option value={{residencyChoice.id}} selected={{eq currentStudent.resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
 {{/each}}
 </select>
-</div>
-</div>
-</div>
+        </div>
+      </div>
+    </div>
 
-<!-- Show student photo -->
-<div class="ui center aligned four wide column">
-  <img src={{studentPhoto}}>
-</div>
-</div>
+    <!-- Show student photo -->
+    <div class="ui center aligned four wide column">
+      <img src={{studentPhoto}}>
+    </div>
+  </div>
 
 </div>
 
@@ -143,10 +130,10 @@
 
 <div class="ui bottom attached tab segment" data-tab="admission">
   <div class="ui inverted violet segment">
-      <h2>
-        <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
-      </h2>
-    </div>
+    <h2>
+      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
+    </h2>
+  </div>
   <div class="ui pointing secondary menu">
     <div class="active item" data-tab="comments">Admission Comments</div>
     <div class="item" data-tab="basis">Basis of Admission</div>
@@ -154,65 +141,65 @@
   </div>
 
   <div class="ui active tab" data-tab="comments">
-      <div class="ui">
+    <div class="ui">
+      <div>
         <div>
-          <div>
-           <button class="ui button" {{action 'saveStudent'}}>
+          <button class="ui button" {{action 'saveStudent'}}>
           <i class="save icon"></i> Save
         </button>
-           <div class ="ui form">
-             <div class = "inline field">
-                <div class = "ui label">Admission Average:</div>
-                 {{input type="text" value = currentStudent.admissionAvg}}
-              </div>
-           </div>
-            
-            <br>
-          </div>
-        </div>
-        <div>
-          <div>
-            <div class="ui form">
+          <div class="ui form">
             <div class="inline field">
-            {{textarea size="10" type="text" value = currentStudent.admissionComments placeholder = "Enter admission comments"}}
+              <div class="ui label">Admission Average:</div>
+              {{input type="text" value = currentStudent.admissionAvg}}
             </div>
+          </div>
+
+          <br>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div class="ui form">
+            <div class="inline field">
+              {{textarea size="10" type="text" value = currentStudent.admissionComments placeholder = "Enter admission comments"}}
             </div>
           </div>
         </div>
       </div>
+    </div>
   </div>
 
 
 
   <div class="ui bottom attached tab" data-tab="basis">
-    
 
-      <div>
-        <button class="ui button" {{action 'saveStudent'}}>
+
+    <div>
+      <button class="ui button" {{action 'saveStudent'}}>
           <i class="save icon"></i> Save
         </button>
-        <div class="ui form">
-          <div class="inline field">
-            {{textarea size="10" type="text" value = currentStudent.basis placeholder="Enter basis of admission"}}
-          </div>
+      <div class="ui form">
+        <div class="inline field">
+          {{textarea size="10" type="text" value = currentStudent.basis placeholder="Enter basis of admission"}}
         </div>
       </div>
-    
+    </div>
+
   </div>
 
   <div class="ui bottom attached tab" data-tab="registration">
 
 
-      <div>
-        <button class="ui button" {{action 'saveStudent'}}>
+    <div>
+      <button class="ui button" {{action 'saveStudent'}}>
           <i class="save icon"></i> Save
         </button>
-        <div class="ui form">
-          <div class="inline field">
-            {{textarea size="10" type="text" value = currentStudent.regComments placeholder = "Enter registration comments"}}
-          </div>
+      <div class="ui form">
+        <div class="inline field">
+          {{textarea size="10" type="text" value = currentStudent.regComments placeholder = "Enter registration comments"}}
         </div>
       </div>
+    </div>
   </div>
 
 </div>
@@ -226,7 +213,7 @@
   </div>
   {{advanced-standing currentStudent=currentStudent}}
 </div>
-  
+
 
 <div class="ui bottom attached tab segment" data-tab="awards">
   <div class="ui inverted violet segment">
@@ -244,7 +231,7 @@
       <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
     </h2>
   </div>
-   {{hs-record currentStudent = currentStudent}}
+  {{hs-record currentStudent = currentStudent}}
 </div>
 
 <div class="ui bottom attached tab segment" data-tab="term">
@@ -253,7 +240,7 @@
       <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
     </h2>
   </div>
-   {{term-record currentStudent = currentStudent}}
+  {{term-record currentStudent = currentStudent}}
 </div>
 
 <!--
@@ -265,7 +252,3 @@
 
 
 {{/if}}
-
-
-
-

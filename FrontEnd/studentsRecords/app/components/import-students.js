@@ -1,54 +1,65 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    actions: {
-        //TODO streamline this to one class
-        importGenders(file) {
-            mongoxlsx = require('mongo-xlsx');
-            var model = null;
-            mongoxlsx.xlsx2MongoData(file,model,function(err, data){
-                console.log(data);
-            });
-        },
+  actions: {
+    //TODO streamline this to one class
+    importGenders() {
+      var file = $("#import-gender")[0].files[0];
+      //var file = document.querySelector('#gender-import > input[type=file]').files[0];
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        /*$post('./genders/import', {
+          file: btoa(event.target.result)
+        });*/
+        //window.alert("4");
+        //window.alert(event.target.result);
+      };
 
-        importAdvancedStanding() {
-        
-        },
+      if (file) {
+        reader.readAsBinaryString(file);
+      }
 
-        importHSCourse() {
-        
-        },
 
-        importHighSchools() {
-        
-        },
+    },
 
-        importResidencies() {
-        
-        },
+    importAdvancedStanding() {
 
-        importScholarshipsAwards() {
-        
-        },
+    },
 
-        importStudents() {
-        
-        },
+    importHSCourse() {
 
-        importUndergradCourses() {
-        
-        },
+    },
 
-        importRecordPlans() {
-        
-        },
+    importHighSchools() {
 
-        importRecordCourses() {
-        
-        },
+    },
 
-        importTermCodes() {
-        
-        }
+    importResidencies() {
+
+    },
+
+    importScholarshipsAwards() {
+
+    },
+
+    importStudents() {
+
+    },
+
+    importUndergradCourses() {
+
+    },
+
+    importRecordPlans() {
+
+    },
+
+    importRecordCourses() {
+
+    },
+
+    importTermCodes() {
+
     }
+  }
 });
