@@ -4,6 +4,7 @@ var models = require('../models/studentsRecordsDB');
 var bodyParser = require('body-parser');
 var parseUrlencoded = bodyParser.urlencoded({extended: false});
 var parseJSON = bodyParser.json();
+var mongoxlsx = require('mongo-xlsx');
 
 router.route('/')
     .post(parseUrlencoded, parseJSON, function (request, response) {
@@ -27,6 +28,19 @@ router.route('/')
             });
         }
     });
+
+router.route('/import')
+    .post(parseUrlencoded, parseJSON, function (request, response) {
+        model.Genders.remove({});
+        var model = null;
+        var xlsx = './genders.xlsx';
+        mongoxlsx.xlsx2MongoData(xlsx, model, function(err, data) {
+            model.Genders.insert(data, function(error, record) {
+            if (error) throw error;
+            console.log("data saved");
+        });
+    });
+});
 
 router.route('/:gender_id')
     .get(parseUrlencoded, parseJSON, function (request, response) {
