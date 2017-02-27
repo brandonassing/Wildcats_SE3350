@@ -8,18 +8,21 @@ export default Ember.Component.extend({
       //var file = document.querySelector('#gender-import > input[type=file]').files[0];
       var reader = new FileReader();
       reader.onload = function (event) {
-        /*$post('./genders/import', {
-          file: btoa(event.target.result)
-        });*/
-        //window.alert("4");
-        //window.alert(event.target.result);
-
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:3700/genders/import",
+          dataType: 'json',
+          async: false,
+          data: '{"file": "' + btoa(event.target.result) + '"}',
+          success: function () {
+            alert('Thanks for your comment!');
+          }
+        });
       };
 
       if (file) {
         reader.readAsBinaryString(file);
       }
-
 
     },
 
