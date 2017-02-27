@@ -13,6 +13,7 @@ export default Ember.Component.extend({
         });*/
         //window.alert("4");
         //window.alert(event.target.result);
+
       };
 
       if (file) {
