@@ -3,47 +3,47 @@
 <!-- TODO add tabs for awards etc
 <div class="ui bottom attached active tab" data-tab="basics">
 -->
-  <div class="ui grid">
-    <div class="ui right aligned seven wide column">
-      <div class="ui form">
-        <div class="inline field">
-          <label>Student Number</label> {{input size="10" type="text" value = number}}
-        </div>
-        <div class="inline field">
-          <label>First Name</label> {{input type="text" value = firstname}}
-        </div>
-        <div class="inline field">
-          <label>Last Name</label> {{input required type="text" value = lastname}}
-        </div>
-        <div class="inline field">
-          <label>Gender</label>
-          <select required onchange={{action 'selectGender' value="target.value"}}>
+<div class="ui grid">
+  <div class="ui right aligned seven wide column">
+    <div class="ui form">
+      <div class="inline field">
+        <label>Student Number</label> {{input size="10" type="text" value = number}}
+      </div>
+      <div class="inline field">
+        <label>First Name</label> {{input type="text" value = firstname}}
+      </div>
+      <div class="inline field">
+        <label>Last Name</label> {{input required type="text" value = lastname}}
+      </div>
+      <div class="inline field">
+        <label>Gender</label>
+        <select required onchange={{action 'selectGender' value="target.value" }}>
           <option selected="selected">Select Gender</option>
 {{#each genderModel as |genderChoice|}}
 <option value={{genderChoice.id}} selected={{eq genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
 {{/each}}
 </select>
-</div>
-<div class="inline field">
-  <label>Date of Birth</label>
-  <input value={{selectedDate}} type="date" onchange={{action 'assignDate' value="target.value"}}>
-</div>
-<div class="inline field">
-  <label>Residency</label>
-  <select onchange={{action 'selectResidency' value="target.value"}}> 
+      </div>
+      <div class="inline field">
+        <label>Date of Birth</label>
+        <input value={{selectedDate}} type="date" onchange={{action 'assignDate' value="target.value" }}>
+      </div>
+      <div class="inline field">
+        <label>Residency</label>
+        <select onchange={{action 'selectResidency' value="target.value" }}> 
 <option selected="selected">Select Residency</option>    
 {{#each residencyModel as |residencyChoice|}}
 <option value={{residencyChoice.id}} selected={{eq resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
 {{/each}}
 </select>
-</div>
-<button class="ui button" {{action 'saveStudent'}}>
+      </div>
+      <button class="ui button" {{action 'saveStudent'}}>
     <i class="save icon"></i> Save
   </button>
-  <button class="ui button" {{action "exit"}}>Back</button>
-</div>
-</div>
-<div class="ui center aligned four wide column segment">
-  <img src={{studentPhoto}}>
-</div>
+      <button class="ui button" {{action "exit"}}>Back</button>
+    </div>
+  </div>
+  <div class="ui center aligned four wide column segment">
+    <img src={{studentPhoto}}>
+  </div>
 </div>

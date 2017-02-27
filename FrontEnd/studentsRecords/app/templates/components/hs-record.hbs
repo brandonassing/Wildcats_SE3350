@@ -1,25 +1,32 @@
 <table class="ui celled table">
-   <tbody>
-     <tr>
-      <td>Course name</td>
-      <td>Description</td>
+  <tbody>
+    <tr>
+      <td>Secondary School</td>
+      <td>Course Info</td>
+      <td>Level</td>
+      <td>Source</td>
       <td>Units</td>
       <td>Grade</td>
-      <td>Location</td>
-     </tr>
-   {{#each currentStudent.highSchoolCourse as |hsCourse|}}
-   <tr>
-     <td>{{hsCourse.course}}</td>
-     <td>{{hsCourse.description}}</td>
-     <td>{{hsCourse.units}}</td>
-     <td>{{hsCourse.grade}}</td>
-     <td>{{hsCourse.location}}</td>
-   </tr>
-   {{else}}
-   <tr>
-    <td>No courses on record</td>
-    <td></td><td></td><td></td><td></td>
-   </tr>
-   {{/each}}
-   </tbody>
- </table>
+    </tr>
+
+    {{#each currentStudent.highSchoolCourse as |hsCourse|}}
+    <tr>
+      <td>{{hsCourse.source.school.name}}</td>
+      <td>{{hsCourse.source.course.name}}<br>{{hsCourse.source.course.description}}</td>
+      <td>{{hsCourse.source.level}}</td>
+      <td>{{hsCourse.source.source}}</td>
+      <td>{{hsCourse.source.unit}}</td>
+      <td>{{hsCourse.mark}}</td>
+    </tr>
+    {{else}}
+    <tr>
+      <td>No courses on record</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

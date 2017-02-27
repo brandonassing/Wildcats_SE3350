@@ -1,54 +1,69 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    actions: {
-        //TODO streamline this to one class
-        importGenders(file) {
-            mongoxlsx = require('mongo-xlsx');
-            var model = null;
-            mongoxlsx.xlsx2MongoData(file,model,function(err, data){
-                console.log(data);
-            });
-        },
+  actions: {
+    //TODO streamline this to one class
+    importGenders() {
+      var file = $("#import-gender")[0].files[0];
+      //var file = document.querySelector('#gender-import > input[type=file]').files[0];
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        $.ajax({
+          type: "POST",
+          url: "http://localhost:3700/genders/import",
+          dataType: 'json',
+          async: false,
+          data: '{"file": "' + btoa(event.target.result) + '"}',
+          success: function () {
+            alert('Thanks for your comment!');
+          }
+        });
+      };
 
-        importAdvancedStanding() {
-        
-        },
+      if (file) {
+        reader.readAsBinaryString(file);
+      }
 
-        importHSCourse() {
-        
-        },
+    },
 
-        importHighSchools() {
-        
-        },
+    importAdvancedStanding() {
 
-        importResidencies() {
-        
-        },
+    },
 
-        importScholarshipsAwards() {
-        
-        },
+    importHSCourse() {
 
-        importStudents() {
-        
-        },
+    },
 
-        importUndergradCourses() {
-        
-        },
+    importHighSchools() {
 
-        importRecordPlans() {
-        
-        },
+    },
 
-        importRecordCourses() {
-        
-        },
+    importResidencies() {
 
-        importTermCodes() {
-        
-        }
+    },
+
+    importScholarshipsAwards() {
+
+    },
+
+    importStudents() {
+
+    },
+
+    importUndergradCourses() {
+
+    },
+
+    importRecordPlans() {
+
+    },
+
+    importRecordCourses() {
+
+    },
+
+    importTermCodes() {
+
     }
+  }
 });
