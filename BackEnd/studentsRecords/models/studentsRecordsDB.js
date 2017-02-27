@@ -229,3 +229,13 @@ db.once('open', function () {
     exports.TermCodes = TermCodes;
 
 });
+
+var mongoxlsx = require('mongo-xlsx');
+var model = null;
+var xlsx = './genders.xlsx';
+mongoxlsx.xlsx2MongoData(xlsx, model, function(err, data) {
+    db.collection('genderSchema').insert(data, function(error, record) {
+        if (error) throw error;
+        console.log("data saved");
+    });
+});
