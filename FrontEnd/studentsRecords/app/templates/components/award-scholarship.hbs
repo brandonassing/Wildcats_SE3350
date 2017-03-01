@@ -1,51 +1,69 @@
 <h3>Awards and Scholarships</h3>
-<table class = "ui celled table">
-    <tbody>
-      {{#each currentStudent.awardInfo as |awards|}}
-      {{#if isEditing}}
-      <tr>
-        <td><div class="ui form warning"><div class = "inline field">{{input type="text" value=awards.note}}</div></div></td>
+<table class="ui celled table">
+  <tbody>
+    {{#each currentStudent.awardInfo as |awards|}} {{#if isEditing}}
+    <tr>
+      <td>
+        <div class="ui form warning">
+          <div class="inline field">{{input type="text" value=awards.note}}</div>
+        </div>
+      </td>
 
-        <td>
-       <button class="ui icon button" data-tooltip="Return" data-inverted=" " {{action 'cancelEdit' thisOne=awards.note}}>
+      <td>
+        <button class="ui icon button" data-tooltip="Return" data-inverted=" " {{action 'cancelEdit' thisOne=awards.note}}>
           <i class="level up icon"></i>
         </button>
-       <button class="ui icon button" data-tooltip="Save Award" data-inverted=" " {{action 'saveAward' awards}}>
+        <button class="ui icon button" data-tooltip="Save Award" data-inverted=" " {{action 'saveAward' awards}}>
           <i class="save icon"></i>
         </button>
-     </td>
-      </tr>
-      
-      {{else}}
-      <tr>
-        <td>{{awards.note}}</td>
-        <td>
-          <button class="ui icon button" data-tooltip="Delete Award" data-inverted=" " {{action 'deleteAward' awards}}>
+      </td>
+    </tr>
+
+    {{else}}
+    <tr>
+      <td>{{awards.note}}</td>
+      <td>
+        <button class="ui icon button" data-tooltip="Delete Award" data-inverted=" " {{action 'toggleDeleteModal' awards}}>
             <i class="delete icon"></i>
           </button>
-          <button class="ui icon button" data-tooltip="Edit Award" data-inverted=" " {{action 'editAward' awards}}>
+        <!-- Delete modal -->
+        <div id="delete-modal-award" class="ui small modal">
+          <div class="header">
+            Delete Award?
+          </div>
+          <div class="actions">
+            <div class="ui red ok button" {{action 'deleteAward' awards}}>
+              <i class="remove icon"></i> Delete
+            </div>
+            <div class="ui cancel button" {{action 'toggleDeleteModal'}}>
+              Cancel
+            </div>
+          </div>
+        </div>
+        <!-- Delete modal -->
+
+        <button class="ui icon button" data-tooltip="Edit Award" data-inverted=" " {{action 'editAward' awards}}>
             <i class="edit icon"></i>
           </button>
-        </td>
-      </tr>
-      {{/if}}
-      {{else}}
-      <tr>
-        <td>No awards/scholarships on record</td>
-        <td></td>
-      </tr>
-      {{/each}}
-      <tr>
-        <td>
-            <div class="ui form">
-                {{input type="text" value = note}}
-            </div>
+      </td>
+    </tr>
+    {{/if}} {{else}}
+    <tr>
+      <td>No awards/scholarships on record</td>
+      <td></td>
+    </tr>
+    {{/each}}
+    <tr>
+      <td>
+        <div class="ui form">
+          {{input type="text" value = note}}
+        </div>
       </td>
       <td>
         <button class="ui icon button" data-tooltip="Add Award" data-inverted=" " {{action 'addAward'}}>
             <i class="plus icon"></i>
         </button>
-    </td>
+      </td>
     </tr>
-    </tbody>
-  </table>
+  </tbody>
+</table>
