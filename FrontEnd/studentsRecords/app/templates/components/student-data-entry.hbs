@@ -53,11 +53,11 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
   <div class="item" data-tab="program">Program Record</div>
    !-->
 
-  <div class="item" data-tab="admission">Admission Details</div>
-  <div class="item" data-tab="standing">Advanced Standing</div>
-  <div class="item" data-tab="awards">Awards and Scholarships</div>
-  <div class="item" data-tab="highschool">High School Records</div>
-  <div class="item" data-tab="term">Term Records</div>
+  <a class="item" data-tab="admission">Admission Details</a>
+  <a class="item" data-tab="standing">Advanced Standing</a>
+  <a class="item" data-tab="awards">Awards and Scholarships</a>
+  <a class="item" data-tab="highschool">High School Records</a>
+  <a class="item" data-tab="term">Term Records</a>
 
 
 
@@ -135,18 +135,15 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
     </h2>
   </div>
   <div class="ui pointing secondary menu">
-    <div class="active item" data-tab="comments">Admission Comments</div>
-    <div class="item" data-tab="basis">Basis of Admission</div>
-    <div class="item" data-tab="registration">Registration Comments</div>
+    <a class="active item" data-tab="comments">Admission Comments</a>
+    <a class="item" data-tab="basis">Basis of Admission</a>
+    <a class="item" data-tab="registration">Registration Comments</a>
   </div>
 
   <div class="ui active tab" data-tab="comments">
     <div class="ui">
       <div>
         <div>
-          <button class="ui button" {{action 'saveStudent'}}>
-          <i class="save icon"></i> Save
-        </button>
           <div class="ui form">
             <div class="inline field">
               <div class="ui label">Admission Average:</div>
@@ -175,9 +172,6 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
 
 
     <div>
-      <button class="ui button" {{action 'saveStudent'}}>
-          <i class="save icon"></i> Save
-        </button>
       <div class="ui form">
         <div class="inline field">
           {{textarea size="10" type="text" value = currentStudent.basis placeholder="Enter basis of admission"}}
@@ -191,9 +185,6 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
 
 
     <div>
-      <button class="ui button" {{action 'saveStudent'}}>
-          <i class="save icon"></i> Save
-        </button>
       <div class="ui form">
         <div class="inline field">
           {{textarea size="10" type="text" value = currentStudent.regComments placeholder = "Enter registration comments"}}
