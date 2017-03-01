@@ -5,7 +5,7 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
 {{else if showAddStudent}} {{add-student notDONE = showAddStudent}} {{else}}
 <!-- Show the menu bar-->
 <div class="ui eleven item fluid borderless inverted menu">
-  <a class="item" {{action 'saveStudent'}}>
+  <a class="item" {{action 'saveStudent'}} data-content="Add users to your feed">
     <i class="save icon"></i>Save
   </a>
   <a class="item" {{action 'undoSave'}}>
@@ -14,7 +14,7 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
   <a class="item" {{action 'addStudent'}}>
     <i class="add user icon"></i>Add
   </a>
-  <a class="item" {{action 'deleteStudent'}}>
+  <a class="item" {{action 'toggleDeleteModal'}}>
     <i class="remove user icon"></i>Delete
   </a>
   <a class="item" {{action 'firstStudent'}}>
@@ -40,13 +40,32 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
   </a>
 </div>
 
+
+<div id="delete-modal" class="ui basic modal">
+  <div class="ui icon header">
+    <i class="remove icon"></i> Delete {{currentStudent.firstName}} {{currentStudent.lastName}}
+  </div>
+  <div class="content">
+    <p>Are you sure you want to delete this student?</p>
+  </div>
+  <div class="actions">
+    <div class="ui red ok inverted button" {{action 'deleteStudent'}}>
+      <i class="checkmark icon"></i> Delete
+    </div>
+    <div class="ui basic cancel inverted button" {{action 'toggleDeleteModal'}}>
+      <i class="remove icon"></i> Cancel
+    </div>
+  </div>
+</div>
+
+
 <!-- Show data entry form -->
 
 
 <div class="ui top attached tabular menu">
 
 
-  <div class="active item" data-tab="basics">Basic Info</div>
+  <a class="active item" data-tab="basics">Basic Info</a>
 
   <!--
    ==============GETIING RID OF THE PROGRAM RECORDS TAB ================

@@ -38,6 +38,8 @@ export default Ember.Component.extend({
   tempHS: null,
   tempMarks: null,
 
+  deleteModalShowing: false,
+
   studentModel: Ember.observer('offset', function () {
     var self = this;
     this.get('store').query('student', {
@@ -89,25 +91,25 @@ export default Ember.Component.extend({
 
   showStudentData: function (index) {
     this.set('currentStudent', this.get('studentsRecords').objectAt(index));
-    
-      this.set('tempnumber', this.get('currentStudent.number'));
-      this.set('tempfirstName', this.get('currentStudent.firstName'));
-      this.set('templastName', this.get('currentStudent.lastName'));
-      this.set('tempDOB', this.get('currentStudent.DOB'));
-      this.set('tempregComments', this.get('currentStudent.regComments'));
-      this.set('tempbasis', this.get('currentStudent.basis'));
-      this.set('tempAvg', this.get('current.admissionAvg'));
-      this.set('tempComments', this.get('current.admissionComments'));
-      this.set('tempPhoto', this.get('currentStudent.photo'));
-      this.set('tempGen', this.get('currentStudent.genInfo'));
-      this.set('tempRes', this.get('currentStudent.resInfo'));
-      this.set('tempTrans', this.get('currentStudent.transInfo'));
-      this.set('tempHS', this.get('currentStudent.highSchoolCourse'));
-      this.set('tempMarks', this.get('currentStudent.term'));
-      //window.alert(index);
-      //window.alert(this.get("currentStudent"));
-      this.set('tempAward', this.get('currentStudent.awardInfo'));
-      
+
+    this.set('tempnumber', this.get('currentStudent.number'));
+    this.set('tempfirstName', this.get('currentStudent.firstName'));
+    this.set('templastName', this.get('currentStudent.lastName'));
+    this.set('tempDOB', this.get('currentStudent.DOB'));
+    this.set('tempregComments', this.get('currentStudent.regComments'));
+    this.set('tempbasis', this.get('currentStudent.basis'));
+    this.set('tempAvg', this.get('current.admissionAvg'));
+    this.set('tempComments', this.get('current.admissionComments'));
+    this.set('tempPhoto', this.get('currentStudent.photo'));
+    this.set('tempGen', this.get('currentStudent.genInfo'));
+    this.set('tempRes', this.get('currentStudent.resInfo'));
+    this.set('tempTrans', this.get('currentStudent.transInfo'));
+    this.set('tempHS', this.get('currentStudent.highSchoolCourse'));
+    this.set('tempMarks', this.get('currentStudent.term'));
+    //window.alert(index);
+    //window.alert(this.get("currentStudent"));
+    this.set('tempAward', this.get('currentStudent.awardInfo'));
+
     this.set('studentPhoto', this.get('currentStudent').get('photo'));
     var date = this.get('currentStudent').get('DOB');
     var datestring = date.toISOString().substring(0, 10);
@@ -130,57 +132,60 @@ export default Ember.Component.extend({
       if (this.get("selectedResidency") == null) {
         this.set("selectedResidency", this.get("currentStudent.resInfo.id"));
       }
-/*SUPPOSED TO BE A NULL CHECK
-      if( this.get('currentStudent.number')===null || this.get('currentStudent.firstName')===null || this.get('currentStudent.lastName')===null || this.get('currentStudent.DOB')===null || this.get('currentStudent.genInfo')===null || this.get('currentStudent.resInfo')===null){
-          window.alert("Sorry, you cannot save a student with empty values. \n Please ensure all fields have a value.");
-      }*/
-      
+      /*SUPPOSED TO BE A NULL CHECK
+            if( this.get('currentStudent.number')===null || this.get('currentStudent.firstName')===null || this.get('currentStudent.lastName')===null || this.get('currentStudent.DOB')===null || this.get('currentStudent.genInfo')===null || this.get('currentStudent.resInfo')===null){
+                window.alert("Sorry, you cannot save a student with empty values. \n Please ensure all fields have a value.");
+            }*/
+
 
       var res = this.get('store').peekRecord('residency', this.get('selectedResidency'));
       var gen = this.get('store').peekRecord('gender', this.get('selectedGender'));
-      
+
       updatedStudent.set('genInfo', gen);
       updatedStudent.set('DOB', new Date(this.get('selectedDate')));
       updatedStudent.set('resInfo', res);
 
 
       updatedStudent.save().then(() => {
-        
+
         //     this.set('isStudentFormEditing', false);
         this.set("selectedGender", null);
         this.set("selectedResidency", null);
       });
-      if(confirm("Are you sure that you want to save this student with the current values?")){
+      /*if(confirm("Are you sure that you want to save this student with the current values?")){
         
       }else{
         this.undoSave();
+      }*/
+    },
+    toggleDeleteModal() {
+      if (this.get("deleteModalShowing")) {
+        $('#delete-modal')
+          .modal('hide');
+        this.set('deleteModalShowing', false);
+      } else {
+        $('#delete-modal')
+          .modal('show');
+        this.set('deleteModalShowing', true);
       }
     },
-    deleteStudent(){
-           ///TODO STILL GETS ERRORS
-           if(confirm("Are you sure you want to delete this student?")){
-
-           }else{
-             return;
-           }
-
-
-    this.get("store").findRecord('student',  this.get("currentStudent.id"))
-    .then(function (stud) {
-      stud.destroyRecord();
-      //stud.save();
-    });
-    
-    /*
-       if (this.get("currentIndex") >= this.get("lastIndex")){
-         this.currentIndex = this.firstIndex;
-         //ERROR this will cause problems on the last offset
-         this.offset +=10;
-      }
-      else{
-        this.currentIndex += 1;
-      }
-      */
+    deleteStudent() {
+      ///TODO STILL GETS ERRORS
+      this.get("store").findRecord('student', this.get("currentStudent.id"))
+        .then(function (stud) {
+          stud.destroyRecord();
+          //stud.save();
+        });
+      /*
+         if (this.get("currentIndex") >= this.get("lastIndex")){
+           this.currentIndex = this.firstIndex;
+           //ERROR this will cause problems on the last offset
+           this.offset +=10;
+        }
+        else{
+          this.currentIndex += 1;
+        }
+        */
     },
 
     firstStudent() {
@@ -224,7 +229,7 @@ export default Ember.Component.extend({
       this.set('showAddStudent', false);
     },
 
-    addStudent(){
+    addStudent() {
       this.set('showFindStudents', false);
       this.set('showAllStudents', false);
       this.set('showAddStudent', true);
