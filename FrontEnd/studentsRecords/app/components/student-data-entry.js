@@ -151,12 +151,23 @@ export default Ember.Component.extend({
         //     this.set('isStudentFormEditing', false);
         this.set("selectedGender", null);
         this.set("selectedResidency", null);
+        $('#save-modal').modal('show');
+
+
+        /*
+        $("#save-btn").popup({
+            title: "Saved",
+          })
+          .popup('show');*/
       });
       /*if(confirm("Are you sure that you want to save this student with the current values?")){
         
       }else{
         this.undoSave();
       }*/
+    },
+    closeSaveModal() {
+      $("#save-modal").modal('hide');
     },
     toggleDeleteModal() {
       if (this.get("deleteModalShowing")) {
