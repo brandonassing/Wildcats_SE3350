@@ -160,11 +160,6 @@ export default Ember.Component.extend({
           })
           .popup('show');*/
       });
-      /*if(confirm("Are you sure that you want to save this student with the current values?")){
-        
-      }else{
-        this.undoSave();
-      }*/
     },
     closeSaveModal() {
       $("#save-modal").modal('hide');

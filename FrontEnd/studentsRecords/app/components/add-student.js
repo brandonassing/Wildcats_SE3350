@@ -66,24 +66,19 @@ export default Ember.Component.extend({
       } else if (this.get("genInfo.name") === "Female") {
         this.set('studentPhoto', "/assets/studentsPhotos/female.png");
       }
-      
+
 
 
       //ALERT FOR CREATING A NULL STUDENT
       //I couldnt quickly come up with a better way to do this, but this big if statement works for now
-      if((this.get("number"))===null||(this.get("firstName"))===null||(this.get("lastName"))===null||(this.get("selectedDate"))===null||(this.get("genInfo.name"))===null||(this.get("resInfo.name"))===null){
-          window.alert("Sorry, you cannot create a student with empty values. \n Please ensure all fields have a value.");
+      if ((this.get("number")) === null || (this.get("firstName")) === null || (this.get("lastName")) === null || (this.get("selectedDate")) === null || (this.get("genInfo.name")) === null || (this.get("resInfo.name")) === null) {
+        window.alert("Sorry, you cannot create a student with empty values. \n Please ensure all fields have a value.");
       }
-     
-      
+
+
 
       if (this.get("number") != null && this.get("firstname") != null && this.get("lastname") != null && this.get("selectedDate") != null && this.get("genInfo.name") != null && this.get("resInfo.name") != null) {
-        if(confirm("Are you sure that you want to create a student with this information?")){
-        
-        }else{
-          return;
-        }
-        
+
         this.get("store").createRecord('student', {
           "number": this.get("number"),
           "firstName": this.get("firstname"),
@@ -101,7 +96,7 @@ export default Ember.Component.extend({
           this.set("selectedGender", null);
           this.set("selectedResidency", null);
           this.set('notDONE', false);
-          
+
         });
 
       }
@@ -137,10 +132,10 @@ export default Ember.Component.extend({
     assignDate(date) {
       this.set('selectedDate', date);
     },
-    
+
     exit() {
       this.set('notDONE', false);
     }
-       
-}
+
+  }
 });

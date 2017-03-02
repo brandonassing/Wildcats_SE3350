@@ -47,12 +47,8 @@ export default Ember.Component.extend({
       this.set('isEditing', true);
     },
     saveAward(thisAward) {
-      if (confirm("Are you sure you want to save? \n All previous information will be lost.")) {
-        thisAward.save();
-        this.set('isEditing', false);
-      } else {
-        return;
-      }
+      thisAward.save();
+      this.set('isEditing', false);
 
     },
     cancelEdit() {
