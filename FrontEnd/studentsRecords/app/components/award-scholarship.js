@@ -40,8 +40,8 @@ export default Ember.Component.extend({
     },
     deleteAward(thisAward) {
       thisAward.set('student', null);
-      thisAward.save();
       thisAward.destroyRecord();
+      thisAward.save();
     },
     editAward(thisAward) {
       this.set('isEditing', true);
