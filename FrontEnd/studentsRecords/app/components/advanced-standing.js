@@ -51,10 +51,10 @@ export default Ember.Component.extend({
         this.set("deleteModalShowing", true);
       }
     },
-    deleteCourse(thisCourse) {
-      thisCourse.set('student', null);
-      thisCourse.save();
-      thisCourse.destroyRecord();
+    deleteCourse(standings) {
+      standings.set('student',null);
+      standings.save();
+      standings.destroyRecord();
     },
     editCourse() {
       this.set('isEditing', true);
