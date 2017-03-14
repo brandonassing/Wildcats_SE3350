@@ -1,4 +1,3 @@
-
 var express = require('express');
 var logger = require('./logger');
 var app = express();
@@ -8,9 +7,15 @@ var residencies = require('./routes/residencies');
 var genders = require('./routes/genders');
 var standings = require('./routes/standings');
 var awards = require('./routes/awards');
+var users = require('./routes/users');
+var passwords = require('./routes/passwords');
+var roots = require('./routes/roots');
+var rolePermissions = require('./routes/rolePermissions');
+var roleCodes = require('./routes/roleCodes');
+var logins = require('./routes/logins');
+var userRoles = require('./routes/usersRoles');
 
-
-app.use(function (request, response, next) {
+app.use(function(request, response, next) {
     response.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     response.header('Access-Control-Allow-Methods', 'POST, PATCH, GET, PUT, DELETE, OPTIONS');
@@ -22,9 +27,17 @@ app.use(logger);
 app.use('/students', students);
 app.use('/residencies', residencies);
 app.use('/genders', genders);
-app.use('/standings',standings);
+app.use('/standings', standings);
 app.use('/awards', awards);
 
-app.listen(3700, function () {
+app.use('/users', users);
+app.use('/passwords', passwords);
+app.use('/roleCodes', roleCodes);
+app.use('/userRoles', userRoles);
+app.use('/rolePermissions', rolePermissions);
+app.use('/logins', logins);
+app.use('/roots', roots);
+
+app.listen(3700, function() {
     console.log('Listening on port 3700');
 });
