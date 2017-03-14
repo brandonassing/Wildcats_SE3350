@@ -37,12 +37,7 @@ body {
   height: 15vh;
 }
 
-#login-header h1 {
-  font-size: 45px;
-  color: white;
-}
-
-#login-header h2 {
+#login-area h2 {
   font-size: 30px;
   color: #EDEDED;
 }
