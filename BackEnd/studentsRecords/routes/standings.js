@@ -60,7 +60,7 @@ router.route('/:standing_id')
         })
     })
     .delete(parseUrlencoded, parseJSON, function(request,response){
-        Standings.Model.findByIdAndRemove(request.params.standing_id, 
+        models.Standings.findByIdAndRemove(request.params.standing_id, 
         function(error,deleted){
             if(!error){
                 response.json({standings: deleted});

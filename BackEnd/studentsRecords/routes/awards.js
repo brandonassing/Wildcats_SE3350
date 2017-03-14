@@ -54,6 +54,14 @@ router.route('/:award_id')
                 });
             }
         })
+    })
+    .delete(parseUrlencoded, parseJSON, function(request, response){
+        models.Awards.findByIdAndRemove(request.param.award_id,
+        function(error,deleted){
+            if(!error){
+                response.json({awards: deleted});
+            }
+        })
     });
 
 module.exports = router;
