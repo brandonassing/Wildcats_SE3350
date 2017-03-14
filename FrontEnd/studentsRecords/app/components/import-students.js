@@ -1,69 +1,48 @@
 import Ember from 'ember';
-
+import XLSX from 'xlsx';
 export default Ember.Component.extend({
+
+  tableHeader: [],
+  tableData: null,
+  isLoading: false,
+
   actions: {
-    //TODO streamline this to one class
-    importGenders() {
-      var file = $("#import-gender")[0].files[0];
-      //var file = document.querySelector('#gender-import > input[type=file]').files[0];
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        $.ajax({
-          type: "POST",
-          url: "http://localhost:3700/genders/import",
-          dataType: 'json',
-          async: false,
-          data: '{"file": "' + btoa(event.target.result) + '"}',
-          success: function () {
-            alert('Thanks for your comment!');
-          }
-        });
-      };
+    
+    fileImport: function (file) {
+      this.set('isLoading', true);
+      var workbook = XLSX.read(file.data, {type: 'binary'});
+      var row = 0;
+      var col = null;
+      var data = [];
+      var header = [];
+      var first_sheet_name = workbook.SheetNames[0];
 
-      if (file) {
-        reader.readAsBinaryString(file);
+      var worksheet = workbook.Sheets[first_sheet_name];
+      var size = 0;
+      for(var cellName in worksheet) { 
+        if(cellName[0] === '!'){
+          continue;
+        }
+        row = cellName.slice(1) - 1;
+        col = cellName.charCodeAt(0) - 65;
+        data[size++] = [];
+        if(row === 0){
+          header[col] = worksheet[cellName].v;
+
+        } else{
+          data[row][col] = worksheet[cellName].v;
+        }
       }
-
+      this.set('tableHeader', header);
+      this.set('tableData', data);
     },
 
-    importAdvancedStanding() {
-
+    done: function() { 
+      this.set('isLoading', false);
     },
 
-    importHSCourse() {
-
-    },
-
-    importHighSchools() {
-
-    },
-
-    importResidencies() {
-
-    },
-
-    importScholarshipsAwards() {
-
-    },
-
-    importStudents() {
-
-    },
-
-    importUndergradCourses() {
-
-    },
-
-    importRecordPlans() {
-
-    },
-
-    importRecordCourses() {
-
-    },
-
-    importTermCodes() {
-
+    cancel: function () {
+      this.get('routing').transitionTo('posts');
     }
   }
 });

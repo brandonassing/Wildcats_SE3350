@@ -1,136 +1,30 @@
-<div class="ui fluid grid">
-  <div class="import-field ">
+  {{#if isLoading}}
+
+      <table class="ui celled table">
+        <thead>
+        <tr>
+          {{#each tableHeader as |header|}}
+            <th>{{header}}</th>
+          {{/each}}
+        </tr>
+        </thead>
+
+        <tbody>
+        {{#each tableData as |oneRow|}}
+          <tr>
+            {{#each oneRow as |oneCol|}}
+              <td>{{oneCol}}</td>
+            {{/each}}
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+      <button class="ui button" {{action 'done'}}> Done</button>
+
+  {{else}}
     <div>
-      <h3 class="ui header">Advanced Standing</h3>
+      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        Select Excel File
+      {{/file-picker}}</button>
     </div>
-    <form>
-      <input id="import-AdvancedStanding" type="file" name="Advanced Standing" accept=".xls,.xlsx">
-      <button class="" {{action 'importAdvancedStanding'}}>
-    <i class="save icon"></i>
-    </button>
-    </form>
-  </div>
-
-  <div class="import-field ">
-    <div>
-      <h3 class="ui header">Genders</h3>
-    </div>
-    <form>
-      <input id="import-gender" type="file" name="Gender" accept=".xls,.xlsx">
-      <button class="" {{action 'importGenders'}}>
-    <i class="save icon"></i>
-    </button>
-    </form>
-  </div>
-
-  <div class="import-field ">
-    <div>
-      <h3 class="ui header">High School Course Information</h3>
-    </div>
-    <form>
-      <input id="import-hsCourseInfo" type="file" name="HSCourseInfo" accept=".xls,.xlsx">
-      <button class="" {{action 'importHScourse'}}>
-    <i class="save icon"></i>
-    </button>
-    </form>
-  </div>
-
-  <div class="import-field ">
-    <div>
-      <h3 class="ui header">High Schools</h3>
-    </div>
-    <form>
-      <input id="import-HighSchools" type="file" name="High Schools" accept=".xls,.xlsx">
-      <button class="" {{action 'importHighSchools'}}>
-    <i class="save icon"></i>
-    </button>
-    </form>
-  </div>
-
-  <div class="import-field ">
-    <div>
-      <h3 class="ui header">Residencies</h3>
-    </div>
-    <form>
-      <input id="import-residencies" type="file" name="Residencies" accept=".xls,.xlsx">
-      <button class="" {{action 'importResidencies'}}>
-    <i class="save icon"></i>
-    </button>
-    </form>
-  </div>
-
-  <div class="import-field ">
-    <div>
-      <h3 class="ui header">Scholarships and Awards</h3>
-    </div>
-    <form>
-      <input id="import-ScholarshipsAwards" type="file" name="Scholarships and Awards" accept=".xls,.xlsx">
-      <button class="" {{action 'importScholarshipsAwards'}}>
-    <i class="save icon"></i>
-    </button>
-    </form>
-  </div>
-
-  <div class="import-field ">
-    <div>
-      <h3 class="ui header">Students</h3>
-    </div>
-    <form>
-      <input id="import-students" type="file" name="Students" accept=".xls,.xlsx">
-      <button class="" {{action 'importStudents'}}>
-    <i class="save icon"></i>
-    </button>
-
-    </form>
-  </div>
-
-  <div class="import-field ">
-    <div>
-      <h3 class="ui header">Undergraduate Courses</h3>
-    </div>
-    <form>
-      <input id="import-undergradCourses" type="file" name="Undergraduate Courses" accept=".xls,.xlsx">
-      <button class="" {{action 'importUndergradCourses'}}>
-    <i class="save icon"></i>
-    </button>
-
-    </form>
-  </div>
-
-  <div class="import-field ">
-    <div>
-      <h3 class="ui header">Undergraduate Record Plans</h3>
-    </div>
-    <form>
-      <input id="import-undergraduateRecordPlans" type="file" name="Undergraduate Record Plans" accept=".xls,.xlsx">
-      <button class="" {{action 'importRecordPlans'}}>
-    <i class="save icon"></i>
-    </button>
-
-    </form>
-  </div>
-
-  <div class="import-field ">
-    <div>
-      <h3 class="ui header">Undergraduate Record Courses</h3>
-    </div>
-    <form>
-      <input id="import-undergraduateRecordCourses" type="file" name="UndergraduaterecordCourses" accept=".xls,.xlsx">
-      <button class="" {{action 'importRecordCourses'}}>
-    <i class="save icon"></i>
-    </button>
-    </form>
-  </div>
-
-  <div class="import-field ">
-    <div>
-      <h3 class="ui header">Term Codes</h3>
-    </div>
-    <form>
-      <input id="import-termCords" type="file" name="Term Codes" accept=".xls,.xlsx">
-      <button class="" {{action 'importTermCodes'}}>
-    <i class="save icon"></i>
-    </button>
-    </form>
-  </div>
-</div>
+  {{/if}}
