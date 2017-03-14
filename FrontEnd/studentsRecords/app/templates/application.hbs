@@ -1,2 +1,15 @@
+{{#if oudaAuth.isAuthenticated }}
+  <div>
+   {{home-page}}
+  </div>
+{{else}}
+  <div>
+    {{#unless oudaAuth.getName}}
+      {{outlet "login"}}
+    {{/unless}}
+  </div>
+{{/if}}
 
-{{outlet}}
+
+
+<!-- TODO move home-page content (ie sidebar etc) to here
