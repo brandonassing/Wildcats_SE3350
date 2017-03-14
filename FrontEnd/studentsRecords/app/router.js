@@ -2,27 +2,29 @@ import Ember from 'ember';
 import config from './config/environment';
 
 const Router = Ember.Router.extend({
-    location: config.locationType,
-    rootURL: config.rootURL
+  location: config.locationType,
+  rootURL: config.rootURL
 });
 
-Router.map(function() {
-    /*this.route('posts');
-    this.route('about');
-    this.route('contact', function() {
-      this.route('phone');
-      this.route('email');
-    });
+Router.map(function () {
+  /*this.route('posts');
+  this.route('about');
+  this.route('contact', function() {
+    this.route('phone');
+    this.route('email');
+  });
 
-    this.route('post', {
-      path: 'posts/:post_id'
-    });
-    this.route('import');
-    this.route('admin-portal');
-    */
-    this.route('home');
-    this.route('login');
-    //this.route('user');
+  this.route('post', {
+    path: 'posts/:post_id'
+  });
+  this.route('import');
+  this.route('admin-portal');
+  */
+  this.route('home', {
+    path: '/'
+  });
+  this.route('login');
+  //this.route('user');
 });
 
 export default Router;

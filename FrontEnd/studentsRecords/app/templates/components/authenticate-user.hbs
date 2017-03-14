@@ -39,10 +39,10 @@
 
 <div id="login-box">
   <div id="login-header">
-    <h1 class="ui header">Western Engineering</h1>
-    <h2 class="ui header">Adjudication System</h2>
+    <img id="login-img" class="ui image" src="/assets/images/Engineer_Stacked_Reversed.png">
   </div>
   <div id="login-area">
+    <h2 class="ui header">Adjudication System Login</h2>
     <div class="ui form">
       <div class="field">
         {{input value=name type="text" placeholder="user name"}}
@@ -51,9 +51,9 @@
         {{input value=password type="password" placeholder="password"}}
       </div>
       <div class="field">
-        <button class="ui button large fluid green" {{action 'login'}}>
+        <a class="ui button" {{action 'login'}}>
             Log In
-          </button>
+          </a>
         <p> {{errorMessage}}</p>
       </div>
     </div>
