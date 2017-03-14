@@ -45,10 +45,10 @@
     <h2 class="ui header">Adjudication System Login</h2>
     <div class="ui form">
       <div class="field">
-        {{input value=name type="text" placeholder="user name"}}
+        {{input value=name type="text" placeholder="user name" action='login' autofocus="autofocus"}}
       </div>
       <div class="field">
-        {{input value=password type="password" placeholder="password"}}
+        {{input value=password type="password" placeholder="password" action='login'}}
       </div>
       <div class="field">
         <a class="ui button" {{action 'login'}}>
