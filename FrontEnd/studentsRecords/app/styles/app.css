@@ -1,77 +1,165 @@
-body{
-    background: #eee;
+body {
+  background: #eee;
 }
+
+
+/*==========LOGIN PAGE==========*/
+
+#login-background {
+  background-color: #2a2a2a;
+  height: 100vh;
+}
+
+#login-box {
+  background-color: white;
+  text-align: center;
+  width: 35vw;
+  height: 45vh;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-top: 10vh;
+}
+
+#login-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+#login-header {
+  padding: 20px;
+  background-color: #4F2683;
+  height: 15vh;
+}
+
+#login-area h2 {
+  font-size: 30px;
+  color: #EDEDED;
+}
+
+#login-area {
+  margin: 50px;
+  /*TODO figure out why margin-bottom doesn't work*/
+  padding-bottom: 50px;
+}
+
+#login-area h2 {
+  color: #2a2a2a;
+  padding-bottom: 20px;
+}
+
+
+/*==========LOGIN PAGE==========*/
+
 
 /*==========HOME PAGE===========*/
-#header{
-    padding:10px;
+
+#header {
+  padding: 10px;
 }
-#header-img{
-    padding: 20px;
+
+#header-img {
+  padding: 20px;
 }
-#header-img img{
-    height: 50%;
+
+#header-img img {
+  height: 50%;
 }
-#header-text{
-    text-align: center;
+
+#header-text {
+  text-align: center;
 }
-#header-text h1{
-    color: white;
+
+#header-text h1 {
+  color: white;
 }
-#header-text h2{
-    color: #EDEDED;
+
+#header-text h2 {
+  color: #EDEDED;
 }
-#menu-items{
-    margin-top: 50px;
+
+#header-text h3 {
+  color: #E4E4E4;
 }
-#main-content{
-    padding-top: 100px;
-    background-image: url(https://www.uwo.ca/web_standards/img/bkg/bigshield.gif);
-    background-repeat: no-repeat;
-    background-position: 50% 0;
-    color: #333;
-    font-size: 14px;
-    padding-bottom: 100px;
+
+#menu-items {
+  margin-top: 50px;
 }
-.titlebar{
-    background-color: #4F2683;
-    padding: 10px;
+
+#main-content {
+  height: 100vh;
+  padding-top: 100px;
+  /*TODO padding-bottom not working*/
+  padding-bottom: 100px;
+  background-image: url(https://www.uwo.ca/web_standards/img/bkg/bigshield.gif);
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  color: #333;
+  font-size: 14px;
 }
-.titlebar h3{
-    color : white;
-    font-size: 30px;
+
+.titlebar {
+  background-color: #4F2683;
+  padding: 10px;
 }
-.content-card{
-    background-color: white;
-    margin: 20px;
-    width: 65vw;
+
+.titlebar h3 {
+  color: white;
+  font-size: 30px;
 }
-.content-card .content{
-    /*TODO padding not working on bottom for some reason*/
-    padding: 20px;
+
+.content-card {
+  background-color: white;
+  margin: 20px;
+  width: 65vw;
 }
+
+.content-card .content {
+  /*TODO padding not working on bottom for some reason*/
+  padding: 20px;
+}
+
 
 /*==========HOME PAGE===========*/
 
-/*==========IMPORT COMPONENT===========*/
-.import-field{
-    padding: 20px;
-    background-color: #eee;
-    margin: 10px;
-}
+
 /*==========IMPORT COMPONENT===========*/
 
-/*==========SYSTEM CODE COMPONENT===========*/
-#edit-res-card.content-card, #edit-gen-card.content-card{
-    width: 30vw;
+.import-field {
+  padding: 20px;
+  background-color: #eee;
+  margin: 10px;
 }
+
+
+/*==========IMPORT COMPONENT===========*/
+
+
 /*==========SYSTEM CODE COMPONENT===========*/
+
+#edit-res-card.content-card,
+#edit-gen-card.content-card {
+  width: 30vw;
+}
+
+
+/*==========SYSTEM CODE COMPONENT===========*/
+
 
 /*==========WELCOME/ABOUT COMPONENT===========*/
-#welcome-card.content-card{
-    /*width: 30vw;*/
+
+#welcome-card.content-card {
+  /*width: 30vw;*/
 }
-#wildcats-logo{
-    width: 20vw;
+
+#wildcats-logo {
+  width: 20vw;
 }
+
+
 /*==========WELCOME/ABOUT COMPONENT===========*/

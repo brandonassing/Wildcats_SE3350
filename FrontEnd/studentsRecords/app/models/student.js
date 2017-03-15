@@ -14,7 +14,6 @@ export default DS.Model.extend({
   genInfo: DS.belongsTo('gender'),
   transInfo: DS.hasMany('standing'),
   awardInfo: DS.hasMany('award'),
-  //============ERROR
   highSchoolCourse: DS.hasMany('hs-course-grade'),
   term: DS.hasMany('term-code')
 });
