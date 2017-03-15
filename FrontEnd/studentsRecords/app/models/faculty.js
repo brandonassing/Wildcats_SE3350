@@ -2,6 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   name: DS.attr(),
-  term: DS.hasMany('term'),
+  assess: DS.belongsTo('assessment-code'),
+  faculty: DS.hasMany('department')
 
 });

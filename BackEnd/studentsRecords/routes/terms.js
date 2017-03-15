@@ -7,58 +7,61 @@ var parseJSON = bodyParser.json();
 
 router.route('/')
     .post(parseUrlencoded, parseJSON, function (request, response) {
-        var termCode = new models.TermCodes(request.body.termCode);
-        termCode.save(function (error) {
+        var term = new models.Terms(request.body.term);
+        term.save(function (error) {
             if (error) response.send(error);
-            response.json({termCode: termCode});
+            response.json({term: term});
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        var Terms = request.query.filter;
-        if (!Term) {
-            models.TermCodes.find(function (error, termCode) {
+        var Student = request.query.filter;
+        if (!Student) {
+            models.Terms.find(function (error, term) {
                 if (error) response.send(error);
-                response.json({termCode: termCodes});
+                response.json({term: terms});
             });
         } else {
-            models.Terms.find({"term": Term.term}, function (error, termCodes) {
+            models.Terms.find({"student": Student.student}, function (error, terms) {
                 if (error) response.send(error);
-                response.json({termCode: terms});
+                response.json({term: students});
             });
         }
     });
 
-router.route('/:termCode_id')
+router.route('/:term_id')
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        models.TermCodes.findById(request.params.termCode_id, function (error, termCode) {
+        models.Terms.findById(request.params.term_id, function (error, term) {
             if (error) response.send(error);
-            response.json({termCode: termCode});
+            response.json({term: term});
         })
     })
     .put(parseUrlencoded, parseJSON, function (request, response) {
-        models.TermCodes.findById(request.params.termCode_id, function (error, termCode) {
+        models.Terms.findById(request.params.term_id, function (error, term) {
             if (error) {
                 response.send({error: error});
             }
             else {
-                termCode.name = request.body.termCode.name;
-                termCode.term = request.body.termCode.term;
-                termCode.save(function (error) {
+                term.term = request.body.term.term;
+                term.program = request.body.term.program;
+                term.courseInfo = request.body.term.courseInfo;
+                term.student = request.body.term.student;
+                term.semester = request.body.term.semester;
+                term.save(function (error) {
                     if (error) {
                         response.send({error: error});
                     }
                     else {
-                        response.json({termCode: termCode});
+                        response.json({term: term});
                     }
                 });
             }
         })
     })
     .delete(parseUrlencoded, parseJSON, function (request, response) {
-        models.TermCodes.findByIdAndRemove(request.params.termCode_id,
+        models.Terms.findByIdAndRemove(request.params.term_id,
             function (error, deleted) {
                 if (!error) {
-                    response.json({termCode: deleted});
+                    response.json({term: deleted});
                 }
             }
         );

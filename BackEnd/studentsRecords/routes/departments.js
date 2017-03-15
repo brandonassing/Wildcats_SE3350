@@ -7,58 +7,59 @@ var parseJSON = bodyParser.json();
 
 router.route('/')
     .post(parseUrlencoded, parseJSON, function (request, response) {
-        var termCode = new models.TermCodes(request.body.termCode);
-        termCode.save(function (error) {
+        var department = new models.Departments(request.body.department);
+        department.save(function (error) {
             if (error) response.send(error);
-            response.json({termCode: termCode});
+            response.json({department: department});
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        var Terms = request.query.filter;
-        if (!Term) {
-            models.TermCodes.find(function (error, termCode) {
+        var Faculty = request.query.filter;
+        if (!Faculty) {
+            models.Departments.find(function (error, departments) {
                 if (error) response.send(error);
-                response.json({termCode: termCodes});
+                response.json({department: departments});
             });
         } else {
-            models.Terms.find({"term": Term.term}, function (error, termCodes) {
+            models.Departments.find({"faculty": Faculty.faculty}, function (error, facultys) {
                 if (error) response.send(error);
-                response.json({termCode: terms});
+                response.json({department: facultys});
             });
         }
     });
 
-router.route('/:termCode_id')
+router.route('/:department_id')
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        models.TermCodes.findById(request.params.termCode_id, function (error, termCode) {
+        models.Departments.findById(request.params.department_id, function (error, department) {
             if (error) response.send(error);
-            response.json({termCode: termCode});
+            response.json({department: department});
         })
     })
     .put(parseUrlencoded, parseJSON, function (request, response) {
-        models.TermCodes.findById(request.params.termCode_id, function (error, termCode) {
+        models.Departments.findById(request.params.department_id, function (error, department) {
             if (error) {
                 response.send({error: error});
             }
             else {
-                termCode.name = request.body.termCode.name;
-                termCode.term = request.body.termCode.term;
-                termCode.save(function (error) {
+                department.name = request.body.department.name;
+                department.faculty = request.body.department.faculty;                
+                department.dept = request.body.department.dept;
+                department.save(function (error) {
                     if (error) {
                         response.send({error: error});
                     }
                     else {
-                        response.json({termCode: termCode});
+                        response.json({department: department});
                     }
                 });
             }
         })
     })
     .delete(parseUrlencoded, parseJSON, function (request, response) {
-        models.TermCodes.findByIdAndRemove(request.params.termCode_id,
+        models.Departments.findByIdAndRemove(request.params.department_id,
             function (error, deleted) {
                 if (!error) {
-                    response.json({termCode: deleted});
+                    response.json({department: deleted});
                 }
             }
         );
