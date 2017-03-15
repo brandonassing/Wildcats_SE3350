@@ -7,24 +7,10 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function () {
-  /*this.route('posts');
-  this.route('about');
-  this.route('contact', function() {
-    this.route('phone');
-    this.route('email');
-  });
-
-  this.route('post', {
-    path: 'posts/:post_id'
-  });
-  this.route('import');
-  this.route('admin-portal');
-  */
   this.route('home', {
     path: '/'
   });
   this.route('login');
-  //this.route('user');
 });
 
 export default Router;

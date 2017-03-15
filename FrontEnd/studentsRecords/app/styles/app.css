@@ -92,13 +92,13 @@ body {
 }
 
 #main-content {
+  height: 100vh;
   padding-top: 100px;
   background-image: url(https://www.uwo.ca/web_standards/img/bkg/bigshield.gif);
   background-repeat: no-repeat;
   background-position: 50% 0;
   color: #333;
   font-size: 14px;
-  padding-bottom: 100px;
 }
 
 .titlebar {
