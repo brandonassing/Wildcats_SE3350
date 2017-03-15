@@ -1,25 +1,24 @@
-<div class="ui grid">
-    <div class="three wide column">
-        <div class="ui violet vertical pointing menu">
-            <a class="item active" {{action "manageUsers"}}>
-                <i class="large users icon"></i> Users Accounts
-            </a>
-            <a class="item" {{action "manageRoles"}}>
-                <i class="large list layout icon"></i> System Roles
-            </a>
-            <a class="item " {{action "manageFeatures"}}>
-                <i class="large lock icon"></i> System Features/Privileges
-            </a>
-        </div>
+<div id="man-users-card" class="ui content-card">
+    <div class="titlebar">
+        <h3 class="titlebar-header">Manage Users</h3>
     </div>
-    <div class="thirteen wide column ">
-        <div class="ui segment container">
-            {{#if isUsersShowing}}
-            <br> {{manage-users}} {{/if}} {{#if isRolesEditing }}
-
-            <br> {{manage-roles}} {{/if}} {{#if isFeaturesEditing }}
-
-            <br> {{manage-features}} {{/if}}
-        </div>
+    <div class="content">
+        {{manage-users}}
+    </div>
+</div>
+<div id="man-roles-card" class="ui content-card">
+    <div class="titlebar">
+        <h3 class="titlebar-header">Manage System Roles</h3>
+    </div>
+    <div class="content">
+        {{manage-roles}}
+    </div>
+</div>
+<div id="man-feats-card" class="ui content-card">
+    <div class="titlebar">
+        <h3 class="titlebar-header">Manage System Features</h3>
+    </div>
+    <div class="content">
+        {{manage-features}}
     </div>
 </div>
