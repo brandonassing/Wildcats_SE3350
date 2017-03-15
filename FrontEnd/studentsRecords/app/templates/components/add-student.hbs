@@ -19,10 +19,10 @@
         <label>Gender</label>
         <select required onchange={{action 'selectGender' value="target.value" }}>
           <option selected="selected">Select Gender</option>
-{{#each genderModel as |genderChoice|}}
-<option value={{genderChoice.id}} selected={{eq genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
-{{/each}}
-</select>
+          {{#each genderModel as |genderChoice|}}
+          <option value={{genderChoice.id}} selected={{eq genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
+          {{/each}}
+        </select>
       </div>
       <div class="inline field">
         <label>Date of Birth</label>
@@ -31,15 +31,22 @@
       <div class="inline field">
         <label>Residency</label>
         <select onchange={{action 'selectResidency' value="target.value" }}> 
-<option selected="selected">Select Residency</option>    
-{{#each residencyModel as |residencyChoice|}}
-<option value={{residencyChoice.id}} selected={{eq resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
-{{/each}}
-</select>
+          <option selected="selected">Select Residency</option>    
+          {{#each residencyModel as |residencyChoice|}}
+          <option value={{residencyChoice.id}} selected={{eq resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
+          {{/each}}
+        </select>
       </div>
-      <button class="ui button" {{action 'saveStudent'}}>
-    <i class="save icon"></i> Save
-  </button>
+      {{#if isEmpty}}
+        <button class="ui button" data-tooltip="Cannot save with empty fields" data-inverted=" " {{action 'highLightRed'}}>
+          <i class="save icon"></i> Save
+        </button>
+      {{else}}
+        <button class="ui button" {{action 'saveStudent'}}>
+          <i class="save icon"></i> Save
+        </button>
+      {{/if}}
+      
       <button class="ui button" {{action "exit"}}>Back</button>
     </div>
   </div>

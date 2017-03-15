@@ -54,7 +54,7 @@ export default Ember.Component.extend({
     deleteCourse(standing) {
       standing.set('student',null);
       standing.destroyRecord();
-      standing.save();
+      //standing.save();
       //console.log(standing.get('isDeleted'));
     },
     editCourse() {

@@ -16,6 +16,7 @@ export default Ember.Component.extend({
   selectedDate: null,
   //studentsRecords: null,
   studentPhoto: null,
+  isEmpty: true,
 
 
   studentModel: Ember.observer('offset', function () {
