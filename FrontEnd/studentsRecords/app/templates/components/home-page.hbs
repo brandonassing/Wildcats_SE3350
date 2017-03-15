@@ -26,6 +26,9 @@
     <a class="item" {{action "importStudentRecords"}}>
       <i class="upload icon"></i> Import Student Records
     </a>
+    <a class="item">{{action 'admin'}}
+      <i class="sign out icon"></i>Admin Portal
+    </a>
     <a class="item" {{action "logout"}}>
       <i class="sign out icon"></i> Log Out
     </a>
@@ -95,7 +98,17 @@
         {{import-students}}
       </div>
     </div>
+    {{/if}} {{#if isAdminShowing}}
+    <div id="import-card" class="ui content-card">
+      <div class="titlebar">
+        <h3 class="titlebar-header">Admin Portal</h3>
+      </div>
+      <div class="content">
+        {{system-administration}}
+      </div>
+    </div>
     {{/if}}
+
 
   </div>
 </div>
