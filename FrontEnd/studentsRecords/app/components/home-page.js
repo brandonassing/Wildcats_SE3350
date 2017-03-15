@@ -47,6 +47,7 @@ export default Ember.Component.extend({
   isImportRecordsShowing: false,
   isAdminShowing: false,
   isProfileShowing: false,
+  isAdjudicationShowing: false,
 
   actions: {
     logout() {
@@ -57,6 +58,7 @@ export default Ember.Component.extend({
       this.set('isAddStudShowing', false);
       this.set('isHomeShowing', true);
       this.set('isStudentsRecordsDataEntry', false);
+      this.set('isAdjudicationShowing',false);
       this.set('isEditSysShowing', false);
       this.set('isImportRecordsShowing', false);
       this.set('isAdminShowing', false);
@@ -67,6 +69,7 @@ export default Ember.Component.extend({
       this.set('isAddStudShowing', false);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', true);
+      this.set('isAdjudicationShowing',false);
       this.set('isEditSysShowing', false);
       this.set('isImportRecordsShowing', false);
       this.set('isAdminShowing', false);
@@ -77,6 +80,18 @@ export default Ember.Component.extend({
       this.set('isAddStudShowing', true);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
+      this.set('isAdjudicationShowing',false);
+      this.set('isEditSysShowing', false);
+      this.set('isImportRecordsShowing', false);
+      this.set('isAdminShowing', false);
+      this.set('isProfileShowing', false);
+    },
+
+    weAdjudication(){
+      this.set('isAddStudShowing', false);
+      this.set('isHomeShowing', false);
+      this.set('isStudentsRecordsDataEntry', false);
+      this.set('isAdjudicationShowing',true);
       this.set('isEditSysShowing', false);
       this.set('isImportRecordsShowing', false);
       this.set('isAdminShowing', false);
@@ -86,6 +101,7 @@ export default Ember.Component.extend({
       this.set('isAddStudShowing', false);
       this.set('isHomeShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
+      this.set('isAdjudicationShowing',false);
       this.set('isEditSysShowing', true);
       this.set('isImportRecordsShowing', false);
       this.set('isAdminShowing', false);
@@ -95,6 +111,7 @@ export default Ember.Component.extend({
       this.set('isImportRecordsShowing', true);
       this.set('isAddStudShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
+      this.set('isAdjudicationShowing',false);
       this.set('isHomeShowing', false);
       this.set('isEditSysShowing', false);
       this.set('isAdminShowing', false);
@@ -104,6 +121,7 @@ export default Ember.Component.extend({
       this.set('isImportRecordsShowing', false);
       this.set('isAddStudShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
+      this.set('isAdjudicationShowing',false);
       this.set('isHomeShowing', false);
       this.set('isEditSysShowing', false);
       this.set('isAdminShowing', true);
@@ -113,6 +131,7 @@ export default Ember.Component.extend({
       this.set('isImportRecordsShowing', false);
       this.set('isAddStudShowing', false);
       this.set('isStudentsRecordsDataEntry', false);
+      this.set('isAdjudicationShowing',false);
       this.set('isHomeShowing', false);
       this.set('isEditSysShowing', false);
       this.set('isAdminShowing', false);

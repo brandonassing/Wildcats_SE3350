@@ -16,6 +16,9 @@
     <a class="item" {{action "studentsDataEntry"}}>
       <i class="leanpub icon"></i> Student Records
     </a>
+    <a class="item" {{action "weAdjudication"}}>
+      <i class="book icon"></i>Adjudication
+    </a>
     <a class="item" {{action "editSystemCode"}}>
       <i class="code icon"></i> Edit System Code
     </a>
@@ -63,6 +66,15 @@
       </div>
       <div class="content">
         {{student-data-entry}}
+      </div>
+    </div>
+    {{/if}} {{#if isAdjudicationShowing}}
+    <div id="adjudication-card" class="ui content-card">
+      <div class="titlebar">
+        <h3 class="titlebar-header">Adjudication</h3>
+      </div>
+      <div class="content">
+        {{we-adjudication}}
       </div>
     </div>
     {{/if}} {{#if isAddStudShowing}}

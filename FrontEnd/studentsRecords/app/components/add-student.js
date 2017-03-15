@@ -16,7 +16,14 @@ export default Ember.Component.extend({
   selectedDate: null,
   //studentsRecords: null,
   studentPhoto: null,
-  isEmpty: true,
+  //isEmpty: true,
+  nullNumber:false,
+  nullFName:false,
+  nullLName: false,
+  nullGInfo:false,
+  nullResInfo: false,
+  nullDOB: false,
+
 
 
   studentModel: Ember.observer('offset', function () {
@@ -74,7 +81,15 @@ export default Ember.Component.extend({
       //I couldnt quickly come up with a better way to do this, but this big if statement works for now
       if ((this.get("number")) === null || (this.get("firstName")) === null || (this.get("lastName")) === null || (this.get("selectedDate")) === null || (this.get("genInfo.name")) === null || (this.get("resInfo.name")) === null) {
         window.alert("Sorry, you cannot create a student with empty values. \n Please ensure all fields have a value.");
+        
       }
+      if(this.get("number")===null){
+        this.set('nullNumber',true);
+      }
+      if(this.get("firstname")===null){
+        this.set('nullFName',true);    
+      }
+
 
 
 

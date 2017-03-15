@@ -6,12 +6,24 @@
 <div class="ui grid">
   <div class="ui right aligned seven wide column">
     <div class="ui form">
+      {{#if nullNumber}}
+      <div class="inline field error">
+        <label>Student Number</label> {{input size="10" type="text" value = number}}
+      </div>
+      {{else}}
       <div class="inline field">
         <label>Student Number</label> {{input size="10" type="text" value = number}}
       </div>
+      {{/if}}
+      {{#if nullFName}}
+      <div class="inline field error">
+        <label>First Name</label> {{input type="text" value = firstname}}
+      </div>
+      {{else}}
       <div class="inline field">
         <label>First Name</label> {{input type="text" value = firstname}}
       </div>
+      {{/if}}
       <div class="inline field">
         <label>Last Name</label> {{input required type="text" value = lastname}}
       </div>
@@ -41,6 +53,7 @@
         <button class="ui button" data-tooltip="Cannot save with empty fields" data-inverted=" " {{action 'highLightRed'}}>
           <i class="save icon"></i> Save
         </button>
+
       {{else}}
         <button class="ui button" {{action 'saveStudent'}}>
           <i class="save icon"></i> Save
