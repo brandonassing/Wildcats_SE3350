@@ -16,19 +16,18 @@
     <a class="item" {{action "studentsDataEntry"}}>
       <i class="leanpub icon"></i> Student Records
     </a>
-    <!--<a class="item" {{action "addStudent"}}>
-        <i class="add user icon"></i>
-        Add Student
-      </a>-->
     <a class="item" {{action "editSystemCode"}}>
       <i class="code icon"></i> Edit System Code
     </a>
+    {{#if ID001IsPermitted}}
     <a class="item" {{action "importStudentRecords"}}>
       <i class="upload icon"></i> Import Student Records
     </a>
+    {{/if}} {{#if ADM01IsPermitted }}
     <a class="item" {{action "admin"}}>
-      <i class="upload icon"></i> Admin Portal
+      <i class="settings icon"></i> Admin Portal
     </a>
+    {{/if}}
     <a class="item" {{action "logout"}}>
       <i class="sign out icon"></i> Log Out
     </a>

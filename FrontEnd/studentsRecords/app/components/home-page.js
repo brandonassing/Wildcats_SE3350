@@ -11,6 +11,23 @@ export default Ember.Component.extend({
     });
   },
 
+  ADM01IsPermitted: Ember.computed(function () { //Manage system roles
+    var authentication = this.get('oudaAuth');
+    if (authentication.getName === "Root") {
+      return true;
+    } else {
+      return (authentication.get('userCList').indexOf("ADM01") >= 0);
+    }
+  }),
+  ID001IsPermitted: Ember.computed(function () { //Manage system roles
+    var authentication = this.get('oudaAuth');
+    if (authentication.getName === "Root") {
+      return true;
+    } else {
+      return (authentication.get('userCList').indexOf("ID001") >= 0);
+    }
+  }),
+
   routing: Ember.inject.service('-routing'),
   store: Ember.inject.service(),
   name: null,
