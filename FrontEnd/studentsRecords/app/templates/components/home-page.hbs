@@ -97,16 +97,7 @@
         {{import-students}}
       </div>
     </div>
-    {{/if}} {{#if isAdminShowing}}
-    <div id="import-card" class="ui content-card">
-      <div class="titlebar">
-        <h3 class="titlebar-header">Admin Portal</h3>
-      </div>
-      <div class="content">
-        {{system-administration}}
-      </div>
-    </div>
-    {{/if}}
+    {{/if}} {{#if isAdminShowing}} {{system-administration}} {{/if}}
 
   </div>
 </div>
