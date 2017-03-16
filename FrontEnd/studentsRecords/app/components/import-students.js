@@ -44,6 +44,8 @@ export default Ember.Component.extend({
       this.set('tableData', data);
     },
 
+    
+
     done: function () {
       this.set('isLoading', false);
     },
