@@ -1,5 +1,10 @@
 import Ember from 'ember';
-import XLSX from 'xlsx';
+//import XLSX from 'xlsx';
+
+
+/* global XLSX */
+
+
 export default Ember.Component.extend({
 
   tableHeader: [],
@@ -7,10 +12,12 @@ export default Ember.Component.extend({
   isLoading: false,
 
   actions: {
-    
+
     fileImport: function (file) {
       this.set('isLoading', true);
-      var workbook = XLSX.read(file.data, {type: 'binary'});
+      var workbook = XLSX.read(file.data, {
+        type: 'binary'
+      });
       var row = 0;
       var col = null;
       var data = [];
@@ -19,17 +26,17 @@ export default Ember.Component.extend({
 
       var worksheet = workbook.Sheets[first_sheet_name];
       var size = 0;
-      for(var cellName in worksheet) { 
-        if(cellName[0] === '!'){
+      for (var cellName in worksheet) {
+        if (cellName[0] === '!') {
           continue;
         }
         row = cellName.slice(1) - 1;
         col = cellName.charCodeAt(0) - 65;
         data[size++] = [];
-        if(row === 0){
+        if (row === 0) {
           header[col] = worksheet[cellName].v;
 
-        } else{
+        } else {
           data[row][col] = worksheet[cellName].v;
         }
       }
@@ -37,7 +44,7 @@ export default Ember.Component.extend({
       this.set('tableData', data);
     },
 
-    done: function() { 
+    done: function () {
       this.set('isLoading', false);
     },
 
