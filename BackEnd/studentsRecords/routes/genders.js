@@ -4,7 +4,6 @@ var models = require('../models/studentsRecordsDB');
 var bodyParser = require('body-parser');
 var parseUrlencoded = bodyParser.urlencoded({extended: false});
 var parseJSON = bodyParser.json();
-var mongoxlsx = require('mongo-xlsx');
 
 router.route('/')
     .post(parseUrlencoded, parseJSON, function (request, response) {

@@ -207,7 +207,7 @@ var termSchema = mongoose.Schema({
     }]
 });
 
-var termCodes = mongoose.Schema({
+var termCodeSchema = mongoose.Schema({
     name: String,
     term: [{
         type: mongoose.Schema.ObjectId,
@@ -336,7 +336,7 @@ db.once('open', function () {
     exports.PlanCodes = PlanCodes;
     exports.TermCodes = TermCodes;
     exports.Terms = Terms;
-    exports.Adjudication = Adjudication;
+    exports.Adjudications = Adjudications;
     exports.AssessmentCodes = AssessmentCodes;
     exports.LogicalExpressions = LogicalExpressions;
     exports.Facultys = Facultys;
