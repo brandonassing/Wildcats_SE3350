@@ -47,8 +47,8 @@ studentsSchema.plugin(mongoosePaginate);
 var standingSchema = mongoose.Schema({
     course: String,
     description: String,
-    units: Number,
-    grade: Number,
+    units: String,
+    grade: String,
     location: String,
     student: {
         type: mongoose.Schema.ObjectId,
