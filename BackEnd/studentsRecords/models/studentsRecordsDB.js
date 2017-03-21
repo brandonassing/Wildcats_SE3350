@@ -34,8 +34,13 @@ var studentsSchema = mongoose.Schema({
     term: 
     [{
         type: mongoose.Schema.ObjectId,
-        ref: 'TermCodes'
-    }]
+        ref: 'Terms'
+    }],
+    adjudication:
+    [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Adjudications'
+    }],
 });
 studentsSchema.plugin(mongoosePaginate);
 
@@ -161,35 +166,131 @@ var courseCodeSchema = mongoose.Schema({
     },
     term:{
         type: mongoose.Schema.ObjectId,
-        ref: ('TermCode')
+        ref: ('Terms')
     }
 
 });
 
 var planCodeSchema = mongoose.Schema({
     name: String,
-    program:[{
+    program:{
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
-    }]
+    }
 });
 
-var termCodeSchema = mongoose.Schema({
-    name: String,
+var termSchema = mongoose.Schema({
     program:
     [{
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
     }],
-    courseInfo:[
-    {
+    courseInfo:
+    [{
         type: mongoose.Schema.ObjectId,
         ref: ('CourseCodes')
     }],
+    term:
+    {
+        type: mongoose.Schema.ObjectId,
+        ref: ('TermCodes')
+    },
     student:
     {
         type: mongoose.Schema.ObjectId,
         ref: ('Students')
+    },
+    semester:
+    [{
+        type: mongoose.Schema.ObjectId,
+        ref: ('Adjudications')
+    }]
+});
+
+var termCodeSchema = mongoose.Schema({
+    name: String,
+    term: [{
+        type: mongoose.Schema.ObjectId,
+        ref: ('Terms')
+    }]
+});
+
+var adjudicationSchema = mongoose.Schema({
+    date: String,
+    termAVG: String,
+    termUnitPassed: String,
+    termUnitsTotal: String,
+    note: String,
+    semester: {
+        type: mongoose.Schema.ObjectId,
+        ref: ('Terms')
+    },
+    student: {
+        type: mongoose.Schema.ObjectId,
+        ref: ('Students')
+    },
+    comment: {
+        type: mongoose.Schema.ObjectId,
+        ref: ('AssessmentCodes')
+    }
+});
+
+var assessmentCodeSchema = mongoose.Schema({
+    code: String,
+    name: String,
+    comment: [{
+        type: mongoose.Schema.ObjectId,
+        ref: ('Adjudications')
+    }],
+    testExpression: [{
+        type: mongoose.Schema.ObjectId,
+        ref: ('LogicalExpressions')
+    }],
+    assess: [{
+        type: mongoose.Schema.ObjectId,
+        ref: ('Facultys')
+    }]
+});
+
+var logicalExpressionSchema = mongoose.Schema({
+    booleanExp: String,
+    logicalLink: String,
+    testExpression: {
+        type: mongoose.Schema.ObjectId,
+        ref: ('AssessmentCodes')
+    }
+});
+
+var facultySchema = mongoose.Schema({
+    name: String,
+    assess: {
+        type: mongoose.Schema.ObjectId,
+        ref: ('AssessmentCodes')
+    },
+    faculty: [{
+        type: mongoose.Schema.ObjectId,
+        ref: ('Departments')
+    }]
+});
+
+var departmentSchema = mongoose.Schema({
+    name: String,
+    faculty: {
+        type: mongoose.Schema.ObjectId,
+        ref: ('Facultys')
+    },
+    dept: [{
+        type: mongoose.Schema.ObjectId,
+        ref: ('ProgramAdministrations')
+    }]
+});
+
+var programAdministrationSchema = mongoose.Schema({
+    name: String,
+    position: String,
+    dept: {
+        type: mongoose.Schema.ObjectId,
+        ref: ('Departments')
     }
 });
 
@@ -207,6 +308,13 @@ var ProgramRecords = mongoose.model('programRecord', programRecordSchema);
 var CourseCodes = mongoose.model('courseCode', courseCodeSchema);
 var PlanCodes = mongoose.model('planCode', planCodeSchema);
 var TermCodes = mongoose.model('termCode', termCodeSchema);
+var Terms = mongoose.model('term', termSchema);
+var Adjudications = mongoose.model('adjudication', adjudicationSchema);
+var AssessmentCodes = mongoose.model('assessmentCode', assessmentCodeSchema);
+var LogicalExpressions = mongoose.model('logicalExpression',logicalExpressionSchema);
+var Facultys = mongoose.model('faculty', facultySchema);
+var Departments = mongoose.model('department', departmentSchema);
+var ProgramAdministrations = mongoose.model('programAdministration', programAdministrationSchema);
 
 mongoose.connect('mongodb://main:main@ds139909.mlab.com:39909/se3350_wildcats');
 var db = mongoose.connection;
@@ -227,5 +335,12 @@ db.once('open', function () {
     exports.CourseCodes = CourseCodes;
     exports.PlanCodes = PlanCodes;
     exports.TermCodes = TermCodes;
+    exports.Terms = Terms;
+    exports.Adjudications = Adjudications;
+    exports.AssessmentCodes = AssessmentCodes;
+    exports.LogicalExpressions = LogicalExpressions;
+    exports.Facultys = Facultys;
+    exports.Departments = Departments;
+    exports.ProgramAdministrations = ProgramAdministrations;
 
 });

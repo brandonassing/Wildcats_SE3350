@@ -2,6 +2,6 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   name: DS.attr(),
-  term: DS.hasMany('term'),
-
+  faculty: DS.belongsTo('faculty'),
+  dept: DS.hasMany('program-administration')
 });

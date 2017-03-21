@@ -7,58 +7,59 @@ var parseJSON = bodyParser.json();
 
 router.route('/')
     .post(parseUrlencoded, parseJSON, function (request, response) {
-        var termCode = new models.TermCodes(request.body.termCode);
-        termCode.save(function (error) {
+        var faculty = new models.Facultys(request.body.faculty);
+        faculty.save(function (error) {
             if (error) response.send(error);
-            response.json({termCode: termCode});
+            response.json({faculty: faculty});
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        var Terms = request.query.filter;
-        if (!Term) {
-            models.TermCodes.find(function (error, termCode) {
+        var AssessmentCode = request.query.filter;
+        if (!AssessmentCode) {
+            models.Facultys.find(function (error, facultys) {
                 if (error) response.send(error);
-                response.json({termCode: termCodes});
+                response.json({faculty: facultys});
             });
         } else {
-            models.Terms.find({"term": Term.term}, function (error, termCodes) {
+            models.LogicalExpressions.find({"assessmentCode": AssessmentCode.assessmentCode}, function (error, assessmentCodes) {
                 if (error) response.send(error);
-                response.json({termCode: terms});
+                response.json({faculty: assessmentCodes});
             });
         }
     });
 
-router.route('/:termCode_id')
+router.route('/:faculty_id')
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        models.TermCodes.findById(request.params.termCode_id, function (error, termCode) {
+        models.Facultys.findById(request.params.faculty_id, function (error, faculty) {
             if (error) response.send(error);
-            response.json({termCode: termCode});
+            response.json({faculty: faculty});
         })
     })
     .put(parseUrlencoded, parseJSON, function (request, response) {
-        models.TermCodes.findById(request.params.termCode_id, function (error, termCode) {
+        models.Facultys.findById(request.params.faculty_id, function (error, faculty) {
             if (error) {
                 response.send({error: error});
             }
             else {
-                termCode.name = request.body.termCode.name;
-                termCode.term = request.body.termCode.term;
-                termCode.save(function (error) {
+                faculty.name = request.body.faculty.name;
+                faculty.assess = request.body.faculty.assess;
+                faculty.faculty = request.body.faculty.faculty;                
+                faculty.save(function (error) {
                     if (error) {
                         response.send({error: error});
                     }
                     else {
-                        response.json({termCode: termCode});
+                        response.json({faculty: faculty});
                     }
                 });
             }
         })
     })
     .delete(parseUrlencoded, parseJSON, function (request, response) {
-        models.TermCodes.findByIdAndRemove(request.params.termCode_id,
+        models.Facultys.findByIdAndRemove(request.params.faculty_id,
             function (error, deleted) {
                 if (!error) {
-                    response.json({termCode: deleted});
+                    response.json({faculty: deleted});
                 }
             }
         );

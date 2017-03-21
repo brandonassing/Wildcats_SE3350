@@ -30,10 +30,11 @@
     <a class="item" {{action "admin"}}>
       <i class="settings icon"></i> Admin Portal
     </a>
-    {{/if}}
+    {{/if}}{{#if (not-eq oudaAuth.getName "Root")}} {{#if EUP01IsPermitted }}
     <a class="item" {{action "profile"}}>
       <i class="settings icon"></i> Profile
     </a>
+    {{/if}}{{/if}}
     <a class="item" {{action "logout"}}>
       <i class="sign out icon"></i> Log Out
     </a>

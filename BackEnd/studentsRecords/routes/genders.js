@@ -28,6 +28,19 @@ router.route('/')
         }
     });
 
+router.route('/import')
+    .post(parseUrlencoded, parseJSON, function (request, response) {
+        model.Genders.remove({});
+        /*var model = null;
+        var xlsx = './genders.xlsx';
+        mongoxlsx.xlsx2MongoData(xlsx, model, function(err, data) {
+            model.Genders.insert(data, function(error, record) {
+            if (error) throw error;
+            console.log("data saved");*/
+          
+    });
+
+
 router.route('/:gender_id')
     .get(parseUrlencoded, parseJSON, function (request, response) {
         models.Genders.findById(request.params.gender_id, function (error, gender) {

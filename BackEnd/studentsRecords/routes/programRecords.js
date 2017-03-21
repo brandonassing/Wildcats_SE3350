@@ -14,16 +14,16 @@ router.route('/')
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        var TermCode = request.query.filter;
-        if (!TermCode) {
+        var Term = request.query.filter;
+        if (!Term) {
             models.ProgramRecords.find(function (error, programRecord) {
                 if (error) response.send(error);
                 response.json({programRecord: programRecords});
             });
         } else {
-            models.ProgramRecords.find({"termCode": TermCode.termCode}, function (error, termCodes) {
+            models.ProgramRecords.find({"term": Term.term}, function (error, terms) {
                 if (error) response.send(error);
-                response.json({programRecord: termCodes});
+                response.json({programRecord: terms});
             });
         }
     });
