@@ -89,6 +89,7 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
   <a class="item" data-tab="awards">Awards and Scholarships</a>
   <a class="item" data-tab="highschool">High School Records</a>
   <a class="item" data-tab="term">Term Records</a>
+  <a class="item" data-tab="adjudication">Adjudication</a>
 
 
 
@@ -265,12 +266,15 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
   {{term-record currentStudent = currentStudent}}
 </div>
 
-<!--
-<div class="ui tab" data-tab="others">
+<div class="ui bottom attached tab segment" data-tab="adjudication">
+  <div class="ui inverted violet segment">
+    <h2>
+      <center> {{currentStudent.firstName}} {{currentStudent.lastName}} : {{currentStudent.number}} </center>
+    </h2>
+  </div>
   
-  <h2>Other data</h2>
 </div>
-!-->
+      
 
 
 {{/if}}
