@@ -272,7 +272,6 @@ var facultySchema = mongoose.Schema({
         ref: ('Departments')
     }]
 });
-
 var departmentSchema = mongoose.Schema({
     name: String,
     faculty: {

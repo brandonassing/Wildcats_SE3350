@@ -288,9 +288,9 @@ export default Ember.Component.extend({
 
       console.log("Part3");
         data.forEach(function (row) {
-          if(row[1]) {
+          if(row[0]) {
             console.log("Part 5");
-            myStore.queryRecord('student', {filter: {number: row[1]}}).then(function (num) {
+            myStore.queryRecord('student', {filter: {number: row[0]}}).then(function (num) {
                 var newAdvancedStanding = myStore.createRecord('standing', {
                   course: row[1],
                   description: row[2],
