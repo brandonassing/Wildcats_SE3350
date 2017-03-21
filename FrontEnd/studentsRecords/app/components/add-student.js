@@ -59,27 +59,11 @@ export default Ember.Component.extend({
       self.set('genderModel', records);
     });
   },
-  actions: {
-    saveStudent() {
-
-      //TODO set default gender and residency
-      //ERROR bc of offset, all students: selecting first student in list doesn't work.
-      //ERROR offset in general throws everything off
-
-      this.set('resInfo', this.get('store').peekRecord('residency', this.get('selectedResidency')));
-      this.set("genInfo", this.get('store').peekRecord('gender', this.get('selectedGender')));
-
-      if (this.get("genInfo.name") === "Male") {
-        this.set('studentPhoto', "/assets/studentsPhotos/male.png");
-      } else if (this.get("genInfo.name") === "Female") {
-        this.set('studentPhoto', "/assets/studentsPhotos/female.png");
-      }
-
-
-
-      //modal for student with null values
+  nullCheck(){
+    //modal for student with null values
       if(this.get("number")===null){
         this.set('nullNumber',true);
+        console.log(this.get("number"));
       }else{
         this.set('nullNumber',false);
       }
@@ -114,6 +98,26 @@ export default Ember.Component.extend({
         this.set("nullResInfo",false);
       }
 
+  },
+  actions: {
+    saveStudent() {
+
+      //TODO set default gender and residency
+      //ERROR bc of offset, all students: selecting first student in list doesn't work.
+      //ERROR offset in general throws everything off
+
+      this.set('resInfo', this.get('store').peekRecord('residency', this.get('selectedResidency')));
+      this.set("genInfo", this.get('store').peekRecord('gender', this.get('selectedGender')));
+
+      if (this.get("genInfo.name") === "Male") {
+        this.set('studentPhoto', "/assets/studentsPhotos/male.png");
+      } else if (this.get("genInfo.name") === "Female") {
+        this.set('studentPhoto', "/assets/studentsPhotos/female.png");
+      }
+
+
+
+      this.nullCheck();
       if((this.get('nullNumber')===true)||(this.get('nullFName')===true)||(this.get('nullLName')===true)||(this.get('nullGInfo')===true)||(this.get('nullResInfo')===true)){
         $('#error-Modal').modal('show');
         return;

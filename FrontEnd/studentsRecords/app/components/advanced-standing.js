@@ -25,7 +25,8 @@ export default Ember.Component.extend({
   actions: {
     addCourse() {
       if(this.get("course")===null||this.get("description")===null||this.get("units")===null||this.get("grade")===null||this.get("location")===null){
-        window.alert("sorry, you cant add a course with empty values");
+        //window.alert("sorry, you cant add a course with empty values");
+        $('#error-modal').modal('show');
         return;
       }
       this.get("store").createRecord('standing', {
@@ -72,6 +73,9 @@ export default Ember.Component.extend({
     },
     cancelEdit() {
       this.set('isEditing', false);
+    },
+    closeErrorModal(){
+      $("#error-modal").modal('hide');
     }
 
 

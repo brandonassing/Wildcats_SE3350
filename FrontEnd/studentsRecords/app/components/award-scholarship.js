@@ -19,6 +19,11 @@ export default Ember.Component.extend({
 
   actions: {
     addAward() {
+      if(this.get("note")===null){
+        $('#error-modal').modal('show');
+        return;
+      }
+
       this.get("store").createRecord('award', {
         "note": this.get("note"),
         "student": this.get("currentStudent"),
@@ -37,6 +42,9 @@ export default Ember.Component.extend({
           .modal('show');
         this.set("deleteModalShowing", true);
       }
+    },
+    closeErrorModal(){
+      $('#error-modal').modal('hide');
     },
     deleteAward(thisAward) {
       thisAward.set('student', null);
