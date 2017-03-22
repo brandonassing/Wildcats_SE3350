@@ -1,108 +1,146 @@
-  {{#if isLoading}}
+ {{#if isLoading}}
 
-      <table class="ui celled table">
-        <thead>
-        <tr>
-          {{#each tableHeader as |header|}}
-            <th>{{header}}</th>
-          {{/each}}
-        </tr>
-        </thead>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      {{#each tableHeader as |header|}}
+      <th>{{header}}</th>
+      {{/each}}
+    </tr>
+  </thead>
 
-        <tbody>
-        {{#each tableData as |oneRow|}}
-          <tr>
-            {{#each oneRow as |oneCol|}}
-              <td>{{oneCol}}</td>
-            {{/each}}
-          </tr>
-        {{/each}}
-        </tbody>
-      </table>
-      <button class="ui button" {{action 'done'}}> Done</button>
+  <tbody>
+    {{#each tableData as |oneRow|}}
+    <tr>
+      {{#each oneRow as |oneCol|}}
+      <td>{{oneCol}}</td>
+      {{/each}}
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<button class="ui button" {{action 'done'}}> Done</button> {{else}}
+<div class="ui grid fluid">
+  <div class="column four wide import-item">
+    <h3>Gender</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="getGenderData" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Residency</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="getResidencyData" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Students</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="getStudentsData" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Advanced Standings</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="getAdvancedStandingData" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide item import-item">
+    <h3>High Schools</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="getHighSchoolData" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Awards</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="getAwardsData" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+       <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+  <div class="column four wide import-item">
+    <h3>Change Me!</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
 
-  {{else}}
-    <div>
-      <button class="ui button">{{#file-picker fileLoaded="getGenderData" accept=".xlsx" readAs="readAsBinaryString"}}
-        Gender
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="getResidencyData" accept=".xlsx" readAs="readAsBinaryString"}}
-        Residency
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="getStudentsData" accept=".xlsx" readAs="readAsBinaryString"}}
-        Students
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="getAdvancedStandingData" accept=".xlsx" readAs="readAsBinaryString"}}
-        Advanced Standing
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="getHighSchoolData" accept=".xlsx" readAs="readAsBinaryString"}}
-        High Schools
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="getAwardsData" accept=".xlsx" readAs="readAsBinaryString"}}
-        Awards
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-      <button class="ui button">{{#file-picker fileLoaded="fileImported" accept=".xlsx" readAs="readAsBinaryString"}}
-        Select Excel File
-      {{/file-picker}}</button>
-      <br>
-
-    </div>
-  {{/if}}
+</div>
+{{/if}}
