@@ -133,16 +133,10 @@ body {
 
 /*==========IMPORT COMPONENT===========*/
 
-.import-field {
-  padding: 20px;
-  background-color: #eee;
-  margin: 10px;
-}
-
 .import-item {
   margin: 5px;
   padding: 10px;
-  background-color: #d7d7d7;
+  background-color: #dbdbdb;
 }
 
 .import-item h3 {
