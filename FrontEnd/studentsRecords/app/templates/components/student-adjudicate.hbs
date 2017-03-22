@@ -1,0 +1,135 @@
+<div id="error-modal" class="ui basic modal">
+    <div class="ui icon header">
+        <i class="warning circle red icon"></i> Cannot save with empty values!
+        <div class="actions">
+            <div class="ui basic ok inverted button" {{action 'closeErrorModal'}}>
+                Ok
+            </div>
+        </div>
+    </div>
+</div>
+<h3>Adjudication Information</h3>
+<table class="ui celled table">
+    <tbody>
+        <tr>
+            <td>Date</td>
+            <td>Term Average</td>
+            <td>Term Units</td>
+            <td>Total Units</td>
+            <td>Notes</td>
+            <td>Semester</td>
+            <td>Action</td>
+        </tr>
+                {{#each currentStudent.adjudicationInfo as |adjudes|}} {{#if isEditing}}
+                <tr>
+                    <td>
+                        <div class="ui form">
+                            <div class="inline field">{{input type="text" value=adjudes.date}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            <div class="inline field">{{input type="text" value=adjudes.TermAVG}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            <div class="inline field">{{input type="text" value=adjudes.TermUnitPassed}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            <div class="inline field">{{input type="text" value=adjudes.TermUnitsTotal}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            <div class="inline field">{{input type="text" value=adjudes.note}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            <div class="inline field">{{input type="text" value=adjudes.semester}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="ui icon button" data-tooltip="Return" data-inverted=" " {{action 'cancelEdit' thisOne=adjudes.note}}>
+                            <i class="level up icon"></i>
+                        </button>
+                        <button class="ui icon button" data-tooltip="Save Comment" data-inverted=" " {{action 'saveComment' adjudes}}>
+                            <i class="save icon"></i>
+                        </button>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td>{{adjudes.date}}</td>
+                    <td>{{adjudes.TermAVG}}</td>
+                    <td>{{adjudes.TermUnitPassed}}</td>
+                    <td>{{adjudes.TermUnitsTotal}}</td>
+                    <td>{{adjudes.note}}</td>
+                    <td>{{adjudes.semester}}</td>
+                    <td>
+                        <button class="ui icon button" data-tooltip="Return" data-inverted=" " {{action 'cancelEdit' thisOne=awards.note}}>
+                            <i class="level up icon"></i>
+                        </button>
+                        <button class="ui icon button" data-tooltip="Save Comment" data-inverted=" " {{action 'saveAward' awards}}>
+                            <i class="save icon"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button class="ui icon button" data-tooltip="Edit Comment" data-inverted=" " {{action 'editAward' awards}}>
+                            <i class="edit icon"></i>
+                        </button>
+                    </td>
+                </tr>
+                {{/if}} {{else}}
+                <tr>
+                    <td>No comments on record</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {{/each}}
+                <tr>
+                    <td>
+                        <div class="ui form">
+                            {{input type="text" value = date}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            {{input type="text" value = TermAvg}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            {{input type="text" value = unitsPassed}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            {{input type="text" value = totalUnits}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            {{input type="text" value = note}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            {{input type="text" value = semester}}
+                        </div>
+                    </td>
+                    <td>
+                        <button class="ui icon button" data-tooltip="Add Comment" data-inverted=" " {{action 'addAdjudication'}}>
+                            <i class="plus icon"></i>
+                        </button>
+                    </td>
+                </tr>
+    </tbody>
+</table>
