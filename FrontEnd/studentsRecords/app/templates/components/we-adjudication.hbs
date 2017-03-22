@@ -3,11 +3,60 @@
     <a class="item" data-tab="categories">Categories</a>
 </div>
 <div class="ui bottom attached active tab segment" data-tab="adjudication">
-    <div class="ui grid">
-        <div class="ui form">
-            <label>Adjudication tab</label>
+    <table class="ui celled table">
+        <tbody>
+            {{#each assessmentCode as |aCode|}}
+            <tr>
+                <td>{{aCode.name}}</td>
+                <td>{{aCode.code}}</td>
+                <td>
+                    <button class="ui icon button" data-tooltip="Delete Award" data-inverted=" " {{action 'toggleDeleteModal' awards}}>
+            <i class="delete icon"></i>
+          </button>
+                    <!-- Delete modal -->
+                    <div id="delete-modal-award" class="ui small modal">
+                        <div class="header">
+                            Delete Award?
+                        </div>
+                        <div class="actions">
+                            <div class="ui red ok button" {{action 'deleteAssessment' awards}}>
+                                <i class="remove icon"></i> Delete
+                            </div>
+                            <div class="ui cancel button" {{action 'toggleDeleteModal'}}>
+                                Cancel
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Delete modal -->
+                    <button class="ui icon button" data-tooltip="Edit Award" data-inverted=" " {{action 'toggleEditModal' awards}}>
+            <i class="edit icon"></i>
+          </button>
+                </td>
+            </tr> {{else}}
+            <tr>
+                <td>No adjudication rules on record</td>
+                <td></td>
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+
+    <button class="ui icon button" data-tooltip="Add Assessment" data-inverted=" " {{action 'toggleAddModal'}}>
+            <i class="plus icon"></i>
+        </button>
+    <!-- Add modal -->
+    <div id="add-modal-adj" class="ui small modal">
+        <div class="header">
+            Add Assesment Rule
+        </div>
+        <div class="actions">
+            <div class="ui cancel button" {{action 'toggleAddModal'}}>
+                Cancel
+            </div>
         </div>
     </div>
+    <!-- Add modal -->
 </div>
 <div class="ui bottom attached tab segment" data-tab="categories">
     <div class="ui grid">
@@ -19,13 +68,6 @@
                     <br>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<div class="ui bottom attached tab segment" data-tab="manageRules">
-    <div class="ui grid">
-        <div class="ui form">
-            <label>rules tab</label>
         </div>
     </div>
 </div>
