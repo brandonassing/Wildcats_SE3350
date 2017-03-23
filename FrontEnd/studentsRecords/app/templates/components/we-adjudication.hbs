@@ -68,34 +68,21 @@
                     <div class="ui celled table">
                         <tbody>
                         <tr>
-                            <td>Category</td>
                             <td>Faculty</td>
                             <td>Department</td>
-                            <td>Administration</td>
+                            <td>Program Administration</td>
                             <td>Assesment Code</td>
-                            <td>Action</td>
                         </tr>
                         {{#each assessmentModel as |assessCodes|}}
                         <tr>
-                            <td class="four wide">
-                                {{assessCodes.name}}
-                            </td>
                             <td>
-                                {{assessCodes.assess.faculty}}
-                            </td>
-                            <td>
-                                {{assessCodes.assess.faculty.department}}
-                            </td>
-                            <td>
-                                {{assessCodes.assess.faculty.department.program-administration}}
-                            </td>
-                            <td class="one wide">
                                 {{assessCodes.code}}
                             </td>
-                            <td class="one wide">
-                                 <button class="ui icon button" data-tooltip="Add Course Code" data-inverted=" " {{action 'editCode'}}>
-                                    <i class="edit icon"></i>
-                                </button>
+                            <td>
+                                {{assessCodes.faculty.department}}
+                            </td>
+                            <td>
+                                {{assessCodes.faculty.department.program-administration}}
                             </td>
                         </tr>
                         {{/each}}

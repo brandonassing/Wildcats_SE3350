@@ -8,4 +8,3 @@ export default DS.Model.extend({
   assess: DS.hasMany('faculty')
 
 });
-
