@@ -35,8 +35,10 @@ export default Ember.Component.extend({
         this.set("deleteModalShowing", true);
       }
     },
-    deleteAssessment() {
-
+    deleteAssessment(thisCode) {
+      //TODO prob need to nullify references
+      //thisCode.set('student', null);
+      thisCode.destroyRecord();
     },
     toggleAddModal() {
       if (this.get("addModalShowing")) {
@@ -59,6 +61,9 @@ export default Ember.Component.extend({
           .modal('show');
         this.set("editModalShowing", true);
       }
+    },
+    deleteCode() {
+
     }
   }
 });
