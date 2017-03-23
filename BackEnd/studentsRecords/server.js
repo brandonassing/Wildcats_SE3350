@@ -14,6 +14,10 @@ var rolePermissions = require('./routes/rolePermissions');
 var roleCodes = require('./routes/roleCodes');
 var logins = require('./routes/logins');
 var userRoles = require('./routes/usersRoles');
+var assessmentCodes = require('./routes/assessmentCodes');
+var departments = require('./routes/departments');
+var faculties = require('./routes/faculties');
+var programAdministrations = require('./routes/programAdministrations');
 
 app.use(function(request, response, next) {
     response.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -34,6 +38,11 @@ app.use('/users', users);
 app.use('/passwords', passwords);
 app.use('/roleCodes', roleCodes);
 app.use('/userRoles', userRoles);
+app.use('/assessmentCodes',assessmentCodes);
+app.use('/departments',departments);
+app.use('/faculties',faculties);
+app.use('/programAdministrations',programAdministrations);
+
 app.use('/rolePermissions', rolePermissions);
 app.use('/logins', logins);
 app.use('/roots', roots);
