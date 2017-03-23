@@ -1,45 +1,100 @@
 <h2 style="text-align:center">Add new student</h2>
+<div id="error-Modal" class="ui basic modal">
+  <div class="ui icon header">
+        <i class="warning circle red icon"></i> Cannot save with empty values!
+        <div class="actions">
+          <div class="ui basic ok inverted button"{{action 'closeErrorModal'}}>
+            Ok
+            </div>
+        </div>
+  </div>
+</div>
 
-<!-- TODO add tabs for awards etc
-<div class="ui bottom attached active tab" data-tab="basics">
--->
 <div class="ui grid">
   <div class="ui right aligned seven wide column">
     <div class="ui form">
+      {{#if nullNumber}}
+      <div class="inline field error">
+        <label>Student Number</label> {{input size="10" type="text" value = number}}
+      </div>
+      {{else}}
       <div class="inline field">
         <label>Student Number</label> {{input size="10" type="text" value = number}}
       </div>
+      {{/if}}
+      {{#if nullFName}}
+      <div class="inline field error">
+        <label>First Name</label> {{input type="text" value = firstname}}
+      </div>
+      {{else}}
       <div class="inline field">
         <label>First Name</label> {{input type="text" value = firstname}}
       </div>
+      {{/if}}
+      {{#if nullLName}}
+      <div class="inline field error">
+        <label>Last Name</label> {{input required type="text" value = lastname}}
+      </div>
+      {{else}}
       <div class="inline field">
         <label>Last Name</label> {{input required type="text" value = lastname}}
       </div>
+      {{/if}}
+      {{#if nullGInfo}}
+      <div class="inline field error">
+        <label>Gender</label>
+        <select required onchange={{action 'selectGender' value="target.value" }}>
+          <option selected="selected">Select Gender</option>
+          {{#each genderModel as |genderChoice|}}
+          <option value={{genderChoice.id}} selected={{eq genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
+          {{/each}}
+        </select>
+      </div>
+      {{else}}
       <div class="inline field">
         <label>Gender</label>
         <select required onchange={{action 'selectGender' value="target.value" }}>
           <option selected="selected">Select Gender</option>
-{{#each genderModel as |genderChoice|}}
-<option value={{genderChoice.id}} selected={{eq genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
-{{/each}}
-</select>
+          {{#each genderModel as |genderChoice|}}
+          <option value={{genderChoice.id}} selected={{eq genInfo.id genderChoice.id}}>{{genderChoice.name}} </option>
+          {{/each}}
+        </select>
       </div>
+      {{/if}}
+      {{#if nullDOB}}
+      <div class="inline field error">
+        <label>Date of Birth</label>
+        <input value={{selectedDate}} type="date" onchange={{action 'assignDate' value="target.value" }}>
+      </div>
+      {{else}}
       <div class="inline field">
         <label>Date of Birth</label>
         <input value={{selectedDate}} type="date" onchange={{action 'assignDate' value="target.value" }}>
       </div>
+      {{/if}}
+      
+      {{#if nullResInfo}}
+      <div class="inline field error">
+        <label>Residency</label>
+        <select onchange={{action 'selectResidency' value="target.value" }}> 
+          <option selected="selected">Select Residency</option>    
+          {{#each residencyModel as |residencyChoice|}}
+          <option value={{residencyChoice.id}} selected={{eq resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
+          {{/each}}
+        </select>
+      </div>
+      {{else}}
       <div class="inline field">
         <label>Residency</label>
         <select onchange={{action 'selectResidency' value="target.value" }}> 
-<option selected="selected">Select Residency</option>    
-{{#each residencyModel as |residencyChoice|}}
-<option value={{residencyChoice.id}} selected={{eq resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
-{{/each}}
-</select>
+          <option selected="selected">Select Residency</option>    
+          {{#each residencyModel as |residencyChoice|}}
+          <option value={{residencyChoice.id}} selected={{eq resInfo.id residencyChoice.id}}>{{residencyChoice.name}} </option>
+          {{/each}}
+        </select>
       </div>
-      <button class="ui button" {{action 'saveStudent'}}>
-    <i class="save icon"></i> Save
-  </button>
+      {{/if}}    
+      <button class="ui button" {{action "saveStudent"}}>Save</button>
       <button class="ui button" {{action "exit"}}>Back</button>
     </div>
   </div>
