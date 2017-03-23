@@ -40,6 +40,20 @@ export default Ember.Component.extend({
       //thisCode.set('student', null);
       thisCode.destroyRecord();
     },
+    addAssessment() {
+      /*if (this.get("note") === null) {
+        $('#error-modal').modal('show');
+        return;
+      }*/
+      /*
+      this.get("store").createRecord('award', {
+        "note": this.get("note"),
+        "student": this.get("currentStudent"),
+
+      }).save().then(() => {
+        this.set("note", null);
+      });*/
+    },
     toggleAddModal() {
       if (this.get("addModalShowing")) {
         $('#add-modal-adj')
