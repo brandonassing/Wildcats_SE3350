@@ -248,7 +248,7 @@ var assessmentCodeSchema = mongoose.Schema({
     }],
     assess: [{
         type: mongoose.Schema.ObjectId,
-        ref: ('Facultys')
+        ref: ('Faculties')
     }]
 });
 
@@ -276,7 +276,7 @@ var departmentSchema = mongoose.Schema({
     name: String,
     faculty: {
         type: mongoose.Schema.ObjectId,
-        ref: ('Facultys')
+        ref: ('Faculties')
     },
     dept: [{
         type: mongoose.Schema.ObjectId,
@@ -311,7 +311,7 @@ var Terms = mongoose.model('term', termSchema);
 var Adjudications = mongoose.model('adjudication', adjudicationSchema);
 var AssessmentCodes = mongoose.model('assessmentCode', assessmentCodeSchema);
 var LogicalExpressions = mongoose.model('logicalExpression',logicalExpressionSchema);
-var Facultys = mongoose.model('faculty', facultySchema);
+var Faculties = mongoose.model('faculty', facultySchema);
 var Departments = mongoose.model('department', departmentSchema);
 var ProgramAdministrations = mongoose.model('programAdministration', programAdministrationSchema);
 
@@ -338,7 +338,7 @@ db.once('open', function () {
     exports.Adjudications = Adjudications;
     exports.AssessmentCodes = AssessmentCodes;
     exports.LogicalExpressions = LogicalExpressions;
-    exports.Facultys = Facultys;
+    exports.Faculties = Faculties;
     exports.Departments = Departments;
     exports.ProgramAdministrations = ProgramAdministrations;
 

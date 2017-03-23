@@ -7,36 +7,43 @@ var parseJSON = bodyParser.json();
 
 router.route('/')
     .post(parseUrlencoded, parseJSON, function (request, response) {
-        var faculty = new models.Facultys(request.body.faculty);
+        console.log('shrek1');
+        var faculty = new models.Faculties(request.body.faculty);
         faculty.save(function (error) {
             if (error) response.send(error);
             response.json({faculty: faculty});
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        var AssessmentCode = request.query.filter;
-        if (!AssessmentCode) {
-            models.Facultys.find(function (error, facultys) {
+        var Department = request.query.filter;
+        console.log('hello there');
+        if (!Department) {
+            console.log('hello again');
+            models.Faculties.find(function (error, faculties) {
                 if (error) response.send(error);
-                response.json({faculty: facultys});
+                response.json({faculty: faculties});
             });
         } else {
-            models.LogicalExpressions.find({"assessmentCode": AssessmentCode.assessmentCode}, function (error, assessmentCodes) {
+            console.log('you got queried');
+            models.Faculties.find({"department": Department.department}, function (error, departments) {
                 if (error) response.send(error);
-                response.json({faculty: assessmentCodes});
+                response.json({faculty: departments});
             });
         }
     });
 
 router.route('/:faculty_id')
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        models.Facultys.findById(request.params.faculty_id, function (error, faculty) {
+        console.log('shrek');
+        models.Faculties.findById(request.params.faculty_id, function (error, faculty) {
             if (error) response.send(error);
             response.json({faculty: faculty});
         })
     })
     .put(parseUrlencoded, parseJSON, function (request, response) {
-        models.Facultys.findById(request.params.faculty_id, function (error, faculty) {
+        console.log('shrek2');
+        models.Faculties.findById(request.params.faculty_id, function (error, faculty) {
+            console.log('donkey');
             if (error) {
                 response.send({error: error});
             }
@@ -56,7 +63,7 @@ router.route('/:faculty_id')
         })
     })
     .delete(parseUrlencoded, parseJSON, function (request, response) {
-        models.Facultys.findByIdAndRemove(request.params.faculty_id,
+        models.Faculties.findByIdAndRemove(request.params.faculty_id,
             function (error, deleted) {
                 if (!error) {
                     response.json({faculty: deleted});
