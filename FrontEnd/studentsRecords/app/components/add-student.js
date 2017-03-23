@@ -16,6 +16,15 @@ export default Ember.Component.extend({
   selectedDate: null,
   //studentsRecords: null,
   studentPhoto: null,
+  //isEmpty: true,
+  nullNumber:false,
+  nullFName:false,
+  nullLName: false,
+  nullGInfo:false,
+  nullResInfo: false,
+  nullDOB: false,
+  
+
 
 
   studentModel: Ember.observer('offset', function () {
@@ -50,11 +59,50 @@ export default Ember.Component.extend({
       self.set('genderModel', records);
     });
   },
+  nullCheck(){
+    //modal for student with null values
+      if(this.get("number")===null){
+        this.set('nullNumber',true);
+        console.log(this.get("number"));
+      }else{
+        this.set('nullNumber',false);
+      }
+
+      if(this.get("firstname")===null){
+        this.set('nullFName',true);
+      }else{
+        this.set('nullFName',false);
+      }
+
+      if(this.get("lastname")===null){
+        this.set('nullLName',true);
+      }else{
+        this.set('nullLName',false);
+      }
+
+      if(this.get("selectedGender")===null){
+        this.set("nullGInfo",true);
+      }else{
+        this.set("nullGInfo",false);
+      }
+
+      if(this.get("selectedDate")===null){
+        this.set("nullDOB",true);
+      }else{
+        this.set("nullDOB",false);
+      }
+
+      if(this.get("selectedResidency")===null){
+        this.set("nullResInfo",true);
+      }else{
+        this.set("nullResInfo",false);
+      }
+
+  },
   actions: {
     saveStudent() {
 
       //TODO set default gender and residency
-      //TODO don't allow save on null values
       //ERROR bc of offset, all students: selecting first student in list doesn't work.
       //ERROR offset in general throws everything off
 
@@ -69,15 +117,11 @@ export default Ember.Component.extend({
 
 
 
-      //ALERT FOR CREATING A NULL STUDENT
-      //I couldnt quickly come up with a better way to do this, but this big if statement works for now
-      if ((this.get("number")) === null || (this.get("firstName")) === null || (this.get("lastName")) === null || (this.get("selectedDate")) === null || (this.get("genInfo.name")) === null || (this.get("resInfo.name")) === null) {
-        window.alert("Sorry, you cannot create a student with empty values. \n Please ensure all fields have a value.");
+      this.nullCheck();
+      if((this.get('nullNumber')===true)||(this.get('nullFName')===true)||(this.get('nullLName')===true)||(this.get('nullGInfo')===true)||(this.get('nullResInfo')===true)){
+        $('#error-Modal').modal('show');
+        return;
       }
-
-
-
-      if (this.get("number") != null && this.get("firstname") != null && this.get("lastname") != null && this.get("selectedDate") != null && this.get("genInfo.name") != null && this.get("resInfo.name") != null) {
 
         this.get("store").createRecord('student', {
           "number": this.get("number"),
@@ -99,7 +143,6 @@ export default Ember.Component.extend({
 
         });
 
-      }
       /*
               window.alert(this.get("newStudent"));
             var updatedStudent = this.get('newStudent');
@@ -131,6 +174,9 @@ export default Ember.Component.extend({
 
     assignDate(date) {
       this.set('selectedDate', date);
+    },
+    closeErrorModal(){
+      $("#error-Modal").modal('hide');
     },
 
     exit() {

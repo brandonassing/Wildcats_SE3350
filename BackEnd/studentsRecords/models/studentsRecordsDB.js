@@ -26,18 +26,15 @@ var studentsSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Awards'
     }],
-    highSchoolCourse: 
-    [{
+    highSchoolCourse: [{
         type: mongoose.Schema.ObjectId,
         ref: 'HSCourseGrades'
     }],
-    term: 
-    [{
+    term: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Terms'
     }],
-    adjudication:
-    [{
+    adjudication: [{
         type: mongoose.Schema.ObjectId,
         ref: 'Adjudications'
     }],
@@ -82,8 +79,7 @@ var residencySchema = mongoose.Schema({
 
 var hsCourseGradeSchema = mongoose.Schema({
     mark: String,
-    source: 
-    {
+    source: {
         type: mongoose.Schema.ObjectId,
         ref: ('HighSchoolCourses')
     },
@@ -97,13 +93,11 @@ var highSchoolCourseSchema = mongoose.Schema({
     level: String,
     source: String,
     unit: String,
-    school:
-    {
+    school: {
         type: mongoose.Schema.ObjectId,
         ref: ('SecondarySchools')
     },
-    course:
-    {
+    course: {
         type: mongoose.Schema.ObjectId,
         ref: ('HighSchoolSubjects')
     },
@@ -115,7 +109,7 @@ var highSchoolCourseSchema = mongoose.Schema({
 
 var secondarySchoolSchema = mongoose.Schema({
     name: String,
-    highSchoolCourses:[{
+    highSchoolCourses: [{
         type: mongoose.Schema.ObjectId,
         ref: ('HighSchoolCourses')
     }]
@@ -124,7 +118,7 @@ var secondarySchoolSchema = mongoose.Schema({
 var highSchoolSubjectSchema = mongoose.Schema({
     name: String,
     description: String,
-    highSchoolCourses:[{
+    highSchoolCourses: [{
         type: mongoose.Schema.ObjectId,
         ref: ('HighSchoolCourses')
     }]
@@ -144,12 +138,11 @@ var programRecordSchema = mongoose.Schema({
     level: String,
     load: String,
     status: String,
-    term:[{
+    term: [{
         type: mongoose.Schema.ObjectId,
         ref: ('TermCodes')
     }],
-    plan:
-    [{
+    plan: [{
         type: mongoose.Schema.ObjectId,
         ref: ('PlanCodes')
     }]
@@ -164,7 +157,7 @@ var courseCodeSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: ('Grades')
     },
-    term:{
+    term: {
         type: mongoose.Schema.ObjectId,
         ref: ('Terms')
     }
@@ -173,35 +166,30 @@ var courseCodeSchema = mongoose.Schema({
 
 var planCodeSchema = mongoose.Schema({
     name: String,
-    program:{
+    program: {
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
     }
 });
 
 var termSchema = mongoose.Schema({
-    program:
-    [{
+    program: [{
         type: mongoose.Schema.ObjectId,
         ref: ('ProgramRecords')
     }],
-    courseInfo:
-    [{
+    courseInfo: [{
         type: mongoose.Schema.ObjectId,
         ref: ('CourseCodes')
     }],
-    term:
-    {
+    term: {
         type: mongoose.Schema.ObjectId,
         ref: ('TermCodes')
     },
-    student:
-    {
+    student: {
         type: mongoose.Schema.ObjectId,
         ref: ('Students')
     },
-    semester:
-    [{
+    semester: [{
         type: mongoose.Schema.ObjectId,
         ref: ('Adjudications')
     }]
@@ -300,7 +288,7 @@ var Standings = mongoose.model('standing', standingSchema);
 var Awards = mongoose.model('award', awardSchema);
 var HSCourseGrades = mongoose.model('hsCourseGrade', hsCourseGradeSchema);
 var HighSchoolCourses = mongoose.model('highSchoolCourse', highSchoolCourseSchema);
-var SecondarySchools = mongoose.model('secondarySchool',secondarySchoolSchema)
+var SecondarySchools = mongoose.model('secondarySchool', secondarySchoolSchema)
 var HighSchoolSubjects = mongoose.model('highSchoolSubject', highSchoolSubjectSchema);
 var Grades = mongoose.model('grade', gradeSchema);
 var ProgramRecords = mongoose.model('programRecord', programRecordSchema);
@@ -310,7 +298,7 @@ var TermCodes = mongoose.model('termCode', termCodeSchema);
 var Terms = mongoose.model('term', termSchema);
 var Adjudications = mongoose.model('adjudication', adjudicationSchema);
 var AssessmentCodes = mongoose.model('assessmentCode', assessmentCodeSchema);
-var LogicalExpressions = mongoose.model('logicalExpression',logicalExpressionSchema);
+var LogicalExpressions = mongoose.model('logicalExpression', logicalExpressionSchema);
 var Faculties = mongoose.model('faculty', facultySchema);
 var Departments = mongoose.model('department', departmentSchema);
 var ProgramAdministrations = mongoose.model('programAdministration', programAdministrationSchema);

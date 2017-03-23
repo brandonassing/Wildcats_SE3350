@@ -1,0 +1,46 @@
+<div class="ui top attached tabular menu">
+    <a class="active item" data-tab="adjudication">Adjudication Rules</a>
+    <a class="item" data-tab="categories">Categories</a>
+</div>
+<div class="ui bottom attached active tab segment" data-tab="adjudication">
+    <div class="ui grid">
+        <div class="ui form">
+            <h3>Adjudication tab</h3>
+        </div>
+    </div>
+</div>
+<div class="ui bottom attached tab segment" data-tab="categories">
+    <div class="ui grid">
+        <div class="ui form">
+            <div class="ten wide segment">
+                <div class="ui right aligned seven wide column">
+                <br>
+                    <div class="ui celled table">
+                        <tbody>
+                        <tr>
+                            <td>Faculty</td>
+                            <td>Department</td>
+                            <td>Program Administration</td>
+                            <td>Assesment Code</td>
+                        </tr>
+                        {{#each assessmentModel as |assessCodes|}}
+                        <tr>
+                            <td>
+                                {{assessCodes.code}}
+                            </td>
+                            <td>
+                                {{assessCodes.faculty.department}}
+                            </td>
+                            <td>
+                                {{assessCodes.faculty.department.program-administration}}
+                            </td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </div>
+                <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
