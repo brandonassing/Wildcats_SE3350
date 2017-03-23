@@ -52,6 +52,7 @@ export default Ember.Component.extend({
       this.set('tableData', data);
     },
 
+
     deleteGender: function () {
       var myStore = this.get('store');
       myStore.findAll('gender').then(function (genders) {
@@ -65,6 +66,15 @@ export default Ember.Component.extend({
     },
 
     getGenderData: function (file) {
+      var myStore = this.get('store');
+      myStore.findAll('gender').then(function (genders) {
+        genders.forEach(function (sex) {
+          sex.set('students', []);
+          sex.save().then(function () {
+            sex.destroyRecord();
+          });
+        });
+      });
       var workbook = XLSX.read(file.data, {type: 'binary'});
       var row = 0;
       var col = null;
@@ -116,6 +126,14 @@ export default Ember.Component.extend({
     },
 
     getResidencyData: function (file) {
+      this.get('store').findAll('residency').then(function (residencies) {
+        residencies.forEach(function (oneResidency) {
+          oneResidency.set('students', []);
+          oneResidency.save().then(function () {
+            oneResidency.destroyRecord();
+          });
+        });
+      });
       var workbook = XLSX.read(file.data, {type: 'binary'});
       var row = 0;
       var col = null;
@@ -171,6 +189,18 @@ export default Ember.Component.extend({
     },
 
     getStudentsData: function (file) {
+      this.get('store').findAll('student').then(function (students) {
+        students.forEach(function (oneStudent) {
+          oneStudent.set('residency', null);
+          oneStudent.set('gender', null);
+          oneStudent.set('advancedStanding', []);
+          oneStudent.set('scholarshipAndAward', []);
+          oneStudent.set('term', []);
+          oneStudent.save().then(function () {
+            oneStudent.destroyRecord();
+          });
+        });
+      });
       var workbook = XLSX.read(file.data, {type: 'binary'});
       var row = 0;
       var col = null;
@@ -201,6 +231,7 @@ export default Ember.Component.extend({
 
 
         data.forEach(function (row) {
+          console.log(row);
           if (row[0]) {
             myStore.queryRecord('gender', {filter: {name: row[3]}}).then(function (sex) {
               myStore.queryRecord('residency', {filter: {name: row[5]}}).then(function (res) {
@@ -237,56 +268,6 @@ export default Ember.Component.extend({
       });
     },
 
-    getTermCodesData: function (file) {
-      var workbook = XLSX.read(file.data, {type: 'binary'});
-      var row = 0;
-      var col = null;
-      var data = [];
-      var header = [];
-      var first_sheet_name = workbook.SheetNames[0];
-
-      /* Get worksheet */
-      var worksheet = workbook.Sheets[first_sheet_name];
-      var size = 0;
-      for (var cellName in worksheet) {
-        //all keys that do not begin with "!" correspond to cell addresses
-        if (cellName[0] === '!') {
-          continue;
-        }
-        row = cellName.slice(1) - 1;
-        col = cellName.charCodeAt(0) - 65;
-        data[size++] = [];
-        if (row === 0) {
-          header[col] = worksheet[cellName].v;
-        } else {
-          data[row][col] = worksheet[cellName].v;
-        }
-      }
-      this.set('tableHeader', header); //just in case I need it
-      this.set('tableData', data);
-
-      var myStore = this.get('store');
-        data.forEach(function (row) {
-          if (row[0]) {
-            var newCode = myStore.createRecord('termCode', {
-              name: row[0]
-            });
-            newCode.save();
-          }
-        });
-
-      this.set('isLoading', true);
-    },
-
-    done: function () {
-      this.set('isLoading', false);
-    },
-
-    cancel: function () {
-      this.get('routing').transitionTo('posts');
-    }
-
-  },
   deleteAdvancedStandings: function () {
       this.get('store').findAll('standing').then(function (standings) {
         standings.forEach(function (oneStanding) {
@@ -295,7 +276,7 @@ export default Ember.Component.extend({
           oneStanding.set('description', null);
           oneStanding.set('units', null);
           oneStanding.set('grade', null);
-          oneStanding.set('from', null);
+          oneStanding.set('location', null);
           oneStanding.save().then(function () {
             oneStanding.destroyRecord();
           });
@@ -303,7 +284,21 @@ export default Ember.Component.extend({
       });
     },
 
-    getAdvancedStandingData: function (file) {
+  getAdvancedStandingData: function (file) {
+    this.get('store').findAll('standing').then(function (standings) {
+        standings.forEach(function (oneStanding) {
+          oneStanding.set('student', null);
+          oneStanding.set('course', null);
+          oneStanding.set('description', null);
+          oneStanding.set('units', null);
+          oneStanding.set('grade', null);
+          oneStanding.set('location', null);
+          oneStanding.save().then(function () {
+            oneStanding.destroyRecord();
+          });
+        });
+      });
+      console.log ("Entered Advanced");
       var workbook = XLSX.read(file.data, {type: 'binary'});
       var row = 0;
       var col = null;
@@ -312,6 +307,7 @@ export default Ember.Component.extend({
       var first_sheet_name = workbook.SheetNames[0];
 
       /* Get worksheet */
+      console.log("Part2");
       var worksheet = workbook.Sheets[first_sheet_name];
       var size = 0;
       for (var cellName in worksheet) {
@@ -332,21 +328,23 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
-
+      console.log("Part3");
         data.forEach(function (row) {
-          if (row[0]) {
+          if(row[0]) {
+            console.log("Part 5");
             myStore.queryRecord('student', {filter: {number: row[0]}}).then(function (num) {
                 var newAdvancedStanding = myStore.createRecord('standing', {
-                  student: num,
                   course: row[1],
                   description: row[2],
                   units: row[3],
                   grade: row[4],
-                  from: row[5]
+                  location: row[5],
+                  student: num,
                 });
+                console.log("Part4");
                 newAdvancedStanding.save();
             });
-          }
+        }
         });
 
       this.set('isLoading', true);
@@ -365,51 +363,6 @@ export default Ember.Component.extend({
     },
 
     getAwardsData: function (file) {
-      var workbook = XLSX.read(file.data, {type: 'binary'});
-      var row = 0;
-      var col = null;
-      var data = [];
-      var header = [];
-      var first_sheet_name = workbook.SheetNames[0];
-
-      /* Get worksheet */
-      var worksheet = workbook.Sheets[first_sheet_name];
-      var size = 0;
-      for (var cellName in worksheet) {
-        //all keys that do not begin with "!" correspond to cell addresses
-        if (cellName[0] === '!') {
-          continue;
-        }
-        row = cellName.slice(1) - 1;
-        col = cellName.charCodeAt(0) - 65;
-        data[size++] = [];
-        if (row === 0) {
-          header[col] = worksheet[cellName].v;
-        } else {
-          data[row][col] = worksheet[cellName].v;
-        }
-      }
-      this.set('tableHeader', header); //just in case I need it
-      this.set('tableData', data);
-      var myStore = this.get('store');
-
-
-        data.forEach(function (row) {
-          if (row[0]) {
-            myStore.queryRecord('student', {filter: {number: row[0]}}).then(function (num) {
-                var newAward = myStore.createRecord('award', {
-                  student: num,
-                  note: row[1],
-                });
-                newAward.save();
-            });
-          }
-        });
-
-      this.set('isLoading', true);
-    },
-
-    deleteAwards: function () {
       this.get('store').findAll('award').then(function (awards) {
         awards.forEach(function (oneAward) {
           oneAward.set('student', null);
@@ -419,9 +372,6 @@ export default Ember.Component.extend({
           });
         });
       });
-    },
-
-    getAwardsData: function (file) {
       var workbook = XLSX.read(file.data, {type: 'binary'});
       var row = 0;
       var col = null;
@@ -467,7 +417,7 @@ export default Ember.Component.extend({
     },
 
     deleteCourseGrades: function () {
-      this.get('store').findAll('hsCourseGrade').then(function (awards) {
+      this.get('store').findAll('hsCourseGrade').then(function (hsCourseGrade) {
         hsCourseGrade.forEach(function (onehsCourseGrade) {
           onehsCourseGrade.set('student', null);
           onehsCourseGrade.set('source', null);
@@ -479,54 +429,7 @@ export default Ember.Component.extend({
       });
     },
 
-    gethsCourseGradeData: function (file) {
-      var workbook = XLSX.read(file.data, {type: 'binary'});
-      var row = 0;
-      var col = null;
-      var data = [];
-      var header = [];
-      var first_sheet_name = workbook.SheetNames[0];
-
-      /* Get worksheet */
-      var worksheet = workbook.Sheets[first_sheet_name];
-      var size = 0;
-      for (var cellName in worksheet) {
-        //all keys that do not begin with "!" correspond to cell addresses
-        if (cellName[0] === '!') {
-          continue;
-        }
-        row = cellName.slice(1) - 1;
-        col = cellName.charCodeAt(0) - 65;
-        data[size++] = [];
-        if (row === 0) {
-          header[col] = worksheet[cellName].v;
-        } else {
-          data[row][col] = worksheet[cellName].v;
-        }
-      }
-      this.set('tableHeader', header); //just in case I need it
-      this.set('tableData', data);
-      var myStore = this.get('store');
-
-
-        data.forEach(function (row) {
-          if (row[0]) {
-            myStore.queryRecord('student', {filter: {number: row[0]}}).then(function (num) {
-              myStore.queryRecord('hsCourseGrade', {filter: {source: row[4]}}), then(function (sourced) {
-                var newhsCourseGrade = myStore.createRecord('hsCourseGrade', {
-                  student: num,
-                  source: sourced,
-                  mark: row[7]
-                });
-                newhsCourseGrade.save();
-              });
-            });
-          }
-        });
-
-      this.set('isLoading', true);
-    },
-
+    
     deleteHighSchoolCourses: function () {
       this.get('store').findAll('highSchoolCourse').then(function (highSchoolCourses) {
         highSchoolCourses.forEach(function (oneHighSchoolCourse) {
@@ -543,59 +446,7 @@ export default Ember.Component.extend({
       });
     },
 
-    getHighSchoolCoursesData: function (file) {
-      var workbook = XLSX.read(file.data, {type: 'binary'});
-      var row = 0;
-      var col = null;
-      var data = [];
-      var header = [];
-      var first_sheet_name = workbook.SheetNames[0];
-
-      /* Get worksheet */
-      var worksheet = workbook.Sheets[first_sheet_name];
-      var size = 0;
-      for (var cellName in worksheet) {
-        //all keys that do not begin with "!" correspond to cell addresses
-        if (cellName[0] === '!') {
-          continue;
-        }
-        row = cellName.slice(1) - 1;
-        col = cellName.charCodeAt(0) - 65;
-        data[size++] = [];
-        if (row === 0) {
-          header[col] = worksheet[cellName].v;
-        } else {
-          data[row][col] = worksheet[cellName].v;
-        }
-      }
-      this.set('tableHeader', header); //just in case I need it
-      this.set('tableData', data);
-      var myStore = this.get('store');
-
-
-        data.forEach(function (row) {
-          if (row[0]) {
-            myStore.queryRecord('secondarySchool', {filter: { name: row[1]}}).then(function (named) {
-              myStore.queryRecord('highSchoolSubject', {filter: { name: row[3]}}).then(function (subs) {
-              myStore.queryRecord('hsCourseGrade', {filter: { mark: [7]}}).then(function (marked) {
-                var newhsCourse = myStore.createRecord('highSchoolCourse', {
-                  level: row[2],
-                  source: row[5],
-                  unit: row[6],
-                  school: named,
-                  course: subs,
-                  hsCourseGrades: marked
-
-                });
-                newhsCourse.save();
-            });
-              });
-            });
-          }
-        });
-
-      this.set('isLoading', true);
-    },
+    
 
     deleteHighSchool: function () {
       this.get('store').findAll('secondarySchool').then(function (highSchools) {
@@ -610,6 +461,15 @@ export default Ember.Component.extend({
     },
 
     getHighSchoolData: function (file) {
+      this.get('store').findAll('secondarySchool').then(function (highSchools) {
+        highSchools.forEach(function (oneHighSchool) {
+          oneHighSchool.set('name', null);
+          oneHighSchool.set('highSchoolCourses', []);
+          oneHighSchool.save().then(function () {
+            oneHighSchool.destroyRecord();
+          });
+        });
+      });
       var workbook = XLSX.read(file.data, {type: 'binary'});
       var row = 0;
       var col = null;
@@ -628,6 +488,7 @@ export default Ember.Component.extend({
         row = cellName.slice(1) - 1;
         col = cellName.charCodeAt(0) - 65;
         data[size++] = [];
+        console.log(data.length);
         if (row === 0) {
           header[col] = worksheet[cellName].v;
         } else {
@@ -640,10 +501,13 @@ export default Ember.Component.extend({
 
 
         data.forEach(function (row) {
+          console.log(row[0]);
           if (row[0]) {
                 var newHS = myStore.createRecord('secondarySchool', {
-                  name: row[0]
+                  name: row[0],
+                  
                 });
+                console.log("worked1");
                 newHS.save();
           }
         });
@@ -655,7 +519,7 @@ export default Ember.Component.extend({
       this.get('store').findAll('highSchoolSubject').then(function (highSchoolSubjects) {
         highSchoolSubjects.forEach(function (oneHighSchoolSubject) {
           oneHighSchoolSubject.set('name', null);
-          oneHighSchoolSubject.set('description', null)
+          oneHighSchoolSubject.set('description', null);
           oneHighSchoolSubject.set('highSchoolCourses', []);
           oneHighSchoolSubject.save().then(function () {
             oneHighSchoolSubject.destroyRecord();
@@ -664,54 +528,13 @@ export default Ember.Component.extend({
       });
     },
 
-    getHighSchoolData: function (file) {
-      var workbook = XLSX.read(file.data, {type: 'binary'});
-      var row = 0;
-      var col = null;
-      var data = [];
-      var header = [];
-      var first_sheet_name = workbook.SheetNames[0];
-
-      /* Get worksheet */
-      var worksheet = workbook.Sheets[first_sheet_name];
-      var size = 0;
-      for (var cellName in worksheet) {
-        //all keys that do not begin with "!" correspond to cell addresses
-        if (cellName[0] === '!') {
-          continue;
-        }
-        row = cellName.slice(1) - 1;
-        col = cellName.charCodeAt(0) - 65;
-        data[size++] = [];
-        if (row === 0) {
-          header[col] = worksheet[cellName].v;
-        } else {
-          data[row][col] = worksheet[cellName].v;
-        }
-      }
-      this.set('tableHeader', header); //just in case I need it
-      this.set('tableData', data);
-      var myStore = this.get('store');
-
-
-        data.forEach(function (row) {
-          if (row[0]) {
-                var newHSSub = myStore.createRecord('highSchoolSubject', {
-                  name: row[3],
-                  description: "NO DESCRIPTION"
-                });
-                newHSSub.save();
-          }
-        });
-
-      this.set('isLoading', true);
-    },
+    
 
     deleteAdjudication: function () {
       this.get('store').findAll('adjudication').then(function (adjudications) {
         adjudications.forEach(function (oneAdjudication) {
           oneAdjudication.set('date', null);
-          oneAdjudication.set('termAVG', null)
+          oneAdjudication.set('termAVG', null);
           oneAdjudication.set('termUnitPassed', null);
           oneAdjudication.set('termUnitsTotal', null);
           oneAdjudication.set('note',null);
@@ -723,6 +546,18 @@ export default Ember.Component.extend({
     },
 
     getAdjudication: function (file) {
+      this.get('store').findAll('adjudication').then(function (adjudications) {
+        adjudications.forEach(function (oneAdjudication) {
+          oneAdjudication.set('date', null);
+          oneAdjudication.set('termAVG', null);
+          oneAdjudication.set('termUnitPassed', null);
+          oneAdjudication.set('termUnitsTotal', null);
+          oneAdjudication.set('note',null);
+          oneAdjudication.save().then(function () {
+            oneAdjudication.destroyRecord();
+          });
+        });
+      });
       var workbook = XLSX.read(file.data, {type: 'binary'});
       var row = 0;
       var col = null;
@@ -775,7 +610,7 @@ export default Ember.Component.extend({
       this.get('store').findAll('assessmentCode').then(function (assessmentCodes) {
         assessmentCodes.forEach(function (oneAssess) {
           oneAssess.set('code', null);
-          oneAssess.set('name', null)
+          oneAssess.set('name', null);
           oneAssess.set('comment', []);
           oneAssess.set('testExpression', []);
           oneAssess.set('assess', []);
@@ -787,6 +622,18 @@ export default Ember.Component.extend({
     },
 
     getAssessCode: function (file) {
+      this.get('store').findAll('assessmentCode').then(function (assessmentCodes) {
+        assessmentCodes.forEach(function (oneAssess) {
+          oneAssess.set('code', null);
+          oneAssess.set('name', null);
+          oneAssess.set('comment', []);
+          oneAssess.set('testExpression', []);
+          oneAssess.set('assess', []);
+          oneAssess.save().then(function () {
+            oneAssess.destroyRecord();
+          });
+        });
+      });
       var workbook = XLSX.read(file.data, {type: 'binary'});
       var row = 0;
       var col = null;
@@ -830,10 +677,10 @@ export default Ember.Component.extend({
     },
 
     deleteFaculty: function () {
-      this.get('store').findAll('faculty').then(function (facultys) {
-        facultys.forEach(function (oneFaculty) {
+      this.get('store').findAll('faculty').then(function (faculties) {
+        faculties.forEach(function (oneFaculty) {
           oneFaculty.set('name', null);
-          oneFaculty.set('assess', null)
+          oneFaculty.set('assess', null);
           oneFaculty.set('faculty', []);
           oneFaculty.save().then(function () {
             oneFaculty.destroyRecord();
@@ -843,6 +690,16 @@ export default Ember.Component.extend({
     },
 
     getFaculty: function (file) {
+      this.get('store').findAll('faculty').then(function (faculties) {
+        faculties.forEach(function (oneFaculty) {
+          oneFaculty.set('name', null);
+          oneFaculty.set('assess', null);
+          oneFaculty.set('faculty', []);
+          oneFaculty.save().then(function () {
+            oneFaculty.destroyRecord();
+          });
+        });
+      });
       var workbook = XLSX.read(file.data, {type: 'binary'});
       var row = 0;
       var col = null;
@@ -877,7 +734,7 @@ export default Ember.Component.extend({
                 var newFaculty = myStore.createRecord('faculty', {
                   name: row[0]
                 });
-                newAssess.save();
+                newFaculty.save();
           }
         });
 
@@ -885,19 +742,30 @@ export default Ember.Component.extend({
     },
 
     deleteDepartment: function () {
+      console.log("Called to delete");
       this.get('store').findAll('department').then(function (departments) {
         departments.forEach(function (oneDepartment) {
           oneDepartment.set('name', null);
-          oneDepartment.set('faculty', null)
+          oneDepartment.set('faculty', null);
           oneDepartment.set('dept', []);
           oneDepartment.save().then(function () {
             oneDepartment.destroyRecord();
-          });
+          }); 
         });
       });
     },
 
     getDepartment: function (file) {
+      this.get('store').findAll('department').then(function (departments) {
+        departments.forEach(function (oneDepartment) {
+          oneDepartment.set('name', null);
+          oneDepartment.set('faculty', null);
+          oneDepartment.set('dept', []);
+          oneDepartment.save().then(function () {
+            oneDepartment.destroyRecord();
+          }); 
+        });
+      });
       var workbook = XLSX.read(file.data, {type: 'binary'});
       var row = 0;
       var col = null;
@@ -930,7 +798,7 @@ export default Ember.Component.extend({
         data.forEach(function (row) {
           if (row[0]) {
               myStore.queryRecord('faculty', {filter: { name: row[1]}}).then(function (named) {
-                var newDept = myStore.createRecord('assessmentCode', {
+                var newDept = myStore.createRecord('department', {
                   name: row[0],
                   faculty: named
                 });
@@ -942,11 +810,11 @@ export default Ember.Component.extend({
       this.set('isLoading', true);
     },
 
-    deleteDepartment: function () {
+    deleteProgramAdministration: function () {
       this.get('store').findAll('programAdministration').then(function (programAdministrations) {
         programAdministrations.forEach(function (oneProgAdmin) {
           oneProgAdmin.set('name', null);
-          oneProgAdmin.set('position', null)
+          oneProgAdmin.set('position', null);
           oneProgAdmin.set('dept', null);
           oneProgAdmin.save().then(function () {
             oneProgAdmin.destroyRecord();
@@ -956,6 +824,16 @@ export default Ember.Component.extend({
     },
 
     getProgramAdministration: function (file) {
+      this.get('store').findAll('programAdministration').then(function (programAdministrations) {
+        programAdministrations.forEach(function (oneProgAdmin) {
+          oneProgAdmin.set('name', null);
+          oneProgAdmin.set('position', null);
+          oneProgAdmin.set('dept', null);
+          oneProgAdmin.save().then(function () {
+            oneProgAdmin.destroyRecord();
+          });
+        });
+      });
       var workbook = XLSX.read(file.data, {type: 'binary'});
       var row = 0;
       var col = null;
@@ -1001,4 +879,433 @@ export default Ember.Component.extend({
       this.set('isLoading', true);
     },
 
+    getTermCodeData: function(file){
+      this.get('store').findAll('termCode').then(function (codes) {
+        codes.forEach(function (codes) {
+          codes.set('terms', []);
+          codes.save().then(function () {
+            codes.destroyRecord();
+          });
+        });
+      });
+      var workbook = XLSX.read(file.data, {type: 'binary'});
+      var row = 0;
+      var col = null;
+      var data = [];
+      var header = [];
+      var first_sheet_name = workbook.SheetNames[0];
+
+      /* Get worksheet */
+      var worksheet = workbook.Sheets[first_sheet_name];
+      var size = 0;
+      for (var cellName in worksheet) {
+        //all keys that do not begin with "!" correspond to cell addresses
+        if (cellName[0] === '!') {
+          continue;
+        }
+        row = cellName.slice(1) - 1;
+        col = cellName.charCodeAt(0) - 65;
+        data[size++] = [];
+        if (row === 0) {
+          header[col] = worksheet[cellName].v;
+        } else {
+          data[row][col] = worksheet[cellName].v;
+        }
+      }
+      this.set('tableHeader', header); //just in case I need it
+      this.set('tableData', data);
+      var myStore = this.get('store');
+
+
+        data.forEach(function (row) {
+          if (row[0]) {
+                var newTermCode = myStore.createRecord('termCode', {
+                  name: row[0],
+                });
+
+                newTermCode.save();
+          }
+        });
+
+      this.set('isLoading', true);
+
+    },
+
+    getUndergraduateRecordCourses: function(file){
+      this.get('store').findAll('courseCode').then(function (courseCodes) {
+        courseCodes.forEach(function (courseCodes) {
+          courseCodes.set('courseLetter', null);
+          courseCodes.set('courseNumber', null);
+          courseCodes.set('unit', null);
+          courseCodes.save().then(function () {
+            courseCodes.destroyRecord();
+          });
+        });
+      });
+
+      this.get('store').findAll('grade').then(function (grades) {
+        grades.forEach(function (grades) {
+          grades.set('mark', null);
+          grades.set('note', null);
+          grades.save().then(function () {
+            grades.destroyRecord();
+          });
+        });
+      });
+
+      var workbook = XLSX.read(file.data, {type: 'binary'});
+      var row = 0;
+      var col = null;
+      var data = [];
+      var header = [];
+      var first_sheet_name = workbook.SheetNames[0];
+
+      /* Get worksheet */
+      var worksheet = workbook.Sheets[first_sheet_name];
+      var size = 0;
+      for (var cellName in worksheet) {
+        //all keys that do not begin with "!" correspond to cell addresses
+        if (cellName[0] === '!') {
+          continue;
+        }
+        row = cellName.slice(1) - 1;
+        col = cellName.charCodeAt(0) - 65;
+        data[size++] = [];
+        if (row === 0) {
+          header[col] = worksheet[cellName].v;
+        } else {
+          data[row][col] = worksheet[cellName].v;
+        }
+      }
+      this.set('tableHeader', header); //just in case I need it
+      this.set('tableData', data);
+      var myStore = this.get('store');
+
+
+        data.forEach(function (row) {
+          if (row[0]) {
+            myStore.queryRecord('termCode', {filter: {name: row[1]}}).then(function (term) {
+              myStore.queryRecord('student', {filter: {number: row[0]}}).then(function (student) {
+                var newCourseCodes = myStore.createRecord('courseCode', {
+                  courseLetter: row[2],
+                  courseNumber: row[3],
+                  unit: row[4],
+                });
+                newCourseCodes.save();
+                var newGrades = myStore.createRecord('grade', {
+                  mark: row[5],
+                  note: row[6],
+                });
+                newGrades.save(); 
+              });
+            });
+          }
+        });
+
+      this.set('isLoading', true);
+
+    },
+
+    getUndergraduateRecordPlanData: function(file){
+      var workbook = XLSX.read(file.data, {type: 'binary'});
+      var row = 0;
+      var col = null;
+      var data = [];
+      var header = [];
+      var first_sheet_name = workbook.SheetNames[0];
+
+      /* Get worksheet */
+      var worksheet = workbook.Sheets[first_sheet_name];
+      var size = 0;
+      for (var cellName in worksheet) {
+        //all keys that do not begin with "!" correspond to cell addresses
+        if (cellName[0] === '!') {
+          continue;
+        }
+        row = cellName.slice(1) - 1;
+        col = cellName.charCodeAt(0) - 65;
+        data[size++] = [];
+        if (row === 0) {
+          header[col] = worksheet[cellName].v;
+        } else {
+          data[row][col] = worksheet[cellName].v;
+        }
+      }
+      this.set('tableHeader', header); //just in case I need it
+      this.set('tableData', data);
+      var myStore = this.get('store');
+
+
+        data.forEach(function (row) {
+          if(row[0]) {
+            myStore.queryRecord('student', {filter: {number: row[0]}}).then(function (num) {
+                myStore.queryRecord('termCode', {filter: {name: row[1]}}).then(function (tc) {
+                var programRecord = myStore.createRecord('programRecord', {
+                  name: row[2],
+                  level: row[3],
+                  load: row[4],
+                });
+                
+                programRecord.save(); 
+
+                var planCode = myStore.createRecord('planCode', {
+                  name: row[5],
+                });
+
+                planCode.save();
+              });
+            });
+        }
+        });
+
+      this.set('isLoading', true);
+
+    },
+
+    getHighSchoolCourseData: function(file) {
+      var workbook = XLSX.read(file.data, {type: 'binary'});
+      var row = 0;
+      var col = null;
+      var data = [];
+      var header = [];
+      var first_sheet_name = workbook.SheetNames[0];
+
+      /* Get worksheet */
+      var worksheet = workbook.Sheets[first_sheet_name];
+      var size = 0;
+      for (var cellName in worksheet) {
+        //all keys that do not begin with "!" correspond to cell addresses
+        if (cellName[0] === '!') {
+          continue;
+        }
+        row = cellName.slice(1) - 1;
+        col = cellName.charCodeAt(0) - 65;
+        data[size++] = [];
+        if (row === 0) {
+          header[col] = worksheet[cellName].v;
+        } else {
+          data[row][col] = worksheet[cellName].v;
+        }
+      }
+      this.set('tableHeader', header); //just in case I need it
+      this.set('tableData', data);
+      var myStore = this.get('store');
+
+
+        data.forEach(function (row) {
+          if(row[0]) {
+            myStore.queryRecord('student', {filter: {number: row[0]}}).then(function (num) {
+                myStore.queryRecord('secondarySchool', {filter: {name: row[1]}}).then(function (tc) {
+                  
+                var programRecord = myStore.createRecord('highSchoolSubject', {
+                  name: row[3],
+                  description: row[4],
+                });
+                programRecord.save(); 
+
+                myStore.queryRecord('highSchoolSubject', {filter: {name: row[3]}}).then(function (hs) {
+                    var hscourse = myStore.createRecord('highSchoolCourse', {
+                      level: row[2],
+                      source: row[5],
+                      unit: row[6],
+                      school: tc,
+                      course: hs,
+                    });
+                    hscourse.save();
+                    
+                });
+
+                myStore.queryRecord('highSchoolCourse', {filter: {source: row[5]}}).then(function (hscourse){
+                  var hscoursegrade = myStore.createRecord('hsCourseGrade',{
+                    mark: row[7],
+                    source: hscourse,
+                    student: num,
+                  });
+                  hscoursegrade.save();
+                });
+                
+                
+
+              });
+            });
+        }
+        });
+
+      this.set('isLoading', true);
+
+    },
+
+    getRegistrationComments: function (file) {
+      console.log ("Entered Advanced");
+      var workbook = XLSX.read(file.data, {type: 'binary'});
+      var row = 0;
+      var col = null;
+      var data = [];
+      var header = [];
+      var first_sheet_name = workbook.SheetNames[0];
+
+      /* Get worksheet */
+      console.log("Part2");
+      var worksheet = workbook.Sheets[first_sheet_name];
+      var size = 0;
+      for (var cellName in worksheet) {
+        //all keys that do not begin with "!" correspond to cell addresses
+        if (cellName[0] === '!') {
+          continue;
+        }
+        row = cellName.slice(1) - 1;
+        col = cellName.charCodeAt(0) - 65;
+        data[size++] = [];
+        if (row === 0) {
+          header[col] = worksheet[cellName].v;
+        } else {
+          data[row][col] = worksheet[cellName].v;
+        }
+      }
+      this.set('tableHeader', header); //just in case I need it
+      this.set('tableData', data);
+      var myStore = this.get('store');
+
+        data.forEach(function (row) {
+          if(row[0]) {
+            myStore.queryRecord('student', {filter: {number: row[0]}}).then(function (student) {
+                student.set('regComments', row[1]);
+                student.save();
+            });
+        }
+        });
+
+      this.set('isLoading', true);
+    },
+
+    getBasis: function (file) {
+      console.log ("Entered Advanced");
+      var workbook = XLSX.read(file.data, {type: 'binary'});
+      var row = 0;
+      var col = null;
+      var data = [];
+      var header = [];
+      var first_sheet_name = workbook.SheetNames[0];
+
+      /* Get worksheet */
+      console.log("Part2");
+      var worksheet = workbook.Sheets[first_sheet_name];
+      var size = 0;
+      for (var cellName in worksheet) {
+        //all keys that do not begin with "!" correspond to cell addresses
+        if (cellName[0] === '!') {
+          continue;
+        }
+        row = cellName.slice(1) - 1;
+        col = cellName.charCodeAt(0) - 65;
+        data[size++] = [];
+        if (row === 0) {
+          header[col] = worksheet[cellName].v;
+        } else {
+          data[row][col] = worksheet[cellName].v;
+        }
+      }
+      this.set('tableHeader', header); //just in case I need it
+      this.set('tableData', data);
+      var myStore = this.get('store');
+
+      data.forEach(function (row) {
+          if(row[0]) {
+            myStore.queryRecord('student', {filter: {number: row[0]}}).then(function (student) {
+                student.set('basis', row[1]);
+                student.save();
+            });
+        }
+        });
+
+      this.set('isLoading', true);
+    },
+
+    getAdmissionAverage: function (file) {
+      console.log ("Entered Advanced");
+      var workbook = XLSX.read(file.data, {type: 'binary'});
+      var row = 0;
+      var col = null;
+      var data = [];
+      var header = [];
+      var first_sheet_name = workbook.SheetNames[0];
+
+      /* Get worksheet */
+      console.log("Part2");
+      var worksheet = workbook.Sheets[first_sheet_name];
+      var size = 0;
+      for (var cellName in worksheet) {
+        //all keys that do not begin with "!" correspond to cell addresses
+        if (cellName[0] === '!') {
+          continue;
+        }
+        row = cellName.slice(1) - 1;
+        col = cellName.charCodeAt(0) - 65;
+        data[size++] = [];
+        if (row === 0) {
+          header[col] = worksheet[cellName].v;
+        } else {
+          data[row][col] = worksheet[cellName].v;
+        }
+      }
+      this.set('tableHeader', header); //just in case I need it
+      this.set('tableData', data);
+      var myStore = this.get('store');
+
+      data.forEach(function (row) {
+          if(row[0]) {
+            myStore.queryRecord('student', {filter: {number: row[0]}}).then(function (student) {
+                student.set('admissionAvg', row[1]);
+                student.save();
+            });
+        }
+        });
+
+      this.set('isLoading', true);
+    },
+
+    getAdmissionComments: function (file) {
+      console.log ("Entered Advanced");
+      var workbook = XLSX.read(file.data, {type: 'binary'});
+      var row = 0;
+      var col = null;
+      var data = [];
+      var header = [];
+      var first_sheet_name = workbook.SheetNames[0];
+
+      /* Get worksheet */
+      console.log("Part2");
+      var worksheet = workbook.Sheets[first_sheet_name];
+      var size = 0;
+      for (var cellName in worksheet) {
+        //all keys that do not begin with "!" correspond to cell addresses
+        if (cellName[0] === '!') {
+          continue;
+        }
+        row = cellName.slice(1) - 1;
+        col = cellName.charCodeAt(0) - 65;
+        data[size++] = [];
+        if (row === 0) {
+          header[col] = worksheet[cellName].v;
+        } else {
+          data[row][col] = worksheet[cellName].v;
+        }
+      }
+      this.set('tableHeader', header); //just in case I need it
+      this.set('tableData', data);
+      var myStore = this.get('store');
+
+      data.forEach(function (row) {
+          if(row[0]) {
+            myStore.queryRecord('student', {filter: {number: row[0]}}).then(function (student) {
+                student.set('admissionComments', row[1]);
+                student.save();
+            });
+        }
+        });
+
+      this.set('isLoading', true);
+    },
+
+  }
 });

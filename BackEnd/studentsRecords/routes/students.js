@@ -24,12 +24,27 @@ router.route('/')
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
+        var Standing = request.query.filter;
+        if(Standing != ""){
+            if(!Standing){
+                console.log('harry ftb');
+                models.Students.find(function (error, students){
+                    if(error) response.send(error);
+                    response.json({student: students});
+                });
+            } else{
+                console.log('rektd');
+                models.Students.find({"standing": Standing.standing}, function(error, standings){
+                    if(error) response.send(error);
+                    response.json({student: standings});
+                });
+            }
+        }
         if (typeof request.query.limit != "undefined" && typeof request.query.offset != "undefined") {
         var l = parseInt(request.query.limit);
         var o = parseInt(request.query.offset);
         var Student = request.query.student;
         if (!Student) {
-            console.log('yes1');
             //models.Students.find(function (error, students) {
             //    if (error) response.send(error);
             //    response.json({student: students});
@@ -41,10 +56,13 @@ router.route('/')
                 }); 
         
         }  else {
-            console.log('yes5');
             models.Students.find({"residency": {$regex : "^" + request.query.residency}}, function (error, students) {
                 if (error) response.send(error);
                 response.json({student: students});
+            });
+            models.Standings.find({"standing": Standing.standing}, function (error, standings) {
+                if (error) response.send(error);
+                response.json({student: standings});
             });
         } 
         }

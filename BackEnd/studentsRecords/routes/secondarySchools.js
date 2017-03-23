@@ -7,6 +7,7 @@ var parseJSON = bodyParser.json();
 
 router.route('/')
     .post(parseUrlencoded, parseJSON, function (request, response) {
+        console.log('worked');
         var secondarySchool = new models.SecondarySchools(request.body.secondarySchool);
         secondarySchool.save(function (error) {
             if (error) response.send(error);

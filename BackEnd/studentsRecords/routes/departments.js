@@ -14,16 +14,16 @@ router.route('/')
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        var Faculty = request.query.filter;
-        if (!Faculty) {
+        var ProgramAdministration = request.query.filter;
+        if (!ProgramAdministration) {
             models.Departments.find(function (error, departments) {
                 if (error) response.send(error);
                 response.json({department: departments});
             });
         } else {
-            models.Departments.find({"faculty": Faculty.faculty}, function (error, facultys) {
+            models.Departments.find({"programAdministration": ProgramAdministration.programAdministration}, function (error, programAdministrations) {
                 if (error) response.send(error);
-                response.json({department: facultys});
+                response.json({department: programAdministrations});
             });
         }
     });

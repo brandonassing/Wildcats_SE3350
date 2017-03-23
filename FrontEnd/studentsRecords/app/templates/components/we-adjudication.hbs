@@ -3,18 +3,68 @@
     <a class="item" data-tab="categories">Categories</a>
 </div>
 <div class="ui bottom attached active tab segment" data-tab="adjudication">
-    <div class="ui grid">
-        <div class="ui form">
-            <h3>Adjudication tab</h3>
+
+    <button class="ui icon button" data-tooltip="Add Assessment" data-inverted=" " {{action 'toggleAddModal'}}>
+            <i class="plus icon"></i>Add Assesment Rule
+        </button>
+    <!-- Add modal -->
+    <div id="add-modal-adj" class="ui small modal">
+        <div class="header">
+            Add Assesment Rule
+        </div>
+        <div class="actions">
+            <div class="ui cancel button" {{action 'toggleAddModal'}}>
+                Cancel
+            </div>
         </div>
     </div>
+    <!-- Add modal -->
+    <table class="ui celled table">
+        <tbody>
+            {{#each assessmentModel as |aCode|}}
+            <tr>
+                <td>{{aCode.name}}</td>
+                <td>{{aCode.code}}</td>
+                <td>
+                    <button class="ui icon button" data-tooltip="Delete Award" data-inverted=" " {{action 'toggleDeleteModal' aCode}}>
+            <i class="delete icon"></i>
+          </button>
+                    <!-- Delete modal -->
+                    <div id="delete-modal-adj" class="ui small modal">
+                        <div class="header">
+                            Delete Code?
+                        </div>
+                        <div class="actions">
+                            <div class="ui red ok button" {{action 'deleteAssessment' aCode}}>
+                                <i class="remove icon"></i> Delete
+                            </div>
+                            <div class="ui cancel button" {{action 'toggleDeleteModal'}}>
+                                Cancel
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Delete modal -->
+                    <button class="ui icon button" data-tooltip="Edit Award" data-inverted=" " {{action 'toggleEditModal' awards}}>
+            <i class="edit icon"></i>
+          </button>
+                </td>
+            </tr> {{else}}
+            <tr>
+                <td>No adjudication rules on record</td>
+                <td></td>
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+
 </div>
 <div class="ui bottom attached tab segment" data-tab="categories">
     <div class="ui grid">
         <div class="ui form">
             <div class="ten wide segment">
                 <div class="ui right aligned seven wide column">
-                <br>
+                    <br>
                     <div class="ui celled table">
                         <tbody>
                         <tr>
@@ -49,9 +99,10 @@
                             </td>
                         </tr>
                         {{/each}}
+
                         </tbody>
                     </div>
-                <br>
+                    <br>
                 </div>
             </div>
         </div>

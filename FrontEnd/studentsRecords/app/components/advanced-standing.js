@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+/* global $ */
+
 export default Ember.Component.extend({
   store: Ember.inject.service(),
   course: null,
@@ -57,7 +59,7 @@ export default Ember.Component.extend({
       }
     },
     deleteCourse(standing) {
-      standing.set('student',null);
+      standing.set('student', null);
       standing.destroyRecord();
       //standing.save();
       //console.log(standing.get('isDeleted'));

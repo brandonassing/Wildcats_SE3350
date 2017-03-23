@@ -16,5 +16,5 @@ export default DS.Model.extend({
   awardInfo: DS.hasMany('award'),
   highSchoolCourse: DS.hasMany('hs-course-grade'),
   term: DS.hasMany('term-code'),
-  adjudicationInfo: DS.hasMany('adjudication')
+  adjudication: DS.hasMany('adjudication')
 });
