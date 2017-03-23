@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+/* global $ */
+
 export default Ember.Component.extend({
   store: Ember.inject.service(),
   adjudicationModel: null,
@@ -10,13 +12,7 @@ export default Ember.Component.extend({
   deleteModalShowing: false,
   editModalShowing: false,
   addModalShowing: false,
-  init() {
-    this._super(...arguments);
-    var self = this;
-    this.get('store').findAll('assessment-code').then(function (records) {
-      self.set('assessmentModel', records);
-    });
-  },
+
   didRender() {
     Ember.$('.menu .item').tab();
   },
