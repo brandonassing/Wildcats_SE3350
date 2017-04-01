@@ -46,7 +46,7 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
     <i class="check circle green icon"></i> Edited {{currentStudent.firstName}} {{currentStudent.lastName}}
   </div>
   <div class="actions">
-    <div class="ui basic ok inverted button" {{action 'closeSaveModel'}}>
+    <div class="ui basic ok inverted button" {{action 'closeSaveModal'}}>
       Close
     </div>
   </div>
@@ -138,7 +138,7 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
 
     <!-- Show student photo -->
     <div class="ui center aligned four wide column">
-      <img src={{studentPhoto}}>
+      {{#unless studentPhoto }} <img src={{studentPhoto}}>{{/unless}}
     </div>
   </div>
 
@@ -274,7 +274,7 @@ showFindStudents}} {{find-student INDEX = currentIndex notDONE = showFindStudent
   </div>
   {{student-adjudicate currentStudent = currentStudent}}
 </div>
-      
+
 
 
 {{/if}}
