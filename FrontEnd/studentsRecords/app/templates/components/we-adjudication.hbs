@@ -13,6 +13,8 @@
             Add Assesment Rule
         </div>
         <div class="content">
+            <h3>Adjudication Rule Expressions</h3>
+
         </div>
         <div class="actions">
             <div class="ui cancel button" {{action 'addAssessment'}}>
@@ -49,7 +51,7 @@
                         </div>
                     </div>
                     <!-- Delete modal -->
-                    <button class="ui icon button" data-tooltip="Edit Award" data-inverted=" " {{action 'toggleEditModal' awards}}>
+                    <button class="ui icon button" data-tooltip="Edit Award" data-inverted=" " {{action 'toggleEditModal' aCode}}>
             <i class="edit icon"></i>
           </button>
                 </td>
@@ -72,25 +74,25 @@
                     <br>
                     <div class="ui celled table">
                         <tbody>
-                        <tr>
-                            <td>Faculty</td>
-                            <td>Department</td>
-                            <td>Program Administration</td>
-                            <td>Assesment Code</td>
-                        </tr>
-                        {{#each assessmentModel as |assessCodes|}}
-                        <tr>
-                            <td>
-                                {{assessCodes.code}}
-                            </td>
-                            <td>
-                                {{assessCodes.faculty.department}}
-                            </td>
-                            <td>
-                                {{assessCodes.faculty.department.program-administration}}
-                            </td>
-                        </tr>
-                        {{/each}}
+                            <tr>
+                                <td>Faculty</td>
+                                <td>Department</td>
+                                <td>Program Administration</td>
+                                <td>Assesment Code</td>
+                            </tr>
+                            {{#each assessmentModel as |assessCodes|}}
+                            <tr>
+                                <td>
+                                    {{assessCodes.code}}
+                                </td>
+                                <td>
+                                    {{assessCodes.faculty.department}}
+                                </td>
+                                <td>
+                                    {{assessCodes.faculty.department.program-administration}}
+                                </td>
+                            </tr>
+                            {{/each}}
 
                         </tbody>
                     </div>

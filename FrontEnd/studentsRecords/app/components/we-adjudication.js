@@ -12,6 +12,7 @@ export default Ember.Component.extend({
   deleteModalShowing: false,
   editModalShowing: false,
   addModalShowing: false,
+  thisModel: null,
 
   didRender() {
     Ember.$('.menu .item').tab();
