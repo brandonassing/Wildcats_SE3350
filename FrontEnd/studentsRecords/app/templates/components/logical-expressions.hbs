@@ -1,0 +1,30 @@
+<h3>Adjudication Rule Expressions</h3>
+{{#each thisModel.testExpression as |expression|}}{{else}}No logical expressions{{/each}}
+<br>
+<br>
+<br>
+<div class="ui form">
+
+    <div class="inline field">
+        <label>Parameter</label>
+        <select id="operator-dropdown" class="ui dropdown" required onchange={{action 'selectOperator' value="target.value" }}>
+    <option value="">Select Parameter</option>
+    {{#each operators as |op|}}
+    <option value={{op}}>{{op}}</option>
+    {{/each}}
+        </select>
+
+        <label>Boolean Operator</label>
+        <select id="operator-dropdown" class="ui dropdown" required onchange={{action 'selectOperator' value="target.value" }}>
+    <option value="">Select Operator</option>
+    {{#each operators as |op|}}
+    <option value={{op}}>{{op}}</option>
+    {{/each}}
+        </select>
+
+        <label>Value</label> {{input type="text" value = expValue}}
+    </div>
+    <button class="ui icon button" {{action 'addExpression'}}>
+    <i class="plus icon"></i>Add Expression
+</button>
+</div>

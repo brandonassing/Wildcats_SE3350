@@ -64,8 +64,7 @@
                             <div class="ui form warning">
                                 <div class="inline field">{{textarea type="text" value=thisModel.name}}</div>
                             </div>
-                            <h3>Adjudication Rule Expressions</h3>
-                            {{#each thisModel.testExpression as |expression|}}{{else}}No logical expressions{{/each}}
+                            {{logical-expressions thisModel = thisModel}}
                         </div>
                         <div class="actions">
                             <div class="ui cancel button" {{action 'editAssessment'}}>

@@ -4,10 +4,10 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   residencyName: null,
   residencyModel: null,
-  resInfo:null,
+  resInfo: null,
   selectedResidency: null,
   deletable: false,
-init() {
+  init() {
     this._super(...arguments);
     var self = this;
     this.get('store').findAll('residency').then(function (records) {
@@ -25,19 +25,17 @@ init() {
         });
       }
     },
-    deleteResidency(){
+    deleteResidency() {
 
       ///TODO STILL GETS ERRORS
 
+      if (this.get("deletable")) {
+        this.get("store").findRecord('residency', this.get("resInfo.id")).then(function (res) {
+          res.destroyRecord();
+          //res.save();
+        });
 
-    if (this.get("deletable")){
-    this.get("store").findRecord('residency',  this.get("resInfo.id")
-    ).then(function (res) {
-    res.destroyRecord();
-    //res.save();
-});
-
-    this.set('deletable', false);
+        this.set('deletable', false);
       }
     },
     selectResidency(residency) {
@@ -45,14 +43,12 @@ init() {
 
       //TODO: maybe move this? idk
       this.set("resInfo", this.get('store').peekRecord('residency', this.get('selectedResidency')));
-      if(this.get('resInfo') != null){
+      if (this.get('resInfo') != null) {
         this.set("deletable", true);
-      }
-      else{
+      } else {
         this.set("deletable", false);
       }
     }
-    
+
   }
 });
-

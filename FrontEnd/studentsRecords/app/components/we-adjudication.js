@@ -81,9 +81,6 @@ export default Ember.Component.extend({
         this.set("editModalShowing", true);
         this.set("thisModel", thisCode);
       }
-    },
-    deleteCode() {
-
     }
   }
 });
