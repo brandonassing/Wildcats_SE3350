@@ -4,21 +4,21 @@
     <div class="content">
         <div class="ui form">
             <div class="inline field">
-                <label>First Name</label> {{input value=userRecord.firstName type="text" placeholder="enter first name" }}
+                <label>First Name</label> {{input value=userRecord.firstName type="text" placeholder="Enter first name" }}
             </div>
             <div class="inline field">
-                <label>Last Name</label> {{input value=userRecord.lastName type="text" placeholder="enter last name"}}
+                <label>Last Name</label> {{input value=userRecord.lastName type="text" placeholder="Enter last name"}}
             </div>
             <div class="inline field">
-                <label>EMail Address</label> {{input value=userRecord.email type="text" placeholder="enter email address"}}
+                <label>EMail Address</label> {{input value=userRecord.email type="text" placeholder="Enter email address"}}
             </div>
             <div class="inline field">
-                <label>User Name</label>
-                <input value={{userName}} type="text" placeholder="enter user name">
+                <label>Username</label>
+                <input value={{userName}} type="text" placeholder="Enter username">
             </div>
             {{#if isResettingPassword }} {{#if EU002IsPermitted}}
             <div class="inline field">
-                <label>Temp. Password</label> {{input value=tempPassword type="text" placeholder="enter temporary password"}}
+                <label>Temp. Password</label> {{input value=tempPassword type="text" placeholder="Enter temporary password"}}
                 <button class="ui button" {{action 'cancelResetPassword'}}>Cancel</button>
             </div>
             {{else}}

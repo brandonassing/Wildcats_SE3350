@@ -4,7 +4,9 @@ export default Ember.Component.extend({
   thisCode: null,
   logicalModel: null,
   operators: ["==", "!=", ">", "<", ">=", "<="],
+  parameters: ["Weighted Average", "Overall Average"],
   selectedOperator: null,
+  selectedParameter: null,
   expValue: null,
 
   init() {
@@ -21,7 +23,13 @@ export default Ember.Component.extend({
           
       }).save().then(() => {
       this.get("thisCode").save();
+      this.set("selectedOperator", null);
+      this.set("selectedParameter", null);
+      this.set("expValue", null);
       });*/
+    },
+    selectParameter(par) {
+      this.set("selectedParameter", par);
     },
     selectOperator(op) {
       this.set("selectedOperator", op);

@@ -2,30 +2,30 @@
     <h3 align="center">Modify User Profile for {{getUser}} {{userProfile.firstName}} {{userProfile.lastName}}</h3>
     <div class="ui form">
         <div class="inline field">
-            <label class="right">First Name</label> {{input value=userProfile.firstName type="text" placeholder="enter first
+            <label class="right">First Name</label> {{input value=userProfile.firstName type="text" placeholder="Enter first
             name" }}
         </div>
         <div class="inline field">
-            <label class="right">Last Name</label> {{input value=userProfile.lastName type="text" placeholder="enter last
+            <label class="right">Last Name</label> {{input value=userProfile.lastName type="text" placeholder="Enter last
             name"}}
         </div>
 
         <div class="inline field">
-            <label class="right">EMail Address</label> {{input value=userProfile.email type="text" placeholder="enter email
+            <label class="right">EMail Address</label> {{input value=userProfile.email type="text" placeholder="Enter email
             address"}}
         </div>
 
         {{#if isChangingPassword }}
         <div class="inline field">
-            <label class="right">Old Password</label> {{input value=oldPassword type="password" placeholder="enter old password"}}
+            <label class="right">Old Password</label> {{input value=oldPassword type="password" placeholder="Enter old password"}}
         </div>
 
         <div class="inline field">
-            <label class="right">New Password</label> {{input value=newPassword1 type="password" placeholder="enter new password"}}
+            <label class="right">New Password</label> {{input value=newPassword1 type="password" placeholder="Enter new password"}}
         </div>
 
         <div class="inline field">
-            <label class="right">New Password Again</label> {{input value=newPassword2 type="password" placeholder="enter
+            <label class="right">New Password Again</label> {{input value=newPassword2 type="password" placeholder="Enter
             new password again"}}
         </div>
 
