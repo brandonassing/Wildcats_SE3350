@@ -54,6 +54,29 @@
                     <button class="ui icon button" data-tooltip="Edit Award" data-inverted=" " {{action 'toggleEditModal' aCode}}>
             <i class="edit icon"></i>
           </button>
+
+                    <!-- Edit modal -->
+                    <div id="edit-modal-adj" class="ui small modal">
+                        <div class="header">
+                            Edit Assesment Rule
+                        </div>
+                        <div class="content">
+                            <div class="ui form warning">
+                                <div class="inline field">{{textarea type="text" value=thisModel.name}}</div>
+                            </div>
+                            <h3>Adjudication Rule Expressions</h3>
+                            {{#each thisModel.testExpression as |expression|}}{{else}}No logical expressions{{/each}}
+                        </div>
+                        <div class="actions">
+                            <div class="ui cancel button" {{action 'editAssessment'}}>
+                                Submit
+                            </div>
+                            <div class="ui cancel button" {{action 'toggleEditModal'}}>
+                                Cancel
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Edit modal -->
                 </td>
             </tr> {{else}}
             <tr>

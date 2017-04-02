@@ -66,15 +66,20 @@ export default Ember.Component.extend({
         this.set("addModalShowing", true);
       }
     },
-    toggleEditModal() {
+    editAssessment() {
+
+    },
+    toggleEditModal(thisCode) {
       if (this.get("editModalShowing")) {
         $('#edit-modal-adj')
           .modal('hide');
         this.set("editModalShowing", false);
+        this.set("thisModel", null);
       } else {
         $('#edit-modal-adj')
           .modal('show');
         this.set("editModalShowing", true);
+        this.set("thisModel", thisCode);
       }
     },
     deleteCode() {
