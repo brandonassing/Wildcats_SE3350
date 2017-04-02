@@ -67,7 +67,7 @@ export default Ember.Component.extend({
       }
     },
     editAssessment() {
-
+      this.get("thisModel").save();
     },
     toggleEditModal(thisCode) {
       if (this.get("editModalShowing")) {
