@@ -37,12 +37,15 @@
             <i class="delete icon"></i>
           </button>
                     <!-- Delete modal -->
-                    <div id="delete-modal-adj" class="ui small modal">
+                    <div id="delete-modal-adj" class="ui small modal modal-box">
                         <div class="header">
                             Delete Code?
                         </div>
+                        <div class="content">
+                            {{thisModel.code}} : {{thisModel.name}}
+                        </div>
                         <div class="actions">
-                            <div class="ui red ok button" {{action 'deleteAssessment' aCode}}>
+                            <div class="ui red ok button" {{action 'deleteAssessment'}}>
                                 <i class="remove icon"></i> Delete
                             </div>
                             <div class="ui cancel button" {{action 'toggleDeleteModal'}}>
@@ -56,7 +59,7 @@
           </button>
 
                     <!-- Edit modal -->
-                    <div id="edit-modal-adj" class="ui small modal">
+                    <div id="edit-modal-adj" class="ui large modal modal-box">
                         <div class="header">
                             Edit Assesment Rule
                         </div>
@@ -67,8 +70,8 @@
                             {{logical-expressions thisModel = thisModel}}
                         </div>
                         <div class="actions">
-                            <div class="ui cancel button" {{action 'editAssessment'}}>
-                                Submit
+                            <div class="ui green button" {{action 'editAssessment'}}>
+                                Save
                             </div>
                             <div class="ui cancel button" {{action 'toggleEditModal'}}>
                                 Cancel

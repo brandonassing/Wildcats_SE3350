@@ -20,7 +20,9 @@ export default Ember.Component.extend({
     addExpression() {
 
       /*this.get("store").createRecord('logical-expression', {
-          
+          "booleanExp":selectedOperator,
+          "logicalLink":,
+          "testExpression":thisCode
       }).save().then(() => {
       this.get("thisCode").save();
       this.set("selectedOperator", null);

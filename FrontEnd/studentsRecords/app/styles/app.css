@@ -127,6 +127,11 @@ body {
   padding: 20px;
 }
 
+.modal-box>.header {
+  background-color: #4F2683 !important;
+  color: white !important;
+}
+
 
 /*==========HOME PAGE===========*/
 

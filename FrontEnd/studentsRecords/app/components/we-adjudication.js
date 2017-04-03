@@ -25,21 +25,24 @@ export default Ember.Component.extend({
     });
   },
   actions: {
-    toggleDeleteModal() {
+    toggleDeleteModal(thisCode) {
       if (this.get("deleteModalShowing")) {
         $('#delete-modal-adj')
           .modal('hide');
         this.set("deleteModalShowing", false);
+        this.set("thisModel", null);
       } else {
         $('#delete-modal-adj')
           .modal('show');
         this.set("deleteModalShowing", true);
+        this.set("thisModel", thisCode);
       }
     },
-    deleteAssessment(thisCode) {
+    deleteAssessment() {
       //TODO prob need to nullify references
       //thisCode.set('student', null);
-      thisCode.destroyRecord();
+      this.get("thisModel").destroyRecord();
+      this.set("thisModel", null);
     },
     addAssessment() {
       /*if (this.get("note") === null) {

@@ -1,11 +1,11 @@
 <div id="error-modal" class="ui basic modal">
   <div class="ui icon header">
-        <i class="warning circle red icon"></i> Cannot save with empty values!
-        <div class="actions">
-          <div class="ui basic ok inverted button"{{action 'closeErrorModal'}}>
-            Ok
-            </div>
-        </div>
+    <i class="warning circle red icon"></i> Cannot save with empty values
+  </div>
+  <div class="actions">
+    <div class="ui basic ok inverted button" {{action 'closeErrorModal'}}>
+      Ok
+    </div>
   </div>
 </div>
 <h3>Awards and Scholarships</h3>
@@ -37,9 +37,12 @@
             <i class="delete icon"></i>
           </button>
         <!-- Delete modal -->
-        <div id="delete-modal-award" class="ui small modal">
+        <div id="delete-modal-award" class="ui small modal modal-box">
           <div class="header">
             Delete Award?
+          </div>
+          <div class="content">
+            {{awards.note}}
           </div>
           <div class="actions">
             <div class="ui red ok button" {{action 'deleteAward' awards}}>
