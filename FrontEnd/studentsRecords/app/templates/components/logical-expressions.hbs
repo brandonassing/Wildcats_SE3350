@@ -8,6 +8,9 @@
                 {{expression.booleanExp}}
             </td>
             <td>
+                <button class="ui icon button" data-tooltip="Add Expression" data-inverted=" " {{action 'appendExpression' expression}}>
+            <i class="plus icon"></i>
+          </button>
                 <button class="ui icon button" data-tooltip="Delete Expression" data-inverted=" " {{action 'deleteExpression' expression}}>
             <i class="delete icon"></i>
           </button>
@@ -46,8 +49,6 @@
 </table>
 
 <br>
-<br>
-<br>
 <div class="ui form">
 
     <div class="inline field">
@@ -67,7 +68,7 @@
     {{/each}}
         </select>
 
-        <label>Value</label> {{input type="text" value = expValue placeholder="Enter value to be checked"}}
+        <label>Value</label> {{input type="text" value = expValue}}
     </div>
     <button class="ui icon button" {{action 'addExpression'}}>
     <i class="plus icon"></i>Add Expression

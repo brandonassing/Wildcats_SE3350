@@ -26,14 +26,21 @@ export default Ember.Component.extend({
         "testExpression": this.get("thisCode"),
         "booleanExp": expression
       }).save().then(() => {
-        this.get("thisCode").save();
         this.set("selectedOperator", null);
         this.set("selectedParameter", null);
         this.set("expValue", null);
       });
     },
-    appendExpression() {
-
+    appendExpression(exp) {
+      this.set("thisExp", exp);
+      var expression = JSON.parse(JSON.stringify(this.get("thisExp"))).booleanExp + "||" + this.get("selectedParameter").toString() + this.get("selectedOperator").toString() + this.get("expValue").toString();
+      this.get("thisExp").set("booleanExp", expression);
+      this.get("thisExp").save().then(() => {
+        this.set("thisExp", null);
+        this.set("selectedOperator", null);
+        this.set("selectedParameter", null);
+        this.set("expValue", null);
+      });
     },
     selectParameter(par) {
       this.set("selectedParameter", par);
