@@ -19,11 +19,9 @@ export default Ember.Component.extend({
   },
   actions: {
     addExpression() {
-      window.alert("thel");
-      window.alert(this.get("thisCode"));
-      window.alert("thel2");
+      var expression = this.get("selectedParameter").toString() + this.get("selectedOperator").toString() + this.get("expValue").toString();
       this.get("store").createRecord('logical-expression', {
-        "booleanExp": (this.get("selectedParameter") + this.get("selectedOperator") + this.get("expValue")),
+        "booleanExp": expression,
         "testExpression": this.get("thisCode")
       }).save().then(() => {
         this.get("thisCode").save();
