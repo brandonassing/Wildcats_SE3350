@@ -62,7 +62,7 @@
       <td>{{standings.grade}}</td>
       <td>{{standings.location}}</td>
       <td>
-        <button class="ui icon button" data-tooltip="Delete Course" data-inverted=" " {{action 'toggleDeleteModal'}}>
+        <button class="ui icon button" data-tooltip="Delete Course" data-inverted=" " {{action 'toggleDeleteModal' standings}}>
           <i class="delete icon"></i>
         </button>
         <!-- Delete modal -->
@@ -71,10 +71,10 @@
             Delete Course?
           </div>
           <div class="content">
-            {{standings.course}}
+            {{thisStanding.course}}
           </div>
           <div class="actions">
-            <div class="ui red ok button" {{action 'deleteCourse' standings}}>
+            <div class="ui red ok button" {{action 'deleteCourse'}}>
               <i class="remove icon"></i> Delete
             </div>
             <div class="ui cancel button" {{action 'toggleDeleteModal'}}>

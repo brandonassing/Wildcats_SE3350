@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   currentStudent: null,
   isEditing: false,
   deleteModalShowing: false,
+  thisAward: null,
 
   init() {
     this._super(...arguments);
@@ -21,7 +22,7 @@ export default Ember.Component.extend({
 
   actions: {
     addAward() {
-      if(this.get("note")===null){
+      if (this.get("note") === null) {
         $('#error-modal').modal('show');
         return;
       }
@@ -34,32 +35,33 @@ export default Ember.Component.extend({
         this.set("note", null);
       });
     },
-    toggleDeleteModal() {
+    toggleDeleteModal(thisAward) {
       if (this.get("deleteModalShowing")) {
         $('#delete-modal-award')
           .modal('hide');
         this.set("deleteModalShowing", false);
+        this.set("thisAward", null);
       } else {
         $('#delete-modal-award')
           .modal('show');
         this.set("deleteModalShowing", true);
+        this.set("thisAward", thisAward);
       }
     },
-    closeErrorModal(){
+    closeErrorModal() {
       $('#error-modal').modal('hide');
     },
-    deleteAward(thisAward) {
-      thisAward.set('student', null);
-      thisAward.destroyRecord();
+    deleteAward() {
+      this.get("thisAward").set('student', null);
+      this.get("thisAward").destroyRecord();
       //thisAward.save();
     },
-    editAward(thisAward) {
+    editAward() {
       this.set('isEditing', true);
     },
     saveAward(thisAward) {
       thisAward.save();
       this.set('isEditing', false);
-
     },
     cancelEdit() {
       this.set('isEditing', false);

@@ -42,10 +42,10 @@
             Delete Award?
           </div>
           <div class="content">
-            {{awards.note}}
+            {{thisAward.note}}
           </div>
           <div class="actions">
-            <div class="ui red ok button" {{action 'deleteAward' awards}}>
+            <div class="ui red ok button" {{action 'deleteAward'}}>
               <i class="remove icon"></i> Delete
             </div>
             <div class="ui cancel button" {{action 'toggleDeleteModal'}}>

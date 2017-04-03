@@ -15,6 +15,7 @@ export default Ember.Component.extend({
   isEditing: false,
   standings: null,
   deleteModalShowing: false,
+  thisStanding: null,
 
   init() {
     this._super(...arguments);
@@ -26,7 +27,7 @@ export default Ember.Component.extend({
 
   actions: {
     addCourse() {
-      if(this.get("course")===null||this.get("description")===null||this.get("units")===null||this.get("grade")===null||this.get("location")===null){
+      if (this.get("course") === null || this.get("description") === null || this.get("units") === null || this.get("grade") === null || this.get("location") === null) {
         //window.alert("sorry, you cant add a course with empty values");
         $('#error-modal').modal('show');
         return;
@@ -47,20 +48,22 @@ export default Ember.Component.extend({
         this.set("location", null);
       });
     },
-    toggleDeleteModal() {
+    toggleDeleteModal(standing) {
       if (this.get("deleteModalShowing")) {
         $('#delete-modal-standing')
           .modal('hide');
         this.set("deleteModalShowing", false);
+        this.set("thisStanding", null);
       } else {
         $('#delete-modal-standing')
           .modal('show');
         this.set("deleteModalShowing", true);
+        this.set("thisStanding", standing);
       }
     },
-    deleteCourse(standing) {
-      standing.set('student', null);
-      standing.destroyRecord();
+    deleteCourse() {
+      this.get("thisStanding").set('student', null);
+      this.get("thisStanding").destroyRecord();
       //standing.save();
       //console.log(standing.get('isDeleted'));
     },
@@ -76,7 +79,7 @@ export default Ember.Component.extend({
     cancelEdit() {
       this.set('isEditing', false);
     },
-    closeErrorModal(){
+    closeErrorModal() {
       $("#error-modal").modal('hide');
     }
 
