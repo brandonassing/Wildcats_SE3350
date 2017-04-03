@@ -64,6 +64,7 @@ export default Ember.Component.extend({
     deleteCourse() {
       this.get("thisStanding").set('student', null);
       this.get("thisStanding").destroyRecord();
+      this.set("thisStanding", null);
       //standing.save();
       //console.log(standing.get('isDeleted'));
     },

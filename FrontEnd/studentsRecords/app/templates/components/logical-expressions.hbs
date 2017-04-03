@@ -1,6 +1,49 @@
 <br>
 <h3>Adjudication Rule Expressions</h3>
-{{#each thisModel.testExpression as |expression|}}{{else}}No logical expressions{{/each}}
+<table class="ui celled table">
+    <tbody>
+        {{#each thisModel.testExpression as |expression|}}
+        <tr>
+            <td>
+                {{expression.booleanExp}}
+            </td>
+            <td>
+                <button class="ui icon button" data-tooltip="Delete Award" data-inverted=" " {{action 'toggleDeleteModal' expression}}>
+            <i class="delete icon"></i>
+          </button>
+                <!-- Delete modal -->
+                <div id="delete-modal-exp" class="ui small modal modal-box">
+                    <div class="header">
+                        Delete Expression?
+                    </div>
+                    <div class="content">
+                        {{thisExp.booleanExp}}
+                    </div>
+                    <div class="actions">
+                        <div class="ui red ok button" {{action 'deleteExpression'}}>
+                            <i class="remove icon"></i> Delete
+                        </div>
+                        <div class="ui cancel button" {{action 'toggleDeleteModal'}}>
+                            Cancel
+                        </div>
+                    </div>
+                </div>
+                <!-- Delete modal -->
+                <!--
+                <button class="ui icon button" data-tooltip="Edit Award" data-inverted=" " {{action 'editAward' awards}}>
+            <i class="edit icon"></i>
+          </button>-->
+            </td>
+        </tr>
+        {{else}}
+        <tr>
+            <td>No logical expressions</td>
+            <td></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
 <br>
 <br>
 <br>

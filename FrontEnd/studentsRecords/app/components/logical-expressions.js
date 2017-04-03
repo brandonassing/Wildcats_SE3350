@@ -8,6 +8,8 @@ export default Ember.Component.extend({
   selectedOperator: null,
   selectedParameter: null,
   expValue: null,
+  thisExp: null,
+  deleteModalShowing: false,
 
   init() {
     this._super(...arguments);
@@ -20,8 +22,7 @@ export default Ember.Component.extend({
     addExpression() {
 
       /*this.get("store").createRecord('logical-expression', {
-          "booleanExp":selectedOperator,
-          "logicalLink":,
+          "booleanExp":(parameter+selectedOperator+value),
           "testExpression":thisCode
       }).save().then(() => {
       this.get("thisCode").save();
@@ -29,6 +30,9 @@ export default Ember.Component.extend({
       this.set("selectedParameter", null);
       this.set("expValue", null);
       });*/
+    },
+    appendExpression() {
+
     },
     selectParameter(par) {
       this.set("selectedParameter", par);
@@ -39,8 +43,22 @@ export default Ember.Component.extend({
     editExpression() {
 
     },
-    deleteExpression(thisExp) {
-      thisExp.destroyRecord();
+    toggleDeleteModal(exp) {
+      if (this.get("deleteModalShowing")) {
+        $('#delete-modal-exp')
+          .modal('hide');
+        this.set("deleteModalShowing", false);
+        this.set("thisExp", null);
+      } else {
+        $('#delete-modal-exp')
+          .modal('show');
+        this.set("deleteModalShowing", true);
+        this.set("thisExp", exp);
+      }
+    },
+    deleteExpression() {
+      this.get("thisExp").destroyRecord();
+      this.set("thisExp", null);
     }
   }
 });
