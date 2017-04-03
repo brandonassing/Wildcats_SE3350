@@ -26,7 +26,6 @@ export default Ember.Component.extend({
         $('#error-modal').modal('show');
         return;
       }
-
       this.get("store").createRecord('award', {
         "note": this.get("note"),
         "student": this.get("currentStudent"),

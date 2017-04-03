@@ -67,10 +67,10 @@
                             <div class="ui form warning">
                                 <div class="inline field">{{textarea type="text" value=thisModel.name}}</div>
                             </div>
-                            {{logical-expressions thisModel = thisModel}}
+                            {{logical-expressions thisCode = thisModel}}
                         </div>
                         <div class="actions">
-                            <div class="ui green button" {{action 'editAssessment'}}>
+                            <div class="ui green ok button" {{action 'editAssessment'}}>
                                 Save
                             </div>
                             <div class="ui cancel button" {{action 'toggleEditModal'}}>
