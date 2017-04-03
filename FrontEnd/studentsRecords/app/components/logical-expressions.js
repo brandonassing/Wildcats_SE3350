@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  store: Ember.inject.service(),
   thisCode: null,
   logicalModel: null,
   operators: ["==", "!=", ">", "<", ">=", "<="],
@@ -13,16 +14,17 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-    /*this.get('store').findAll('logical-expression').then(function (records) {
+    var self = this;
+    this.get('store').findAll('logical-expression').then(function (records) {
       self.set('logicalModel', records);
-    });*/
+    });
   },
   actions: {
     addExpression() {
       var expression = this.get("selectedParameter").toString() + this.get("selectedOperator").toString() + this.get("expValue").toString();
       this.get("store").createRecord('logical-expression', {
-        "booleanExp": expression,
-        "testExpression": this.get("thisCode")
+        "testExpression": this.get("thisCode"),
+        "booleanExp": expression
       }).save().then(() => {
         this.get("thisCode").save();
         this.set("selectedOperator", null);
