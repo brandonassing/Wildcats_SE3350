@@ -229,30 +229,40 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
+      //TEST
+      var genderModel = myStore.peekAll('gender');
+      var resModel = myStore.peekAll('residency');
 
-        data.forEach(function (row) {
-          console.log(row);
-          if (row[0]) {
-            myStore.queryRecord('gender', {filter: {name: row[3]}}).then(function (sex) {
-              myStore.queryRecord('residency', {filter: {name: row[5]}}).then(function (res) {
-                var newStudents = myStore.createRecord('student', {
-                  number: row[0],
-                  firstName: row[1],
-                  lastName: row[2],
-                  gender: sex,
-                  DOB: new Date(row[4]),
-                  photo: "",
-                  registrationComments: "NONE FOUND",
-                  basisOfAdmission: "NONE FOUND",
-                  admissionAverage: "NONE FOUND",
-                  admissionComments: "NONE FOUND",
-                  residency: res
-                });
-                newStudents.save();
-              });
-            });
-          }
-        });
+
+      var genderMap = {};
+      genderModel.forEach(function (gender){
+        genderMap[genderModel.name] = gender.id;
+      });
+
+      var resMap = {};
+      resModel.forEach(function (res){
+        resMap[res.name] = res.id;
+      });
+      //END TEST
+      var addStudent = function (student) {
+          var addedStudent = myStore.createRecord('student', {
+            number: row[0],
+            firstName: row[1],
+            lastName: row[2],
+            gender: genderMap[student.gender],
+            DOB: new Date(row[4]),
+            photo: "",
+            registrationComments: "NONE FOUND",
+            basisOfAdmission: "NONE FOUND",
+            admissionAverage: "NONE FOUND",
+            admissionComments: "NONE FOUND",
+            residency: resMap[student.residency],
+          });
+          console.log('lmao');
+          addedStudent.save();
+      }
+      //bit of testing
+      
 
       this.set('isLoading', true);
     },
