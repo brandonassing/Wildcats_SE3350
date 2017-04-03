@@ -8,11 +8,11 @@
                 {{expression.booleanExp}}
             </td>
             <td>
-                <button class="ui icon button" data-tooltip="Delete Award" data-inverted=" " {{action 'toggleDeleteModal' expression}}>
+                <button class="ui icon button" data-tooltip="Delete Expression" data-inverted=" " {{action 'deleteExpression' expression}}>
             <i class="delete icon"></i>
           </button>
                 <!-- Delete modal -->
-                <div id="delete-modal-exp" class="ui small modal modal-box">
+                <!--<div id="delete-modal-exp" class="ui small modal modal-box">
                     <div class="header">
                         Delete Expression?
                     </div>
@@ -28,6 +28,7 @@
                         </div>
                     </div>
                 </div>
+                -->
                 <!-- Delete modal -->
                 <!--
                 <button class="ui icon button" data-tooltip="Edit Award" data-inverted=" " {{action 'editAward' awards}}>
