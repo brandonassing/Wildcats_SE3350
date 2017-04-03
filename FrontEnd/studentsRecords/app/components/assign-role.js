@@ -28,13 +28,7 @@ export default Ember.Component.extend({
 
   didRender() {
     this._super(...arguments);
-    Ember.$('.ui.modal')
-      .modal({
-        closable: false,
-        transition: 'horizontal flip',
-      })
-      .modal('show');
-
+    Ember.$('#user-manage-modal').modal('show');
 
   },
 
@@ -67,8 +61,8 @@ export default Ember.Component.extend({
 
     done() {
       this.set('isManagingUserRole', false);
-      Ember.$('.ui.modal').modal('hide');
-      Ember.$('.ui.modal').remove();
+      Ember.$('#user-manage-modal').modal('hide');
+      Ember.$('#user-manage-modal').remove();
     },
 
     selectRole(role) {

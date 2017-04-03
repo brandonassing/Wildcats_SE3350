@@ -52,12 +52,7 @@ export default Ember.Component.extend({
 
   didRender() {
     this._super(...arguments);
-    Ember.$('.ui.modal')
-      .modal({
-        closable: false,
-        transition: 'horizontal flip',
-      });
-    Ember.$('.ui.modal').modal('show');
+    Ember.$('#role-modal').modal('show');
 
   },
 
@@ -91,8 +86,8 @@ export default Ember.Component.extend({
 
     done() {
       this.set('isManagingPermission', false);
-      Ember.$('.ui.modal').modal('hide');
-      Ember.$('.ui.modal').remove();
+      Ember.$('#role-modal').modal('hide');
+      Ember.$('#role-modal').remove();
     },
 
     selectPermission(permissions) {

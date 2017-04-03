@@ -11,15 +11,6 @@ export default Ember.Component.extend({
   encryptedPassword: null,
   isResettingPassword: null,
 
-  didRender() {
-    this._super(...arguments);
-    Ember.$('.ui.modal')
-      .modal({
-        closable: false,
-        transition: 'horizontal flip'
-      })
-      .modal('show');
-  },
 
   EU001IsPermitted: Ember.computed(function () { //Edit User
     var authentication = this.get('oudaAuth');
@@ -47,6 +38,12 @@ export default Ember.Component.extend({
   }),
 
 
+  didRender() {
+    this._super(...arguments);
+    Ember.$('#edit-user-modal').modal('show');
+
+  },
+
   actions: {
     saveUser() {
       var name = this.get('userName');
@@ -70,8 +67,8 @@ export default Ember.Component.extend({
           userShadow.save().then(function () {
             user.save().then(function () {
               self.set('isUserFormEditing', false);
-              Ember.$('.ui.modal').modal('hide');
-              Ember.$('.ui.modal').remove();
+              Ember.$('#edit-user-modal').modal('hide');
+              Ember.$('#edit-user-modal').remove();
             });
           });
 
@@ -111,8 +108,8 @@ export default Ember.Component.extend({
 
     cancel() {
       this.set('isUserFormEditing', false);
-      Ember.$('.ui.modal').modal('hide');
-      Ember.$('.ui.modal').remove();
+      Ember.$('#edit-user-modal').modal('hide');
+      Ember.$('#edit-user-modal').remove();
     },
 
 

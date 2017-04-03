@@ -18,13 +18,10 @@ export default Ember.Component.extend({
 
   didRender() {
     this._super(...arguments);
-    Ember.$('.ui.modal')
-      .modal({
-        closable: false,
-        transition: 'horizontal flip',
-      })
-      .modal('show');
+    Ember.$('#add-user-modal').modal('show');
+
   },
+
 
   actions: {
     saveAccount() {
@@ -48,8 +45,8 @@ export default Ember.Component.extend({
         newUserShadow.save();
       });
       this.set('isUserFormEditing', false);
-      Ember.$('.ui.modal').modal('hide');
-      Ember.$('.ui.modal').remove();
+      Ember.$('#add-user-modal').modal('hide');
+      Ember.$('#add-user-modal').remove();
     },
 
     assignDate(date) {
@@ -69,8 +66,7 @@ export default Ember.Component.extend({
 
     cancel() {
       this.set('isUserFormEditing', false);
-      Ember.$('.ui.modal').modal('hide');
-      Ember.$('.ui.modal').remove();
+      $('add-user-modal').modal('hide');
 
     }
   }

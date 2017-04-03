@@ -13,14 +13,15 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-    var self = this;
     /*this.get('store').findAll('logical-expression').then(function (records) {
       self.set('logicalModel', records);
     });*/
   },
   actions: {
     addExpression() {
-      window.alert(this.thisCode);
+      window.alert("thel");
+      window.alert(this.get("thisCode"));
+      window.alert("thel2");
       this.get("store").createRecord('logical-expression', {
         "booleanExp": (this.get("selectedParameter") + this.get("selectedOperator") + this.get("expValue")),
         "testExpression": this.get("thisCode")
