@@ -58,8 +58,8 @@ export default Ember.Component.extend({
       }
     },
     deleteExpression(exp) {
-      //this.get("thisExp").destroyRecord();
-      exp.destroyRecord();
+      this.set("thisExp", exp);
+      this.get("thisExp").destroyRecord();
       this.set("thisExp", null);
     }
   }
