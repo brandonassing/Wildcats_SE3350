@@ -21,15 +21,15 @@ export default Ember.Component.extend({
   actions: {
     addExpression() {
 
-      /*this.get("store").createRecord('logical-expression', {
-          "booleanExp":(parameter+selectedOperator+value),
-          "testExpression":thisCode
+      this.get("store").createRecord('logical-expression', {
+        "booleanExp": (this.get("selectedParameter") + this.get("selectedOperator") + this.get("expValue")),
+        "testExpression": this.get("thisCode")
       }).save().then(() => {
-      this.get("thisCode").save();
-      this.set("selectedOperator", null);
-      this.set("selectedParameter", null);
-      this.set("expValue", null);
-      });*/
+        this.get("thisCode").save();
+        this.set("selectedOperator", null);
+        this.set("selectedParameter", null);
+        this.set("expValue", null);
+      });
     },
     appendExpression() {
 
