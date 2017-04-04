@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+/* global $ */
+
 export default Ember.Component.extend({
   store: Ember.inject.service(),
   thisCode: null,
@@ -33,7 +35,7 @@ export default Ember.Component.extend({
     },
     appendExpression(exp) {
       this.set("thisExp", exp);
-      var expression = JSON.parse(JSON.stringify(this.get("thisExp"))).booleanExp + "||" + this.get("selectedParameter").toString() + this.get("selectedOperator").toString() + this.get("expValue").toString();
+      var expression = JSON.parse(JSON.stringify(this.get("thisExp"))).booleanExp + " || " + this.get("selectedParameter").toString() + this.get("selectedOperator").toString() + this.get("expValue").toString();
       this.get("thisExp").set("booleanExp", expression);
       this.get("thisExp").save().then(() => {
         this.set("thisExp", null);
