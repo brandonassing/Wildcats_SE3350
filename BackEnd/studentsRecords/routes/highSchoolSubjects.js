@@ -16,10 +16,10 @@ router.route('/')
     .get(parseUrlencoded, parseJSON, function (request, response) {
         var HighSchoolCourse = request.query.filter;
         if (!HighSchoolCourse) {
-            models.HighSchoolSubjects.find(function (error, highSchoolSubjects) {
+            /*models.HighSchoolSubjects.find(function (error, highSchoolSubjects) {
                 if (error) response.send(error);
                 response.json({highSchoolSubject: highSchoolSubjects});
-            });
+            });*/
         } else {
             models.HighSchoolSubjects.find({"highSchoolCourse": HighSchoolCourse.highSchoolCourse}, function (error, highSchoolCourses) {
                 if (error) response.send(error);

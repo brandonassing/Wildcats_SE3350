@@ -16,10 +16,10 @@ router.route('/')
     .get(parseUrlencoded, parseJSON, function (request, response) {
         var grade = request.query.filter;
         if (!CourseCode) {
-            models.Grades.find(function (error, grade) {
+            /*models.Grades.find(function (error, grade) {
                 if (error) response.send(error);
                 response.json({grade: grades});
-            });
+            });*/
         } else {
             models.Grades.find({"grade": Grade.grade}, function (error, grades) {
                 if (error) response.send(error);

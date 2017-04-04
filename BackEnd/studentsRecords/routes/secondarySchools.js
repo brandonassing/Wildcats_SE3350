@@ -17,10 +17,10 @@ router.route('/')
     .get(parseUrlencoded, parseJSON, function (request, response) {
         var HighSchoolCourse = request.query.filter;
         if (!HighSchoolCourse) {
-            models.SecondarySchools.find(function (error, secondarySchools) {
+            /*models.SecondarySchools.find(function (error, secondarySchools) {
                 if (error) response.send(error);
                 response.json({secondarySchool: secondarySchools});
-            });
+            });*/
         } else {
             models.SecondarySchools.find({"highSchoolCourse": HighSchoolCourse.highSchoolCourse}, function (error, highSchoolCourses) {
                 if (error) response.send(error);
