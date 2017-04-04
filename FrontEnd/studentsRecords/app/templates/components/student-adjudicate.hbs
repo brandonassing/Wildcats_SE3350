@@ -8,7 +8,7 @@
         </div>
     </div>
 </div>
-<div id="add-modal-adj" class="ui small modal">
+<div id="add-modal-adj" class="ui modal">
     <div class="header">
         Add Assesment Code
     </div>
@@ -27,11 +27,33 @@
                     <td>{{aCode.code}}</td>
                     <td>{{aCode.name}}</td>
                     <td>
-                        <button class="ui icon button" data-tooltip="Add To Student" data-inverted=" " {{action 'addThisCode' thisCode=aCode}}>
+                        <button class="ui icon button" data-tooltip="Add To Student" data-inverted=" " {{action 'addThisCode' aCode=aCode currentStudent=currentStudent}}>
                             <i class="plus icon"></i>
                         </button>
                     </td>
                 </tr>
+               <!-- <tr>
+                    <td>
+                        <div class="ui form">
+                            <div class="inline field">{{input type="text" value=date placeholder="Date"}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            <div class="inline field">{{input type="text" value=avg placeholder="Term Avg"}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            <div class="inline field">{{input type="text" value=note placeholder="Add Note"}}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui form">
+                            <div class="inline field">{{input type="text" value=semester placeholder="Semester"}}</div>
+                        </div>
+                    </td>
+                </tr> -->
                 {{else}}
                 <tr>
                     <td>No Assessment Codes on File</td>
@@ -55,7 +77,10 @@
 
 <h3>Adjudication Information</h3>
 <button class="ui icon button" data-tooltip="Add Code" data-inverted=" " {{action 'toggleAddModal'}}>
-    <i class = "plus icon"></i> Add Assesment Code
+    <i class = "plus icon"></i> Add Assessment Code
+</button>
+<button class="ui icon button" {{action 'clearStore'}}>
+    <i class="delete icon"></i>Clear Ajudication Store
 </button>
 <table class="ui celled table">
     <tbody>
@@ -64,12 +89,12 @@
             <td>Name</td>
             <td>Action</td>
         </tr>
-        {{#each currentStudent.adjudicationInfo as |adjudes|}}
+        {{#each currentStudent.adjudication as |adjudes|}}
         <tr>
             <td>{{adjudes.comment.code}}</td>
             <td>{{adjudes.comment.name}}</td>
             <td>
-                <button class="ui icon button" data-tooltip="Remove Code" data-inverted=" " {{action 'removeCode' thisOne=adjudes}}>
+                <button class="ui icon button" data-tooltip="Remove Code" data-inverted=" " {{action 'removeCode' adjudes}}>
                     <i class="delete icon"></i>
                 </button>
             </td>

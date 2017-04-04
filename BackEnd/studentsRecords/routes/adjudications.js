@@ -16,7 +16,7 @@ router.route('/')
     .get(parseUrlencoded, parseJSON, function (request, response) {
         var Student = request.query.filter;
         if (!Student) {
-            models.Adjudications.find(function (error, adjudication) {
+            models.Adjudications.find(function (error, adjudications) {
                 if (error) response.send(error);
                 response.json({adjudication: adjudications});
             });
