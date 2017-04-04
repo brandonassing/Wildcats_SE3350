@@ -42,25 +42,25 @@ router.route('/')
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
         var Standing = request.query.filter;
-        if (Standing != "") {
-            if (!Standing) {
-                models.Students.find(function (error, students) {
-                    if (error) response.send(error);
-                    response.json({
-                        student: students
-                    });
+        //if (Standing != "") {
+        if (!Standing) {
+            /*models.Students.find(function (error, students) {
+                if (error) response.send(error);
+                response.json({
+                    student: students
                 });
-            } else {
-                models.Students.find({
-                    "standing": Standing.standing
-                }, function (error, standings) {
-                    if (error) response.send(error);
-                    response.json({
-                        student: standings
-                    });
+            });*/
+        } else {
+            models.Students.find({
+                "standing": Standing.standing
+            }, function (error, standings) {
+                if (error) response.send(error);
+                response.json({
+                    student: standings
                 });
-            }
+            });
         }
+        // }
         if (typeof request.query.limit != "undefined" && typeof request.query.offset != "undefined") {
             var l = parseInt(request.query.limit);
             var o = parseInt(request.query.offset);

@@ -268,7 +268,7 @@ export default Ember.Component.extend({
               });
               newStudents.save();
             });
-            newStudents.save();
+            //newStudents.save();
           });
         }
       });
