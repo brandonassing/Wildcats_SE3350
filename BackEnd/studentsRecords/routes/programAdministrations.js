@@ -15,12 +15,15 @@ router.route('/')
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
         var Department = request.query.filter;
+        console.log("1");
         if (!Department) {
+            console.log("2");
             models.ProgramAdministrations.find(function (error, programAdministrations) {
                 if (error) response.send(error);
                 response.json({programAdministration: programAdministrations});
             });
         } else {
+            console.log("3");
             models.ProgramAdministrations.find({"department": Department.department}, function (error, departments) {
                 if (error) response.send(error);
                 response.json({programAdministration: departments});

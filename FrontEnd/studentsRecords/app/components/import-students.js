@@ -56,24 +56,11 @@ export default Ember.Component.extend({
       this.set('tableData', data);
     },
 
-
-    deleteGender: function () {
-      var myStore = this.get('store');
-      myStore.findAll('gender').then(function (genders) {
-        genders.forEach(function (sex) {
-          sex.set('students', []);
-          sex.save().then(function () {
-            sex.destroyRecord();
-          });
-        });
-      });
-    },
-
     getGenderData: function (file) {
       var myStore = this.get('store');
       myStore.findAll('gender').then(function (genders) {
         genders.forEach(function (sex) {
-          sex.set('students', []);
+          sex.set('name', null);
           sex.save().then(function () {
             sex.destroyRecord();
           });
@@ -88,7 +75,7 @@ export default Ember.Component.extend({
       var header = [];
       var first_sheet_name = workbook.SheetNames[0];
 
-      /* Get worksheet */
+
       var worksheet = workbook.Sheets[first_sheet_name];
       var size = 0;
       for (var cellName in worksheet) {
@@ -108,7 +95,6 @@ export default Ember.Component.extend({
       this.set('tableHeader', header); //just in case I need it
       this.set('tableData', data);
 
-      var myStore = this.get('store');
       data.forEach(function (row) {
         if (row[0]) {
           var newGender = myStore.createRecord('gender', {
@@ -239,9 +225,23 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
+      //TEST
+      var genderModel = myStore.peekAll('gender');
+      var resModel = myStore.peekAll('residency');
 
+
+      var genderMap = {};
+      genderModel.forEach(function (gender) {
+        genderMap[genderModel.name] = gender.id;
+      });
+
+      var resMap = {};
+      resModel.forEach(function (res) {
+        resMap[res.name] = res.id;
+      });
+      //END TEST
+      console.log("here");
       data.forEach(function (row) {
-        console.log(row);
         if (row[0]) {
           myStore.queryRecord('gender', {
             filter: {
@@ -268,6 +268,7 @@ export default Ember.Component.extend({
               });
               newStudents.save();
             });
+            newStudents.save();
           });
         }
       });
@@ -278,7 +279,7 @@ export default Ember.Component.extend({
     deleteTermCodes: function () {
       this.get('store').findAll('termCode').then(function (codes) {
         codes.forEach(function (codes) {
-          codes.set('terms', []);
+          codes.set('name', null);
           codes.save().then(function () {
             codes.destroyRecord();
           });

@@ -6,6 +6,7 @@ var parseUrlencoded = bodyParser.urlencoded({
     extended: false
 });
 var parseJSON = bodyParser.json();
+var i = 0;
 router.route('/find-student')
     .get(parseUrlencoded, parseJSON, function (request, response) {
         if (request.query.number != null || Student.firstName != null || Student.lastName != null) {
@@ -40,12 +41,9 @@ router.route('/')
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        console.log("in");
-        /*var Standing = request.query.filter;
+        var Standing = request.query.filter;
         if (Standing != "") {
-            console.log("in2");
             if (!Standing) {
-                console.log('harry ftb');
                 models.Students.find(function (error, students) {
                     if (error) response.send(error);
                     response.json({
@@ -53,7 +51,6 @@ router.route('/')
                     });
                 });
             } else {
-                console.log('rektd');
                 models.Students.find({
                     "standing": Standing.standing
                 }, function (error, standings) {
@@ -63,7 +60,7 @@ router.route('/')
                     });
                 });
             }
-        }*/
+        }
         if (typeof request.query.limit != "undefined" && typeof request.query.offset != "undefined") {
             var l = parseInt(request.query.limit);
             var o = parseInt(request.query.offset);
