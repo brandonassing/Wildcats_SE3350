@@ -14,32 +14,24 @@ router.route('/')
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
+        console.log("chicken");
         var Student = request.query.filter;
         if (!Student) {
+            /*console.log("moose");
             models.Genders.find(function (error, genders) {
                 if (error) response.send(error);
                 response.json({gender: genders});
-            });
+            });*/
         } else {
+            console.log("horse");
             models.Genders.find({"student": Student.student}, function (error, students) {
                 if (error) response.send(error);
                 response.json({gender: students});
             });
         }
-    });
 
-router.route('/import')
-    .post(parseUrlencoded, parseJSON, function (request, response) {
-        model.Genders.remove({});
-        /*var model = null;
-        var xlsx = './genders.xlsx';
-        mongoxlsx.xlsx2MongoData(xlsx, model, function(err, data) {
-            model.Genders.insert(data, function(error, record) {
-            if (error) throw error;
-            console.log("data saved");*/
-          
+        
     });
-
 
 router.route('/:gender_id')
     .get(parseUrlencoded, parseJSON, function (request, response) {

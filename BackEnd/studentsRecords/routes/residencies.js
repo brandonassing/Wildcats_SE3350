@@ -16,10 +16,10 @@ router.route('/')
     .get(parseUrlencoded, parseJSON, function (request, response) {
         var Student = request.query.filter;
         if (!Student) {
-            models.Residencies.find(function (error, residencies) {
+            /*models.Residencies.find(function (error, residencies) {
                 if (error) response.send(error);
                 response.json({residency: residencies});
-            });
+            });*/
         } else {
             models.Residencies.find({"student": Student.student}, function (error, students) {
                 if (error) response.send(error);
