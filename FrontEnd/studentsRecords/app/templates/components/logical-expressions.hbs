@@ -8,14 +8,15 @@
                 {{expression.booleanExp}}
             </td>
             <td>
-                <button class="ui icon button" data-tooltip="Add Expression" data-inverted=" " {{action 'appendExpression' expression}}>
-            <i class="plus icon"></i>
-          </button>
-                <button class="ui icon button" data-tooltip="Delete Expression" data-inverted=" " {{action 'deleteExpression' expression}}>
+                <button class="ui icon button" data-tooltip="Fill out field and then press to append" data-inverted=" " {{action
+                    'appendExpression' expression}}>
+                    <i class="plus icon"></i>Append Expression
+                    </button>
+                    <button class="ui icon button" data-tooltip="Delete Expression" data-inverted=" " {{action 'deleteExpression' expression}}>
             <i class="delete icon"></i>
           </button>
-                <!-- Delete modal -->
-                <!--<div id="delete-modal-exp" class="ui small modal modal-box">
+                    <!-- Delete modal -->
+                    <!--<div id="delete-modal-exp" class="ui small modal modal-box">
                     <div class="header">
                         Delete Expression?
                     </div>
@@ -32,8 +33,8 @@
                     </div>
                 </div>
                 -->
-                <!-- Delete modal -->
-                <!--
+                    <!-- Delete modal -->
+                    <!--
                 <button class="ui icon button" data-tooltip="Edit Award" data-inverted=" " {{action 'editAward' awards}}>
             <i class="edit icon"></i>
           </button>-->
@@ -50,26 +51,30 @@
 
 <br>
 <div class="ui form">
-
-    <div class="inline field">
-        <label>Parameter</label>
-        <select id="operator-dropdown" class="ui dropdown" required onchange={{action 'selectParameter' value="target.value" }}>
+    <div class="ui grid">
+        <div class="five wide column">
+            <label>Parameter</label>
+            <select id="operator-dropdown" class="ui dropdown" required onchange={{action 'selectParameter' value="target.value" }}>
     <option value="">Select Parameter</option>
     {{#each parameters as |par|}}
     <option value={{par}}>{{par}}</option>
     {{/each}}
         </select>
-
-        <label>Boolean Operator</label>
-        <select id="operator-dropdown" class="ui dropdown" required onchange={{action 'selectOperator' value="target.value" }}>
+        </div>
+        <div class="five wide column">
+            <label>Boolean Operator</label>
+            <select id="operator-dropdown" class="ui dropdown" required onchange={{action 'selectOperator' value="target.value" }}>
     <option value="">Select Operator</option>
     {{#each operators as |op|}}
     <option value={{op}}>{{op}}</option>
     {{/each}}
         </select>
-
-        <label>Value</label> {{input type="text" value = expValue}}
+        </div>
+        <div class="five wide column">
+            <label>Value</label> {{input type="text" value = expValue}}
+        </div>
     </div>
+    <br>
     <button class="ui icon button" {{action 'addExpression'}}>
     <i class="plus icon"></i>Add Expression
 </button>
