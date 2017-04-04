@@ -14,14 +14,17 @@ router.route('/')
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
+        console.log("chicken");
         var Terms = request.query.filter;
-        if (!Term) {
-            models.TermCodes.find(function (error, termCode) {
+        if (!Terms) {
+            /*console.log("moose");
+            models.TermCodes.find(function (error, termCodes) {
                 if (error) response.send(error);
                 response.json({termCode: termCodes});
-            });
+            });*/
         } else {
-            models.Terms.find({"term": Term.term}, function (error, termCodes) {
+            console.log("horse");
+            models.TermCodes.find({"term": Term.term}, function (error, termCodes) {
                 if (error) response.send(error);
                 response.json({termCode: terms});
             });
