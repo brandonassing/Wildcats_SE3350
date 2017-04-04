@@ -111,7 +111,6 @@ export default Ember.Component.extend({
     //window.alert(index);
     //window.alert(this.get("currentStudent"));
     this.set('tempAward', this.get('currentStudent.awardInfo'));
-
     this.set('studentPhoto', this.get('currentStudent').get('photo'));
     var date = this.get('currentStudent').get('DOB');
     var datestring = date.toISOString().substring(0, 10);
