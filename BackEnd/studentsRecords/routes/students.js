@@ -41,7 +41,7 @@ router.route('/')
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
         console.log("in");
-        var Standing = request.query.filter;
+        /*var Standing = request.query.filter;
         if (Standing != "") {
             console.log("in2");
             if (!Standing) {
@@ -63,7 +63,7 @@ router.route('/')
                     });
                 });
             }
-        }
+        }*/
         if (typeof request.query.limit != "undefined" && typeof request.query.offset != "undefined") {
             var l = parseInt(request.query.limit);
             var o = parseInt(request.query.offset);

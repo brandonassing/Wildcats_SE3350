@@ -1,5 +1,5 @@
  {{#if isLoading}}
-
+<button class="ui button" {{action 'done'}}> Done</button>
 <table class="ui celled table">
   <thead>
     <tr>
@@ -19,7 +19,7 @@
     {{/each}}
   </tbody>
 </table>
-<button class="ui button" {{action 'done'}}> Done</button> {{else}}
+{{else}}
 <div class="ui grid fluid">
   <div class="column five wide import-item">
     <h3>Gender</h3>
@@ -137,4 +137,3 @@
   </div>
 </div>
 {{/if}}
-
