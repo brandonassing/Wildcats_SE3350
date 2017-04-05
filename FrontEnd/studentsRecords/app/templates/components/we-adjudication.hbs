@@ -4,21 +4,26 @@
 </div>
 <div class="ui bottom attached active tab segment" data-tab="adjudication">
 
-    <button class="ui icon button" data-tooltip="Add Assessment" data-inverted=" " {{action 'toggleAddModal'}}>
+    <button class="ui icon button" {{action 'toggleAddModal'}}>
             <i class="plus icon"></i>Add Assesment Rule
         </button>
     <!-- Add modal -->
-    <div id="add-modal-adj" class="ui small modal">
+    <div id="add-modal-adj" class="ui small modal modal-box">
         <div class="header">
             Add Assesment Rule
         </div>
         <div class="content">
-            <h3>Adjudication Rule Expressions</h3>
-
+            <div class="ui form warning">
+                <div class="inline field"><label>Assessment Code</label>{{input type="text" size="10" value=newCode}}</div>
+                <br>
+                <div class="inline field"><label>Assessment Code Description</label>{{textarea type="text" placeholder="Enter assessment code description"
+                    value=newName}}
+                </div>
+            </div>
         </div>
         <div class="actions">
-            <div class="ui cancel button" {{action 'addAssessment'}}>
-                Submit
+            <div class="ui ok green button" {{action 'addAssessment'}}>
+                Create
             </div>
             <div class="ui cancel button" {{action 'toggleAddModal'}}>
                 Cancel
@@ -65,7 +70,9 @@
                         </div>
                         <div class="content">
                             <div class="ui form warning">
-                                <div class="inline field">{{textarea type="text" value=thisModel.name}}</div>
+                                <div class="inline field"><label>Assessment Code</label>{{input type="text" size="10" value=thisModel.code}}</div>
+                                <br>
+                                <div class="inline field"><label>Assessment Code Description</label>{{textarea type="text" value=thisModel.name}}</div>
                             </div>
                             {{logical-expressions thisCode = thisModel}}
                         </div>
