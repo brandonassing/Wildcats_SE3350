@@ -13,6 +13,8 @@ export default Ember.Component.extend({
   editModalShowing: false,
   addModalShowing: false,
   thisModel: null,
+  newName: null,
+  newCode: null,
 
   didRender() {
     Ember.$('.menu .item').tab();
@@ -49,14 +51,14 @@ export default Ember.Component.extend({
         $('#error-modal').modal('show');
         return;
       }*/
-      /*
-      this.get("store").createRecord('award', {
-        "note": this.get("note"),
-        "student": this.get("currentStudent"),
 
+      this.get("store").createRecord('assessmentCode', {
+        "code": this.get("newCode"),
+        "name": this.get("newName")
       }).save().then(() => {
-        this.set("note", null);
-      });*/
+        this.set("newCode", null);
+        this.set("newName", null);
+      });
     },
     toggleAddModal() {
       if (this.get("addModalShowing")) {

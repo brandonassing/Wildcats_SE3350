@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
+/* global $ */
+
 export default Ember.Component.extend({
+  store: Ember.inject.service(),
   thisCode: null,
   logicalModel: null,
   operators: ["==", "!=", ">", "<", ">=", "<="],
@@ -13,27 +16,33 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-    /*this.get('store').findAll('logical-expression').then(function (records) {
+    var self = this;
+    this.get('store').findAll('logical-expression').then(function (records) {
       self.set('logicalModel', records);
-    });*/
+    });
   },
   actions: {
     addExpression() {
-      window.alert("thel");
-      window.alert(this.get("thisCode"));
-      window.alert("thel2");
+      var expression = this.get("selectedParameter").toString() + this.get("selectedOperator").toString() + this.get("expValue").toString();
       this.get("store").createRecord('logical-expression', {
-        "booleanExp": (this.get("selectedParameter") + this.get("selectedOperator") + this.get("expValue")),
-        "testExpression": this.get("thisCode")
+        "testExpression": this.get("thisCode"),
+        "booleanExp": expression
       }).save().then(() => {
-        this.get("thisCode").save();
         this.set("selectedOperator", null);
         this.set("selectedParameter", null);
         this.set("expValue", null);
       });
     },
-    appendExpression() {
-
+    appendExpression(exp) {
+      this.set("thisExp", exp);
+      var expression = JSON.parse(JSON.stringify(this.get("thisExp"))).booleanExp + " || " + this.get("selectedParameter").toString() + this.get("selectedOperator").toString() + this.get("expValue").toString();
+      this.get("thisExp").set("booleanExp", expression);
+      this.get("thisExp").save().then(() => {
+        this.set("thisExp", null);
+        this.set("selectedOperator", null);
+        this.set("selectedParameter", null);
+        this.set("expValue", null);
+      });
     },
     selectParameter(par) {
       this.set("selectedParameter", par);
@@ -57,7 +66,8 @@ export default Ember.Component.extend({
         this.set("thisExp", exp);
       }
     },
-    deleteExpression() {
+    deleteExpression(exp) {
+      this.set("thisExp", exp);
       this.get("thisExp").destroyRecord();
       this.set("thisExp", null);
     }

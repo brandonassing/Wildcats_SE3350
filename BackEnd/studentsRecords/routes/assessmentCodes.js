@@ -20,16 +20,12 @@ router.route('/')
     .get(parseUrlencoded, parseJSON, function (request, response) {
         var Adjudication = request.query.filter;
         if (!Adjudication) {
-            /*models.AssessmentCodes.find(function (error, assessmentCodes) {
+            models.AssessmentCodes.find(function (error, assessmentCodes) {
                 if (error) response.send(error);
-<<<<<<< HEAD
                 response.json({
                     assessmentCode: assessmentCodes
                 });
             });
-=======
-                response.json({assessmentCode: assessmentCodes});
-            });*/
 
         } else {
             models.AssessmentCodes.find({

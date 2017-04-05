@@ -8,128 +8,78 @@
         </div>
     </div>
 </div>
-<h3>Adjudication Information</h3>
-<table class="ui celled table">
-    <tbody>
-        <tr>
-            <td>Date</td>
-            <td>Term Average</td>
-            <td>Term Units</td>
-            <td>Total Units</td>
-            <td>Notes</td>
-            <td>Semester</td>
-            <td>Action</td>
-        </tr>
-                {{#each currentStudent.adjudicationInfo as |adjudes|}} {{#if isEditing}}
+<div id="add-modal-adj" class="ui small modal">
+    <div class="header">
+        Add Assesment Code
+    </div>
+    <div class="content">
+        <h3>Assesment Roles</h3>
+
+        <table class="ui celled table">
+            <tbody>
                 <tr>
+                    <td>Code</td>
+                    <td>Name</td>
+                    <td>Action</td>
+                </tr>
+                {{#each assessmentModel as |aCode|}}
+                <tr>
+                    <td>{{aCode.code}}</td>
+                    <td>{{aCode.name}}</td>
                     <td>
-                        <div class="ui form">
-                            <div class="inline field">{{input type="text" value=adjudes.date}}</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ui form">
-                            <div class="inline field">{{input type="text" value=adjudes.TermAVG}}</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ui form">
-                            <div class="inline field">{{input type="text" value=adjudes.TermUnitPassed}}</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ui form">
-                            <div class="inline field">{{input type="text" value=adjudes.TermUnitsTotal}}</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ui form">
-                            <div class="inline field">{{input type="text" value=adjudes.note}}</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ui form">
-                            <div class="inline field">{{input type="text" value=adjudes.semester}}</div>
-                        </div>
-                    </td>
-                    <td>
-                        <button class="ui icon button" data-tooltip="Return" data-inverted=" " {{action 'cancelEdit' thisOne=adjudes.note}}>
-                            <i class="level up icon"></i>
-                        </button>
-                        <button class="ui icon button" data-tooltip="Save Comment" data-inverted=" " {{action 'saveComment' adjudes}}>
-                            <i class="save icon"></i>
+                        <button class="ui icon button" data-tooltip="Add To Student" data-inverted=" " {{action 'addThisCode' thisCode=aCode}}>
+                            <i class="plus icon"></i>
                         </button>
                     </td>
                 </tr>
                 {{else}}
                 <tr>
-                    <td>{{adjudes.date}}</td>
-                    <td>{{adjudes.TermAVG}}</td>
-                    <td>{{adjudes.TermUnitPassed}}</td>
-                    <td>{{adjudes.TermUnitsTotal}}</td>
-                    <td>{{adjudes.note}}</td>
-                    <td>{{adjudes.semester}}</td>
-                    <td>
-                        <button class="ui icon button" data-tooltip="Return" data-inverted=" " {{action 'cancelEdit' thisOne=awards.note}}>
-                            <i class="level up icon"></i>
-                        </button>
-                        <button class="ui icon button" data-tooltip="Save Comment" data-inverted=" " {{action 'saveAward' awards}}>
-                            <i class="save icon"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="ui icon button" data-tooltip="Edit Comment" data-inverted=" " {{action 'editAward' awards}}>
-                            <i class="edit icon"></i>
-                        </button>
-                    </td>
-                </tr>
-                {{/if}} {{else}}
-                <tr>
-                    <td>No comments on record</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>No Assessment Codes on File</td>
                     <td></td>
                     <td></td>
                 </tr>
                 {{/each}}
-                <tr>
-                    <td>
-                        <div class="ui form">
-                            {{input type="text" value = date}}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ui form">
-                            {{input type="text" value = TermAvg}}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ui form">
-                            {{input type="text" value = unitsPassed}}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ui form">
-                            {{input type="text" value = totalUnits}}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ui form">
-                            {{input type="text" value = note}}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ui form">
-                            {{input type="text" value = semester}}
-                        </div>
-                    </td>
-                    <td>
-                        <button class="ui icon button" data-tooltip="Add Comment" data-inverted=" " {{action 'addAdjudication'}}>
-                            <i class="plus icon"></i>
-                        </button>
-                    </td>
-                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="actions">
+        <div class="ui save button" {{action 'addAssessment'}}>
+            Save
+        </div>
+        <div class="ui cancel button" {{action 'toggleAddModal'}}>
+            Cancel
+        </div>
+    </div>
+
+</div>
+
+<h3>Adjudication Information</h3>
+<button class="ui icon button" data-tooltip="Add Code" data-inverted=" " {{action 'toggleAddModal'}}>
+    <i class = "plus icon"></i> Add Assesment Code
+</button>
+<table class="ui celled table">
+    <tbody>
+        <tr>
+            <td>Comment Code</td>
+            <td>Name</td>
+            <td>Action</td>
+        </tr>
+        {{#each currentStudent.adjudicationInfo as |adjudes|}}
+        <tr>
+            <td>{{adjudes.comment.code}}</td>
+            <td>{{adjudes.comment.name}}</td>
+            <td>
+                <button class="ui icon button" data-tooltip="Remove Code" data-inverted=" " {{action 'removeCode' thisOne=adjudes}}>
+                    <i class="delete icon"></i>
+                </button>
+            </td>
+        </tr>
+        {{else}}
+        <tr>
+            <td>No comments on record</td>
+            <td></td>
+            <td></td>
+        </tr>
+        {{/each}}
     </tbody>
 </table>
