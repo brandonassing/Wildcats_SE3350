@@ -18,7 +18,7 @@ export default Ember.Component.extend({
   currentIndex: null,
   firstIndex: 0,
   lastIndex: 0,
-  studentPhoto: null,
+  studentPhoto: "",
   limit: null,
   offset: null,
   pageSize: null,
@@ -108,8 +108,6 @@ export default Ember.Component.extend({
     this.set('tempTrans', this.get('currentStudent.transInfo'));
     this.set('tempHS', this.get('currentStudent.highSchoolCourse'));
     this.set('tempMarks', this.get('currentStudent.term'));
-    //window.alert(index);
-    //window.alert(this.get("currentStudent"));
     this.set('tempAward', this.get('currentStudent.awardInfo'));
     this.set('studentPhoto', this.get('currentStudent').get('photo'));
     var date = this.get('currentStudent').get('DOB');

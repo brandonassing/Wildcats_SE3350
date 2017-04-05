@@ -130,7 +130,11 @@ export default Ember.Component.extend({
         "photo": this.get('studentPhoto'),
         "DOB": new Date(this.get('selectedDate')),
         "resInfo": this.get('resInfo'),
-        "genInfo": this.get('genInfo')
+        "genInfo": this.get('genInfo'),
+        "regComments": "NONE FOUND",
+        "basis": "NONE FOUND",
+        "admissionAvg": "NONE FOUND",
+        "admissionComments": "NONE FOUND"
       }).save().then(() => {
         this.set("number", null);
         this.set("firstname", null);
