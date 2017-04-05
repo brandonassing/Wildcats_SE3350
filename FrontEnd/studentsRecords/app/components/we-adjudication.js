@@ -15,6 +15,8 @@ export default Ember.Component.extend({
   thisModel: null,
   newName: null,
   newCode: null,
+  length: 0,
+  keep: true,
 
   didRender() {
     Ember.$('.menu .item').tab();
@@ -25,6 +27,11 @@ export default Ember.Component.extend({
     this.get('store').findAll('assessment-code').then(function (records) {
       self.set('assessmentModel', records);
     });
+    this.get('store').findAll('adjudication').then(function (records) {
+      self.set('adjudicationModel', records);
+    })
+    // this.set("length",this.get("assessment-code.get('length')"));
+    //this.send('studentCount');
   },
   actions: {
     toggleDeleteModal(thisCode) {
@@ -86,6 +93,23 @@ export default Ember.Component.extend({
         this.set("editModalShowing", true);
         this.set("thisModel", thisCode);
       }
+    },
+    incrementCode(comment) {
+      /*  console.log(comment);
+        switch (comment) {
+          case '55': var newLength = this.get('length');
+            newLength += 1;
+            this.set('length', newLength);
+            break;
+          default: break;
+        }*/
+       // let array=this.get('store').peekAll('assessment-code');
+        //console.log(array.get('comment'));
+        
+        
+         
+   
     }
   }
-});
+}
+);

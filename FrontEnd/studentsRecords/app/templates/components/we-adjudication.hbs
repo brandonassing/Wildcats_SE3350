@@ -1,6 +1,6 @@
 <div class="ui top attached tabular menu">
     <a class="active item" data-tab="adjudication">Adjudication Rules</a>
-    <a class="item" data-tab="categories">Categories</a>
+    <a class="item" data-tab="distribution">Distribution</a>
 </div>
 <div class="ui bottom attached active tab segment" data-tab="adjudication">
 
@@ -98,8 +98,11 @@
     </table>
 
 </div>
-<div class="ui bottom attached tab segment" data-tab="categories">
+<div class="ui bottom attached tab segment" data-tab="distribution">
     <div class="ui grid">
+        <button class="ui icon button" {{action 'incrementCode'}}>
+            <i class="add icon"></i>
+         </button>
         <div class="ui form">
             <div class="ten wide segment">
                 <div class="ui right aligned seven wide column">
@@ -107,10 +110,9 @@
                     <div class="ui celled table">
                         <tbody>
                             <tr>
-                                <td>Faculty</td>
-                                <td>Department</td>
-                                <td>Program Administration</td>
-                                <td>Assesment Code</td>
+                                <td>Name</td>
+                                <td>Comment Code</td>
+                                <td>Count</td>
                             </tr>
                             {{#each assessmentModel as |assessCodes|}}
                             <tr>
@@ -118,10 +120,27 @@
                                     {{assessCodes.code}}
                                 </td>
                                 <td>
-                                    {{assessCodes.faculty.department}}
+                                    {{assessCodes.name}}
                                 </td>
                                 <td>
-                                    {{assessCodes.faculty.department.program-administration}}
+                                <!--     <button class="ui icon button" {{action 'incrementCode' assessCodes.code}}>
+                                        <i class="save icon"></i>
+                                     
+                                    </button>-->
+                                    <!--  {{#each assessCodes.comment as |comment|}}
+                                    {{action "incrementCode" comment}} 
+                                    {{/each}}
+                                     {{#if keep}}
+
+-->
+
+                                   
+                                  <!--  {{#each assessCodes.comment as |code|}}
+                                    {{action "incrementCode" code}}
+                                    {{/each}}-->
+                                  <!--  {{action "incrementCode" code}}
+                                    {{/if}}-->
+                                    {{this.length}}
                                 </td>
                             </tr>
                             {{/each}}
