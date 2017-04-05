@@ -1,5 +1,6 @@
 import Ember from 'ember';
 /* global XLSX */
+/* global $ */
 
 export default Ember.Component.extend({
 
@@ -8,6 +9,8 @@ export default Ember.Component.extend({
   tableHeader: [],
   tableData: null,
   isLoading: false,
+  noticeModalShowing: false,
+  firstRender: true,
 
   ID001IsPermitted: Ember.computed(function () { //Manage system roles
     var authentication = this.get('oudaAuth');
@@ -23,8 +26,25 @@ export default Ember.Component.extend({
     var self = this;
     this.get('store').findAll('residency');
     this.get('store').findAll('gender');
+
+  },
+  didRender() {
+    if (this.get("firstRender")) {
+      this.set("noticeModalShowing", true);
+      $("#import-notice-modal").modal("show");
+    }
+    this.set("firstRender", false);
   },
   actions: {
+    toggleNoticeModal() {
+      if (this.get("noticeModalShowing")) {
+        $("#import-notice-modal").modal("hide");
+        this.set("noticeModalShowing", false);
+      } else {
+        $("#import-notice-modal").modal("show");
+        this.set("noticeModalShowing", true);
+      }
+    },
     done() {
       this.set("isLoading", false);
     },
