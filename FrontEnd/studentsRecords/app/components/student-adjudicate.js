@@ -1,43 +1,60 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
-    store: Ember.inject.service(),
-    addModalShowing: false,
-    assessmentModel: null,
+/* global $ */
 
-    didRender() {
-        Ember.$('.menu .item').tab();
+export default Ember.Component.extend({
+  store: Ember.inject.service(),
+  addModalShowing: false,
+  assessmentModel: null,
+  adjudicationModel: null,
+  aCode: null,
+  currentStudent: null,
+
+
+  didRender() {
+    Ember.$('.menu .item').tab();
+  },
+  init() {
+    this._super(...arguments);
+    var self = this;
+    this.get("store").findAll("assessmentCode").then(function (records) {
+      self.set("assessmentModel", records);
+    });
+    this.get("store").findAll("adjudication").then(function (records) {
+      self.set("adjudicationModel", records);
+    });
+
+  },
+  actions: {
+    addThisCode(code) {
+      this.set("aCode", code);
+      this.get("store").createRecord("adjudication", {
+        "date": "200",
+        "termAVG": null,
+        "termUnitPassed": null,
+        "termUnitsTotal": null,
+        "note": null,
+        "semester": null,
+        "student": this.get("currentStudent"),
+        "comment": this.get("aCode")
+      }).save();
+      this.send('toggleAddModal');
     },
-    init() {
-        this._super(...arguments);
-        var self = this;
-        this.get('store').findAll('assessment-code').then(function (records) {
-            self.set('assessmentModel', records);
-        });
+    removeCode(code) {
+      this.set("aCode", code);
+      this.get("aCode").destroyRecord();
+      this.set("aCode", null);
     },
-    actions: {
-        addThisCode() {
-                this.get("store").createRecord('adjudication', {
-                "student": this.get("currentStudent"),
-                "assessment-code": this.get("thisCode")
-            });            
-        },
-        removeCode(thisOne){
-            thisOne.set('student',null);
-            thisOne.set('assessment-code',null);
-            thisOne.destroyRecord();
-            this.get("currentStudent").save();
-        },
-        toggleAddModal() {
-            if (this.get("addModalShowing")) {
-                $('#add-modal-adj')
-                    .modal('hide');
-                this.set("addModalShowing", false);
-            } else {
-                $('#add-modal-adj')
-                    .modal('show');
-                this.set("addModalShowing", true);
-            }
-        },
+    toggleAddModal() {
+      if (this.get("addModalShowing")) {
+        $('#add-modal-rec-adj')
+          .modal('hide');
+        this.set("addModalShowing", false);
+      } else {
+        $('#add-modal-rec-adj')
+          .modal('show');
+        this.set("addModalShowing", true);
+      }
     }
+  }
 });

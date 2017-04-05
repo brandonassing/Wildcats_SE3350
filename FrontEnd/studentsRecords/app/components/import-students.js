@@ -11,6 +11,7 @@ export default Ember.Component.extend({
   isLoading: false,
   noticeModalShowing: false,
   firstRender: true,
+  deleteModalShowing: false,
 
   ID001IsPermitted: Ember.computed(function () { //Manage system roles
     var authentication = this.get('oudaAuth');
@@ -35,6 +36,20 @@ export default Ember.Component.extend({
     this.set("firstRender", false);
   },
   actions: {
+    clearDatabase() {
+
+    },
+    toggleDeleteModal() {
+      if (this.get("deleteModalShowing")) {
+        $('#clear-db-modal')
+          .modal('hide');
+        this.set('deleteModalShowing', false);
+      } else {
+        $('#clear-db-modal')
+          .modal('show');
+        this.set('deleteModalShowing', true);
+      }
+    },
     toggleNoticeModal() {
       if (this.get("noticeModalShowing")) {
         $("#import-notice-modal").modal("hide");

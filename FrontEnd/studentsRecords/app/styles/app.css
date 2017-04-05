@@ -156,7 +156,13 @@ body {
 
 #edit-res-card.content-card,
 #edit-gen-card.content-card {
-  width: 30vw;
+  width: 31.3vw;
+}
+
+#edit-res-card.content-card,
+#edit-gen-card.content-card,
+#adj-sys-card {
+  float: left;
 }
 
 
