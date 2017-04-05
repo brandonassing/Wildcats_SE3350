@@ -58,6 +58,7 @@ export default Ember.Component.extend({
 
     getGenderData: function (file) {
       var myStore = this.get('store');
+      /*
       myStore.findAll('gender').then(function (genders) {
         genders.forEach(function (sex) {
           sex.set('name', null);
@@ -66,6 +67,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -118,6 +120,7 @@ export default Ember.Component.extend({
     },
 
     getResidencyData: function (file) {
+      /*
       this.get('store').findAll('residency').then(function (residencies) {
         residencies.forEach(function (oneResidency) {
           oneResidency.set('students', []);
@@ -126,6 +129,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -183,6 +187,7 @@ export default Ember.Component.extend({
     },
 
     getStudentsData: function (file) {
+      /*
       this.get('store').findAll('student').then(function (students) {
         students.forEach(function (oneStudent) {
           oneStudent.set('residency', null);
@@ -195,6 +200,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -304,6 +310,7 @@ export default Ember.Component.extend({
     },
 
     getAdvancedStandingData: function (file) {
+      /*
       this.get('store').findAll('standing').then(function (standings) {
         standings.forEach(function (oneStanding) {
           oneStanding.set('student', null);
@@ -317,6 +324,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       console.log("Entered Advanced");
       var workbook = XLSX.read(file.data, {
         type: 'binary'
@@ -388,6 +396,7 @@ export default Ember.Component.extend({
     },
 
     getAwardsData: function (file) {
+      /*
       this.get('store').findAll('award').then(function (awards) {
         awards.forEach(function (oneAward) {
           oneAward.set('student', null);
@@ -397,6 +406,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -492,6 +502,7 @@ export default Ember.Component.extend({
     },
 
     getHighSchoolData: function (file) {
+      /*
       this.get('store').findAll('secondarySchool').then(function (highSchools) {
         highSchools.forEach(function (oneHighSchool) {
           oneHighSchool.set('name', null);
@@ -501,6 +512,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -579,6 +591,7 @@ export default Ember.Component.extend({
     },
 
     getAdjudication: function (file) {
+      /*
       this.get('store').findAll('adjudication').then(function (adjudications) {
         adjudications.forEach(function (oneAdjudication) {
           oneAdjudication.set('date', null);
@@ -591,6 +604,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -661,6 +675,7 @@ export default Ember.Component.extend({
     },
 
     getAssessCode: function (file) {
+      /*
       this.get('store').findAll('assessmentCode').then(function (assessmentCodes) {
         assessmentCodes.forEach(function (oneAssess) {
           oneAssess.set('code', null);
@@ -673,6 +688,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -731,6 +747,7 @@ export default Ember.Component.extend({
     },
 
     getFaculty: function (file) {
+      /*
       this.get('store').findAll('faculty').then(function (faculties) {
         faculties.forEach(function (oneFaculty) {
           oneFaculty.set('name', null);
@@ -741,6 +758,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -799,6 +817,7 @@ export default Ember.Component.extend({
     },
 
     getDepartment: function (file) {
+      /*
       this.get('store').findAll('department').then(function (departments) {
         departments.forEach(function (oneDepartment) {
           oneDepartment.set('name', null);
@@ -809,6 +828,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -873,6 +893,7 @@ export default Ember.Component.extend({
     },
 
     getProgramAdministration: function (file) {
+      /*
       this.get('store').findAll('programAdministration').then(function (programAdministrations) {
         programAdministrations.forEach(function (oneProgAdmin) {
           oneProgAdmin.set('name', null);
@@ -883,6 +904,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -935,6 +957,7 @@ export default Ember.Component.extend({
     },
 
     getTermCodeData: function (file) {
+      /*
       this.get('store').findAll('termCode').then(function (codes) {
         codes.forEach(function (codes) {
           codes.set('terms', []);
@@ -943,6 +966,7 @@ export default Ember.Component.extend({
           });
         });
       });
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -989,6 +1013,7 @@ export default Ember.Component.extend({
     },
 
     getUndergraduateRecordCourses: function (file) {
+      /*
       this.get('store').findAll('courseCode').then(function (courseCodes) {
         courseCodes.forEach(function (courseCodes) {
           courseCodes.set('courseLetter', null);
@@ -1009,7 +1034,7 @@ export default Ember.Component.extend({
           });
         });
       });
-
+      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });

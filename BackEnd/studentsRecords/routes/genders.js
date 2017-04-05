@@ -21,14 +21,12 @@ router.route('/')
         console.log("chicken");
         var Student = request.query.filter;
         if (!Student) {
-            /*console.log("moose");
             models.Genders.find(function (error, genders) {
                 if (error) response.send(error);
                 response.json({
                     gender: genders
                 });
             });
-            */
         } else {
             models.Genders.find({
                 "students": Student.student
