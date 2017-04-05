@@ -8,7 +8,7 @@
         </div>
     </div>
 </div>
-<div id="add-modal-adj" class="ui modal">
+<div id="add-modal-rec-adj" class="ui modal">
     <div class="header">
         Add Assesment Code
     </div>
@@ -27,12 +27,12 @@
                     <td>{{aCode.code}}</td>
                     <td>{{aCode.name}}</td>
                     <td>
-                        <button class="ui icon button" data-tooltip="Add To Student" data-inverted=" " {{action 'addThisCode' aCode=aCode currentStudent=currentStudent}}>
+                        <button class="ui icon button" data-tooltip="Add To Student" data-inverted=" " {{action 'addThisCode' aCode}}>
                             <i class="plus icon"></i>
                         </button>
                     </td>
                 </tr>
-               <!-- <tr>
+                <!-- <tr>
                     <td>
                         <div class="ui form">
                             <div class="inline field">{{input type="text" value=date placeholder="Date"}}</div>
@@ -65,18 +65,15 @@
         </table>
     </div>
     <div class="actions">
-        <div class="ui save button" {{action 'addAssessment'}}>
-            Save
-        </div>
         <div class="ui cancel button" {{action 'toggleAddModal'}}>
-            Cancel
+            Close
         </div>
     </div>
 
 </div>
 
 <h3>Adjudication Information</h3>
-<button class="ui icon button" data-tooltip="Add Code" data-inverted=" " {{action 'toggleAddModal'}}>
+<button class="ui icon button" {{action 'toggleAddModal'}}>
     <i class = "plus icon"></i> Add Assessment Code
 </button>
 <button class="ui icon button" {{action 'clearStore'}}>

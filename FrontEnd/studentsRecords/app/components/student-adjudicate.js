@@ -1,65 +1,71 @@
 import Ember from 'ember';
 
+/* global $ */
+
 export default Ember.Component.extend({
-    store: Ember.inject.service(),
-    addModalShowing: false,
-    assessmentModel: null,
-    adjudicationModel: null,
-    aCode: null,
-    currentStudent: null,
+  store: Ember.inject.service(),
+  addModalShowing: false,
+  assessmentModel: null,
+  adjudicationModel: null,
+  aCode: null,
+  currentStudent: null,
 
 
-    didRender() {
-        Ember.$('.menu .item').tab();
+  didRender() {
+    Ember.$('.menu .item').tab();
+  },
+  init() {
+    this._super(...arguments);
+    var self = this;
+    this.get('store').findAll('adjudication').then(function (records) {
+      self.set('adjudicationModel', records);
+    });
+    this.get('store').findAll('assessmentCode').then(function (records) {
+      self.set('assessmentModel', records);
+    });
+  },
+  actions: {
+    addThisCode(code) {
+      this.set("aCode", code);
+      this.get("store").createRecord('adjudication', {
+        "date": '200',
+        "termAVG": null,
+        "termUnitPassed": null,
+        "termUnitsTotal": null,
+        "note": null,
+        "semester": null,
+        "student": this.get("currentStudent"),
+        "comment": this.get("aCode")
+      }).save().then(() => {
+        this.send('toggleAddModal');
+      });
     },
-    init() {
-        this._super(...arguments);
-        var self = this;
-        this.get('store').findAll('adjudication').then(function (records) {
-            self.set('adjudicationModel', records);
-        });
-        this.get('store').findAll('assessment-code').then(function (records) {
-            self.set('assessmentModel', records);
-        });
+    removeCode(code) {
+      this.set("aCode", code)
+      window.alert(this.get("aCode"));
+      this.get("aCode").destroyRecord();
+      this.set("aCode", null);
     },
-    actions: {
-        addThisCode() {
-            window.alert(this.get("aCode"));
-                this.get("store").createRecord('adjudication', {
-                "student": this.get("currentStudent"),
-                "assessment-code": this.get("aCode"),
-                "date": '200'
-
-            }).save().then(()=>{
-                this.send('toggleAddModal');
-            });            
-        },
-        removeCode(adjudes){
-            adjudes.set('student',null);
-            adjudes.set('assessment-code',null);
-            adjudes.destroyRecord();
-            this.get("currentStudent").save();
-        },
-        toggleAddModal() {
-            if (this.get("addModalShowing")) {
-                $('#add-modal-adj')
-                    .modal('hide');
-                this.set("addModalShowing", false);
-            } else {
-                $('#add-modal-adj')
-                    .modal('show');
-                this.set("addModalShowing", true);
-            }
-        },
-        clearStore(){
-            this.get('store').findAll('adjudication').then(function(record){
-            record.content.forEach(function(rec) {
-            Ember.run.once(this, function() {
-           rec.deleteRecord();
-           rec.save();
-        });
-     }, this);
-  });
-        }
+    toggleAddModal() {
+      if (this.get("addModalShowing")) {
+        $('#add-modal-rec-adj')
+          .modal('hide');
+        this.set("addModalShowing", false);
+      } else {
+        $('#add-modal-rec-adj')
+          .modal('show');
+        this.set("addModalShowing", true);
+      }
+    },
+    clearStore() {
+      this.get('store').findAll('adjudication').then(function (record) {
+        record.content.forEach(function (rec) {
+          Ember.run.once(this, function () {
+            rec.deleteRecord();
+            rec.save();
+          });
+        }, this);
+      });
     }
+  }
 });
