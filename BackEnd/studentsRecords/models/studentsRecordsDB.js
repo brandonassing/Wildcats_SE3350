@@ -315,7 +315,7 @@ db.once('open', function () {
     exports.HSCourseGrades = HSCourseGrades;
     exports.HighSchoolCourses = HighSchoolCourses;
     exports.SecondarySchools = SecondarySchools;
-    exports.HighSchoolCourses = HighSchoolCourses;
+    exports.HighSchoolSubjects = HighSchoolSubjects;
     exports.Grades = Grades;
     exports.ProgramRecords = ProgramRecords;
     exports.CourseCodes = CourseCodes;

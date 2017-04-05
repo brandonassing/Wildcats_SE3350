@@ -14,14 +14,14 @@ router.route('/')
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
-        var HighSchoolCourse = request.query.filter;
-        if (!HighSchoolCourse) {
+        var HSCourseGrade = request.query.filter;
+        if (!HSCourseGrade) {
             models.HighSchoolCourses.find(function (error, highSchoolCourses) {
                 if (error) response.send(error);
                 response.json({highSchoolCourse: highSchoolCourses});
             });
         } else {
-            models.HighSchoolCourses.find({"hsCourseGrade": HSCourseGrade.hsCourseGrade}, function (error, hsCourseGrade) {
+            models.HighSchoolCourses.find({"hsCourseGrade": HSCourseGrade.hsCourseGrade}, function (error, hsCourseGrades) {
                 if (error) response.send(error);
                 response.json({highSchoolCourse: hsCourseGrades});
             });
