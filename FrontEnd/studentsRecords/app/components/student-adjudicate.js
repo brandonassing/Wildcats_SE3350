@@ -23,7 +23,7 @@ export default Ember.Component.extend({
     this.get("store").findAll("adjudication").then(function (records) {
       self.set("adjudicationModel", records);
     });
-    
+
   },
   actions: {
     addThisCode(code) {
@@ -56,16 +56,6 @@ export default Ember.Component.extend({
           .modal('show');
         this.set("addModalShowing", true);
       }
-    },
-    clearStore() {
-      this.get('store').findAll('adjudication').then(function (record) {
-        record.content.forEach(function (rec) {
-          Ember.run.once(this, function () {
-            rec.deleteRecord();
-            rec.save();
-          });
-        }, this);
-      });
     }
   }
 });
