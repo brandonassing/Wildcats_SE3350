@@ -16,6 +16,9 @@ export default Ember.Component.extend({
     });
   },
   actions: {
+    adjudicate() {
+
+    },
     toggleDeleteModal() {
       if (this.get("deleteModalShowing")) {
         $('#clear-adj-modal')
