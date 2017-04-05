@@ -263,14 +263,14 @@ export default Ember.Component.extend({
                 number: row[0],
                 firstName: row[1],
                 lastName: row[2],
-                gender: sex,
+                genInfo: sex,
                 DOB: new Date(row[4]),
                 photo: "",
-                registrationComments: "NONE FOUND",
-                basisOfAdmission: "NONE FOUND",
-                admissionAverage: "NONE FOUND",
+                regComments: "NONE FOUND",
+                basis: "NONE FOUND",
+                admissionAvg: "NONE FOUND",
                 admissionComments: "NONE FOUND",
-                residency: res
+                resInfo: res
               });
               newStudents.save();
             });
