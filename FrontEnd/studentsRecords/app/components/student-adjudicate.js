@@ -28,7 +28,7 @@ export default Ember.Component.extend({
     addThisCode(code) {
       this.set("aCode", code);
       this.get("store").createRecord('adjudication', {
-        "date": '200',
+        "date": null,
         "termAVG": null,
         "termUnitPassed": null,
         "termUnitsTotal": null,
@@ -41,8 +41,7 @@ export default Ember.Component.extend({
       });
     },
     removeCode(code) {
-      this.set("aCode", code)
-      window.alert(this.get("aCode"));
+      this.set("aCode", code);
       this.get("aCode").destroyRecord();
       this.set("aCode", null);
     },
