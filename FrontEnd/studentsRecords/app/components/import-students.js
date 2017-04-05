@@ -18,6 +18,12 @@ export default Ember.Component.extend({
     }
   }),
 
+  init() {
+    this._super(...arguments);
+    var self = this;
+    this.get('store').findAll('residency');
+    this.get('store').findAll('gender');
+  },
   actions: {
     done() {
       this.set("isLoading", false);
@@ -102,7 +108,9 @@ export default Ember.Component.extend({
           var newGender = myStore.createRecord('gender', {
             name: row[0]
           });
-          newGender.save();
+          newGender.save().then(function () {
+            myStore.findAll('gender');
+          });
         }
       });
       this.set('isLoading', true);
@@ -164,7 +172,9 @@ export default Ember.Component.extend({
           var newResidency = myStore.createRecord('residency', {
             name: row[0]
           });
-          newResidency.save();
+          newResidency.save().then(function () {
+            myStore.findAll('residency');
+          });
         }
       });
 
@@ -231,51 +241,36 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
-      //TEST
       var genderModel = myStore.peekAll('gender');
       var resModel = myStore.peekAll('residency');
 
 
       var genderMap = {};
       genderModel.forEach(function (gender) {
-        genderMap[genderModel.name] = gender.id;
+        genderMap[JSON.parse(JSON.stringify(gender)).name] = gender;
       });
 
       var resMap = {};
       resModel.forEach(function (res) {
-        resMap[res.name] = res.id;
+        resMap[JSON.parse(JSON.stringify(res)).name] = res;
       });
-      //END TEST
-      console.log("here");
+
       data.forEach(function (row) {
         if (row[0]) {
-          myStore.queryRecord('gender', {
-            filter: {
-              name: row[3]
-            }
-          }).then(function (sex) {
-            myStore.queryRecord('residency', {
-              filter: {
-                name: row[5]
-              }
-            }).then(function (res) {
-              var newStudents = myStore.createRecord('student', {
-                number: row[0],
-                firstName: row[1],
-                lastName: row[2],
-                genInfo: sex,
-                DOB: new Date(row[4]),
-                photo: "",
-                regComments: "NONE FOUND",
-                basis: "NONE FOUND",
-                admissionAvg: "NONE FOUND",
-                admissionComments: "NONE FOUND",
-                resInfo: res
-              });
-              newStudents.save();
-            });
-            //newStudents.save();
+          var newStudents = myStore.createRecord('student', {
+            number: row[0],
+            firstName: row[1],
+            lastName: row[2],
+            genInfo: genderMap[row[3]],
+            DOB: new Date(row[4]),
+            photo: "",
+            regComments: "NONE FOUND",
+            basis: "NONE FOUND",
+            admissionAvg: "NONE FOUND",
+            admissionComments: "NONE FOUND",
+            resInfo: resMap[row[5]]
           });
+          newStudents.save();
         }
       });
 

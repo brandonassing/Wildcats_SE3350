@@ -17,13 +17,13 @@ export default Ember.Component.extend({
   //studentsRecords: null,
   studentPhoto: null,
   //isEmpty: true,
-  nullNumber:false,
-  nullFName:false,
+  nullNumber: false,
+  nullFName: false,
   nullLName: false,
-  nullGInfo:false,
+  nullGInfo: false,
   nullResInfo: false,
   nullDOB: false,
-  
+
 
 
 
@@ -59,44 +59,44 @@ export default Ember.Component.extend({
       self.set('genderModel', records);
     });
   },
-  nullCheck(){
+  nullCheck() {
     //modal for student with null values
-      if(this.get("number")===null){
-        this.set('nullNumber',true);
-        console.log(this.get("number"));
-      }else{
-        this.set('nullNumber',false);
-      }
+    if (this.get("number") === null) {
+      this.set('nullNumber', true);
+      console.log(this.get("number"));
+    } else {
+      this.set('nullNumber', false);
+    }
 
-      if(this.get("firstname")===null){
-        this.set('nullFName',true);
-      }else{
-        this.set('nullFName',false);
-      }
+    if (this.get("firstname") === null) {
+      this.set('nullFName', true);
+    } else {
+      this.set('nullFName', false);
+    }
 
-      if(this.get("lastname")===null){
-        this.set('nullLName',true);
-      }else{
-        this.set('nullLName',false);
-      }
+    if (this.get("lastname") === null) {
+      this.set('nullLName', true);
+    } else {
+      this.set('nullLName', false);
+    }
 
-      if(this.get("selectedGender")===null){
-        this.set("nullGInfo",true);
-      }else{
-        this.set("nullGInfo",false);
-      }
+    if (this.get("selectedGender") === null) {
+      this.set("nullGInfo", true);
+    } else {
+      this.set("nullGInfo", false);
+    }
 
-      if(this.get("selectedDate")===null){
-        this.set("nullDOB",true);
-      }else{
-        this.set("nullDOB",false);
-      }
+    if (this.get("selectedDate") === null) {
+      this.set("nullDOB", true);
+    } else {
+      this.set("nullDOB", false);
+    }
 
-      if(this.get("selectedResidency")===null){
-        this.set("nullResInfo",true);
-      }else{
-        this.set("nullResInfo",false);
-      }
+    if (this.get("selectedResidency") === null) {
+      this.set("nullResInfo", true);
+    } else {
+      this.set("nullResInfo", false);
+    }
 
   },
   actions: {
@@ -118,30 +118,30 @@ export default Ember.Component.extend({
 
 
       this.nullCheck();
-      if((this.get('nullNumber')===true)||(this.get('nullFName')===true)||(this.get('nullLName')===true)||(this.get('nullGInfo')===true)||(this.get('nullResInfo')===true)){
+      if ((this.get('nullNumber') === true) || (this.get('nullFName') === true) || (this.get('nullLName') === true) || (this.get('nullGInfo') === true) || (this.get('nullResInfo') === true)) {
         $('#error-Modal').modal('show');
         return;
       }
 
-        this.get("store").createRecord('student', {
-          "number": this.get("number"),
-          "firstName": this.get("firstname"),
-          "lastName": this.get("lastname"),
-          "photo": this.get('studentPhoto'),
-          "DOB": new Date(this.get('selectedDate')),
-          "resInfo": this.get('resInfo'),
-          "genInfo": this.get('genInfo')
-        }).save().then(() => {
-          this.set("number", null);
-          this.set("firstname", null);
-          this.set("lastname", null);
-          this.set("studentPhoto", null);
-          this.set("selectedDate", null);
-          this.set("selectedGender", null);
-          this.set("selectedResidency", null);
-          this.set('notDONE', false);
+      this.get("store").createRecord('student', {
+        "number": this.get("number"),
+        "firstName": this.get("firstname"),
+        "lastName": this.get("lastname"),
+        "photo": this.get('studentPhoto'),
+        "DOB": new Date(this.get('selectedDate')),
+        "resInfo": this.get('resInfo'),
+        "genInfo": this.get('genInfo')
+      }).save().then(() => {
+        this.set("number", null);
+        this.set("firstname", null);
+        this.set("lastname", null);
+        this.set("studentPhoto", null);
+        this.set("selectedDate", null);
+        this.set("selectedGender", null);
+        this.set("selectedResidency", null);
+        this.set('notDONE', false);
 
-        });
+      });
 
       /*
               window.alert(this.get("newStudent"));
@@ -175,7 +175,7 @@ export default Ember.Component.extend({
     assignDate(date) {
       this.set('selectedDate', date);
     },
-    closeErrorModal(){
+    closeErrorModal() {
       $("#error-Modal").modal('hide');
     },
 
