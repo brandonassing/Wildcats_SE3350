@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   department: null,
   pAdministration: null,
   deleteModalShowing: false,
+  deleteModalAdjShowing: false,
   editModalShowing: false,
   addModalShowing: false,
   thisModel: null,
@@ -27,13 +28,35 @@ export default Ember.Component.extend({
     this.get('store').findAll('assessment-code').then(function (records) {
       self.set('assessmentModel', records);
     });
-    this.get('store').findAll('adjudication').then(function (records) {
-      self.set('adjudicationModel', records);
-    })
-    // this.set("length",this.get("assessment-code.get('length')"));
-    //this.send('studentCount');
+    this.get("store").findAll("adjudication").then(function (records) {
+      self.set("adjudicationModel", records);
+    });
   },
   actions: {
+    adjudicate() {
+
+    },
+    toggleDeleteAdjModal() {
+      if (this.get("deleteModalAdjShowing")) {
+        $('#clear-adj-modal')
+          .modal('hide');
+        this.set('deleteModalAdjShowing', false);
+      } else {
+        $('#clear-adj-modal')
+          .modal('show');
+        this.set('deleteModalAdjShowing', true);
+      }
+    },
+    clearStore() {
+      this.get('store').findAll('adjudication').then(function (record) {
+        record.content.forEach(function (rec) {
+          Ember.run.once(this, function () {
+            rec.deleteRecord();
+            rec.save();
+          });
+        }, this);
+      });
+    },
     toggleDeleteModal(thisCode) {
       if (this.get("deleteModalShowing")) {
         $('#delete-modal-adj')

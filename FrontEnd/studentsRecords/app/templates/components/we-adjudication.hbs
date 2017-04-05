@@ -7,6 +7,30 @@
     <button class="ui icon button" {{action 'toggleAddModal'}}>
             <i class="plus icon"></i>Add Assesment Rule
         </button>
+    <button class="ui icon red button" {{action 'toggleDeleteAdjModal'}}>
+    <i class="delete icon"></i>Clear Ajudication Records
+</button>
+    <button class="ui icon green button" {{action 'adjudicate'}}>
+    <i class="lightning icon"></i>Assess All Students
+</button>
+
+
+    <div id="clear-adj-modal" class="ui basic modal">
+        <div class="ui icon header">
+            <i class="remove circle red icon"></i> Clear Adjudication Records
+        </div>
+        <div class="content">
+            <p>Clearing the adjudication records will remove all assessment codes from all students.</p>
+        </div>
+        <div class="actions">
+            <div class="ui red ok inverted button" {{action 'clearStore'}}>
+                <i class="remove icon"></i> Clear All
+            </div>
+            <div class="ui basic cancel inverted button" {{action 'toggleDeleteAdjModal'}}>
+                Cancel
+            </div>
+        </div>
+    </div>
     <!-- Add modal -->
     <div id="add-modal-adj" class="ui small modal modal-box">
         <div class="header">

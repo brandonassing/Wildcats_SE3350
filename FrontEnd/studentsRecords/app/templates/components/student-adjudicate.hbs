@@ -72,37 +72,34 @@
 
 </div>
 <div>
-<h3>Adjudication Information</h3>
-<button class="ui icon button" {{action 'toggleAddModal'}}>
+    <h3>Adjudication Information</h3>
+    <button class="ui icon button" {{action 'toggleAddModal'}}>
     <i class = "plus icon"></i> Add Assessment Code
 </button>
-<button class="ui icon button" {{action 'clearStore'}}>
-    <i class="delete icon"></i>Clear Ajudication Store
-</button>
-<table class="ui celled table">
-    <tbody>
-        <tr>
-            <td>Comment Code</td>
-            <td>Name</td>
-            <td>Action</td>
-        </tr>
-        {{#each currentStudent.adjudication as |adjudes|}}
-        <tr>
-            <td>{{adjudes.comment.code}}</td>
-            <td>{{adjudes.comment.name}}</td>
-            <td>
-                <button class="ui icon button" data-tooltip="Remove Code" data-inverted=" " {{action 'removeCode' adjudes}}>
+    <table class="ui celled table">
+        <tbody>
+            <tr>
+                <td>Comment Code</td>
+                <td>Name</td>
+                <td>Action</td>
+            </tr>
+            {{#each currentStudent.adjudication as |adjudes|}}
+            <tr>
+                <td>{{adjudes.comment.code}}</td>
+                <td>{{adjudes.comment.name}}</td>
+                <td>
+                    <button class="ui icon ok button" data-tooltip="Remove Code" data-inverted=" " {{action 'removeCode' adjudes}}>
                     <i class="delete icon"></i>
                 </button>
-            </td>
-        </tr>
-        {{else}}
-        <tr>
-            <td>No comments on record</td>
-            <td></td>
-            <td></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td>No comments on record</td>
+                <td></td>
+                <td></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </div>
