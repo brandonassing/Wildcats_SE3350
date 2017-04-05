@@ -30,7 +30,7 @@ router.route('/')
 =======
                 response.json({assessmentCode: assessmentCodes});
             });*/
->>>>>>> spencer
+
         } else {
             models.AssessmentCodes.find({
                 "adjudication": Adjudication.adjudication
