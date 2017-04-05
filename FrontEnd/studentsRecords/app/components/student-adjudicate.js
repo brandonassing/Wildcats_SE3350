@@ -37,9 +37,8 @@ export default Ember.Component.extend({
         "semester": null,
         "student": this.get("currentStudent"),
         "comment": this.get("aCode")
-      }).save().then(() => {
-        this.send("toggleAddModal");
-      });
+      }).save();
+      this.send('toggleAddModal');
     },
     removeCode(code) {
       this.set("aCode", code);
