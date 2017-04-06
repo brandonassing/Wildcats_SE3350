@@ -48,10 +48,31 @@
   </div>
 </div>
 
+
+<div id="clear-db-modal" class="ui basic modal">
+  <div class="ui icon header">
+    <i class="remove circle red icon"></i> Clear Database
+  </div>
+  <div class="content">
+    <p>This will remove all collections from the database in order to prepare for document imports.</p>
+  </div>
+  <div class="actions">
+    <div class="ui red ok inverted button" {{action 'clearDatabase'}}>
+      <i class="remove icon"></i> Clear All
+    </div>
+    <div class="ui basic cancel inverted button" {{action 'toggleDeleteModal'}}>
+      Cancel
+    </div>
+  </div>
+</div>
+
 <div class="ui grid fluid">
 
-  <div class="column fifteen wide">
+  <div class="column three wide">
     <button class="ui button" {{action 'toggleNoticeModal'}}><i class = "info circle icon"></i>Import Steps</button>
+  </div>
+  <div class="column thirteen wide">
+    <button class="ui button" {{action 'toggleDeleteModal'}}><i class = "remove circle icon"></i>Clear Database</button>
   </div>
   <!--parent-->
   <div class="column five wide import-item">

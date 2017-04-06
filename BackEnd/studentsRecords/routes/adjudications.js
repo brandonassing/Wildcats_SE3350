@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models/studentsRecordsDB');
 var bodyParser = require('body-parser');
-var parseUrlencoded = bodyParser.urlencoded({extended: false});
+var parseUrlencoded = bodyParser.urlencoded({
+    extended: false
+});
 var parseJSON = bodyParser.json();
 
 router.route('/')
@@ -10,20 +12,28 @@ router.route('/')
         var adjudication = new models.Adjudications(request.body.adjudication);
         adjudication.save(function (error) {
             if (error) response.send(error);
-            response.json({adjudication: adjudication});
+            response.json({
+                adjudication: adjudication
+            });
         });
     })
     .get(parseUrlencoded, parseJSON, function (request, response) {
         var Student = request.query.filter;
         if (!Student) {
-            models.Adjudications.find(function (error, adjudication) {
+            models.Adjudications.find(function (error, adjudications) {
                 if (error) response.send(error);
-                response.json({adjudication: adjudications});
+                response.json({
+                    adjudication: adjudications
+                });
             });
         } else {
-            models.Adjudications.find({"student": Student.student}, function (error, adjudications) {
+            models.Adjudications.find({
+                "student": Student.student
+            }, function (error, students) {
                 if (error) response.send(error);
-                response.json({adjudication: students});
+                response.json({
+                    adjudication: students
+                });
             });
         }
     });
@@ -32,15 +42,18 @@ router.route('/:adjudication_id')
     .get(parseUrlencoded, parseJSON, function (request, response) {
         models.Adjudications.findById(request.params.term_id, function (error, adjudication) {
             if (error) response.send(error);
-            response.json({adjudication: adjudication});
+            response.json({
+                adjudication: adjudication
+            });
         })
     })
     .put(parseUrlencoded, parseJSON, function (request, response) {
         models.Adjudications.findById(request.params.adjudication_id, function (error, adjudication) {
             if (error) {
-                response.send({error: error});
-            }
-            else {
+                response.send({
+                    error: error
+                });
+            } else {
                 adjudication.date = request.body.adjudication.date;
                 adjudication.termAVG = request.body.adjudication.termAVG;
                 adjudication.termUnitPassed = request.body.adjudication.termUnitPassed;
@@ -51,10 +64,13 @@ router.route('/:adjudication_id')
                 adjudication.comment = request.body.adjudication.comment;
                 term.save(function (error) {
                     if (error) {
-                        response.send({error: error});
-                    }
-                    else {
-                        response.json({adjudication: adjudication});
+                        response.send({
+                            error: error
+                        });
+                    } else {
+                        response.json({
+                            adjudication: adjudication
+                        });
                     }
                 });
             }
@@ -64,7 +80,9 @@ router.route('/:adjudication_id')
         models.Adjudications.findByIdAndRemove(request.params.adjudication_id,
             function (error, deleted) {
                 if (!error) {
-                    response.json({adjudication: deleted});
+                    response.json({
+                        adjudication: deleted
+                    });
                 }
             }
         );
