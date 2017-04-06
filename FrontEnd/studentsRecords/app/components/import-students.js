@@ -11,7 +11,6 @@ export default Ember.Component.extend({
   isLoading: false,
   noticeModalShowing: false,
   firstRender: true,
-  deleteModalShowing: false,
 
   ID001IsPermitted: Ember.computed(function () { //Manage system roles
     var authentication = this.get('oudaAuth');
@@ -39,20 +38,6 @@ export default Ember.Component.extend({
     this.set("firstRender", false);
   },
   actions: {
-    clearDatabase() {
-
-    },
-    toggleDeleteModal() {
-      if (this.get("deleteModalShowing")) {
-        $('#clear-db-modal')
-          .modal('hide');
-        this.set('deleteModalShowing', false);
-      } else {
-        $('#clear-db-modal')
-          .modal('show');
-        this.set('deleteModalShowing', true);
-      }
-    },
     toggleNoticeModal() {
       if (this.get("noticeModalShowing")) {
         $("#import-notice-modal").modal("hide");
@@ -99,10 +84,8 @@ export default Ember.Component.extend({
       this.set('tableData', data);
     },
 
-    getGenderData: function (file) {
-      var myStore = this.get('store');
-      /*
-      myStore.findAll('gender').then(function (genders) {
+    deleteGender: function () {
+      this.get('store').findAll('gender').then(function (genders) {
         genders.forEach(function (sex) {
           sex.set('name', null);
           sex.save().then(function () {
@@ -110,7 +93,10 @@ export default Ember.Component.extend({
           });
         });
       });
-      */
+    },
+
+    getGenderData: function (file) {
+      var myStore = this.get('store');
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -165,16 +151,6 @@ export default Ember.Component.extend({
     },
 
     getResidencyData: function (file) {
-      /*
-      this.get('store').findAll('residency').then(function (residencies) {
-        residencies.forEach(function (oneResidency) {
-          oneResidency.set('students', []);
-          oneResidency.save().then(function () {
-            oneResidency.destroyRecord();
-          });
-        });
-      });
-      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -234,20 +210,6 @@ export default Ember.Component.extend({
     },
 
     getStudentsData: function (file) {
-      /*
-      this.get('store').findAll('student').then(function (students) {
-        students.forEach(function (oneStudent) {
-          oneStudent.set('residency', null);
-          oneStudent.set('gender', null);
-          oneStudent.set('advancedStanding', []);
-          oneStudent.set('scholarshipAndAward', []);
-          oneStudent.set('term', []);
-          oneStudent.save().then(function () {
-            oneStudent.destroyRecord();
-          });
-        });
-      });
-      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -279,7 +241,6 @@ export default Ember.Component.extend({
       var myStore = this.get('store');
 
       var genderModel = myStore.peekAll('gender');
-      console.log(genderModel);
       var resModel = myStore.peekAll('residency');
 
 
@@ -287,7 +248,7 @@ export default Ember.Component.extend({
       genderModel.forEach(function (gender) {
         genderMap[JSON.parse(JSON.stringify(gender)).name] = gender;
       });
-      console.log (genderMap);
+
       var resMap = {};
       resModel.forEach(function (res) {
         resMap[JSON.parse(JSON.stringify(res)).name] = res;
@@ -343,21 +304,6 @@ export default Ember.Component.extend({
     },
 
     getAdvancedStandingData: function (file) {
-      /*
-      this.get('store').findAll('standing').then(function (standings) {
-        standings.forEach(function (oneStanding) {
-          oneStanding.set('student', null);
-          oneStanding.set('course', null);
-          oneStanding.set('description', null);
-          oneStanding.set('units', null);
-          oneStanding.set('grade', null);
-          oneStanding.set('location', null);
-          oneStanding.save().then(function () {
-            oneStanding.destroyRecord();
-          });
-        });
-      });
-      */
       console.log("Entered Advanced");
       var workbook = XLSX.read(file.data, {
         type: 'binary'
@@ -389,27 +335,26 @@ export default Ember.Component.extend({
       this.set('tableHeader', header); //just in case I need it
       this.set('tableData', data);
       var myStore = this.get('store');
+      var studentModel = myStore.peekAll('student');
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
 
       console.log("Part3");
       data.forEach(function (row) {
         if (row[0]) {
           console.log("Part 5");
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (num) {
             var newAdvancedStanding = myStore.createRecord('standing', {
               course: row[1],
               description: row[2],
               units: row[3],
               grade: row[4],
               location: row[5],
-              student: num,
+              student: studentMap[row[0]],
             });
             console.log("Part4");
             newAdvancedStanding.save();
-          });
         }
       });
 
@@ -429,17 +374,6 @@ export default Ember.Component.extend({
     },
 
     getAwardsData: function (file) {
-      /*
-      this.get('store').findAll('award').then(function (awards) {
-        awards.forEach(function (oneAward) {
-          oneAward.set('student', null);
-          oneAward.set('note', null);
-          oneAward.save().then(function () {
-            oneAward.destroyRecord();
-          });
-        });
-      });
-      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -469,21 +403,22 @@ export default Ember.Component.extend({
       this.set('tableHeader', header); //just in case I need it
       this.set('tableData', data);
       var myStore = this.get('store');
+      var studentModel = myStore.peekAll('student');
+
+
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
 
 
       data.forEach(function (row) {
         if (row[0]) {
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (num) {
             var newAward = myStore.createRecord('award', {
-              student: num,
+              student: studentMap[row[0]],
               note: row[1],
             });
             newAward.save();
-          });
         }
       });
 
@@ -1217,21 +1152,7 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
-      var studentModel = myStore.peekAll('student');
-      var schoolModel = myStore.peekAll('secondarySchool');
-      console.log(studentModel);
 
-      var studentMap = {};
-      studentModel.forEach(function (student) {
-        window.alert('loop');
-        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
-        window.alert(JSON.parse(JSON.stringify(student)).number);
-      });
-      console.log(studentMap);
-      var schoolMap = {};
-      schoolModel.forEach(function (school) {
-        schoolMap[JSON.parse(JSON.stringify(school)).name] = school;
-      });
       data.forEach(function (row) {
         if (row[0]) {
               var programRecord = myStore.createRecord('highSchoolSubject', {
@@ -1293,7 +1214,6 @@ export default Ember.Component.extend({
           
                 data.forEach(function (row) {
           if (row[0]) {
-              
                 var hscourse = myStore.createRecord('highSchoolCourse', {
                   level: row[2],
                   source: row[5],
@@ -1304,8 +1224,6 @@ export default Ember.Component.extend({
                 hscourse.save();
                 }});
                 console.log("1");
-                
-
       
       this.set('isLoading', true);
     },
@@ -1369,9 +1287,8 @@ export default Ember.Component.extend({
                   student: studentMap[row[0]],
               });
               hscoursegrade.save();
-            }});
-                
-        this.set('isLoading', true);
+            }
+          });
     },
 
     getRegistrationComments: function (file) {
@@ -1406,17 +1323,19 @@ export default Ember.Component.extend({
       this.set('tableHeader', header); //just in case I need it
       this.set('tableData', data);
       var myStore = this.get('store');
+      var studentModel = myStore.peekAll('student');
+
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
+      console.log(studentMap);
 
       data.forEach(function (row) {
         if (row[0]) {
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (student) {
-            student.set('regComments', row[1]);
-            student.save();
-          });
+          console.log(studentMap[row[0]]);
+            studentMap[row[0]].set('regComments', row[1]);
+            studentMap[row[0]].save();
         }
       });
 
@@ -1456,16 +1375,18 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
+           var studentModel = myStore.peekAll('student');
+
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
+
       data.forEach(function (row) {
         if (row[0]) {
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (student) {
-            student.set('basis', row[1]);
-            student.save();
-          });
+          console.log(studentMap[row[0]]);
+            studentMap[row[0]].set('basis', row[1]);
+            studentMap[row[0]].save();
         }
       });
 
@@ -1505,16 +1426,18 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
-      data.forEach(function (row) {
+            var studentModel = myStore.peekAll('student');
+
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
+
+            data.forEach(function (row) {
         if (row[0]) {
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (student) {
-            student.set('admissionAvg', row[1]);
-            student.save();
-          });
+          console.log(studentMap[row[0]]);
+            studentMap[row[0]].set('admissionAvg', row[1]);
+            studentMap[row[0]].save();
         }
       });
 
@@ -1554,16 +1477,18 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
+           var studentModel = myStore.peekAll('student');
+
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
+
       data.forEach(function (row) {
         if (row[0]) {
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (student) {
-            student.set('admissionComments', row[1]);
-            student.save();
-          });
+          console.log(studentMap[row[0]]);
+            studentMap[row[0]].set('admissionComments', row[1]);
+            studentMap[row[0]].save();
         }
       });
 
