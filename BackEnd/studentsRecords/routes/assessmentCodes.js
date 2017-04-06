@@ -26,6 +26,7 @@ router.route('/')
                     assessmentCode: assessmentCodes
                 });
             });
+
         } else {
             models.AssessmentCodes.find({
                 "adjudication": Adjudication.adjudication
