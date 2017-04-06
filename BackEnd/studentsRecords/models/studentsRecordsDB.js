@@ -302,10 +302,10 @@ var Faculties = mongoose.model('faculty', facultySchema);
 var Departments = mongoose.model('department', departmentSchema);
 var ProgramAdministrations = mongoose.model('programAdministration', programAdministrationSchema);
 
-mongoose.connect('mongodb://main:main@ds139909.mlab.com:39909/se3350_wildcats');
+mongoose.connect('mongodb://localhost/Wildcats');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
+db.once('open', function() {
 
     exports.Students = Students;
     exports.Genders = Genders;
