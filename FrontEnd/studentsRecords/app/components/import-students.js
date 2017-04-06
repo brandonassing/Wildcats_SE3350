@@ -27,6 +27,8 @@ export default Ember.Component.extend({
     var self = this;
     this.get('store').findAll('residency');
     this.get('store').findAll('gender');
+    //this.get('store').findAll('student');
+    //this.get('store').findAll('secondarySchool');
   },
   didRender() {
     if (this.get("firstRender")) {
@@ -284,7 +286,7 @@ export default Ember.Component.extend({
       genderModel.forEach(function (gender) {
         genderMap[JSON.parse(JSON.stringify(gender)).name] = gender;
       });
-      console.log (genderMap);
+      console.log(genderMap);
       var resMap = {};
       resModel.forEach(function (res) {
         resMap[JSON.parse(JSON.stringify(res)).name] = res;
@@ -1220,13 +1222,13 @@ export default Ember.Component.extend({
 
       var studentMap = {};
       studentModel.forEach(function (student) {
-        window.alert('loop');
+        window.alert("loop");
         studentMap[JSON.parse(JSON.stringify(student)).number] = student;
-        window.alert(JSON.parse(JSON.stringify(student)).number);
       });
       console.log(studentMap);
       var schoolMap = {};
       schoolModel.forEach(function (school) {
+        window.alert("loop2");
         schoolMap[JSON.parse(JSON.stringify(school)).name] = school;
       });
       data.forEach(function (row) {
@@ -1244,53 +1246,53 @@ export default Ember.Component.extend({
             }).then(function (tc) {
               console.log(tc);
               console.log(row[0]);*/
-              var programRecord = myStore.createRecord('highSchoolSubject', {
-                name: row[3],
-                description: row[4],
-              });
-              programRecord.save();
-              /*myStore.queryRecord('highSchoolSubject', {
-                filter: {
-                  name: row[3]
-                }
-              }).then(function (hs) {*/
-              var subjectModel = myStore.peekAll('highSchoolSubject');
+          var programRecord = myStore.createRecord('highSchoolSubject', {
+            name: row[3],
+            description: row[4],
+          });
+          programRecord.save();
+          /*myStore.queryRecord('highSchoolSubject', {
+            filter: {
+              name: row[3]
+            }
+          }).then(function (hs) {*/
+          var subjectModel = myStore.peekAll('highSchoolSubject');
 
 
-              var subjectMap = {};
-              subjectModel.forEach(function (subject) {
-                subjectMap[JSON.parse(JSON.stringify(subject)).name] = subject;
-              });
-                var hscourse = myStore.createRecord('highSchoolCourse', {
-                  level: row[2],
-                  source: row[5],
-                  unit: row[6],
-                  school: schoolMap[row[1]],
-                  course: subjectMap[row[3]],
-                });
-                hscourse.save();
+          var subjectMap = {};
+          subjectModel.forEach(function (subject) {
+            subjectMap[JSON.parse(JSON.stringify(subject)).name] = subject;
+          });
+          var hscourse = myStore.createRecord('highSchoolCourse', {
+            level: row[2],
+            source: row[5],
+            unit: row[6],
+            school: schoolMap[row[1]],
+            course: subjectMap[row[3]],
+          });
+          hscourse.save();
 
-              /*});*/
+          /*});*/
 
-              /*myStore.queryRecord('highSchoolCourse', {
-                filter: {
-                  source: row[5]
-                }
-              }).then(function (hscourse) {*/
-                var courseModel = myStore.peekAll('highSchoolCourse');
+          /*myStore.queryRecord('highSchoolCourse', {
+            filter: {
+              source: row[5]
+            }
+          }).then(function (hscourse) {*/
+          var courseModel = myStore.peekAll('highSchoolCourse');
 
 
-              var courseMap = {};
-              courseModel.forEach(function (course) {
-                courseMap[JSON.parse(JSON.stringify(course)).name] = course;
-              });
-                var hscoursegrade = myStore.createRecord('hsCourseGrade', {
-                  mark: row[7],
-                  source: courseMap[row[5]],
-                  student: studentMap[row[0]],
-                });
-                hscoursegrade.save();
-              /*});
+          var courseMap = {};
+          courseModel.forEach(function (course) {
+            courseMap[JSON.parse(JSON.stringify(course)).name] = course;
+          });
+          var hscoursegrade = myStore.createRecord('hsCourseGrade', {
+            mark: row[7],
+            source: courseMap[row[5]],
+            student: studentMap[row[0]],
+          });
+          hscoursegrade.save();
+          /*});
 
 
 
