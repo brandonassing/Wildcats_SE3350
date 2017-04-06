@@ -170,12 +170,25 @@
       {{/file-picker}}</button>
   </div>
   <div class="column five wide import-item">
-    <h3>High School Course Info</h3>
-    <button class="ui green button right floated">{{#file-picker fileLoaded="getHighSchoolCourseData" accept=".xlsx" readAs="readAsBinaryString"}}
+    <h3>High School Course Subject</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="getHighSchoolSubject" accept=".xlsx" readAs="readAsBinaryString"}}
         <i class = "file excel outline icon"></i>Import
       {{/file-picker}}</button>
   </div>
 
+  <div class="column five wide import-item">
+    <h3>High School Course</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="getHighSchoolCourse" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
+
+    <div class="column five wide import-item">
+    <h3>High School Course Grade</h3>
+    <button class="ui green button right floated">{{#file-picker fileLoaded="getHighSchoolGrades" accept=".xlsx" readAs="readAsBinaryString"}}
+        <i class = "file excel outline icon"></i>Import
+      {{/file-picker}}</button>
+  </div>
   <!--parent-->
   <div class="column five wide import-item">
     <h3>Term Codes</h3>
