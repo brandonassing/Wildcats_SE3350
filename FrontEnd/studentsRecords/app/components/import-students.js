@@ -1263,9 +1263,9 @@ export default Ember.Component.extend({
 
       var studentMap = {};
       studentModel.forEach(function (student) {
-        window.alert('loop');
+        //window.alert('loop');
         studentMap[JSON.parse(JSON.stringify(student)).number] = student;
-        window.alert(JSON.parse(JSON.stringify(student)).number);
+        //window.alert(JSON.parse(JSON.stringify(student)).number);
       });
       console.log(studentMap);
       var schoolMap = {};
