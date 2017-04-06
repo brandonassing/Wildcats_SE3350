@@ -11,7 +11,6 @@ export default Ember.Component.extend({
   isLoading: false,
   noticeModalShowing: false,
   firstRender: true,
-  deleteModalShowing: false,
 
   ID001IsPermitted: Ember.computed(function () { //Manage system roles
     var authentication = this.get('oudaAuth');
@@ -27,6 +26,8 @@ export default Ember.Component.extend({
     var self = this;
     this.get('store').findAll('residency');
     this.get('store').findAll('gender');
+    this.get('store').findAll('student');
+
   },
   didRender() {
     if (this.get("firstRender")) {
@@ -36,20 +37,6 @@ export default Ember.Component.extend({
     this.set("firstRender", false);
   },
   actions: {
-    clearDatabase() {
-
-    },
-    toggleDeleteModal() {
-      if (this.get("deleteModalShowing")) {
-        $('#clear-db-modal')
-          .modal('hide');
-        this.set('deleteModalShowing', false);
-      } else {
-        $('#clear-db-modal')
-          .modal('show');
-        this.set('deleteModalShowing', true);
-      }
-    },
     toggleNoticeModal() {
       if (this.get("noticeModalShowing")) {
         $("#import-notice-modal").modal("hide");
@@ -253,7 +240,6 @@ export default Ember.Component.extend({
       var myStore = this.get('store');
 
       var genderModel = myStore.peekAll('gender');
-      console.log(genderModel);
       var resModel = myStore.peekAll('residency');
 
 
@@ -261,7 +247,7 @@ export default Ember.Component.extend({
       genderModel.forEach(function (gender) {
         genderMap[JSON.parse(JSON.stringify(gender)).name] = gender;
       });
-      console.log (genderMap);
+
       var resMap = {};
       resModel.forEach(function (res) {
         resMap[JSON.parse(JSON.stringify(res)).name] = res;
@@ -348,27 +334,26 @@ export default Ember.Component.extend({
       this.set('tableHeader', header); //just in case I need it
       this.set('tableData', data);
       var myStore = this.get('store');
+      var studentModel = myStore.peekAll('student');
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
 
       console.log("Part3");
       data.forEach(function (row) {
         if (row[0]) {
           console.log("Part 5");
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (num) {
             var newAdvancedStanding = myStore.createRecord('standing', {
               course: row[1],
               description: row[2],
               units: row[3],
               grade: row[4],
               location: row[5],
-              student: num,
+              student: studentMap[row[0]],
             });
             console.log("Part4");
             newAdvancedStanding.save();
-          });
         }
       });
 
@@ -417,21 +402,22 @@ export default Ember.Component.extend({
       this.set('tableHeader', header); //just in case I need it
       this.set('tableData', data);
       var myStore = this.get('store');
+      var studentModel = myStore.peekAll('student');
+
+
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
 
 
       data.forEach(function (row) {
         if (row[0]) {
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (num) {
             var newAward = myStore.createRecord('award', {
-              student: num,
+              student: studentMap[row[0]],
               note: row[1],
             });
             newAward.save();
-          });
         }
       });
 
@@ -1165,88 +1151,59 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
-      var studentModel = myStore.peekAll('student');
-      var schoolModel = myStore.peekAll('secondarySchool');
-      console.log(studentModel);
 
-      var studentMap = {};
-      studentModel.forEach(function (student) {
-        window.alert('loop');
-        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
-        window.alert(JSON.parse(JSON.stringify(student)).number);
-      });
-      console.log(studentMap);
-      var schoolMap = {};
-      schoolModel.forEach(function (school) {
-        schoolMap[JSON.parse(JSON.stringify(school)).name] = school;
-      });
       data.forEach(function (row) {
         if (row[0]) {
-          /*myStore.queryRecord('student', {
+          myStore.queryRecord('student', {
             filter: {
               number: row[0]
             }
           }).then(function (num) {
-            console.log(num);
             myStore.queryRecord('secondarySchool', {
               filter: {
                 name: row[1]
               }
             }).then(function (tc) {
-              console.log(tc);
-              console.log(row[0]);*/
+
               var programRecord = myStore.createRecord('highSchoolSubject', {
                 name: row[3],
                 description: row[4],
               });
               programRecord.save();
-              /*myStore.queryRecord('highSchoolSubject', {
+
+              myStore.queryRecord('highSchoolSubject', {
                 filter: {
                   name: row[3]
                 }
-              }).then(function (hs) {*/
-              var subjectModel = myStore.peekAll('highSchoolSubject');
-
-
-              var subjectMap = {};
-              subjectModel.forEach(function (subject) {
-                subjectMap[JSON.parse(JSON.stringify(subject)).name] = subject;
-              });
+              }).then(function (hs) {
                 var hscourse = myStore.createRecord('highSchoolCourse', {
                   level: row[2],
                   source: row[5],
                   unit: row[6],
-                  school: schoolMap[row[1]],
-                  course: subjectMap[row[3]],
+                  school: tc,
+                  course: hs,
                 });
                 hscourse.save();
 
-              /*});*/
+              });
 
-              /*myStore.queryRecord('highSchoolCourse', {
+              myStore.queryRecord('highSchoolCourse', {
                 filter: {
                   source: row[5]
                 }
-              }).then(function (hscourse) {*/
-                var courseModel = myStore.peekAll('highSchoolCourse');
-
-
-              var courseMap = {};
-              courseModel.forEach(function (course) {
-                courseMap[JSON.parse(JSON.stringify(course)).name] = course;
-              });
+              }).then(function (hscourse) {
                 var hscoursegrade = myStore.createRecord('hsCourseGrade', {
                   mark: row[7],
-                  source: courseMap[row[5]],
-                  student: studentMap[row[0]],
+                  source: hscourse,
+                  student: num,
                 });
                 hscoursegrade.save();
-              /*});
+              });
 
 
 
             });
-          });*/
+          });
         }
       });
 
@@ -1286,17 +1243,19 @@ export default Ember.Component.extend({
       this.set('tableHeader', header); //just in case I need it
       this.set('tableData', data);
       var myStore = this.get('store');
+      var studentModel = myStore.peekAll('student');
+
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
+      console.log(studentMap);
 
       data.forEach(function (row) {
         if (row[0]) {
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (student) {
-            student.set('regComments', row[1]);
-            student.save();
-          });
+          console.log(studentMap[row[0]]);
+            studentMap[row[0]].set('regComments', row[1]);
+            studentMap[row[0]].save();
         }
       });
 
@@ -1336,16 +1295,18 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
+           var studentModel = myStore.peekAll('student');
+
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
+
       data.forEach(function (row) {
         if (row[0]) {
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (student) {
-            student.set('basis', row[1]);
-            student.save();
-          });
+          console.log(studentMap[row[0]]);
+            studentMap[row[0]].set('basis', row[1]);
+            studentMap[row[0]].save();
         }
       });
 
@@ -1385,16 +1346,18 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
-      data.forEach(function (row) {
+            var studentModel = myStore.peekAll('student');
+
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
+
+            data.forEach(function (row) {
         if (row[0]) {
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (student) {
-            student.set('admissionAvg', row[1]);
-            student.save();
-          });
+          console.log(studentMap[row[0]]);
+            studentMap[row[0]].set('admissionAvg', row[1]);
+            studentMap[row[0]].save();
         }
       });
 
@@ -1434,16 +1397,18 @@ export default Ember.Component.extend({
       this.set('tableData', data);
       var myStore = this.get('store');
 
+           var studentModel = myStore.peekAll('student');
+
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+      });
+
       data.forEach(function (row) {
         if (row[0]) {
-          myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (student) {
-            student.set('admissionComments', row[1]);
-            student.save();
-          });
+          console.log(studentMap[row[0]]);
+            studentMap[row[0]].set('admissionComments', row[1]);
+            studentMap[row[0]].save();
         }
       });
 
