@@ -26,6 +26,9 @@ export default Ember.Component.extend({
     var self = this;
     this.get('store').findAll('residency');
     this.get('store').findAll('gender');
+    this.get('store').findAll('student');
+    this.get('store').findAll('highSchoolSubject');
+    this.get('store').findAll('secondarySchool');
   },
   didRender() {
     if (this.get("firstRender")) {
@@ -1168,7 +1171,7 @@ export default Ember.Component.extend({
 
     },
 
-    getHighSchoolCourseData: function (file) {
+    getHighSchoolSubject: function (file) {
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -1216,76 +1219,144 @@ export default Ember.Component.extend({
       });
       data.forEach(function (row) {
         if (row[0]) {
-          /*myStore.queryRecord('student', {
-            filter: {
-              number: row[0]
-            }
-          }).then(function (num) {
-            console.log(num);
-            myStore.queryRecord('secondarySchool', {
-              filter: {
-                name: row[1]
-              }
-            }).then(function (tc) {
-              console.log(tc);
-              console.log(row[0]);*/
               var programRecord = myStore.createRecord('highSchoolSubject', {
                 name: row[3],
                 description: row[4],
               });
               programRecord.save();
-              /*myStore.queryRecord('highSchoolSubject', {
-                filter: {
-                  name: row[3]
-                }
-              }).then(function (hs) {*/
-              var subjectModel = myStore.peekAll('highSchoolSubject');
+        }
+      });
+      this.set('isLoading', true);
 
+    },
 
-              var subjectMap = {};
-              subjectModel.forEach(function (subject) {
+    getHighSchoolCourse: function(file){
+      
+      var workbook = XLSX.read(file.data, {
+        type: 'binary'
+      });
+      var row = 0;
+      var col = null;
+      var data = [];
+      var header = [];
+      var first_sheet_name = workbook.SheetNames[0];
+
+      /* Get worksheet */
+      var worksheet = workbook.Sheets[first_sheet_name];
+      var size = 0;
+      for (var cellName in worksheet) {
+        //all keys that do not begin with "!" correspond to cell addresses
+        if (cellName[0] === '!') {
+          continue;
+        }
+        row = cellName.slice(1) - 1;
+        col = cellName.charCodeAt(0) - 65;
+        data[size++] = [];
+        if (row === 0) {
+          header[col] = worksheet[cellName].v;
+        } else {
+          data[row][col] = worksheet[cellName].v;
+        }
+      }
+      this.set('tableHeader', header); //just in case I need it
+      this.set('tableData', data);
+      var myStore = this.get('store');
+
+      var schoolModel = myStore.peekAll('secondarySchool');
+      var subjectModel = myStore.peekAll('highSchoolSubject');
+
+      var schoolMap = {};
+      schoolModel.forEach(function (school) {
+        schoolMap[JSON.parse(JSON.stringify(school)).name] = school;
+      });
+      
+          console.log("2");
+                var subjectMap = {};
+                subjectModel.forEach(function (subject) {
                 subjectMap[JSON.parse(JSON.stringify(subject)).name] = subject;
-              });
+                });
+          
+                data.forEach(function (row) {
+          if (row[0]) {
+              
                 var hscourse = myStore.createRecord('highSchoolCourse', {
                   level: row[2],
                   source: row[5],
                   unit: row[6],
                   school: schoolMap[row[1]],
-                  course: subjectMap[row[3]],
+                  course: subjectMap[row[3]]
                 });
                 hscourse.save();
+                }});
+                console.log("1");
+                
 
-              /*});*/
+      
+      this.set('isLoading', true);
+    },
 
-              /*myStore.queryRecord('highSchoolCourse', {
-                filter: {
-                  source: row[5]
-                }
-              }).then(function (hscourse) {*/
-                var courseModel = myStore.peekAll('highSchoolCourse');
+    getHighSchoolGrades: function(file){
+      var workbook = XLSX.read(file.data, {
+        type: 'binary'
+      });
+      var row = 0;
+      var col = null;
+      var data = [];
+      var header = [];
+      var first_sheet_name = workbook.SheetNames[0];
 
+      /* Get worksheet */
+      var worksheet = workbook.Sheets[first_sheet_name];
+      var size = 0;
+      for (var cellName in worksheet) {
+        //all keys that do not begin with "!" correspond to cell addresses
+        if (cellName[0] === '!') {
+          continue;
+        }
+        row = cellName.slice(1) - 1;
+        col = cellName.charCodeAt(0) - 65;
+        data[size++] = [];
+        if (row === 0) {
+          header[col] = worksheet[cellName].v;
+        } else {
+          data[row][col] = worksheet[cellName].v;
+        }
+      }
+      this.set('tableHeader', header); //just in case I need it
+      this.set('tableData', data);
+      var myStore = this.get('store');
 
+      var studentModel = myStore.peekAll('student');
+      var schoolModel = myStore.peekAll('secondarySchool');
+      console.log(studentModel);
+
+      var studentMap = {};
+      studentModel.forEach(function (student) {
+        window.alert('loop');
+        studentMap[JSON.parse(JSON.stringify(student)).number] = student;
+        window.alert(JSON.parse(JSON.stringify(student)).number);
+      });
+      console.log(studentMap);
+      var schoolMap = {};
+      schoolModel.forEach(function (school) {
+        schoolMap[JSON.parse(JSON.stringify(school)).name] = school;
+      });
+        var courseModel = myStore.peekAll('highSchoolCourse');
               var courseMap = {};
               courseModel.forEach(function (course) {
                 courseMap[JSON.parse(JSON.stringify(course)).name] = course;
               });
+              data.forEach(function (row) {
+        if (row[0]) {
                 var hscoursegrade = myStore.createRecord('hsCourseGrade', {
                   mark: row[7],
                   source: courseMap[row[5]],
                   student: studentMap[row[0]],
-                });
-                hscoursegrade.save();
-              /*});
-
-
-
-            });
-          });*/
-        }
-      });
-
-      this.set('isLoading', true);
-
+              });
+              hscoursegrade.save();
+            }});
+                
+        this.set('isLoading', true);
     },
 
     getRegistrationComments: function (file) {
