@@ -82,10 +82,8 @@ export default Ember.Component.extend({
       this.set('tableData', data);
     },
 
-    getGenderData: function (file) {
-      var myStore = this.get('store');
-      /*
-      myStore.findAll('gender').then(function (genders) {
+    deleteGender: function () {
+      this.get('store').findAll('gender').then(function (genders) {
         genders.forEach(function (sex) {
           sex.set('name', null);
           sex.save().then(function () {
@@ -93,7 +91,10 @@ export default Ember.Component.extend({
           });
         });
       });
-      */
+    },
+
+    getGenderData: function (file) {
+      var myStore = this.get('store');
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -148,16 +149,6 @@ export default Ember.Component.extend({
     },
 
     getResidencyData: function (file) {
-      /*
-      this.get('store').findAll('residency').then(function (residencies) {
-        residencies.forEach(function (oneResidency) {
-          oneResidency.set('students', []);
-          oneResidency.save().then(function () {
-            oneResidency.destroyRecord();
-          });
-        });
-      });
-      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -217,20 +208,6 @@ export default Ember.Component.extend({
     },
 
     getStudentsData: function (file) {
-      /*
-      this.get('store').findAll('student').then(function (students) {
-        students.forEach(function (oneStudent) {
-          oneStudent.set('residency', null);
-          oneStudent.set('gender', null);
-          oneStudent.set('advancedStanding', []);
-          oneStudent.set('scholarshipAndAward', []);
-          oneStudent.set('term', []);
-          oneStudent.save().then(function () {
-            oneStudent.destroyRecord();
-          });
-        });
-      });
-      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
@@ -325,21 +302,6 @@ export default Ember.Component.extend({
     },
 
     getAdvancedStandingData: function (file) {
-      /*
-      this.get('store').findAll('standing').then(function (standings) {
-        standings.forEach(function (oneStanding) {
-          oneStanding.set('student', null);
-          oneStanding.set('course', null);
-          oneStanding.set('description', null);
-          oneStanding.set('units', null);
-          oneStanding.set('grade', null);
-          oneStanding.set('location', null);
-          oneStanding.save().then(function () {
-            oneStanding.destroyRecord();
-          });
-        });
-      });
-      */
       console.log("Entered Advanced");
       var workbook = XLSX.read(file.data, {
         type: 'binary'
@@ -411,17 +373,6 @@ export default Ember.Component.extend({
     },
 
     getAwardsData: function (file) {
-      /*
-      this.get('store').findAll('award').then(function (awards) {
-        awards.forEach(function (oneAward) {
-          oneAward.set('student', null);
-          oneAward.set('note', null);
-          oneAward.save().then(function () {
-            oneAward.destroyRecord();
-          });
-        });
-      });
-      */
       var workbook = XLSX.read(file.data, {
         type: 'binary'
       });
